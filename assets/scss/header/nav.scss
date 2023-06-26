@@ -1,0 +1,93 @@
+.site-header {
+  height: 108px;
+  background-color: #ffffff;
+  @include box-shadow();
+}
+
+.main-navigation {
+  height: inherit;
+
+  .site-navbar {
+    position: relative;
+    height: inherit;
+    margin: 0 auto;
+    display: grid;
+    grid-column-gap: 25px;
+    grid-template-columns: minmax(auto, 128px) 1fr;
+  }
+
+  button {
+    &.navbar-toggler {
+      padding: 0;
+      border: 0;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.site-logo {
+  @include flex(0 0 auto);
+
+  a {
+    display: inline-block;
+  }
+}
+
+.site-menu {
+  @include flex(1);
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      position: relative;
+
+      a {
+        display: block;
+        font-weight: 600;
+
+        &:hover {
+          background-color: transparent;
+          color: $color-hover;
+        }
+      }
+
+      &:last-child {
+        a {
+          padding-right: 0;
+        }
+      }
+
+      .sub-menu-toggle {
+        &:after {
+          @include transition();
+        }
+      }
+
+      &.current-menu-parent,
+      &.current-menu-item {
+        > a {
+          color: $color-hover;
+        }
+      }
+    }
+  }
+}
+
+.sub-menu-toggle {
+  margin-left: 9px;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  &:after {
+    content: "\f078";
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free', serif;
+    font-style: normal;
+    font-weight: 900;
+  }
+}
