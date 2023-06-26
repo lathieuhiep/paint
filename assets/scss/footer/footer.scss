@@ -1,0 +1,54 @@
+.site-footer {
+  padding: 50px 0 35px;
+  background-color: $background-primary;
+
+  section {
+    &.widget {
+      margin-bottom: 15px;
+      color: $color-white;
+
+      a {
+        color: $color-white;
+
+        &:hover {
+          color: $color-hover;
+        }
+      }
+
+      .widget-title {
+        color: $color-white;
+      }
+
+      &.widget_text {
+        p {
+          margin-bottom: 0.5rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        img {
+          &.alignnone {
+            margin: 0;
+          }
+        }
+      }
+
+      .social-network-item {
+        width: auto;
+        height: auto;
+        line-height: 1;
+        border-radius: unset;
+
+        a {
+          font-size: 2.5rem;
+          color: $color-hover;
+
+          &:hover {
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+}

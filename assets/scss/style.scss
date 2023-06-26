@@ -1,0 +1,127 @@
+/*
+Theme Name: Paint
+Theme URI: https://uxui.vn/
+Author: DiepLK
+Author URI: https://www.facebook.com/lathieuhiep
+Version: 1.0.0
+Description: Basic Theme
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, two-columns, three-columns, four-columns, right-sidebar,  theme-options
+Text Domain: paint
+*/
+
+/**
+* Table of Contents:
+*
+# General
+# WordPress Core
+# Custom Bootstrap
+# Header
+  ## Information
+  ## Nav
+# Page
+# Components
+  ## Banner
+  ## Products
+  ## Tool
+  ## Our Maxim
+  ## Count Up
+  ## Services
+  ## Testimonial
+  ## Post slider
+  ## About
+# Sidebar
+# Blog
+  ## Single
+  ## Pagination
+  ## Comment
+## Post Type Project
+## Post Type Product
+## Post Type Tool
+## Post Type Discover
+# Contact Form 7
+# Footer
+# Responsive
+* -----------------------------------------------------------------------------
+*/
+
+@import "variables-site/variables";
+
+/**
+# General
+-----------------------------------------------------------------------------*/
+@import "general";
+
+/* WordPress Core
+-------------------------------------------------------------- */
+@import "wp-core";
+
+/* Custom Bootstrap
+-------------------------------------------------------------- */
+@import "custom-bootstrap";
+
+/**
+# Header
+-----------------------------------------------------------------------------*/
+@import "header/header";
+
+/**
+# Page
+-----------------------------------------------------------------------------*/
+@import "page";
+
+/**
+# Components
+-----------------------------------------------------------------------------*/
+@import "components/components";
+
+/**
+# Sidebar
+-----------------------------------------------------------------------------*/
+@import "sidebar";
+
+/**
+# Blog
+-----------------------------------------------------------------------------*/
+@import "blog/blog";
+
+/**
+# Post Type Project
+-----------------------------------------------------------------------------*/
+@import "post-type/project";
+
+/**
+# Post Type Product
+-----------------------------------------------------------------------------*/
+@import "post-type/product";
+
+/**
+# Post Type Tool
+-----------------------------------------------------------------------------*/
+@import "post-type/tool";
+
+/**
+# Post Type Discover
+-----------------------------------------------------------------------------*/
+@import "post-type/discover";
+
+/**
+# Contact Form 7
+-----------------------------------------------------------------------------*/
+@import "cf7";
+
+/**
+# 404
+-----------------------------------------------------------------------------*/
+@import "404";
+
+/**
+# Footer
+-----------------------------------------------------------------------------*/
+@import "footer/footer";
+
+/**
+# Responsive
+-----------------------------------------------------------------------------*/
+@import "responsive";

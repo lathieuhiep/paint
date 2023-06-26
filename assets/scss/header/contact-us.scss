@@ -1,0 +1,22 @@
+.contact-us {
+  line-height: 2.5;
+  border-bottom: 1px solid $border-color-primary;
+
+  span {
+    display: inline-block;
+    padding-left: 7px;
+    padding-right: 12px;
+
+    i.fa {
+      margin-right: 5px;
+    }
+  }
+
+  &__social-network {
+    .social-network-item {
+      margin: 0;
+      width: 30px;
+      text-align: center;
+    }
+  }
+}

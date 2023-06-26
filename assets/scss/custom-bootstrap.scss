@@ -1,0 +1,53 @@
+.form-control {
+  font-size: inherit;
+}
+
+@media (min-width: 1400px) {
+  .container,
+  .container-fluid,
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    --bs-gutter-x: 2.3rem;
+    position: relative;
+    padding-right: calc(var(--bs-gutter-x) * 1);
+    padding-left: calc(var(--bs-gutter-x) * 1);
+  }
+
+  .row {
+    --bs-gutter-x: 2.3rem;
+    margin-right: calc(-1 * var(--bs-gutter-x));
+    margin-left: calc(-1 * var(--bs-gutter-x));
+  }
+  .row > * {
+    padding-right: calc(var(--bs-gutter-x) * 1);
+    padding-left: calc(var(--bs-gutter-x) * 1);
+  }
+}
+
+@media (max-width: 1399px) {
+  .container,
+  .container-fluid,
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    --bs-gutter-x: 1.2rem;
+    position: relative;
+    padding-right: calc(var(--bs-gutter-x) * 1);
+    padding-left: calc(var(--bs-gutter-x) * 1);
+  }
+
+  .row {
+    --bs-gutter-x: 1.2rem;
+    margin-right: calc(-1 * var(--bs-gutter-x));
+    margin-left: calc(-1 * var(--bs-gutter-x));
+  }
+  .row > * {
+    padding-right: calc(var(--bs-gutter-x) * 1);
+    padding-left: calc(var(--bs-gutter-x) * 1);
+  }
+}

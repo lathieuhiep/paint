@@ -1,0 +1,106 @@
+.site-discover-warp {
+  .content-warp {
+    margin-top: 5.5rem;
+    padding: 0 12px;
+  }
+}
+
+.grid-discover {
+  margin: 0 -6px;
+
+  &__item {
+    margin-bottom: 12px;
+    padding: 0 6px;
+    width: 10%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .thumbnail-image {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .title {
+    margin-bottom: 2px;
+    font-size: 1.2rem;
+  }
+
+  .meta {
+    font-size: 1.2rem;
+  }
+
+  .view-detail {
+    cursor: pointer;
+  }
+}
+
+.site-single-discover {
+  .entry-post {
+    padding-top: 118px;
+    display: grid;
+    grid-gap: 12px;
+    grid-template-columns: 50px 1fr;
+
+    .history-back-discover {
+      display: block;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 2.5rem;
+      line-height: 50px;
+      border-radius: 50%;
+      @include box-shadow();
+      background-color: #ffffff;
+
+      &:hover {
+        color: #ffffff;
+        background-color: $background-primary;
+      }
+    }
+  }
+
+  .entry-content {
+    max-width: 817px;
+    margin: 0 auto;
+    overflow: hidden;
+    @include box-shadow();
+    border-radius: 27px;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .post-info {
+      padding: 30px 30px 22px;
+      display: grid;
+      grid-row-gap: 12px;
+      grid-template-rows: 1fr auto;
+
+      .title {
+        margin-bottom: 12px;
+        font-size: 2rem;
+      }
+
+      .desc {
+        font-size: 1.4rem;
+        color: #5C5C5C;
+      }
+
+      &__right {
+        > div {
+          display: inline-block;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+.site-result-discover {
+  .page-title {
+    font-size: 1.8rem;
+  }
+}

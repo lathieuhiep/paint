@@ -1,0 +1,123 @@
+// Page Default
+.site-container {
+  padding: 3.2rem 0 5.2rem;
+
+  &.site-container-elementor {
+    padding: 0;
+  }
+}
+
+.site-page-content {
+  p {
+    &:after {
+      display: table;
+      clear: both;
+      content: '';
+    }
+  }
+}
+
+// Page FAQ
+.page-template-faq {
+  .page-title {
+    margin-bottom: 3.6rem;
+    font-weight: 400;
+    font-size: 2.4rem;
+  }
+
+  .heading {
+    margin-bottom: 30px;
+  }
+
+  .accordion {
+    .accordion-item {
+      margin-bottom: 16px;
+      border: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .accordion-header {
+      .accordion-button {
+        padding: 18px 25px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $color-primary;
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: $background-hover;
+
+        &::before {
+          margin-right: 20px;
+          content: "\2b";
+          font-size: 1.6rem;
+          font-family: "Font Awesome 6 Free", serif;
+        }
+
+        &:not(.collapsed) {
+          &::before {
+            content: "\f068";
+          }
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    .accordion-body {
+      padding: 26px 60px;
+    }
+  }
+}
+
+// Page Project
+.site-project-cat {
+  .heading {
+    margin-bottom: 3.2rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+}
+
+.project-grid {
+  .item {
+    margin-bottom: 46px;
+  }
+  .thumbnail {
+    position: relative;
+    @include transition();
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      @include box-shadow(0px 20px 30px rgb(0,0,0,0.5));
+    }
+
+    .link-image {
+      display: block;
+    }
+
+    .title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 12px 21px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 51.19%);
+
+      a {
+        display: inline-block;
+        line-height: 1.4;
+        color: #ffffff;
+      }
+    }
+  }
+}
