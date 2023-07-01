@@ -1,7 +1,15 @@
 .site-discover-warp {
   .content-warp {
-    margin-top: 5.5rem;
-    padding: 0 12px;
+    margin-top: 2.8rem;
+  }
+}
+
+.site-discover-cat {
+  .title {
+    margin-top: 5rem;
+    margin-bottom: 2.8rem;
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 
@@ -11,7 +19,7 @@
   &__item {
     margin-bottom: 12px;
     padding: 0 6px;
-    width: 10%;
+    width: 16.66666667%;
 
     img {
       width: 100%;
@@ -100,7 +108,15 @@
 }
 
 .site-result-discover {
+  padding-top: 5.5rem;
+
+  .heading {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
   .page-title {
+    margin-bottom: 0;
     font-size: 1.8rem;
   }
 }

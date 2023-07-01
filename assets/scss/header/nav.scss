@@ -13,7 +13,7 @@
     margin: 0 auto;
     display: grid;
     grid-column-gap: 25px;
-    grid-template-columns: minmax(auto, 128px) 1fr;
+    grid-template-columns: 12.8rem 1fr;
   }
 
   button {
@@ -70,9 +70,11 @@
       &.current-menu-parent,
       &.current-menu-item {
         > a {
-          color: $color-primary;
           font-weight: 700;
-          background-color: $color-secondary;
+
+          @media screen and (min-width: 992px){
+            background-color: $color-secondary;
+          }
         }
       }
     }

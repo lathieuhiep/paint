@@ -29,10 +29,6 @@ $query = new WP_Query($args);
 
   <div class="site-result-discover site-discover-warp element-spacer-pb">
     <div class="container">
-      <div class="spacer-pt-breadcrumbs">
-        <?php get_template_part('components/inc', 'breadcrumbs'); ?>
-      </div>
-
       <?php
       get_template_part('template-parts/discover/inc', 'search-form');
 
@@ -40,32 +36,32 @@ $query = new WP_Query($args);
         ?>
         <header class="heading">
           <h1 class="page-title">
-            <?php _e('Tìm kiếm cho', 'paint'); ?>: "<?php echo esc_html($search_query); ?>"
+            <?php _e('Kết quả tìm kiếm cho', 'paint'); ?>: "<?php echo esc_html($search_query); ?>"
           </h1>
         </header>
       <?php endif; ?>
-    </div>
 
-    <div class="result-discover-warp content-warp">
-      <?php if ($query->have_posts()) : ?>
-        <div class="grid-discover">
-          <?php
-          while ($query->have_posts()) :
-            $query->the_post();
+      <div class="result-discover-warp content-warp">
+        <?php if ($query->have_posts()) : ?>
+          <div class="grid-discover">
+            <?php
+            while ($query->have_posts()) :
+              $query->the_post();
 
-            get_template_part('template-parts/discover/inc', 'render-item');
+              get_template_part('template-parts/discover/inc', 'render-item');
 
-          endwhile;
-          wp_reset_postdata();
-          ?>
-        </div>
-
-        <div class="spinner-warp text-center d-none">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+            endwhile;
+            wp_reset_postdata();
+            ?>
           </div>
-        </div>
-      <?php endif; ?>
+
+          <div class="spinner-warp text-center d-none">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 

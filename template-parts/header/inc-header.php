@@ -6,7 +6,7 @@ $logo = paint_get_option('general_opt_logo', '');
 <header class="site-header<?php echo esc_attr($sticky_menu ? ' active-sticky-nav' : ''); ?>">
   <nav class="main-navigation container">
     <div class="site-navbar">
-      <div class="site-logo d-flex align-items-center">
+      <div class="site-logo d-lg-flex align-items-lg-center">
         <a href="<?php echo esc_url(get_home_url('/')); ?>" title="<?php bloginfo('name'); ?>">
           <?php
           if (!empty($logo['id'])) :
