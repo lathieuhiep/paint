@@ -1,5 +1,5 @@
 .site-header {
-  height: 108px;
+  height: 8rem;
   background-color: #ffffff;
   @include box-shadow();
 }
@@ -70,7 +70,9 @@
       &.current-menu-parent,
       &.current-menu-item {
         > a {
-          color: $color-hover;
+          color: $color-primary;
+          font-weight: 700;
+          background-color: $color-secondary;
         }
       }
     }
@@ -78,8 +80,7 @@
 }
 
 .sub-menu-toggle {
-  margin-left: 9px;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   cursor: pointer;
 
   &:after {

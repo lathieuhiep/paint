@@ -4,7 +4,7 @@
   }
 }
 
-@media (min-width: 1200px) and ( max-width: 1399px ) {
+@media (min-width: 1200px) and (max-width: 1399px) {
   .container {
     max-width: 1200px;
   }
@@ -27,14 +27,11 @@
   .site-menu {
     > ul {
       > li {
-        padding: 0 25px;
-
-        &:first-child {
-          padding-left: 0;
+        &.menu-item-has-children:not(:last-child) {
+          margin-right: 1.2rem;
         }
-
-        &:last-child {
-          padding-right: 0;
+        > a {
+          padding: .5rem 1.2rem;
         }
       }
     }
@@ -66,7 +63,7 @@
     }
   }
 
-  .element-products  {
+  .element-products {
     .item {
       margin-bottom: 2.4rem;
     }
