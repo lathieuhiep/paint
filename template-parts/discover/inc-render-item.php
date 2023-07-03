@@ -5,7 +5,7 @@
     </a>
   </figure>
 
-  <h2 class="title view-detail">
+  <h2 class="title-item view-detail">
     <a href="<?php the_permalink(); ?>">
       <?php the_title() ?>
     </a>
