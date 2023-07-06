@@ -17,8 +17,11 @@ if (is_singular('paint_discover')) {
 }
 ?>
 
-<form role="search" method="get" class="search-form search-form-discover" action="<?php echo esc_url(home_url('/')); ?>"
-      data-limit="<?php echo esc_attr(posts_per_page_discover) ?>">
+<form role="search" method="get"
+      class="search-form <?php echo esc_attr( !is_singular('paint_discover') ? 'search-form-discover' : 'search-form-single-discover' ); ?>"
+      action="<?php echo esc_url(home_url('/')); ?>"
+      data-limit="<?php echo esc_attr(posts_per_page_discover) ?>"
+>
   <?php if ($terms) : ?>
     <div class="group-check">
       <div class="group-check__item">
@@ -46,7 +49,7 @@ if (is_singular('paint_discover')) {
 
   <div class="group-search">
     <input type="search" id="<?php echo $paint_unique_id; ?>" class="search-field"
-           placeholder="<?php echo esc_attr_x('Nhập từ khóa', 'placeholder', 'paint'); ?>"
+           placeholder="<?php echo esc_attr_x('Nhập từ khóa...', 'placeholder', 'paint'); ?>"
            value="<?php echo get_search_query(); ?>" name="s" aria-label=""/>
 
     <button type="submit" class="search-submit">

@@ -960,15 +960,34 @@ if (class_exists('CSF')) {
   // -> Create a section post type discover
   CSF::createSection($paint_prefix, array(
     'title' => esc_html__('Khám phá', 'paint'),
+    'id' => 'paint_opt_discover',
     'icon' => 'fas fa-images',
-    'description' => esc_html__('Thiết lập cho danh mục, trang tìm kiếm và trang lưu trữ'),
+  ));
+
+  // taxonomy discover
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'paint_opt_discover',
+    'title' => esc_html__('Chuyên muc', 'paint'),
     'fields' => array(
       // Limit
       array(
         'id' => 'discover_opt_limit',
         'type' => 'number',
         'title' => esc_html__('Số bài viêt cần lấy', 'paint'),
-        'default' => 30,
+        'default' => 12,
+      ),
+    )
+  ));
+
+  // Single discover
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'paint_opt_discover',
+    'title' => esc_html__('Chi tiết', 'paint'),
+    'fields' => array(
+      array(
+        'id' => 'paint_opt_discover_single',
+        'type' => 'text',
+        'title' => esc_html__('Link tư vấn', 'paint'),
       ),
     )
   ));

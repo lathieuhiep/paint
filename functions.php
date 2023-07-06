@@ -32,6 +32,7 @@ if (!class_exists('CMB2')) {
   require get_parent_theme_file_path('/extension/meta-box/cmb_color_code.php');
   require get_parent_theme_file_path('/extension/meta-box/cmb_tool.php');
   require get_parent_theme_file_path('/extension/meta-box/cmb_project.php');
+  require get_parent_theme_file_path('/extension/meta-box/cmb_discover.php');
 
   // add fields custom
   require get_parent_theme_file_path('/extension/meta-box/add-fields/address.php');

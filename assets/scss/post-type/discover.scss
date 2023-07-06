@@ -1,12 +1,128 @@
 .site-discover-warp {
-  .content-warp {
-    margin-top: 2.8rem;
+  padding-top: 5rem;
+
+  .search-form {
+    .group-check {
+      &__item {
+        .btn {
+          padding: 0;
+          color: #231F20;
+          font-size: 1.8rem;
+          border: none;
+          background-color: transparent;
+          @include transition();
+
+          &:hover {
+            color: $color-secondary;
+          }
+        }
+
+        .btn-check:checked + .btn {
+          color: $color-secondary;
+        }
+
+        &:first-child {
+          .btn {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 992px) {
+      .search-field {
+        font-size: 1.8rem;
+        border: none;
+        border-radius: 0;
+        padding: 1rem 0 1rem 3rem;
+        background-color: transparent;
+      }
+
+      .search-submit {
+        width: auto;
+      }
+    }
+  }
+}
+
+.search-form-discover {
+  margin-bottom: 2.8rem;
+  display: grid;
+  grid-gap: 2.5rem 5rem;
+
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr 20rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  .group-check {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @media screen and (min-width: 992px) {
+      grid-gap: 1.2rem 5rem;
+    }
+
+    @media screen and (max-width: 991px) {
+      grid-gap: 1.2rem 2rem;
+    }
+
+    &__item {
+      position: relative;
+
+      @media screen and (min-width: 992px) {
+        flex: 1;
+      }
+
+      @media screen and (max-width: 991px) {
+        flex: 0 0 auto;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: #9B9797;
+
+        @media screen and (min-width: 992px) {
+          right: -2.5rem;
+        }
+
+        @media screen and (max-width: 991px) {
+          right: -1rem;
+        }
+      }
+
+      &:last-child {
+        &:after {
+          @media screen and (max-width: 991px) {
+            display: none;
+          }
+        }
+      }
+
+      .btn {
+        display: block;
+
+        @media screen and (max-width: 991px) {
+          text-align: left;
+        }
+      }
+    }
   }
 }
 
 .site-discover-cat {
   .title {
-    margin-top: 5rem;
     margin-bottom: 2.8rem;
     text-align: center;
     text-transform: uppercase;
@@ -49,39 +165,38 @@
 }
 
 .site-single-discover {
-  .entry-post {
-    padding-top: 118px;
+  .container {
+    > div {
+      ~ div {
+        margin-top: 5rem;
+      }
+    }
+  }
+
+  .grid-layout {
     display: grid;
-    grid-gap: 12px;
-    grid-template-columns: 50px 1fr;
+    grid-gap: 2.4rem;
+    grid-template-columns: 20rem 1fr;
 
-    .history-back-discover {
-      display: block;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      font-size: 2.5rem;
-      line-height: 50px;
-      border-radius: 50%;
-      @include box-shadow();
-      background-color: #ffffff;
-
-      &:hover {
-        color: #ffffff;
-        background-color: $background-primary;
+    .group-check {
+      &__item {
+        &:not(:last-child) {
+          margin-bottom: 1.2rem;
+        }
       }
     }
   }
 
   .entry-content {
-    max-width: 817px;
-    margin: 0 auto;
-    overflow: hidden;
-    @include box-shadow();
-    border-radius: 27px;
     background-color: #ffffff;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+    .thumbnail-image {
+      img {
+        width: 100%;
+      }
+    }
 
     .post-info {
       padding: 30px 30px 22px;
@@ -89,14 +204,77 @@
       grid-row-gap: 12px;
       grid-template-rows: 1fr auto;
 
+      &__left {
+        > div {
+          &:not(:last-child) {
+            margin-bottom: 2rem;
+          }
+        }
+      }
+
       .title {
         margin-bottom: 12px;
         font-size: 2rem;
       }
 
       .desc {
-        font-size: 1.4rem;
         color: #5C5C5C;
+      }
+
+      .meta-filed {
+        &__item {
+          display: grid;
+          grid-gap: 1.2rem;
+          grid-template-columns: auto 1fr;
+          align-items: center;
+
+          &:not(:last-child) {
+            margin-bottom: 1.2rem;
+          }
+
+          .meta-filed-color {
+            a {
+              display: inline-block;
+              color: $color-secondary;
+            }
+          }
+
+          .meta-filed-construction-tools {
+            img {
+              width: 2rem;
+
+              ~ img {
+                margin-left: 0.8rem;
+              }
+            }
+          }
+
+          .meta-filed-video {
+            a {
+              display: inline-block;
+              color: #FF0000;
+            }
+          }
+        }
+      }
+
+      .site-comments {
+        padding-top: 0;
+
+        #comments {
+          margin: 0;
+          max-width: none;
+        }
+
+        #wpdcom {
+          margin: 0;
+          padding: 0;
+
+          .wpd-form-head {
+            margin-top: 0;
+            padding-top: 0;
+          }
+        }
       }
 
       &__right {
@@ -104,6 +282,22 @@
           display: inline-block;
           margin-bottom: 8px;
         }
+      }
+    }
+  }
+
+  .link-contact {
+    text-align: center;
+
+    a {
+      padding: 1rem 1.5rem .8rem;
+      display: inline-block;
+      font-weight: 700;
+      text-transform: uppercase;
+      background-color: $color-secondary;
+
+      &:hover {
+        color: #ffffff;
       }
     }
   }
@@ -120,5 +314,26 @@
   .page-title {
     margin-bottom: 0;
     font-size: 1.8rem;
+  }
+}
+
+.site-discover-related {
+  .slick-slider {
+    margin: 0 -0.8rem;
+  }
+
+  .slick-slide {
+    padding: 0 .8rem;
+  }
+
+  .item-post {
+    .thumbnail-image {
+      margin-bottom: 1rem;
+    }
+
+    .title-item {
+      margin-bottom: 0;
+      font-size: 1.6rem;
+    }
   }
 }

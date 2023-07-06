@@ -188,7 +188,7 @@ function paint_order_tool_columns($columns): array
 }
 
 // Set limit custom post type
-define('posts_per_page_discover', paint_get_option('discover_opt_limit', 30));
+define('posts_per_page_discover', paint_get_option('discover_opt_limit', 12));
 
 add_action('pre_get_posts', 'paint_set_limit_custom_post_type');
 function paint_set_limit_custom_post_type($query): void

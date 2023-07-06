@@ -227,7 +227,6 @@ function paint_link_page(): void
 // Comment
 function paint_comment_form(): void
 {
-
   if (comments_open() || get_comments_number()) :
     ?>
     <div class="site-comments">
