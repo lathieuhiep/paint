@@ -73,6 +73,7 @@
           font-weight: 700;
 
           @media screen and (min-width: 992px){
+            color: $color-black;
             background-color: $color-secondary;
           }
         }
@@ -91,5 +92,10 @@
     font-family: 'Font Awesome 5 Free', serif;
     font-style: normal;
     font-weight: 900;
+  }
+
+  @media screen and (min-width: 992px) {
+    position: absolute;
+    right: 8px;
   }
 }
