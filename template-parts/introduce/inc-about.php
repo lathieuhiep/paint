@@ -1,7 +1,6 @@
 <?php
 $opt_title = paint_get_option('template_introduce_opt_title', '');
 $opt_image = paint_get_option('template_introduce_opt_image', '');
-$opt_link = paint_get_option('template_introduce_opt_link', '');
 $opt_desc = paint_get_option('template_introduce_opt_desc', '');
 ?>
 
@@ -17,17 +16,7 @@ $opt_desc = paint_get_option('template_introduce_opt_desc', '');
         if ($opt_image) :
           echo wp_get_attachment_image($opt_image['id'], 'full');
         endif;
-
-        if (!empty($opt_link['url'])) :
-          $target = $opt_link['target'];
-          ?>
-          <div class="link">
-            <a href="<?php echo esc_url($opt_link['url']); ?>"
-               target="<?php echo esc_attr(!empty($target) ? $target : '_self'); ?>">
-              <?php echo esc_html($opt_link['text']); ?>
-            </a>
-          </div>
-        <?php endif; ?>
+        ?>
       </div>
     </div>
 

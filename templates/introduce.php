@@ -7,24 +7,32 @@ get_header();
 ?>
 
   <div class="content-warp">
-    <div class="element-section spacer-pt-breadcrumbs">
-      <div class="container">
-        <?php get_template_part('components/inc', 'breadcrumbs'); ?>
-      </div>
-    </div>
     <!-- include about -->
-    <div class="element-section element-spacer-pb">
+    <div class="element-section element-spacer background-color-white">
       <div class="container">
         <?php get_template_part('template-parts/introduce/inc', 'about'); ?>
       </div>
     </div>
 
-    <!-- our maxim -->
-    <section class="element-section element-spacer background-color-white">
+    <!-- About -->
+    <section class="element-section element-spacer">
       <div class="container">
-        <?php get_template_part('components/inc', 'our-maxim'); ?>
+        <?php
+        get_template_part('components/inc', 'heading-underline', array(
+          'title' => esc_html__('Chúng tôi làm gì', 'paint')
+        ));
+
+        get_template_part('components/inc', 'services');
+        ?>
       </div>
     </section>
+
+    <!-- count up -->
+    <div class="element-section element-section-introduce-count-up background-color-white">
+      <div class="container">
+        <?php get_template_part('components/inc', 'count-up'); ?>
+      </div>
+    </div>
 
     <!-- include gallery -->
     <div class="element-section">

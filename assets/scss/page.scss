@@ -17,12 +17,31 @@
   }
 }
 
-// Home page
+// Page Home
 .page-template-home {
   .element-count-up {
     .item {
+      display: grid;
+      grid-gap: 2.6rem;
+      grid-template-columns: minmax(auto, 50px) 1fr;
+      @include align-items(center);
+
       ~ .item {
         margin-top: 2rem;
+      }
+
+      .count-box {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: $color-black;
+
+        span {
+          display: inline-block;
+        }
+      }
+
+      .text {
+        color: $color-black;
       }
     }
   }
@@ -39,6 +58,80 @@
         font-size: 1.6rem;
         color: $color-secondary;
         background-color: $color-black;
+      }
+    }
+  }
+}
+
+// Page Introduce
+.page-template-introduce {
+  .element-about {
+    .title {
+      margin-bottom: 3.6rem;
+    }
+  }
+
+  .element-services {
+    display: grid;
+    grid-gap: 2.4rem 12rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    .item {
+      text-align: center;
+      border: 1px solid $color-black;
+
+      &__title {
+        margin: 0;
+        padding: 1.2rem 1.6rem;
+        color: $color-secondary;
+        background-color: $color-black;
+      }
+
+      &__content {
+        padding: 2rem;
+      }
+    }
+  }
+
+  .element-section-introduce-count-up {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  .element-count-up {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .item {
+      margin-bottom: 3rem;
+      width: 33.33333333%;
+      display: flex;
+      justify-content: center;
+
+      &__icon {
+        display: none;
+      }
+
+      &__content {
+        display: inline-block;
+
+        .count-box {
+          margin-bottom: 2rem;
+          font-weight: 700;
+          line-height: 0.8;
+          font-size: 6rem;
+          display: flex;
+
+          span {
+            display: inline-block;
+          }
+
+          .symbol {
+            color: $color-secondary;
+          }
+        }
       }
     }
   }
