@@ -123,17 +123,69 @@ if (class_exists('CSF')) {
     )
   ));
 
-  // Banner 2
+  // About Us
   CSF::createSection($paint_prefix, array(
     'parent' => 'template_home_opt',
-    'title' => esc_html__('Banner 2', 'paint'),
+    'title' => esc_html__('Về chúng tôi', 'paint'),
     'fields' => array(
+      // statistical
       array(
-        'id' => 'template_home_opt_banner_2',
-        'type' => 'media',
-        'library' => 'image',
-        'url' => false,
-        'preview_size' => 'full'
+        'id' => 'template_home_opt_result_count_bottom',
+        'type' => 'group',
+        'title' => esc_html__('Chúng tôi có', 'paint'),
+        'fields' => array(
+          array(
+            'id' => 'title',
+            'type' => 'text',
+            'title' => esc_html__('Tiêu đề', 'paint'),
+          ),
+
+          array(
+            'id' => 'image',
+            'type' => 'media',
+            'title' => esc_html__('Ảnh icon', 'paint'),
+            'library' => 'image',
+            'url' => false,
+          ),
+
+          array(
+            'id' => 'count',
+            'type' => 'number',
+            'title' => esc_html__('Nhập số', 'paint'),
+            'default' => '325'
+          ),
+
+          array(
+            'id' => 'show_icon',
+            'type' => 'switcher',
+            'title' => esc_html__('Hiển thị dấu (+)', 'paint'),
+            'text_on' => esc_html__('Có', 'paint'),
+            'text_off' => esc_html__('Không', 'paint'),
+            'default' => true,
+            'text_width' => 80
+          ),
+        ),
+      ),
+
+      // Services
+      array(
+        'id' => 'template_home_opt_about_services',
+        'type' => 'group',
+        'title' => esc_html__('Dịch vụ', 'paint'),
+        'fields' => array(
+          array(
+            'id' => 'title',
+            'type' => 'text',
+            'title' => esc_html__('Tiêu đề', 'paint'),
+          ),
+
+          // content
+          array(
+            'id' => 'describe',
+            'type' => 'textarea',
+            'title' => esc_html__('Mô tả', 'paint'),
+          ),
+        ),
       ),
     )
   ));
@@ -143,34 +195,6 @@ if (class_exists('CSF')) {
     'parent' => 'template_home_opt',
     'title' => esc_html__('Sản phẩm', 'paint'),
     'fields' => array(
-      // Heading
-      array(
-        'id' => 'template_home_opt_product_heading',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('Sản phẩm', 'paint')
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
-        ),
-      ),
-
       // Select category
       array(
         'id' => 'template_home_opt_product_cat',
@@ -220,191 +244,17 @@ if (class_exists('CSF')) {
     )
   ));
 
-  // Tools
-  CSF::createSection($paint_prefix, array(
-    'parent' => 'template_home_opt',
-    'title' => esc_html__('Dụng cụ thi công', 'paint'),
-    'fields' => array(
-      // Heading
-      array(
-        'id' => 'template_home_opt_tool_heading',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('Dụng cụ thi công', 'paint')
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
-        ),
-      ),
-
-      // Select category
-      array(
-        'id' => 'template_home_opt_tool_cat',
-        'type' => 'select',
-        'title' => esc_html__('Chọn danh mục dụng cụ', 'paint'),
-        'placeholder' => esc_html__('Chọn danh mục dụng cụ', 'paint'),
-        'options' => 'categories',
-        'multiple' => true,
-        'chosen' => true,
-        'query_args' => array(
-          'taxonomy' => 'paint_tool_cat',
-        ),
-      ),
-
-      // Limit
-      array(
-        'id' => 'template_home_opt_tool_limit',
-        'type' => 'number',
-        'title' => esc_html__('Số bài viêt cần lấy', 'paint'),
-        'default' => 10,
-      ),
-
-      // order by
-      array(
-        'id' => 'template_home_opt_tool_order_by',
-        'type' => 'select',
-        'title' => esc_html__('Lấy bài viết theo', 'paint'),
-        'options' => array(
-          'id' => esc_html__('ID', 'beecolor'),
-          'title' => esc_html__('Tiêu đề', 'paint'),
-          'date' => esc_html__('Ngày tạo', 'paint'),
-        ),
-        'default' => 'id'
-      ),
-
-      // order
-      array(
-        'id' => 'template_home_opt_tool_order',
-        'type' => 'select',
-        'title' => esc_html__('Sắp xếp bài viết', 'paint'),
-        'options' => array(
-          'ASC' => esc_html__('Trên xuống dưới', 'paint'),
-          'DESC' => esc_html__('Dưới lên trên', 'paint'),
-        ),
-        'default' => 'DESC'
-      )
-    )
-  ));
-
-  // Result_count
-  CSF::createSection($paint_prefix, array(
-    'parent' => 'template_home_opt',
-    'title' => esc_html__('Kết quả đạt được', 'paint'),
-    'fields' => array(
-      // Top box
-      array(
-        'id' => 'template_home_opt_result_count_top',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('KẾT QUẢ ĐẠT ĐƯỢC', 'paint')
-          ),
-
-          // content
-          array(
-            'id' => 'describe',
-            'type' => 'wp_editor',
-            'title' => esc_html__('Mô tả', 'paint'),
-            'default' => esc_html__('Chúng tôi tự hào về những thành quả đã đạt được trong suốt chặng đường vươn lên đạt top 1 sơn trang trí', 'paint')
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
-        ),
-      ),
-
-      // Bottom box
-      array(
-        'id' => 'template_home_opt_result_count_bottom',
-        'type' => 'group',
-        'title' => esc_html__('Mục dưới', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-          ),
-
-          array(
-            'id' => 'image',
-            'type' => 'media',
-            'title' => esc_html__('Ảnh icon', 'paint'),
-            'library' => 'image',
-            'url' => false,
-          ),
-
-          array(
-            'id' => 'count',
-            'type' => 'number',
-            'title' => esc_html__('Nhập số', 'paint'),
-            'default' => '325'
-          ),
-        ),
-      ),
-    )
-  ));
 
   // Project
   CSF::createSection($paint_prefix, array(
     'parent' => 'template_home_opt',
     'title' => esc_html__('Dự án', 'paint'),
     'fields' => array(
-      // Heading
+      // Desc
       array(
-        'id' => 'template_home_opt_project_heading',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('DỰ ÁN', 'paint')
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
-        ),
+        'id' => 'template_home_opt_project_content',
+        'type' => 'wp_editor',
+        'title' => esc_html__('Nội dung', 'paint'),
       ),
 
       // Select category
@@ -456,110 +306,58 @@ if (class_exists('CSF')) {
     )
   ));
 
-  // Services
+
+  // Discover
   CSF::createSection($paint_prefix, array(
     'parent' => 'template_home_opt',
-    'title' => esc_html__('Dịch vụ', 'paint'),
+    'title' => esc_html__('Khám phá', 'paint'),
     'fields' => array(
-      // media
+      // Select category
       array(
-        'id' => 'template_home_opt_service_image',
-        'type' => 'media',
-        'title' => esc_html__('Chọn ảnh', 'paint'),
-        'library' => 'image',
-        'url' => false,
-      ),
-
-      // list
-      array(
-        'id' => 'template_home_opt_service_list',
-        'type' => 'group',
-        'title' => esc_html__('Danh sách dịch vụ', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-          ),
-
-          array(
-            'id' => 'image',
-            'type' => 'media',
-            'title' => esc_html__('Ảnh icon', 'paint'),
-            'library' => 'image',
-            'url' => false,
-          ),
-
-          array(
-            'id' => 'content',
-            'type' => 'textarea',
-            'title' => esc_html__('Nội dung', 'paint'),
-          ),
-        ),
-      ),
-    )
-  ));
-
-  // Testimonial
-  CSF::createSection($paint_prefix, array(
-    'parent' => 'template_home_opt',
-    'title' => esc_html__('Ý kiến đánh giá', 'paint'),
-    'fields' => array(
-      // Heading
-      array(
-        'id' => 'template_home_opt_testimonial_heading',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('Ý KIẾN ĐÁNH GIÁ', 'paint')
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
+        'id' => 'template_home_opt_discover_cat',
+        'type' => 'select',
+        'title' => esc_html__('Chọn danh mục khám phá', 'paint'),
+        'placeholder' => esc_html__('Chọn danh mục khám phá', 'paint'),
+        'options' => 'categories',
+        'multiple' => true,
+        'chosen' => true,
+        'query_args' => array(
+          'taxonomy' => 'paint_discover_cat',
         ),
       ),
 
-      // List
+      // Limit
       array(
-        'id' => 'template_home_opt_testimonial_customers',
-        'type' => 'group',
-        'title' => esc_html__('Khách hàng', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'name',
-            'type' => 'text',
-            'title' => esc_html__('Tên khách hàng', 'paint'),
-          ),
-
-          array(
-            'id' => 'image',
-            'type' => 'media',
-            'title' => esc_html__('Avatar', 'paint'),
-            'library' => 'image',
-            'url' => false,
-          ),
-
-          array(
-            'id' => 'content',
-            'type' => 'textarea',
-            'title' => esc_html__('Ý kiến', 'paint'),
-          ),
-        ),
+        'id' => 'template_home_opt_discover_limit',
+        'type' => 'number',
+        'title' => esc_html__('Số bài viêt cần lấy', 'paint'),
+        'default' => 5,
       ),
+
+      // order by
+      array(
+        'id' => 'template_home_opt_discover_order_by',
+        'type' => 'select',
+        'title' => esc_html__('Lấy bài viết theo', 'paint'),
+        'options' => array(
+          'id' => esc_html__('ID', 'beecolor'),
+          'title' => esc_html__('Tiêu đề', 'paint'),
+          'date' => esc_html__('Ngày tạo', 'paint'),
+        ),
+        'default' => 'id'
+      ),
+
+      // order
+      array(
+        'id' => 'template_home_opt_discover_order',
+        'type' => 'select',
+        'title' => esc_html__('Sắp xếp bài viết', 'paint'),
+        'options' => array(
+          'ASC' => esc_html__('Trên xuống dưới', 'paint'),
+          'DESC' => esc_html__('Dưới lên trên', 'paint'),
+        ),
+        'default' => 'DESC'
+      )
     )
   ));
 
@@ -642,6 +440,27 @@ if (class_exists('CSF')) {
         ),
         'default' => 'ASC'
       )
+    )
+  ));
+
+  // Newsletter
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'template_home_opt',
+    'title' => esc_html__('Đăng kí nhận tin', 'paint'),
+    'fields' => array(
+      // Desc
+      array(
+        'id' => 'template_home_opt_newsletter',
+        'type' => 'textarea',
+        'title' => esc_html__('Nội dung', 'paint'),
+      ),
+
+      // shortcode
+      array(
+        'id' => 'template_home_opt_newsletter_shortcode',
+        'type' => 'textarea',
+        'title' => esc_html__('Shortcode Newsletter', 'paint'),
+      ),
     )
   ));
 

@@ -1,0 +1,31 @@
+.element-newsletter {
+  display: grid;
+  grid-gap: 2rem 3rem;
+  grid-template-columns: 40rem 1fr;
+  align-items: center;
+
+  form {
+    &.tnp-subscription {
+      max-width: none;
+      margin: 0;
+      display: flex;
+      grid-gap: 2rem;
+
+      > div {
+        margin: 0;
+      }
+
+      .tnp-field-email {
+        flex: 1;
+      }
+
+      .tnp-field-button {
+        flex: 0 0 auto;
+
+        .tnp-submit {
+          background-color: $color-black;
+        }
+      }
+    }
+  }
+}

@@ -12,63 +12,84 @@ get_header();
       <?php get_template_part('components/inc', 'banner', array('opt' => 'template_home_opt_banner_1')); ?>
     </div>
 
-    <!-- our maxim -->
-    <section class="element-section element-spacer background-color-white">
+    <!-- count up -->
+    <section class="element-section element-spacer element-section-about background-color-white">
       <div class="container">
-        <?php get_template_part('components/inc', 'our-maxim'); ?>
+        <?php
+          get_template_part('components/inc', 'heading-line', array(
+           'title' => esc_html__('Về Chúng Tôi', 'paint')
+          ));
+        ?>
+
+        <div class="row">
+          <div class="col-4">
+            <?php get_template_part('components/inc', 'count-up'); ?>
+          </div>
+
+          <div class="col-8">
+            <?php get_template_part('components/inc', 'services'); ?>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- banner 2 -->
-    <div class="element-section">
-      <?php get_template_part('components/inc', 'banner', array('opt' => 'template_home_opt_banner_2')); ?>
-    </div>
-
-    <!-- products add tool -->
-    <section class="element-section element-spacer element-section-products element-background-image">
+    <!-- products -->
+    <section class="element-section element-spacer element-section-products">
       <div class="container">
         <?php
-        get_template_part('components/inc', 'heading', array('opt' => 'template_home_opt_product_heading'));
-        get_template_part('components/inc', 'products');
+        get_template_part('components/inc', 'heading-line', array(
+          'title' => esc_html__('Sản phẩm', 'paint')
+        ));
 
-        get_template_part('components/inc', 'heading', array('opt' => 'template_home_opt_tool_heading'));
-        get_template_part('components/inc', 'tool');
+        get_template_part('components/inc', 'products');
         ?>
       </div>
     </section>
 
-    <!-- count up -->
+    <!-- project -->
+    <section class="element-section element-section-project background-color-white">
+      <div class="container">
+        <?php
+        get_template_part('components/inc', 'heading-line', array(
+          'title' => esc_html__('Dự án', 'paint')
+        ));
+
+        get_template_part('components/inc', 'project');
+        ?>
+      </div>
+    </section>
+
+    <!-- discover -->
+    <div class="element-section element-spacer element-section-discover">
+      <div class="container">
+        <?php
+        get_template_part('components/inc', 'heading-line', array(
+          'title' => esc_html__('Khám phá', 'paint')
+        ));
+
+        get_template_part('components/inc', 'discover');
+        ?>
+      </div>
+    </div>
+
+    <!-- posts slider -->
     <section class="element-section element-spacer background-color-white">
       <div class="container">
-        <?php get_template_part('components/inc', 'count-up'); ?>
-      </div>
-    </section>
+        <?php
+        get_template_part('components/inc', 'heading-line', array(
+          'title' => esc_html__('Bài viết', 'paint')
+        ));
 
-    <!-- project -->
-    <section class="element-section element-section-project element-background-image">
-      <div class="container">
-        <?php get_template_part('components/inc', 'project'); ?>
-      </div>
-    </section>
-
-    <!-- services -->
-    <section class="element-section background-color-white">
-      <div class="container">
-        <?php get_template_part('components/inc', 'services'); ?>
-      </div>
-    </section>
-
-    <!-- testimonial -->
-    <section class="element-section element-spacer element-background-image background-color-yellow">
-      <div class="container">
-        <?php get_template_part('components/inc', 'testimonial'); ?>
+        get_template_part('components/inc', 'post-slider');
+        ?>
       </div>
     </section>
 
     <!-- posts slider -->
-    <section class="element-section element-spacer">
+    <section class="element-section element-section-newsletter mb-5">
       <div class="container">
-        <?php get_template_part('components/inc', 'post-slider'); ?>
+        <?php get_template_part('components/inc', 'newsletter'); ?>
       </div>
     </section>
   </div>

@@ -8,10 +8,10 @@ $opt_order = paint_get_option('template_home_opt_post_order', 'ASC');
 // config slider
 $data_config_slider = [
   'infinite' => true,
-  'slidesToShow' => 4,
-  'slidesToScroll' => 4,
+  'slidesToShow' => 3,
+  'slidesToScroll' => 3,
   'arrows' => false,
-  'autoplay' => true,
+  'autoplay' => false,
   'dots' => false,
   'responsive' => [
     [
@@ -49,20 +49,12 @@ $args = array(
 );
 
 $query = new WP_Query($args);
+
+if ($query->have_posts()) :
 ?>
 
 <div class="element-post-slider">
-  <?php if (!empty($opt_heading)) : ?>
-    <h2 class="heading text-<?php echo esc_attr($opt_heading['align']); ?>">
-      <?php echo esc_html($opt_heading['title']); ?>
-    </h2>
-  <?php
-  endif;
-
-  if ($query->have_posts()) :
-    ?>
-
-    <div class="custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
+  <div class="custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
       <?php while ($query->have_posts()): $query->the_post(); ?>
         <div class="post">
           <figure class="post__thumbnail">
@@ -77,24 +69,29 @@ $query = new WP_Query($args);
             </a>
           </h2>
 
-          <p class="post__desc">
+          <div class="post__date">
+            <?php echo esc_html( get_the_date() ); ?>
+          </div>
+
+          <div class="post__desc">
             <?php
             if (has_excerpt()) :
-              echo esc_html(get_the_excerpt());
+              the_excerpt();
             else:
-              echo esc_html(wp_trim_words(get_the_content(), 10, '...'));
+              echo wp_trim_words(get_the_content(), '35', '...');
             endif;
             ?>
-          </p>
-
-          <a href="<?php the_permalink(); ?>" class="read-more" title="<?php the_title() ?>">
-            <span><?php esc_html_e('Xem thêm', 'paint'); ?></span>
-            <i class="fa-solid fa-right-long"></i>
-          </a>
+          </div>
         </div>
       <?php endwhile;
       wp_reset_postdata(); ?>
     </div>
 
-  <?php endif; ?>
+  <div class="link-all">
+    <a href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>">
+      <?php esc_html_e('Xem thêm', 'paint'); ?>
+    </a>
+  </div>
 </div>
+
+<?php endif; ?>

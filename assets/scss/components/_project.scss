@@ -1,0 +1,67 @@
+.element-project {
+  .desc {
+    margin-bottom: 5rem;
+  }
+
+  .project-content {
+    margin-bottom: 5rem;
+
+    .item {
+      .thumbnail {
+        position: relative;
+
+        .title {
+          position: absolute;
+          left: 6rem;
+          right: 6rem;
+          bottom: 5rem;
+          font-size: 1.7rem;
+          text-transform: uppercase;
+          text-align: center;
+
+          a {
+            display: inline-block;
+            padding: 1rem 1.6rem;
+            color: $color-black;
+            background: rgb(255,223,56);
+            background: linear-gradient(90deg, rgba(255,223,56,0.48) 48%, rgba(250,241,176,1) 100%);
+          }
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+
+      &.slick-slide {
+        padding: 2.5rem 0;
+        @include transition( all 0.2s ease-in-out);
+      }
+
+      &.slick-current {
+        + .slick-slide {
+          position: relative;
+          z-index: 2;
+          transform: scale(1.12);
+        }
+      }
+    }
+
+    &.slick-slider {
+      .slick-arrow {
+        color: $color-black;
+        font-size: 3rem;
+        border-radius: 0;
+        background-color: $color-secondary;
+
+        &.slick-prev {
+          left: 0;
+        }
+
+        &.slick-next {
+          right: 0;
+        }
+      }
+    }
+  }
+}

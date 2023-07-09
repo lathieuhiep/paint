@@ -20,7 +20,6 @@ $args = array(
   'posts_per_page' => $opt_limit,
   'orderby' => $opt_order_by,
   'order' => $opt_order,
-  'ignore_sticky_posts' => 1,
   'tax_query' => $tax_query
 );
 
@@ -30,7 +29,7 @@ if ($query->have_posts()) :
   ?>
 
   <div class="element-products">
-    <div class="row row-cols-2 row-cols-md-3">
+    <div class="row row-cols-2 row-cols-md-4">
       <?php
       while ($query->have_posts()):
         $query->the_post();
@@ -45,16 +44,22 @@ if ($query->have_posts()) :
               echo wp_get_attachment_image($image_hover, 'large', '', array("class" => "img-feature-hover"));
               ?>
             </a>
-
-            <h2 class="title">
-              <a href="<?php the_permalink(); ?>">
-                <?php the_title() ?>
-              </a>
-            </h2>
           </div>
+
+          <h2 class="title">
+            <a href="<?php the_permalink(); ?>">
+              <?php the_title() ?>
+            </a>
+          </h2>
         </div>
       <?php endwhile;
       wp_reset_postdata(); ?>
+    </div>
+
+    <div class="link-all">
+      <a href="<?php echo esc_url( get_post_type_archive_link( 'paint_product' ) ); ?>">
+        <?php esc_html_e('Xem thêm', 'paint'); ?>
+      </a>
     </div>
   </div>
 

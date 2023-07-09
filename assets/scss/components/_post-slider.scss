@@ -1,25 +1,31 @@
 .element-post-slider {
+  color: $color-black;
+
   .heading {
     margin-bottom: 36px;
   }
 
   .post {
     &__thumbnail {
+      margin-bottom: .6rem;
+      height: 24.5rem;
+      overflow: hidden;
       @include transition();
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     &__title {
-      margin-bottom: 0;
-      font-size: 1.6rem;
+      margin-bottom: .2em;
+      font-size: 1.8rem;
     }
 
-    &__desc {
-      margin-bottom: 0;
-      font-size: 1.4rem;
-    }
-
-    .read-more {
-      display: inline-block;
+    &__date {
+      margin-bottom: .2rem;
       font-size: 1.5rem;
     }
 
@@ -38,14 +44,7 @@
     margin: 0 12px;
   }
 
-  .slick-track {
-    display: flex;
-  }
-
-  .slick-slide {
-    height: inherit;
-    display: grid;
-    grid-row-gap: 10px;
-    grid-template-rows: auto 1fr 1fr;
+  .link-all {
+    margin-top: 3rem;
   }
 }
