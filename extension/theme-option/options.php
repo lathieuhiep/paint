@@ -466,76 +466,6 @@ if (class_exists('CSF')) {
 
   // -> End section template home
 
-  // Create a section our maxim
-  CSF::createSection($paint_prefix, array(
-    'title' => esc_html__('Châm ngôn của chúng tôi', 'paint'),
-    'icon' => 'fas fa-window-maximize',
-    'fields' => array(
-      // Top box
-      array(
-        'id' => 'our_maxim_opt_top',
-        'type' => 'fieldset',
-        'title' => esc_html__('Mục trên', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-            'default' => esc_html__('CHÂM NGÔN CỦA CHÚNG TÔI', 'paint')
-          ),
-
-          // content
-          array(
-            'id' => 'describe',
-            'type' => 'wp_editor',
-            'title' => esc_html__('Mô tả', 'paint'),
-          ),
-
-          // align
-          array(
-            'id' => 'align',
-            'type' => 'select',
-            'title' => esc_html__('Căn chỉnh', 'paint'),
-            'options' => array(
-              'start' => esc_html__('Căn lề trái', 'paint'),
-              'center' => esc_html__('Căn giữa', 'paint'),
-              'end' => esc_html__('Căn phải', 'paint'),
-            ),
-            'default' => 'center'
-          ),
-        ),
-      ),
-
-      // Bottom box
-      array(
-        'id' => 'our_maxim_opt_group',
-        'type' => 'group',
-        'title' => esc_html__('Mục dưới', 'paint'),
-        'fields' => array(
-          array(
-            'id' => 'title',
-            'type' => 'text',
-            'title' => esc_html__('Tiêu đề', 'paint'),
-          ),
-
-          array(
-            'id' => 'image',
-            'type' => 'media',
-            'title' => esc_html__('Ảnh icon', 'paint'),
-            'library' => 'image',
-            'url' => false,
-          ),
-
-          array(
-            'id' => 'content',
-            'type' => 'textarea',
-            'title' => esc_html__('Nội dung', 'paint'),
-          ),
-        ),
-      ),
-    )
-  ));
-
   //
   // -> Create a section template introduce
   CSF::createSection($paint_prefix, array(
@@ -572,16 +502,100 @@ if (class_exists('CSF')) {
     )
   ));
 
-  // Gallery
+  // Our Maxim
   CSF::createSection($paint_prefix, array(
     'parent' => 'template_introduce_opt',
-    'title' => esc_html__('Gallery', 'paint'),
+    'title' => esc_html__('Châm ngôn của chúng tôi', 'paint'),
     'fields' => array(
       array(
-        'id' => 'template_introduce_opt_gallery',
+        'id' => 'tpl_introduce_opt_our_maxim_group',
+        'type' => 'group',
+        'fields' => array(
+          array(
+            'id' => 'title',
+            'type' => 'text',
+            'title' => esc_html__('Tiêu đề', 'paint'),
+          ),
+
+          array(
+            'id' => 'content',
+            'type' => 'wp_editor',
+            'title' => esc_html__('Nội dung', 'paint'),
+          ),
+        ),
+      ),
+    )
+  ));
+
+  // Technology
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'template_introduce_opt',
+    'title' => esc_html__('Công nghệ', 'paint'),
+    'fields' => array(
+      array(
+        'id' => 'tpl_introduce_opt_technology_group',
+        'type' => 'group',
+        'fields' => array(
+          array(
+            'id' => 'title',
+            'type' => 'text',
+            'title' => esc_html__('Tiêu đề', 'paint'),
+          ),
+
+          array(
+            'id'    => 'color',
+            'type'  => 'color',
+            'title' => esc_html__('Màu nền', 'paint'),
+          ),
+
+          array(
+            'title' => esc_html__('Ảnh', 'paint'),
+            'id' => 'image',
+            'type' => 'media',
+            'library' => 'image',
+            'url' => false,
+          ),
+
+          array(
+            'id' => 'content',
+            'type' => 'wp_editor',
+            'title' => esc_html__('Nội dung', 'paint'),
+          ),
+        ),
+      ),
+    )
+  ));
+
+  // Certification
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'template_introduce_opt',
+    'title' => esc_html__('Chứng nhận', 'paint'),
+    'fields' => array(
+      array(
+        'id' => 'template_introduce_opt_certification',
         'type' => 'gallery',
-        'title' => esc_html__('Gallery', 'paint')
       )
+    )
+  ));
+
+  // community
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'template_introduce_opt',
+    'title' => esc_html__('Hoạt động vì cộng đồng', 'paint'),
+    'fields' => array(
+      array(
+        'id' => 'template_introduce_opt_community_image',
+        'title' => esc_html__('Ảnh', 'paint'),
+        'type' => 'media',
+        'library' => 'image',
+        'url' => false,
+      ),
+
+      array(
+        'id' => 'template_introduce_opt_community_content',
+        'type' => 'wp_editor',
+        'title' => esc_html__('Nội dung', 'paint'),
+      ),
     )
   ));
 

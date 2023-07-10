@@ -34,10 +34,56 @@ get_header();
       </div>
     </div>
 
+    <!-- our maxim -->
+    <section class="element-section element-section-our-maxim">
+      <div class="container">
+        <?php get_template_part('components/inc', 'our-maxim'); ?>
+      </div>
+    </section>
+
+    <!-- Technology -->
+    <section class="element-section element-section-space-pt element-section-technology">
+      <div class="container">
+        <?php
+        get_template_part('components/inc', 'heading-underline', array(
+          'title' => esc_html__('Công nghệ', 'paint')
+        ));
+
+        get_template_part('template-parts/introduce/inc', 'technology');
+        ?>
+      </div>
+    </section>
+
     <!-- include gallery -->
-    <div class="element-section">
-      <?php get_template_part('template-parts/introduce/inc', 'gallery'); ?>
+    <div class="element-section element-section-space-pt">
+      <div class="container">
+        <?php
+        get_template_part('components/inc', 'heading-underline', array(
+          'title' => esc_html__('Chứng nhận chất lượng', 'paint')
+        ));
+
+        get_template_part('template-parts/introduce/inc', 'certification');
+        ?>
+      </div>
     </div>
+
+    <!-- include community -->
+    <div class="element-section element-section-space element-section-community">
+      <?php
+      get_template_part('components/inc', 'heading-underline', array(
+        'title' => esc_html__('Hoạt động vì cộng đồng', 'paint')
+      ));
+
+      get_template_part('template-parts/introduce/inc', 'community');
+      ?>
+    </div>
+
+    <!-- newsletter -->
+    <section class="element-section element-section-newsletter mb-5">
+      <div class="container">
+        <?php get_template_part('components/inc', 'newsletter'); ?>
+      </div>
+    </section>
   </div>
 
 <?php

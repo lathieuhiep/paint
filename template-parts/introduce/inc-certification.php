@@ -1,8 +1,8 @@
 <?php
-$opt_gallery = paint_get_option('template_introduce_opt_gallery', '');
+$opt_certification= paint_get_option('template_introduce_opt_certification');
 
-if ($opt_gallery) :
-  $gallery_ids = explode(',', $opt_gallery);
+if ($opt_certification) :
+  $gallery_ids = explode(',', $opt_certification);
   ?>
 
   <div class="element-about-gallery">

@@ -86,7 +86,7 @@ get_header();
       </div>
     </section>
 
-    <!-- posts slider -->
+    <!-- newsletter -->
     <section class="element-section element-section-newsletter mb-5">
       <div class="container">
         <?php get_template_part('components/inc', 'newsletter'); ?>
