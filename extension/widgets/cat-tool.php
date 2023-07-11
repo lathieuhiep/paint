@@ -45,28 +45,32 @@ class paint_cat_tool_widget extends WP_Widget
       'taxonomy' => 'paint_tool_cat',
       'hide_empty' => false
     ));
-
-    if ($taxonomies) :
-      ?>
-
+    ?>
       <ul class="cat-tool-widget">
-        <?php foreach ($taxonomies as $item) : ?>
-          <li class="cat-tool-item">
+        <li class="cat-tool-item<?php echo esc_attr( is_post_type_archive('paint_tool') ? ' active' : '' ); ?>">
+          <a href="<?php echo esc_url(get_post_type_archive_link('paint_tool')); ?>">
+            <?php esc_html_e('Tất cả', 'paint'); ?>
+          </a>
+        </li>
+
+        <?php
+        if ($taxonomies) :
+          $term = get_queried_object();
+
+          foreach ($taxonomies as $item) :
+        ?>
+          <li class="cat-tool-item<?php echo esc_attr( !is_post_type_archive('paint_tool') && $term->term_id == $item->term_id ? ' active' : '' ); ?>">
             <a href="<?php echo esc_url(get_term_link($item->slug, 'paint_tool_cat')); ?>"
                title="<?php echo esc_attr($item->name); ?>">
               <?php echo esc_html($item->name); ?>
             </a>
-
-            <span class="count">
-                    (<?php echo esc_html($item->count); ?>)
-                </span>
           </li>
-        <?php endforeach; ?>
+        <?php
+          endforeach;
+        endif;
+        ?>
       </ul>
-
     <?php
-    endif;
-
     echo $args['after_widget'];
   }
 
