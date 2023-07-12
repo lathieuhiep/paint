@@ -25,15 +25,15 @@ $query = new WP_Query($args);
 
   <div class="site-container faq-warp">
     <div class="container">
-      <?php get_template_part('components/inc', 'breadcrumbs'); ?>
+      <div class="top text-center">
+        <h1 class="top__title mb-2">
+          <?php echo get_the_title(); ?>
+        </h1>
 
-      <h1 class="page-title text-center">
-        <?php echo get_the_title(); ?>
-      </h1>
-
-      <h2 class="heading">
-        <?php esc_html_e('Câu hỏi phổ biến về B-color', 'paint'); ?>
-      </h2>
+        <p class="top__heading text">
+          <?php esc_html_e('Câu hỏi phổ biến về BColor', 'paint'); ?>
+        </p>
+      </div>
 
       <?php if ($query->have_posts()) : ?>
         <div class="accordion accordion-faq">

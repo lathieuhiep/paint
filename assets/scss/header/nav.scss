@@ -66,15 +66,49 @@
           @include transition();
         }
       }
+    }
+  }
 
-      &.current-menu-parent,
-      &.current-menu-item {
+  > ul {
+    > li {
+      &.current-menu-parent ,
+      &.current-menu-item,
+      &.current-menu-ancestor {
         > a {
           font-weight: 700;
 
           @media screen and (min-width: 992px){
             color: $color-black;
             background-color: $color-secondary;
+          }
+        }
+      }
+
+      .sub-menu {
+        > .current-menu-parent,
+        > .current-menu-item {
+          @media screen and (min-width: 992px){
+            background-color: $color-secondary;
+
+            a {
+              color: $color-black;
+            }
+          }
+
+          > a {
+            font-weight: 700;
+          }
+        }
+
+        li {
+          &.current-menu-item {
+            @media screen and (min-width: 992px){
+              background-color: $color-secondary;
+
+              a {
+                color: $color-black;
+              }
+            }
           }
         }
       }

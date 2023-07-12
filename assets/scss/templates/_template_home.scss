@@ -1,0 +1,44 @@
+.page-template-home {
+  .element-count-up {
+    .item {
+      display: grid;
+      grid-gap: 2.6rem;
+      grid-template-columns: minmax(auto, 50px) 1fr;
+      @include align-items(center);
+
+      ~ .item {
+        margin-top: 2rem;
+      }
+
+      .count-box {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: $color-black;
+
+        span {
+          display: inline-block;
+        }
+      }
+
+      .text {
+        color: $color-black;
+      }
+    }
+  }
+
+  .element-services {
+    .item {
+      ~ .item {
+        margin-top: 3rem;
+      }
+
+      &__title {
+        display: inline-block;
+        padding: .3rem .6rem;
+        font-size: 1.6rem;
+        color: $color-secondary;
+        background-color: $color-black;
+      }
+    }
+  }
+}

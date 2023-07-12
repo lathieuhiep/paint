@@ -46,4 +46,32 @@ function paint_create_project()
   register_post_type('paint_project', $args);
   /* End post type */
 
+  /* Start taxonomy */
+  $taxonomy_labels = array(
+    'name' => _x('Danh mục dự án', 'taxonomy general name', 'paint'),
+    'singular_name' => _x('Danh mục', 'taxonomy singular name', 'paint'),
+    'search_items' => esc_html__('Tìm kiếm danh mục', 'paint'),
+    'all_items' => esc_html__('Tất cả danh mục', 'paint'),
+    'parent_item' => esc_html__('Danh mục cha', 'paint'),
+    'parent_item_colon' => esc_html__('Danh mục cha:', 'paint'),
+    'edit_item' => esc_html__('Sửa danh mục', 'paint'),
+    'update_item' => esc_html__('Cập nhật danh mục', 'paint'),
+    'add_new_item' => esc_html__('Thêm mới danh mục', 'paint'),
+    'new_item_name' => esc_html__('Tên danh mục mới', 'paint'),
+    'menu_name' => esc_html__('Danh mục', 'paint'),
+  );
+
+  $taxonomy_args = array(
+    'labels' => $taxonomy_labels,
+    'hierarchical' => true,
+    'public' => true,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array('slug' => 'danh-muc-du-an'),
+  );
+
+  register_taxonomy('paint_project_cat', array('paint_project'), $taxonomy_args);
+  /* End taxonomy */
+
 }

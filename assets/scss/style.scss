@@ -31,6 +31,10 @@ Text Domain: paint
   ## Testimonial
   ## Post slider
   ## About
+# Templates
+  ## Template Home
+  ## Template Introduce
+  ## Template FAQ
 # Sidebar
 # Blog
   ## Single
@@ -75,6 +79,11 @@ Text Domain: paint
 # Components
 -----------------------------------------------------------------------------*/
 @import "components/components";
+
+/**
+# Templates
+-----------------------------------------------------------------------------*/
+@import "templates/templates";
 
 /**
 # Sidebar
