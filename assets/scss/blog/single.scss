@@ -1,4 +1,13 @@
 .site-single {
+  .single-content-warp {
+    padding: 2.4rem 3.4rem;
+    background-color: $color-white;
+
+    > div {
+      margin-top: 3rem;
+    }
+  }
+
   .site-post-image,
   .page-links {
     margin-bottom: 30px;
@@ -10,6 +19,27 @@
 
   .site-post-excerpt {
     margin-bottom: 15px;
+  }
+
+  .site-sidebar {
+    .widget_lpwtoc_widget {
+      position: fixed;
+      max-width: 290px;
+      width: 100%;
+      top: 15rem;
+
+      > div {
+        margin: 0;
+      }
+
+      .lwptoc_i {
+        padding: 0;
+      }
+    }
+  }
+
+  .element-section-newsletter {
+    margin-top: 8rem;
   }
 }
 
@@ -95,24 +125,72 @@
 }
 
 .site-single-post-related {
-  .title {
+  .item {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+  }
+
+  .title-post {
     position: relative;
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.6rem;
     font-size: 1.8rem;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
+    flex: 1;
 
     &:after {
       position: absolute;
       content: "";
+      width: 15rem;
+      height: .2rem;
       left: 0;
       bottom: 0;
-      width: 30px;
-      height: 1px;
-      background-color: $background-hover;
+      background-color: $color-secondary;
     }
   }
 
-  .item {
-    margin-bottom: 15px;
+  .view-post {
+    padding: .3rem .5rem;
+    display: inline-block;
+    font-size: 1.5rem;
+    border: 1px solid currentColor;
+  }
+
+  .slick-track {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .slick-list {
+    margin: 0 -12px;
+  }
+
+  .slick-slide {
+    margin: 0 12px;
+  }
+
+  .slick-slider {
+    .slick-arrow {
+      padding: 0;
+      width: auto;
+      height: auto;
+      color: $color-black;
+      font-size: 3rem;
+      border-radius: 0;
+      background-color: transparent;
+
+      &:hover {
+        color: $color-hover;
+      }
+
+      &.slick-prev {
+        left: -2.8rem;
+      }
+
+      &.slick-next {
+        right: -2.8rem;
+      }
+    }
   }
 }

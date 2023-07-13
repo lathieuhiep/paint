@@ -1,10 +1,3 @@
-<?php
-$sidebar = paint_get_option('paint_opt_blog_cat_sidebar', 'right');
-$per_row = paint_get_option('paint_opt_blog_per_row', '2');
-
-$class_col_content = paint_col_use_sidebar($sidebar, 'paint-sidebar-main');
-?>
-
 <div class="site-blog">
   <div class="container">
     <div class="grid">

@@ -7,8 +7,6 @@ $class_col_content = paint_col_use_sidebar($sidebar, 'paint-sidebar-main');
 
 <div class="site-container site-single">
   <div class="container">
-    <?php get_template_part('template-parts/breadcrumbs/inc', 'breadcrumbs'); ?>
-
     <div class="row">
       <div class="<?php echo esc_attr($class_col_content); ?>">
         <?php
@@ -28,6 +26,13 @@ $class_col_content = paint_col_use_sidebar($sidebar, 'paint-sidebar-main');
       ?>
     </div>
   </div>
+
+  <!-- newsletter -->
+  <section class="element-section element-section-newsletter">
+    <div class="container">
+      <?php get_template_part('components/inc', 'newsletter'); ?>
+    </div>
+  </section>
 </div>
 
 <?php get_footer(); ?>

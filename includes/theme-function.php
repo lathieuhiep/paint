@@ -126,8 +126,8 @@ function paint_pagination(): void
   the_posts_pagination(array(
     'type' => 'list',
     'mid_size' => 2,
-    'prev_text' => esc_html__('Previous', 'paint'),
-    'next_text' => esc_html__('Next', 'paint'),
+    'prev_text' => '<i class="fa-solid fa-left-long"></i>',
+    'next_text' => '<i class="fa-solid fa-right-long"></i>',
     'screen_reader_text' => '&nbsp;',
   ));
 }
@@ -188,24 +188,24 @@ function paint_post_meta(): void
   ?>
 
   <div class="site-post-meta">
-        <span class="site-post-author">
-            <?php esc_html_e('Author:', 'paint'); ?>
+    <span class="site-post-author">
+        <?php esc_html_e('Author:', 'paint'); ?>
 
-            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>">
-                <?php the_author(); ?>
-            </a>
-        </span>
+        <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>">
+            <?php the_author(); ?>
+        </a>
+    </span>
 
     <span class="site-post-date">
-            <?php esc_html_e('Post date: ', 'paint');
-            the_date(); ?>
-        </span>
+      <?php esc_html_e('Post date: ', 'paint');
+      the_date(); ?>
+    </span>
 
     <span class="site-post-comments">
-            <?php
-            comments_popup_link('0 ' . esc_html__('Comment', 'paint'), '1 ' . esc_html__('Comment', 'paint'), '% ' . esc_html__('Comments', 'paint'));
-            ?>
-        </span>
+      <?php
+      comments_popup_link('0 ' . esc_html__('Comment', 'paint'), '1 ' . esc_html__('Comment', 'paint'), '% ' . esc_html__('Comments', 'paint'));
+      ?>
+    </span>
   </div>
 
   <?php
@@ -219,7 +219,7 @@ function paint_link_page(): void
     'before' => '<div class="page-links">' . esc_html__('Pages:', 'paint'),
     'after' => '</div>',
     'link_before' => '<span class="page-number">',
-    'link_after' => '</span>',
+    'link_after' => '</span>'
   ));
 
 }
@@ -283,9 +283,11 @@ function paint_post_share(): void
   ?>
   <div class="site-post-share">
     <div class="fb-share-button" data-href="<?php the_permalink(); ?>" data-layout="button_count" data-size="small"
-         data-lazy="true"><a target="_blank"
-                             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                             class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+         data-lazy="true">
+      <a target="_blank"
+         href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+         class="fb-xfbml-parse-ignore">Chia sẻ</a>
+    </div>
 
     <div class="fb-save" data-uri="<?php the_permalink(); ?>" data-size="small" data-lazy="true"></div>
   </div>
@@ -392,3 +394,10 @@ function paint_pagination_discover()
 
   wp_die();
 }
+
+// custom query page_for_posts
+add_action( 'pre_get_posts', function( $query ) {
+  if ( get_option( 'page_for_posts' )  ) {
+    $query->set( 'ignore_sticky_posts', true );
+  }
+});

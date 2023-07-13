@@ -1,4 +1,37 @@
 <?php
+// config slider
+$data_config_slider = [
+  'infinite' => true,
+  'slidesToShow' => 3,
+  'slidesToScroll' => 3,
+  'arrows' => true,
+  'autoplay' => false,
+  'dots' => false,
+  'responsive' => [
+    [
+      'breakpoint' => 1023,
+      'settings' => [
+        'slidesToShow' => 3,
+        'slidesToScroll' => 3,
+      ]
+    ],
+    [
+      'breakpoint' => 767,
+      'settings' => [
+        'slidesToShow' => 2,
+        'slidesToScroll' => 2,
+      ]
+    ],
+    [
+      'breakpoint' => 575,
+      'settings' => [
+        'slidesToShow' => 1,
+        'slidesToScroll' => 1,
+      ]
+    ],
+  ],
+];
+
 $list_cate = get_the_terms(get_the_ID(), 'category');
 
 $term_ids = wp_get_post_terms(get_the_ID(), 'category', array('fields' => 'ids'));
@@ -8,49 +41,43 @@ if (!empty($term_ids)):
     'post_type' => 'post',
     'cat' => $term_ids,
     'post__not_in' => array(get_the_ID()),
-    'posts_per_page' => 3,
+    'posts_per_page' => 6,
   );
 
   $query = new WP_Query($arg);
 
   if ($query->have_posts()) :
     ?>
-    <div class="site-single-post-related">
+    <div class="site-single-post-related mt-5">
       <h3 class="title">
-        <?php esc_html_e('Bài viết liên quan', 'paint'); ?>
+        <?php esc_html_e('Bài viết tương tự', 'paint'); ?>
       </h3>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+      <div class="custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
         <?php
         while ($query->have_posts()) :
           $query->the_post();
           ?>
-          <div class="col item">
-            <div class="related-post-item">
-              <?php if (has_post_thumbnail()) : ?>
-                <figure class="post-image mb-2">
+          <div class="item">
+            <?php if (has_post_thumbnail()) : ?>
+              <figure class="post-image mb-3">
+                <a href="<?php the_permalink(); ?>">
                   <?php the_post_thumbnail('large'); ?>
-                </figure>
-              <?php endif; ?>
-
-              <h4 class="title-post">
-                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                  <?php the_title(); ?>
                 </a>
-              </h4>
+              </figure>
+            <?php endif; ?>
 
-              <div class="excerpt-post">
-                <p>
-                  <?php
-                  if (has_excerpt()) :
-                    echo wp_trim_words(get_the_excerpt(), 15, '...');
-                  else:
-                    echo wp_trim_words(get_the_content(), 15, '...');
-                  endif;
-                  ?>
-                </p>
-              </div>
-            </div>
+            <h4 class="title-post">
+              <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                <?php the_title(); ?>
+              </a>
+            </h4>
+
+           <div class="action">
+             <a href="<?php the_permalink(); ?>" class="view-post">
+               <?php esc_html_e('Xem bài viết'); ?>
+             </a>
+           </div>
           </div>
         <?php
         endwhile;

@@ -258,25 +258,6 @@
         }
       }
 
-      .site-comments {
-        padding-top: 0;
-
-        #comments {
-          margin: 0;
-          max-width: none;
-        }
-
-        #wpdcom {
-          margin: 0;
-          padding: 0;
-
-          .wpd-form-head {
-            margin-top: 0;
-            padding-top: 0;
-          }
-        }
-      }
-
       &__right {
         > div {
           display: inline-block;
