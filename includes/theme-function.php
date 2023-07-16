@@ -394,10 +394,3 @@ function paint_pagination_discover()
 
   wp_die();
 }
-
-// custom query page_for_posts
-add_action( 'pre_get_posts', function( $query ) {
-  if ( get_option( 'page_for_posts' )  ) {
-    $query->set( 'ignore_sticky_posts', true );
-  }
-});

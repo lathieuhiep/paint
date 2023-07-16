@@ -55,12 +55,6 @@
         }
       }
 
-      &:last-child {
-        a {
-          padding-right: 0;
-        }
-      }
-
       .sub-menu-toggle {
         &:after {
           @include transition();

@@ -34,15 +34,10 @@ $config_nav_thumbnail = [
     ],
   ],
 ]
-
 ?>
 
-  <div class="site-single-project element-spacer-pb element-background-image">
+  <div class="site-container site-single-project">
     <div class="container">
-      <div class="spacer-pt-breadcrumbs">
-        <?php get_template_part('components/inc', 'breadcrumbs'); ?>
-      </div>
-
       <?php while (have_posts()) : the_post(); ?>
         <h1 class="title text-center">
           <?php the_title() ?>

@@ -1,19 +1,28 @@
 <?php
-$limit = 3;
+$term_ids = wp_get_post_terms(get_the_ID(), 'paint_project_cat', array('fields' => 'ids'));
+if (!empty($term_ids)) :
+  $limit = 3;
 
-$arg = array(
-  'post_type' => 'paint_project',
-  'post__not_in' => array(get_the_ID()),
-  'posts_per_page' => $limit,
-  'orderby' => 'id',
-  'order' => 'DESC',
-  'ignore_sticky_posts' => 1
-);
+  $arg = array(
+    'post_type' => 'paint_project',
+    'post__not_in' => array(get_the_ID()),
+    'posts_per_page' => $limit,
+    'orderby' => 'id',
+    'order' => 'DESC',
+    'ignore_sticky_posts' => 1,
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'paint_project_cat',
+        'field' => 'term_id',
+        'terms' => $term_ids
+      ),
+    )
+  );
 
-$query = new WP_Query($arg);
+  $query = new WP_Query($arg);
 
-if ($query->have_posts()) :
-  ?>
+  if ($query->have_posts()) :
+?>
 
   <div class="site-single-project-related">
     <h3 class="title text-center">
@@ -21,25 +30,14 @@ if ($query->have_posts()) :
     </h3>
 
     <div class="project-content project-grid">
-      <div class="row row-cols-1 row-cols-sm-3">
-        <?php while ($query->have_posts()): $query->the_post(); ?>
-          <div class="col item">
-            <div class="thumbnail">
-              <a class="link-image" href="<?php the_permalink(); ?>">
-                <?php the_post_thumbnail('large'); ?>
-              </a>
-
-              <h2 class="title">
-                <a href="<?php the_permalink(); ?>">
-                  <?php the_title() ?>
-                </a>
-              </h2>
-            </div>
-          </div>
-        <?php endwhile; ?>
-      </div>
+      <?php
+      while ($query->have_posts()): $query->the_post();
+        get_template_part('template-parts/project/inc', 'item');
+      endwhile;
+     ?>
     </div>
   </div>
 
 <?php
+  endif;
 endif;

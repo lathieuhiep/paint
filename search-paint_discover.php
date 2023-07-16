@@ -29,11 +29,7 @@ $query = new WP_Query($args);
 
   <div class="site-result-discover site-discover-warp element-spacer-pb">
     <div class="container">
-      <?php
-      get_template_part('template-parts/discover/inc', 'search-form');
-
-      if ($search_query) :
-        ?>
+      <?php if ($search_query) : ?>
         <header class="heading">
           <h1 class="page-title">
             <?php _e('Kết quả tìm kiếm cho', 'paint'); ?>: "<?php echo esc_html($search_query); ?>"

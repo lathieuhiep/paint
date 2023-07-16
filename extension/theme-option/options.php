@@ -784,7 +784,7 @@ if (class_exists('CSF')) {
   // taxonomy discover
   CSF::createSection($paint_prefix, array(
     'parent' => 'paint_opt_discover',
-    'title' => esc_html__('Chuyên muc', 'paint'),
+    'title' => esc_html__('Chuyên mục', 'paint'),
     'fields' => array(
       // Limit
       array(
@@ -805,6 +805,29 @@ if (class_exists('CSF')) {
         'id' => 'paint_opt_discover_single',
         'type' => 'text',
         'title' => esc_html__('Link tư vấn', 'paint'),
+      ),
+    )
+  ));
+
+  //
+  // -> Create a section post type product
+  CSF::createSection($paint_prefix, array(
+    'title' => esc_html__('Sản phẩm', 'paint'),
+    'id' => 'paint_opt_product',
+    'icon' => 'fas fa-shopping-cart',
+  ));
+
+  // taxonomy product
+  CSF::createSection($paint_prefix, array(
+    'parent' => 'paint_opt_product',
+    'title' => esc_html__('Chuyên mục', 'paint'),
+    'fields' => array(
+      // Limit
+      array(
+        'id' => 'paint_opt_product_cat_limit',
+        'type' => 'number',
+        'title' => esc_html__('Số sản phẩm cần lấy', 'paint'),
+        'default' => 8,
       ),
     )
   ));

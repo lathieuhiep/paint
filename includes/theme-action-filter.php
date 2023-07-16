@@ -190,10 +190,15 @@ function paint_order_tool_columns($columns): array
 // Set limit custom post type
 define('posts_per_page_discover', paint_get_option('discover_opt_limit', 12));
 
-add_action('pre_get_posts', 'paint_set_limit_custom_post_type');
-function paint_set_limit_custom_post_type($query): void
+add_action('pre_get_posts', 'paint_set_query_custom_post_type');
+function paint_set_query_custom_post_type($query): void
 {
   if (!is_admin() && $query->is_main_query()) {
+    // custom query page_for_posts
+    if ( get_option( 'page_for_posts' )  ) {
+      $query->set( 'ignore_sticky_posts', true );
+    }
+
     // custom query archive post type discover
     if (is_post_type_archive('paint_discover')) {
       $query->set('posts_per_page', posts_per_page_discover);
@@ -210,6 +215,13 @@ function paint_set_limit_custom_post_type($query): void
       $query->set('order', $opt_project_order);
     }
 
+    //  custom query archive & cat post type product
+    if (is_post_type_archive('paint_product')) {
+      $opt_product_limit = paint_get_option('paint_opt_product_cat_limit', 8);
+
+      $query->set('posts_per_page', $opt_product_limit);
+    }
+
   }
 }
 
@@ -222,6 +234,10 @@ function paint_template_search_post_type($template)
 
   if ($wp_query->is_search && $post_type == 'paint_discover') {
     return locate_template('search-paint_discover.php');
+  }
+
+  if ($wp_query->is_search && $post_type == 'paint_project') {
+    return locate_template('search-paint_project.php');
   }
 
   return $template;
