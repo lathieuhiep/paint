@@ -14,8 +14,6 @@ $banner = get_post_meta(get_the_ID(), 'paint_cmb_product_banner_id', true);
     <div class="header-warp">
       <div class="container">
         <?php
-        get_template_part('components/inc', 'breadcrumbs');
-
         get_template_part('template-parts/product/detail/inc', 'nav-cat');
 
         get_template_part('template-parts/product/detail/inc', 'nav-related');

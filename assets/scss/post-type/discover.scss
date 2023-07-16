@@ -310,6 +310,12 @@
   .item-post {
     .thumbnail-image {
       margin-bottom: 1rem;
+
+      a {
+        display: block;
+        overflow: hidden;
+        border-radius: 1rem;
+      }
     }
 
     .title-item {
