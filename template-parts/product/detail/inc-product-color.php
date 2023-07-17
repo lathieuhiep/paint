@@ -1,4 +1,6 @@
 <?php
+global $wp_query;
+
 $id_color_code_cat = get_post_meta(get_the_ID(), 'paint_cmb_options_product_color', true);
 
 if ($id_color_code_cat) :

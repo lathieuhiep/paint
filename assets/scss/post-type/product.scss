@@ -1,105 +1,26 @@
 .site-single-product {
-  .header-warp {
-    margin-bottom: 1rem;
-    padding-top: 3rem;
-    padding-bottom: 2rem;
-    background-color: #ffffff;
+  .product-title {
+    margin-bottom: 0;
+    font-size: 2.4rem;
   }
 
-  .breadcrumbs {
-    margin-bottom: 4.2rem;
-  }
+  .product-code {
+    margin-top: .2rem;
 
-  .nav-cat {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #E1E1E1;
-
-    &__box {
-      margin: 0 auto;
-      max-width: 1010px;
+    &__line {
+      width: 5rem;
+      height: .2rem;
+      background-color: $color-secondary;
     }
 
-    .slick-list {
-      margin: 0 -26px;
+    &__text {
+      padding: 0 1.2rem;
     }
-
-    .slick-slide {
-      margin: 0 26px;
-    }
-
-    .item {
-      a {
-        display: block;
-        padding: 9px 16px;
-        text-align: center;
-        color: #848484;
-        font-size: 2.4rem;
-        font-weight: 700;
-        overflow: hidden;
-        border-radius: 14px;
-        background-color: #E8E8E8;
-        border: 1px solid #CACACA;
-
-        &.active,
-        &:hover {
-          color: $color-primary;
-          border-color: $background-btn;
-          background-color: $background-btn;
-        }
-      }
-    }
-  }
-
-  .nav-post {
-    &__box {
-      margin: 0 auto;
-      max-width: 1010px;
-    }
-
-    .item {
-      text-align: center;
-    }
-
-    .post-title {
-      display: inline-block;
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #BDBDBD;
-
-      &.active,
-      &:hover {
-        color: $color-primary;
-      }
-    }
-
-    .slick-list {
-      margin: 0 -12px;
-    }
-
-    .slick-slide {
-      margin: 0 12px;
-    }
-
-    .slick-arrow {
-      opacity: 0;
-    }
-
-    &:hover {
-      .slick-arrow {
-        opacity: 1;
-      }
-    }
-  }
-
-  .entry-content {
-    padding-top: 3.6rem;
-    padding-bottom: 5rem;
-    background-color: #ffffff;
   }
 
   .tabs-warp {
+    margin-top: 5rem;
+
     .nav-pills {
       margin-bottom: 4.6rem;
 
@@ -110,8 +31,8 @@
       .nav-link {
         position: relative;
         padding: 0 0 3px;
-        font-weight: 400;
-        font-size: 2rem;
+        font-weight: 700;
+        font-size: 2.2rem;
         color: $color-primary;
         background-color: transparent;
         @include transition();
@@ -128,10 +49,6 @@
           @include transition();
         }
 
-        &.active {
-          font-weight: 700;
-        }
-
         &.active,
         &:hover {
           &::after {
@@ -139,6 +56,10 @@
           }
         }
       }
+    }
+
+    .tab-content {
+      font-size: 2rem;
     }
 
     .product-color {
@@ -249,7 +170,7 @@
       .list-color {
         display: grid;
         grid-gap: 30px;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         @include transition();
 
         .item {
@@ -337,39 +258,5 @@
         width: 100%;
       }
     }
-
-    .info-product {
-      .item {
-        margin-bottom: 16px;
-        background-color: #F7F7F7;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .title {
-        padding: 16px 24px;
-        background-color: #FFD600;
-
-        i {
-          margin-right: 12px;
-          font-size: 1.6rem;
-        }
-      }
-
-      .content {
-        padding: 2.7rem 6rem;
-      }
-    }
-  }
-}
-
-.suggestion-tool {
-  padding-bottom: 50px;
-  background-color: #ffffff;
-
-  .title {
-    margin-bottom: 6rem;
   }
 }

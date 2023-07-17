@@ -45,23 +45,9 @@ function paint_cmb_product(): void
   ));
 
   $cmb_options->add_field(array(
-    'id' => 'paint_cmb_product_banner',
-    'name' => esc_html__('Banner', 'paint'),
-    'type' => 'file',
-    'options' => array(
-      'url' => false,
-    ),
-    'text' => array(
-      'add_upload_file_text' => esc_html__('Chọn ảnh', 'paint')
-    ),
-    'query_args' => array(
-      'type' => array(
-        'image/gif',
-        'image/jpeg',
-        'image/png',
-      ),
-    ),
-    'preview_size' => 'large'
+    'id' => 'paint_cmb_product_code',
+    'name' => esc_html__('Mã sản phẩm', 'paint'),
+    'type' => 'text',
   ));
 
   $cmb_options->add_field(array(
@@ -73,16 +59,7 @@ function paint_cmb_product(): void
     'options' => paint_check_get_cat('paint_color_code_cat')
   ));
 
-  $cmb_options->add_field(array(
-    'name' => esc_html__('Quy trình thi công', 'paint'),
-    'id' => 'paint_cmb_product_procedure',
-    'type' => 'wysiwyg',
-    'options' => array(
-      'textarea_rows' => 11,
-    )
-  ));
-
-  // group field
+  // group field gallery
   $gallery_field = $cmb_options->add_field(array(
     'id' => 'paint_cmb_product_gallery',
     'type' => 'group',
@@ -92,7 +69,7 @@ function paint_cmb_product(): void
       'add_button' => esc_html__('Thêm', 'paint'),
       'remove_button' => esc_html__('Xoá', 'paint'),
       'sortable' => true,
-      'closed' => false,
+      'closed' => true,
       'remove_confirm' => esc_html__('Bạn thật sự muốn xoá?', 'paint'),
     ),
   ));
@@ -128,28 +105,34 @@ function paint_cmb_product(): void
     'preview_size' => 'large',
   ));
 
-  // options suggestion tool
-  $cmb_suggestion_tool = new_cmb2_box(array(
-    'id' => 'paint_cmb_product_suggestion_tool',
-    'title' => esc_html__('Dụng cụ gợi ý', 'paint'),
-    'object_types' => array('paint_product'),
-    'context' => 'normal',
-    'priority' => 'high',
-    'show_names' => true
+  // group field construction process
+  $construction_process_field = $cmb_options->add_field(array(
+    'id' => 'paint_cmb_product_construction_process',
+    'type' => 'group',
+    'description' => esc_html__('Quy trình thi công', 'paint'),
+    'options' => array(
+      'group_title' => esc_html__('Bước {#}', 'paint'),
+      'add_button' => esc_html__('Thêm', 'paint'),
+      'remove_button' => esc_html__('Xoá', 'paint'),
+      'sortable' => true,
+      'closed' => true,
+      'remove_confirm' => esc_html__('Bạn thật sự muốn xoá?', 'paint'),
+    ),
   ));
 
-  $cmb_suggestion_tool->add_field(array(
-    'id' => 'paint_cmb_product_suggestion_tool_title',
-    'name' => esc_html__('Tiêu đề', 'paint'),
-    'default' => esc_html__('Dụng cụ thi công liên quan', 'paint'),
+  $cmb_options->add_group_field($construction_process_field, array(
+    'id' => 'step',
+    'name' => esc_html__('STT', 'paint'),
     'type' => 'text',
+    'default' => esc_html__('Bước', 'paint'),
   ));
 
-  $cmb_suggestion_tool->add_field(array(
-    'name' => esc_html__('Chọn dụng đi kèm', 'paint'),
-    'id' => 'paint_cmb_product_suggestion_tool_check',
-    'type' => 'multicheck',
-    'options' => paint_get_post_types('paint_tool'),
+  $cmb_options->add_group_field($construction_process_field, array(
+    'name' => esc_html__('Quy trình thi công', 'paint'),
+    'id' => 'content',
+    'type' => 'wysiwyg',
+    'options' => array(
+      'textarea_rows' => 11,
+    )
   ));
-
 }
