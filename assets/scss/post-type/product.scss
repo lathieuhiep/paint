@@ -258,5 +258,61 @@
         width: 100%;
       }
     }
+
+    .construction-process-product {
+      .accordion {
+        .accordion-item {
+          border: 0;
+          background-color: transparent;
+
+          ~ .accordion-item {
+            margin-top: 2rem;
+          }
+
+          &:nth-child(odd) {
+            .accordion-header {
+              .accordion-button {
+                color: $color-black;
+                background-color: $color-secondary;
+              }
+            }
+          }
+
+          &:nth-child(even) {
+            .accordion-header {
+              .accordion-button {
+                color: $color-white;
+                background-color: $color-black;
+              }
+            }
+          }
+        }
+
+        .accordion-header {
+          .accordion-button {
+            padding: 1.8rem 1.2rem 1.4rem;
+            font-size: 2rem;
+            border-radius: 1rem;
+            display: block;
+            text-align: center;
+
+            &:focus {
+              box-shadow: none;
+              border-color: transparent;
+            }
+          }
+        }
+
+        .accordion-body {
+          padding: 2rem;
+          max-width: 120rem;
+          margin: 0 auto;
+          border-width: 0 1px 1px 1px;
+          border-style: solid;
+          border-color: $color-secondary;
+          background-color: $color-white;
+        }
+      }
+    }
   }
 }

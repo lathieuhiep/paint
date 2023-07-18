@@ -18,8 +18,8 @@
 }
 
 // Page Product
-.site-product-cat {
-  .element-products {
+.product-grid-cat {
+  &.element-products {
     display: grid;
     grid-gap: 2.4rem;
     grid-template-columns: repeat(4, 1fr);
@@ -89,6 +89,15 @@
         }
       }
     }
+  }
+}
+
+.related-product {
+  margin-top: 5rem;
+
+  &__title {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
   }
 }
 
