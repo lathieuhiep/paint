@@ -153,6 +153,7 @@
       &__top {
         position: relative;
         padding: 2.4rem 3rem;
+        width: 100%;
         background-color: rgba(0,0,0,0.6);
         @include transition();
 

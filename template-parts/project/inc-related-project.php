@@ -1,7 +1,7 @@
 <?php
 $term_ids = wp_get_post_terms(get_the_ID(), 'paint_project_cat', array('fields' => 'ids'));
 if (!empty($term_ids)) :
-  $limit = 3;
+  $limit = 4;
 
   $arg = array(
     'post_type' => 'paint_project',
@@ -26,7 +26,7 @@ if (!empty($term_ids)) :
 
   <div class="site-single-project-related">
     <h3 class="title text-center">
-      <?php esc_html_e('DỰ ÁN KHÁC', 'paint'); ?>
+      <?php esc_html_e('CÁC DỰ ÁN KHÁC', 'paint'); ?>
     </h3>
 
     <div class="project-content project-grid">
