@@ -43,106 +43,117 @@ $config_nav_thumbnail = [
 
   <div class="site-container site-single-project">
     <div class="container">
-      <?php
-      while (have_posts()) : the_post();
-        $terms = get_the_terms(get_the_ID(), 'paint_project_cat');
-      ?>
-        <div class="banner">
-          <?php echo wp_get_attachment_image($banner, 'full') ?>
-
-          <div class="info d-flex align-items-center justify-content-center flex-column">
-            <p class="sub-text">
-              <?php esc_html_e('DỰ ÁN CÔNG TRÌNH', 'paint'); ?>
-            </p>
-
-            <h1 class="title">
-              <?php the_title() ?>
-            </h1>
-
-            <?php if ($terms) : ?>
-              <div class="tax">
-                <?php foreach ($terms as $term) : ?>
-                  <a href="<?php echo esc_url(get_term_link($term->slug, 'paint_project_cat')); ?>">
-                    <?php echo esc_html($term->name); ?>
-                  </a>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-          </div>
+      <div class="grid">
+        <div class="grid__item">
+          <?php get_template_part('template-parts/project/inc', 'search-cat'); ?>
         </div>
 
-        <div class="entry-content">
-          <div class="post-image">
-            <div class="post-image__feature custom-slick-carousel slider-for"
-                 data-config-slick='<?php echo wp_json_encode($config_feature); ?>'>
-              <div class="item">
-                <?php the_post_thumbnail('large'); ?>
-              </div>
+        <div class="grid__item">
+          <?php
+          while (have_posts()) : the_post();
+            $terms = get_the_terms(get_the_ID(), 'paint_project_cat');
+            ?>
+            <div class="banner">
+              <?php echo wp_get_attachment_image($banner, 'full') ?>
 
-              <?php foreach ($gallery as $key => $item) : ?>
-                <div class="item">
-                  <?php echo wp_get_attachment_image($key, 'large') ?>
+              <div class="info d-flex align-items-center justify-content-center flex-column">
+                <p class="sub-text">
+                  <?php esc_html_e('DỰ ÁN CÔNG TRÌNH', 'paint'); ?>
+                </p>
+
+                <h1 class="title">
+                  <?php the_title() ?>
+                </h1>
+
+                <?php if ($terms) : ?>
+                  <div class="tax">
+                    <?php foreach ($terms as $term) : ?>
+                      <a href="<?php echo esc_url(get_term_link($term->slug, 'paint_project_cat')); ?>">
+                        <?php echo esc_html($term->name); ?>
+                      </a>
+                    <?php endforeach; ?>
+                  </div>
+                <?php endif; ?>
+              </div>
+            </div>
+
+            <div class="entry-content">
+              <div class="post-image">
+                <div class="post-image__feature custom-slick-carousel slider-for"
+                     data-config-slick='<?php echo wp_json_encode($config_feature); ?>'>
+                  <div class="item">
+                    <?php the_post_thumbnail('large'); ?>
+                  </div>
+
+                  <?php foreach ($gallery as $key => $item) : ?>
+                    <div class="item">
+                      <?php echo wp_get_attachment_image($key, 'large') ?>
+                    </div>
+                  <?php endforeach; ?>
                 </div>
-              <?php endforeach; ?>
-            </div>
 
-            <div class="post-image__gallery custom-slick-carousel slider-nav"
-                 data-config-slick='<?php echo wp_json_encode($config_nav_thumbnail); ?>'>
-              <div class="item">
-                <?php the_post_thumbnail('thumbnail'); ?>
-              </div>
+                <div class="post-image__gallery custom-slick-carousel slider-nav"
+                     data-config-slick='<?php echo wp_json_encode($config_nav_thumbnail); ?>'>
+                  <div class="item">
+                    <?php the_post_thumbnail('thumbnail'); ?>
+                  </div>
 
-              <?php foreach ($gallery as $key => $item) : ?>
-                <div class="item">
-                  <?php echo wp_get_attachment_image($key) ?>
+                  <?php foreach ($gallery as $key => $item) : ?>
+                    <div class="item">
+                      <?php echo wp_get_attachment_image($key) ?>
+                    </div>
+                  <?php endforeach; ?>
                 </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
-
-          <div class="post-content">
-            <div class="post-content__warp">
-              <h3 class="post-content__heading">
-                <?php esc_html_e('Tổng quan dự án', 'paint'); ?>
-              </h3>
-
-              <div class="post-content__desc">
-                <?php the_content(); ?>
               </div>
 
-              <h3 class="post-content__heading">
-                <?php esc_html_e('Thông tin kỹ thuât', 'paint'); ?>
-              </h3>
+              <div class="post-content">
+                <div class="post-content__warp">
+                  <h3 class="post-content__heading">
+                    <?php esc_html_e('Tổng quan dự án', 'paint'); ?>
+                  </h3>
 
-              <ul class="post-content__info">
-                <li class="model">
-                  <span class="txt-label"><?php esc_html_e('Loại sơn:', 'paint'); ?></span>
-                  <span class="txt-value"><?php echo esc_html($model); ?></span>
-                </li>
+                  <div class="post-content__desc">
+                    <?php the_content(); ?>
+                  </div>
 
-                <li class="mass">
-                  <span class="txt-label"><?php esc_html_e('Khối lượng:', 'paint'); ?></span>
-                  <span class="txt-value"><?php echo esc_html($mass); ?></span>
-                </li>
+                  <h3 class="post-content__heading">
+                    <?php esc_html_e('Thông tin kỹ thuât', 'paint'); ?>
+                  </h3>
 
-                <li class="completion-time">
-                  <span class="txt-label"><?php esc_html_e('Thời gian hoàn thành:', 'paint'); ?></span>
-                  <span class="txt-value"><?php echo esc_html($completion_time); ?></span>
-                </li>
+                  <ul class="post-content__info">
+                    <li class="model">
+                      <span class="txt-label"><?php esc_html_e('Loại sơn:', 'paint'); ?></span>
+                      <span class="txt-value"><?php echo esc_html($model); ?></span>
+                    </li>
 
-                <li class="completion-construction">
-                  <span class="txt-value"><?php echo esc_html($completion_construction); ?></span>
-                </li>
-              </ul>
+                    <li class="mass">
+                      <span class="txt-label"><?php esc_html_e('Khối lượng:', 'paint'); ?></span>
+                      <span class="txt-value"><?php echo esc_html($mass); ?></span>
+                    </li>
+
+                    <li class="completion-time">
+                      <span class="txt-label"><?php esc_html_e('Thời gian hoàn thành:', 'paint'); ?></span>
+                      <span class="txt-value"><?php echo esc_html($completion_time); ?></span>
+                    </li>
+
+                    <?php if ( $completion_construction ) : ?>
+                      <li class="completion-construction">
+                        <span class="txt-value"><?php echo esc_html($completion_construction); ?></span>
+                      </li>
+                    <?php endif; ?>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          <?php
+          endwhile;
+          wp_reset_postdata();
+          ?>
         </div>
-      <?php
-      endwhile;
-      wp_reset_postdata();
+      </div>
 
-      get_template_part('template-parts/project/inc', 'related-project');
-      ?>
+
+      <?php get_template_part('template-parts/project/inc', 'related-project'); ?>
     </div>
 
     <!-- newsletter -->

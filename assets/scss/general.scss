@@ -117,6 +117,36 @@ pre {
   }
 }
 
+.form-search-custom {
+  select,
+  .form-control {
+    padding: 0 1.2rem;
+    display: block;
+    width: 100%;
+    min-height: 5rem;
+    border: 1px solid #cccccc;
+    border-radius: 1rem;
+  }
+
+  .search-submit {
+    margin-top: 2.4rem;
+    padding: 0 1.2rem;
+    display: block;
+    width: 100%;
+    min-height: 5rem;
+    color: $color-white;
+    font-size: inherit;
+    border: 0;
+    border-radius: 1rem;
+    background-color: $color-black;
+    @include transition();
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+  }
+}
+
 #site-loadding {
   position: fixed;
   top: 0;
@@ -288,6 +318,19 @@ pre {
 }
 
 .slick-slider {
+  .slick-slide {
+    margin: 0 1.2rem;
+  }
+
+  .slick-list {
+    margin: 0 -1.2rem;
+  }
+
+  .slick-track {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .slick-arrow {
     position: absolute;
     top: 50%;
@@ -295,15 +338,14 @@ pre {
     height: 42px;
     z-index: 1;
     line-height: 42px;
-    color: #ffffff;
+    color: $color-black;
     border: 0;
-    border-radius: 50%;
-    background-color: #D3D3D3;
+    background-color: $background-hover;
     @include transition();
     @include transform(translateY(-50%));
 
     &:hover {
-      background-color: $background-hover;
+      color: $color-white;
     }
 
     &.slick-prev {
@@ -428,4 +470,8 @@ pre {
     background-color: $color-secondary;
     transform: translateX(-50%);
   }
+}
+
+.form-search-custom {
+
 }

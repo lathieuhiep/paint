@@ -1,9 +1,24 @@
 .site-single-project {
+  .grid {
+    display: grid;
+    grid-gap: 2.4rem;
+    grid-template-columns: 1fr 80%;
+  }
+
+  .form-search-custom {
+    .group-control {
+      ~ .group-control {
+        margin-top: 2.4rem;
+      }
+    }
+  }
+
   .banner {
     margin-bottom: 6rem;
     position: relative;
     height: 40rem;
     overflow: hidden;
+    background-color: #aaa;
 
     img {
       width: 100%;

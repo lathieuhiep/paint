@@ -48,7 +48,7 @@ if (is_post_type_archive('paint_project')) {
         <?php get_template_part('template-parts/project/inc', 'search'); ?>
       </div>
 
-      <div class="project-grid">
+      <div class="project-grid project-layout">
         <?php
         while (have_posts()) : the_post();
 

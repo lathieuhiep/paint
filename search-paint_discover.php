@@ -3,14 +3,14 @@ get_header();
 
 $search_query = get_search_query();
 $s = $_GET['s'];
-$cat = $_GET['cat'];
+$cat = !empty($_GET['cat']) ? (int) $_GET['cat'] : '';
 
 $tax_query = array();
 if (!empty($cat)) {
   $tax_query = array(
     array(
       'taxonomy' => 'paint_discover_cat',
-      'field' => 'slug',
+      'field' => 'term_id',
       'terms' => $cat
     ),
   );

@@ -117,7 +117,9 @@
   @media screen and (min-width: 576px) and (max-width: 767px) {
     grid-template-columns: repeat(2, 1fr);
   }
+}
 
+.project-layout {
   .item {
     position: relative;
 
@@ -375,23 +377,16 @@
 
   .form-search-project {
     margin-bottom: 3rem;
+    display: grid;
+    grid-gap: 2.4rem;
+    grid-template-columns: repeat(2, 1fr) 25rem;
 
     .group-control {
-      max-width: 35rem;
-      display: grid;
-      grid-gap: 2.4rem;
-      grid-template-columns: 1fr 3.8rem;
+      margin: 0;
+    }
 
-      .search-field {
-        padding: 0.6rem 1rem;
-        border: 1px solid $color-primary;
-      }
-
-      .search-submit {
-        padding: 0;
-        text-align: center;
-        border: 1px solid $color-primary;
-      }
+    .search-submit {
+      margin: 0;
     }
   }
 }

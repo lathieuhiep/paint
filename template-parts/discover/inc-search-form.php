@@ -6,7 +6,7 @@ $terms = get_terms(array(
   'hide_empty' => false,
 ));
 
-$cat = !empty($_GET['cat']) ? $_GET['cat'] : '';
+$cat = !empty($_GET['cat']) ? (int) $_GET['cat'] : '';
 
 if (is_singular('paint_discover')) {
   $get_terms_post = wp_get_post_terms(get_the_ID(), 'paint_discover_cat', array('fields' => 'slugs'));

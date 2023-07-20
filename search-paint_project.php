@@ -3,8 +3,21 @@ get_header();
 
 $search_query = get_search_query();
 $s = $_GET['s'];
+$cat = !empty($_GET['cat']) ? (int) $_GET['cat'] : '';
+
 $opt_project_limit = paint_get_option('template_project_opt_limit', 12);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+$tax_query = array();
+if (!empty($cat)) {
+  $tax_query = array(
+    array(
+      'taxonomy' => 'paint_project_cat',
+      'field' => 'term_id',
+      'terms' => $cat
+    ),
+  );
+}
 
 $args = array(
   'post_type' => 'paint_project',
@@ -12,6 +25,7 @@ $args = array(
   's' => $s,
   'posts_per_page' => $opt_project_limit,
   'paged' => $paged,
+  'tax_query' => $tax_query,
 );
 
 $query = new WP_Query($args);
@@ -19,7 +33,7 @@ $query = new WP_Query($args);
 
 <div class="site-container site-result-project">
   <div class="container">
-    <?php get_template_part('template-parts/project/inc', 'search'); ?>
+    <?php get_template_part('template-parts/project/inc', 'search-cat'); ?>
 
     <?php if ($search_query) : ?>
       <header class="heading">
@@ -32,7 +46,7 @@ $query = new WP_Query($args);
 
     if ($query->have_posts()) :
     ?>
-      <div class="project-grid">
+      <div class="project-grid project-layout">
         <?php
         while ($query->have_posts()) : $query->the_post();
 
