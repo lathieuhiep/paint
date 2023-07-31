@@ -54,6 +54,13 @@ function paint_register_required_plugins(): void
       'slug' => 'wpdiscuz',
       'required' => true,
     ),
+
+    // This is an example of how to include a plugin from the WordPress Plugin Repository
+    array(
+      'name' => 'UsersWP',
+      'slug' => 'userswp',
+      'required' => true,
+    ),
   );
 
   /**
