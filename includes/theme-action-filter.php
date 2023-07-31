@@ -254,3 +254,13 @@ function paint_child_filter_archive_title()
   }
 
 }
+
+// change placeholder confirm password
+add_filter( "um_confirm_user_password_form_edit_field", "my_um_remove_placeholder", 10, 2 );
+function my_um_remove_placeholder( $output, $set_mode ) {
+var_dump($set_mode);
+  if( $set_mode == 'register' ) {
+    $output = str_replace( 'placeholder="Confirm Password"', 'placeholder="'. esc_html__('Xác nhận mật khẩu *', 'paint') .'"', $output );
+  }
+  return $output;
+}

@@ -5,7 +5,16 @@
     </h1>
 
     <div class="entry-content">
-      <div class="thumbnail-image">
+      <div class="thumbnail-image position-relative">
+        <a class="download-image position-absolute" href="<?php the_post_thumbnail_url('full'); ?>" download>
+          <i class="fa-solid fa-download"></i>
+          <span class="txt"><?php esc_html_e('Lưu', 'pain'); ?></span>
+        </a>
+
+        <a class="view-popup position-absolute" href="<?php the_post_thumbnail_url('full'); ?>" data-lity>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+
         <?php the_post_thumbnail('full'); ?>
       </div>
 

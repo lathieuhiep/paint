@@ -1,0 +1,100 @@
+.user-warp {
+  .grid {
+    display: grid;
+    grid-gap: 5rem 10rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    &__item {
+      position: relative;
+
+      ~ .grid__item {
+        &:before {
+          position: absolute;
+          content: "";
+          top: 0;
+          left: -5rem;
+          bottom: 0;
+          width: .2rem;
+          background-color: $color-secondary;
+        }
+      }
+
+      .page-title {
+        padding-bottom: 1.6rem;
+        position: relative;
+        font-size: 3.2rem;
+
+        &:after {
+          position: absolute;
+          content: "";
+          width: 10rem;
+          height: .2rem;
+          bottom: 0;
+          left: 0;
+          background-color: $color-secondary;
+        }
+      }
+
+      .card {
+        border-radius: 0;
+        background-color: transparent;
+      }
+
+      .card-body {
+        padding: 0;
+
+        .card-title {
+          display: none;
+        }
+      }
+
+      .bsui {
+        padding-top: 3.8rem;
+      }
+
+      .wpbs {
+        .row {
+          margin: 0;
+        }
+
+      }
+
+      .uwp_form {
+        .form-control {
+          padding: 1rem 1.2rem;
+          height: auto;
+          font-size: inherit;
+          font-weight: inherit;
+          background-color: #D9D9D8;
+
+          &:focus {
+            border-color: #ced4da;
+            box-shadow: none;
+            color: rgba(0, 0, 0, 0.6);
+            background-color: $color-white;
+          }
+        }
+
+        .btn {
+          font-size: inherit;
+        }
+
+        .form-group {
+          #remember_me {
+            padding: 0;
+
+            ~ label {
+              padding-left: 1.2rem;
+
+              &:before,
+              &:after {
+                width: 1.8rem;
+                height: 1.8rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

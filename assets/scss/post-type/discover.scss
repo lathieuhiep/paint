@@ -196,6 +196,32 @@
       img {
         width: 100%;
       }
+
+      .download-image {
+        top: 1rem;
+        left: 1rem;
+        color: $color-secondary;
+
+        .txt {
+          margin-left: .5rem;
+          padding: 0 1.6rem;
+          display: inline-block;
+          color: $color-black;
+          border-radius: 3rem;
+          background-color: $color-secondary;
+        }
+      }
+
+      .view-popup {
+        top: 1rem;
+        right: 1rem;
+        color: $color-white;
+        font-size: 1.8rem;
+
+        &:hover {
+          color: $color-secondary;
+        }
+      }
     }
 
     .post-info {
