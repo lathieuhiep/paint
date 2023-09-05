@@ -34,67 +34,52 @@
           background-color: $color-secondary;
         }
       }
+    }
+  }
 
-      .card {
-        border-radius: 0;
-        background-color: transparent;
+  .form-user {
+    .grid-control {
+      &:not(:last-child) {
+        margin-bottom: 2.4rem;
       }
 
-      .card-body {
-        padding: 0;
+      .form-control {
+        padding: 1rem 1.2rem;
+        height: auto;
+        font-size: inherit;
+        font-weight: inherit;
+        background-color: #D9D9D8;
 
-        .card-title {
-          display: none;
+        &:focus {
+          border-color: #ced4da;
+          box-shadow: none;
+          color: rgba(0, 0, 0, 0.6);
+          background-color: $color-white;
         }
       }
 
-      .bsui {
-        padding-top: 3.8rem;
-      }
+      .btn-submit {
+        padding: .8rem 2.8rem;
+        font-size: inherit;
+        color: $color-primary;
+        background-color: $color-secondary;
+        @include transition();
 
-      .wpbs {
-        .row {
-          margin: 0;
-        }
-
-      }
-
-      .uwp_form {
-        .form-control {
-          padding: 1rem 1.2rem;
-          height: auto;
-          font-size: inherit;
-          font-weight: inherit;
-          background-color: #D9D9D8;
-
-          &:focus {
-            border-color: #ced4da;
-            box-shadow: none;
-            color: rgba(0, 0, 0, 0.6);
-            background-color: $color-white;
-          }
-        }
-
-        .btn {
-          font-size: inherit;
-        }
-
-        .form-group {
-          #remember_me {
-            padding: 0;
-
-            ~ label {
-              padding-left: 1.2rem;
-
-              &:before,
-              &:after {
-                width: 1.8rem;
-                height: 1.8rem;
-              }
-            }
-          }
+        &:hover {
+          color: $color-white;
+          background-color: $color-primary;
         }
       }
+    }
+
+    .grid-control-full-name {
+      display: grid;
+      grid-gap: 2.4rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-control-submit {
+      padding-top: 3.6rem;
     }
   }
 }

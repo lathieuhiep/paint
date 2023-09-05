@@ -45,8 +45,8 @@ function compressLibraryJsMin() {
     './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
     './node_modules/owl.carousel/dist/owl.carousel.js',
     './node_modules/slick-carousel/slick/slick.js',
+    './node_modules/imagesloaded/imagesloaded.pkgd.js',
     './node_modules/masonry-layout/dist/masonry.pkgd.js',
-    './node_modules/imagesloaded/imagesloaded.js',
     './node_modules/lity/dist/lity.js'
   ], {allowEmpty: true})
     .pipe(concat('library.min.js'))

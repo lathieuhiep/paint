@@ -14,8 +14,10 @@
     "browser-sync": "^2.27.11",
     "gulp-clean-css": "^4.3.0",
     "gulp-sourcemaps": "^3.0.0",
+    "imagesloaded": "^5.0.0",
     "jquery.scrollbar": "^0.2.11",
     "lity": "^2.4.1",
+    "masonry-layout": "^4.2.2",
     "owl.carousel": "^2.3.4",
     "slick-carousel": "^1.8.1"
   }

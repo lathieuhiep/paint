@@ -248,19 +248,14 @@ function paint_template_search_post_type($template)
 add_filter('get_the_archive_title', 'paint_child_filter_archive_title');
 function paint_child_filter_archive_title()
 {
-
   if (is_post_type_archive()) {
     return post_type_archive_title('', false);
   }
-
 }
 
-// change placeholder confirm password
-add_filter( "um_confirm_user_password_form_edit_field", "my_um_remove_placeholder", 10, 2 );
-function my_um_remove_placeholder( $output, $set_mode ) {
-var_dump($set_mode);
-  if( $set_mode == 'register' ) {
-    $output = str_replace( 'placeholder="Confirm Password"', 'placeholder="'. esc_html__('Xác nhận mật khẩu *', 'paint') .'"', $output );
-  }
-  return $output;
-}
+add_action( 'user_register', function ( $user_id ) {
+  $userdata = array();
+  $userdata['ID'] = $user_id;
+  $userdata['phone_number'] = $_POST['phone_number'] ?? null;
+  wp_update_user( $userdata );
+} );
