@@ -10,7 +10,7 @@ global $wpdb;
 $username = $first_name = $last_name = $phone_number = $email = $password = '';
 
 $errors = new WP_Error();
-$errorUser = $errorFirstName = $errorLastName = $errorEmail = $errorPassword = $errorPasswordConfirm ='';
+$errorUser = $errorFirstName = $errorLastName = $errorPhoneNumber = $errorEmail = $errorPassword = $errorPasswordConfirm ='';
 
 if ( isset($_POST['f-submit']) ) {
   $username = $wpdb->_escape($_POST['username']);
@@ -44,6 +44,11 @@ if ( isset($_POST['f-submit']) ) {
     $errors->add('last_name', esc_html__('Tên không được để trống', 'paint'));
   }
 
+  // check phone number
+  if ( empty($phone_number) ) {
+    $errors->add('phone_number', esc_html__('Số điện thoại không được để trống', 'paint'));
+  }
+
   // check validate email
   if ( !empty($email) ) {
     if (!is_email($email)) {
@@ -73,6 +78,7 @@ if ( isset($_POST['f-submit']) ) {
     $errorUser = $errors->errors['username'][0] ?? '';
     $errorFirstName = $errors->errors['first_name'][0] ?? '';
     $errorLastName = $errors->errors['last_name'][0] ?? '';
+    $errorPhoneNumber = $errors->errors['phone_number'][0] ?? '';
     $errorEmail = $errors->errors['email'][0] ?? '';
     $errorPassword = $errors->errors['password'][0] ?? '';
     $errorPasswordConfirm = $errors->errors['password_confirm'][0] ?? '';
@@ -168,7 +174,13 @@ var_dump($user_id);
 
           <!-- phone number -->
           <div class="grid-control">
-            <input id="phone-number" type="tel" class="form-control" name="phone_number" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="">
+            <input id="phone-number" type="tel" class="form-control" name="phone_number" value="<?php echo esc_attr($phone_number) ?>" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="">
+
+            <?php if ( $errorPhoneNumber ) : ?>
+              <p class="error-message">
+                <?php echo esc_html($errorPhoneNumber); ?>
+              </p>
+            <?php endif; ?>
           </div>
 
           <!-- email -->
