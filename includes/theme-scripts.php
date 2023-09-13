@@ -75,6 +75,11 @@ function paint_register_front_end(): void
     wp_localize_script('discover', 'discoverAjax', array('url' => $paint_admin_url_ajax));
   }
 
+  if ( is_page_template('templates/register.php') ) {
+    wp_enqueue_script('cleave.min', get_theme_file_uri('/assets/libs/cleave/cleave.min.js'), array(), '1.6.0', true);
+    wp_enqueue_script('template-register', get_theme_file_uri('/assets/js/template-register.js'), array(), '', true);
+  }
+
   /*
  * End Get Js Front End
  * */

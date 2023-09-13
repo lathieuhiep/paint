@@ -48,6 +48,23 @@ $logo = paint_get_option('general_opt_logo', '');
           </ul>
         <?php endif; ?>
       </div>
+
+      <div class="site-user">
+        <i class="fa-regular fa-circle-user"></i>
+
+        <?php
+        if ( is_user_logged_in() ) :
+          $current_user = wp_get_current_user();
+        ?>
+
+        <span class="user-name">
+          <?php echo esc_html($current_user->user_nicename); ?>
+        </span>
+
+        <?php else: ?>
+          <a href="<?php echo esc_url( paint_get_tpl_url('templates/register.php') ) ?>">Đăng nhập</a>
+        <?php endif; ?>
+      </div>
     </div>
   </nav>
 </header>

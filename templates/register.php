@@ -6,6 +6,7 @@
 get_header();
 
 global $wpdb;
+$table_extended_users = $wpdb->prefix . 'extended_users';
 
 $username = $first_name = $last_name = $phone_number = $email = $password = '';
 
@@ -47,6 +48,22 @@ if ( isset($_POST['f-submit']) ) {
   // check phone number
   if ( empty($phone_number) ) {
     $errors->add('phone_number', esc_html__('Số điện thoại không được để trống', 'paint'));
+  }
+
+  if (!empty($phone_number)) {
+    if ( !is_numeric($phone_number) ) {
+      $errors->add('phone_number', esc_html__('Số điện thoại chỉ nhập số', 'paint'));
+    }
+
+    if ( strlen($phone_number) < 10 || strlen($phone_number) > 11 ) {
+      $errors->add('phone_number', esc_html__('Số điện thoại độ dài là 10 hoặc 11 số', 'paint'));
+    }
+
+    $phone_exists = $wpdb->get_var( "SELECT COUNT(phone_number) FROM $table_extended_users WHERE phone_number = $phone_number" );
+
+    if ($phone_exists > 0) {
+      $errors->add('phone_number', esc_html__('Số điện thoại đã tồn tại', 'paint'));
+    }
   }
 
   // check validate email
@@ -96,10 +113,10 @@ if ( isset($_POST['f-submit']) ) {
 
     $user_id = wp_insert_user($userdata);
 
-    if ($user_id && $phone_number) {
-var_dump($user_id);
-      add_user_meta( $user_id, 'phone_number', $phone_number);
-    }
+    $wpdb->insert($table_extended_users, array(
+      'user_id' => $user_id,
+      'phone_number' => $phone_number
+    ));
   }
 }
 ?>
@@ -174,7 +191,7 @@ var_dump($user_id);
 
           <!-- phone number -->
           <div class="grid-control">
-            <input id="phone-number" type="tel" class="form-control" name="phone_number" value="<?php echo esc_attr($phone_number) ?>" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="">
+            <input id="phone-number" type="tel" class="form-control" name="phone_number" value="<?php echo esc_attr($phone_number) ?>" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="" minlength="10" maxlength="11">
 
             <?php if ( $errorPhoneNumber ) : ?>
               <p class="error-message">
