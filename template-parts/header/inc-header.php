@@ -62,7 +62,7 @@ $logo = paint_get_option('general_opt_logo', '');
         </span>
 
         <?php else: ?>
-          <a href="<?php echo esc_url( paint_get_tpl_url('templates/register.php') ) ?>">Đăng nhập</a>
+          <a href="<?php echo esc_url( paint_get_tpl_url('templates/login.php') ) ?>">Đăng nhập</a>
         <?php endif; ?>
       </div>
     </div>
