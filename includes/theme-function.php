@@ -411,3 +411,56 @@ function paint_get_tpl_url($tpl): ?string
 
   return $url;
 }
+
+// action login ajax
+add_action('wp_ajax_nopriv_paint_login_from', 'paint_login_from');
+add_action('wp_ajax_paint_login_from', 'paint_login_from');
+
+function paint_login_from()
+{
+  global $wpdb;
+
+  // First check the nonce, if it fails the function will break
+  check_ajax_referer( 'ajax-login-nonce', 'security' );
+
+  // Nonce is checked, get the POST data and sign user on
+  $info = array();
+  $info['user_login'] = $_POST['username'];
+  $info['user_password'] = $_POST['password'];
+  $info['remember'] = true;
+
+
+  if ( is_numeric( $info['user_login'] ) ) {
+    $phone_number = (int) $info['user_login'];
+    $table_extended_users = $wpdb->prefix . 'extended_users';
+    $table_users = $wpdb->prefix . 'users';
+
+    $result = $wpdb->get_results(
+      "SELECT * FROM $table_extended_users INNER JOIN $table_users ON $table_extended_users.user_id = $table_users.id WHERE phone_number = $phone_number LIMIT 1"
+    );
+
+    if (!empty($result[0])) {
+      $info['user_login'] = $result[0]->user_login;
+    }
+  }
+
+  $user_signon = wp_signon( $info, false );
+
+  if ( is_wp_error( $user_signon )) {
+    $result = [
+      'loggedin' => false,
+      'message' => esc_html__( 'Tên người dùng hoặc mật khẩu sai!', 'paint' )
+    ];
+
+    wp_send_json_error($result);
+  } else {
+    $result = [
+      'loggedin' => true,
+      'message' => esc_html__( 'Đăng nhập thành công!', 'paint' )
+    ];
+
+    wp_send_json_success($result);
+  }
+
+  die();
+}

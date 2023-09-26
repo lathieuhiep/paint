@@ -61,6 +61,8 @@ $logo = paint_get_option('general_opt_logo', '');
           <?php echo esc_html($current_user->user_nicename); ?>
         </span>
 
+          <a href="<?php echo wp_logout_url( home_url() ); ?>">Đăng xuất</a>
+
         <?php else: ?>
           <a href="<?php echo esc_url( paint_get_tpl_url('templates/login.php') ) ?>">Đăng nhập</a>
         <?php endif; ?>

@@ -1,4 +1,8 @@
 .user-warp {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+
   .grid {
     display: grid;
     grid-gap: 5rem 10rem;
@@ -39,8 +43,8 @@
 
   .form-user {
     .grid-control {
-      &:not(:last-child) {
-        margin-bottom: 2.4rem;
+      ~ .grid-control {
+        margin-top: 2.4rem;
       }
 
       .form-control {
@@ -55,6 +59,12 @@
           box-shadow: none;
           color: rgba(0, 0, 0, 0.6);
           background-color: $color-white;
+        }
+      }
+
+      .box-lost-password {
+        a {
+          color: #0056D1;
         }
       }
 
@@ -80,6 +90,34 @@
 
     .grid-control-submit {
       padding-top: 3.6rem;
+    }
+
+    .not-account {
+      margin-top: 3rem;
+
+      a {
+        color: #FAC832;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  &.login-warp {
+    .grid {
+      &__item {
+        &:before {
+          display: none;
+        }
+      }
+    }
+
+    .form-user {
+      padding: 3.6rem 1.6rem;
+      border: 2px solid #000000;
+      border-radius: .5rem;
     }
   }
 }

@@ -42,6 +42,8 @@ body {
 .sticky-footer {
   flex: 1 0 auto;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -472,6 +474,6 @@ pre {
   }
 }
 
-.form-search-custom {
-
+.txt-error {
+  color: $background-tertiary;
 }
