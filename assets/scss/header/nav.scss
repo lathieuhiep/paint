@@ -16,15 +16,50 @@
     grid-template-columns: 12.8rem 1fr auto;
 
     .site-user {
-      display: grid;
-      grid-gap: .4rem;
-      grid-template-columns: 2rem 1fr;
-      align-items: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-      .user-name {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      &__box {
+        display: grid;
+        grid-gap: .4rem;
+        grid-template-columns: 2rem 1fr;
+        align-items: center;
+
+        .user-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+     &__manager {
+       margin: 0;
+       padding: 0;
+       list-style: none;
+       position: absolute;
+       top: 120%;
+       left: 0;
+       min-width: 160px;
+       border-top: 1px solid #FACA26;
+       background-color: #fff;
+       visibility: hidden;
+       opacity: 0;
+       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+       @include transition();
+
+       li {
+         padding: .6rem .8rem;
+       }
+     }
+
+      &:hover {
+        .site-user__manager {
+          top: 100%;
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
   }

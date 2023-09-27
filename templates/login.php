@@ -28,6 +28,7 @@ get_header();
                   type="text"
                   name="username"
                   class="form-control"
+                  required
                   value="<?php echo esc_attr($_REQUEST['username'] ?? ''); ?>"
                   placeholder="<?php esc_attr_e('Email/ Số điện thoại/ Tên đăng nhập', 'paint'); ?>"
                   aria-label=""
@@ -40,6 +41,7 @@ get_header();
                   type="password"
                   name="password"
                   class="form-control"
+                  required
                   value=""
                   placeholder="<?php esc_attr_e('Mật khẩu', 'paint'); ?>"
                   aria-label=""

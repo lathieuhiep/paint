@@ -50,21 +50,27 @@ $logo = paint_get_option('general_opt_logo', '');
       </div>
 
       <div class="site-user">
-        <i class="fa-regular fa-circle-user"></i>
+        <div class="site-user__box">
+          <i class="fa-regular fa-circle-user"></i>
 
-        <?php
-        if ( is_user_logged_in() ) :
-          $current_user = wp_get_current_user();
-        ?>
+          <?php
+          if ( is_user_logged_in() ) :
+            $current_user = wp_get_current_user();
+            ?>
 
-        <span class="user-name">
-          <?php echo esc_html($current_user->user_nicename); ?>
-        </span>
+            <span class="user-name"><?php echo esc_html($current_user->user_nicename); ?></span>
 
-          <a href="<?php echo wp_logout_url( home_url() ); ?>">Đăng xuất</a>
+          <?php else: ?>
+            <a href="<?php echo esc_url( paint_get_tpl_url('templates/login.php') ) ?>">Đăng nhập</a>
+          <?php endif; ?>
+        </div>
 
-        <?php else: ?>
-          <a href="<?php echo esc_url( paint_get_tpl_url('templates/login.php') ) ?>">Đăng nhập</a>
+        <?php if (is_user_logged_in()) : ?>
+          <ul class="site-user__manager">
+            <li>
+              <a href="<?php echo wp_logout_url( home_url() ); ?>">Đăng xuất</a>
+            </li>
+          </ul>
         <?php endif; ?>
       </div>
     </div>

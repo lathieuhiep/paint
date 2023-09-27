@@ -436,7 +436,7 @@ function paint_login_from()
     $table_users = $wpdb->prefix . 'users';
 
     $result = $wpdb->get_results(
-      "SELECT * FROM $table_extended_users INNER JOIN $table_users ON $table_extended_users.user_id = $table_users.id WHERE phone_number = $phone_number LIMIT 1"
+      "SELECT $table_users.user_login FROM $table_extended_users INNER JOIN $table_users ON $table_extended_users.user_id = $table_users.id WHERE phone_number = $phone_number LIMIT 1"
     );
 
     if (!empty($result[0])) {
