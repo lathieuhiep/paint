@@ -7,8 +7,6 @@ if ( is_user_logged_in() ) {
   wp_redirect( home_url() ); exit;
 }
 
-get_header();
-
 global $wpdb;
 $table_extended_users = $wpdb->prefix . 'extended_users';
 
@@ -121,8 +119,22 @@ if ( isset($_POST['f-submit']) ) {
       'user_id' => $user_id,
       'phone_number' => $phone_number
     ));
+    
+    //auto login
+    $info = array();
+    $info['user_login'] = $username;
+    $info['user_password'] = $password;
+    $info['remember'] = true;
+    
+    $user_signon = wp_signon( $info, true );
+    
+    if (!is_wp_error( $user_signon )) {
+      wp_redirect( home_url() ); exit;
+    }
   }
 }
+
+get_header();
 ?>
 <div class="site-container register-warp user-warp">
   <div class="container">
@@ -134,7 +146,7 @@ if ( isset($_POST['f-submit']) ) {
       </div>
 
       <div class="grid__item">
-        <form method="post" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" class="form-user">
+        <form id="register-form" method="post" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" class="form-user">
           <!-- username -->
           <div class="grid-control">
             <input
@@ -148,7 +160,7 @@ if ( isset($_POST['f-submit']) ) {
             >
 
             <?php if ( $errorUser ) : ?>
-              <p class="error-message">
+              <p class="error">
                 <?php echo esc_html($errorUser); ?>
               </p>
             <?php endif; ?>
@@ -168,7 +180,7 @@ if ( isset($_POST['f-submit']) ) {
               >
 
               <?php if ( $errorFirstName ) : ?>
-                <p class="error-message">
+                <p class="error">
                   <?php echo esc_html($errorFirstName); ?>
                 </p>
               <?php endif; ?>
@@ -186,7 +198,7 @@ if ( isset($_POST['f-submit']) ) {
               >
 
               <?php if ( $errorLastName ) : ?>
-                <p class="error-message">
+                <p class="error">
                   <?php echo esc_html($errorLastName); ?>
                 </p>
               <?php endif; ?>
@@ -195,10 +207,10 @@ if ( isset($_POST['f-submit']) ) {
 
           <!-- phone number -->
           <div class="grid-control">
-            <input id="phone-number" type="tel" class="form-control" name="phone_number" value="<?php echo esc_attr($phone_number) ?>" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="" minlength="10" maxlength="11">
+            <input id="phone-number" type="tel" class="form-control" name="phone_number" value="<?php echo esc_attr($phone_number) ?>" placeholder="<?php esc_attr_e('Số điện thoại *', 'paint'); ?>" aria-label="">
 
             <?php if ( $errorPhoneNumber ) : ?>
-              <p class="error-message">
+              <p class="error">
                 <?php echo esc_html($errorPhoneNumber); ?>
               </p>
             <?php endif; ?>
@@ -217,7 +229,7 @@ if ( isset($_POST['f-submit']) ) {
             >
 
             <?php if ( $errorEmail ) : ?>
-              <p class="error-message">
+              <p class="error">
                 <?php echo esc_html($errorEmail); ?>
               </p>
             <?php endif; ?>
@@ -235,7 +247,7 @@ if ( isset($_POST['f-submit']) ) {
             >
 
             <?php if ( $errorPassword ) : ?>
-              <p class="error-message">
+              <p class="error">
                 <?php echo esc_html($errorPassword); ?>
               </p>
             <?php endif; ?>
@@ -253,7 +265,7 @@ if ( isset($_POST['f-submit']) ) {
             >
 
             <?php if ( $errorPasswordConfirm ) : ?>
-              <p class="error-message">
+              <p class="error">
                 <?php echo esc_html($errorPasswordConfirm); ?>
               </p>
             <?php endif; ?>

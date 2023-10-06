@@ -77,11 +77,13 @@ function paint_register_front_end(): void
 
   if ( is_page_template('templates/register.php') ) {
     wp_enqueue_script('cleave.min', get_theme_file_uri('/assets/libs/cleave/cleave.min.js'), array(), '1.6.0', true);
+    wp_enqueue_script('jquery.validate.min', get_theme_file_uri('/assets/libs/validate/jquery.validate.min.js'), array(), '1.19.5', true);
     wp_enqueue_script('template-register', get_theme_file_uri('/assets/js/template-register.js'), array(), '', true);
   }
 
   // template login
   if ( is_page_template('templates/login.php') ) {
+    wp_enqueue_script('jquery.validate.min', get_theme_file_uri('/assets/libs/validate/jquery.validate.min.js'), array(), '1.19.5', true);
     wp_enqueue_script('template-login', get_theme_file_uri('/assets/js/template-login.js'), array(), '1.0.0', true);
     wp_localize_script('template-login', 'loginAjax', array('url' => $paint_admin_url_ajax));
   }
