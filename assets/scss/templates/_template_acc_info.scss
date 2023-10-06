@@ -1,0 +1,43 @@
+.user-info-warp {
+  .grid-info {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    grid-column-gap: 20rem;
+  }
+
+  .heading {
+    &__right {
+      .avatar {
+        display: inline-block;
+        width: 6.4rem;
+        height: 6.4rem;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .tab-user-info {
+    .nav-link {
+      padding: 0;
+      color: $color-primary;
+      text-align: inherit;
+      border-radius: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 0.6rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid $color-secondary;
+      }
+
+      &.active {
+        color: $color-secondary;
+        background-color: transparent;
+      }
+
+      &:hover {
+        color: $color-secondary;
+      }
+    }
+  }
+}
