@@ -1,4 +1,6 @@
 .user-info-warp {
+  background-color: $color-white;
+
   .grid-info {
     display: grid;
     grid-template-columns: 15rem 1fr;
@@ -14,6 +16,62 @@
         overflow: hidden;
         border-radius: 50%;
       }
+    }
+  }
+
+  .nav-acc-management {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        ~ li {
+          margin-top: .8rem;
+        }
+      }
+    }
+  }
+
+  .user-update-form {
+    .group-control {
+      ~ .group-control {
+        margin-top: 1.6rem;
+      }
+    }
+
+    .form-label {
+      margin-bottom: .8rem;
+      font-style: italic;
+      color: $color-tertiary;
+    }
+
+    .form-control {
+      padding: 0 0 .6rem;
+      border-width: 0 0 1px;
+      border-color: $color-tertiary;
+      border-radius: 0;
+
+      ~ .form-control {
+        margin-top: 1rem;
+      }
+
+      &:disabled {
+        color: $color-tertiary;
+        background-color: transparent;
+      }
+    }
+
+    .action-box {
+      margin-top: 5rem;
+    }
+
+    .btn-submit-update {
+      padding: .8rem 1.6rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-radius: 0;
+      background-color: $color-secondary;
     }
   }
 

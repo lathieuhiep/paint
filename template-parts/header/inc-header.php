@@ -70,7 +70,7 @@ $logo = paint_get_option('general_opt_logo', '');
         <?php if (is_user_logged_in()) : ?>
           <ul class="site-user__manager">
             <li>
-              <a href="<?php echo esc_url( paint_get_tpl_url('templates/account-information.php') ); ?>">
+              <a href="<?php echo esc_url( paint_get_tpl_url('templates/personal-info.php') ); ?>">
                 <?php esc_html_e('Thông tin tài khoản', 'paint'); ?>
               </a>
             </li>
