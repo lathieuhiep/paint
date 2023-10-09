@@ -18,12 +18,12 @@ $table_extended_users = $wpdb->prefix . 'extended_users';
 $queryExtendedUser = $wpdb->get_row( "SELECT id, user_id, phone_number, date_birth, province, district, wards, street FROM $table_extended_users WHERE user_id = $currentUserId" );
 
 $email = $current_user->user_email;
-$phone_number = $queryExtendedUser->phone_number;
-$date_birth = $queryExtendedUser->date_birth;
-$province = $queryExtendedUser->province;
-$district = $queryExtendedUser->district;
-$wards = $queryExtendedUser->wards;
-$street = $queryExtendedUser->street;
+$phone_number = $queryExtendedUser->phone_number ?? null;
+$date_birth = $queryExtendedUser->date_birth ?? null;
+$province = $queryExtendedUser->province ?? null;
+$district = $queryExtendedUser->district ?? null;
+$wards = $queryExtendedUser->wards ?? null;
+$street = $queryExtendedUser->street ?? null;
 
 $errors = new WP_Error();
 $userDataUpdate = '';
@@ -259,7 +259,7 @@ get_header();
             </div>
 
             <div class="action-box text-center">
-              <button type="submit" name="f-submit" class="btn btn-submit-update">
+              <button type="submit" name="f-submit" class="btn btn-submit">
                 <?php esc_html_e('CẬP NHẬT THÔNG TIN', 'paint'); ?>
               </button>
             </div>

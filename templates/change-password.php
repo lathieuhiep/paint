@@ -8,7 +8,33 @@ if (!is_user_logged_in()) {
   exit;
 }
 
+global $wpdb;
 global $current_user;
+$currentUserId = $current_user->id;
+
+$old_password = $password = '';
+
+$errors = new WP_Error();
+$errorPassword = $errorPasswordConfirm = '';
+
+if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formType'] ) && wp_verify_nonce( $_POST['formType'], 'changePassword' ) ) {
+  $old_password = $wpdb->_escape($_POST['old_password']);
+  $password = $wpdb->_escape($_POST['password']);
+  $passwordConfirm = $wpdb->_escape($_POST['password_confirm']);
+
+  // check validate password
+  if ( strlen($password) < 8  ) {
+    $errors->add('password', esc_html__('Độ dài tối thiểu của mật khẩu là 8 kí tự', 'paint'));
+  }
+
+  if ( strlen($password) > 32  ) {
+    $errors->add('password', esc_html__('Độ dài tối đa của mật khẩu là 32 kí tự', 'paint'));
+  }
+
+  if ( strcmp($password, $passwordConfirm) !== 0 ) {
+    $errors->add('password_confirm', esc_html__('Mật khẩu không khớp', 'paint'));
+  }
+}
 
 get_header();
 ?>
