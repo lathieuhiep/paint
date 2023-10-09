@@ -15,12 +15,21 @@ $currentUserId = $current_user->id;
 $old_password = $password = '';
 
 $errors = new WP_Error();
-$errorPassword = $errorPasswordConfirm = '';
+$errorOldPassword = $errorPassword = $errorPasswordConfirm = '';
 
 if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formType'] ) && wp_verify_nonce( $_POST['formType'], 'changePassword' ) ) {
   $old_password = $wpdb->_escape($_POST['old_password']);
   $password = $wpdb->_escape($_POST['password']);
   $passwordConfirm = $wpdb->_escape($_POST['password_confirm']);
+
+  // check old password
+  if ( empty($old_password) ) {
+    $errors->add('old_password', esc_html__('Mật khẩu cũ không được để trống', 'paint'));
+  }
+
+  if ( !empty($old_password) && !wp_check_password( $old_password, $current_user->user_pass, $currentUserId ) ) {
+    $errors->add('old_password', esc_html__('Mật khẩu không đúng', 'paint'));
+  }
 
   // check validate password
   if ( strlen($password) < 8  ) {
@@ -33,6 +42,13 @@ if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formT
 
   if ( strcmp($password, $passwordConfirm) !== 0 ) {
     $errors->add('password_confirm', esc_html__('Mật khẩu không khớp', 'paint'));
+  }
+
+  // error message
+  if ( $errors->errors ) {
+    $errorOldPassword = $errors->errors['old_password'][0] ?? '';
+    $errorPassword = $errors->errors['password'][0] ?? '';
+    $errorPasswordConfirm = $errors->errors['password_confirm'][0] ?? '';
   }
 }
 
@@ -64,6 +80,12 @@ get_header();
               class="form-control"
               value=""
             >
+
+            <?php if ( $errorOldPassword ) : ?>
+              <p class="error">
+                <?php echo esc_html($errorOldPassword); ?>
+              </p>
+            <?php endif; ?>
           </div>
 
           <div class="group-control">
@@ -78,6 +100,12 @@ get_header();
               class="form-control"
               value=""
             >
+
+            <?php if ( $errorPassword ) : ?>
+              <p class="error">
+                <?php echo esc_html($errorPassword); ?>
+              </p>
+            <?php endif; ?>
           </div>
 
           <div class="group-control">
