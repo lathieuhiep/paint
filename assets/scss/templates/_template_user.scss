@@ -116,22 +116,6 @@
         }
       }
     }
-
-    .form-control {
-      &.error {
-        border-color: $color-red;
-
-        &:focus {
-          border-color: $color-red;
-        }
-      }
-    }
-
-    .error {
-      margin-top: .6rem;
-      color: $color-red;
-      font-size: 1.6rem;
-    }
   }
 
   &.login-warp {

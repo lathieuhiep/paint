@@ -13,7 +13,7 @@ $table_extended_users = $wpdb->prefix . 'extended_users';
 $username = $first_name = $last_name = $phone_number = $email = $password = '';
 
 $errors = new WP_Error();
-$errorUser = $errorFirstName = $errorLastName = $errorPhoneNumber = $errorEmail = $errorPassword = $errorPasswordConfirm ='';
+$errorUser = $errorFirstName = $errorLastName = $errorPhoneNumber = $errorEmail = $errorPassword = $errorPasswordConfirm = '';
 
 if ( isset($_POST['f-submit']) ) {
   $username = $wpdb->_escape($_POST['username']);
