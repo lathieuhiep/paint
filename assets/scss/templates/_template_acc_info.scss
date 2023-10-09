@@ -33,7 +33,7 @@
     }
   }
 
-  .user-update-form {
+  form {
     .group-control {
       ~ .group-control {
         margin-top: 1.6rem;
@@ -66,12 +66,21 @@
       margin-top: 5rem;
     }
 
-    .btn-submit-update {
+    .btn-submit {
       padding: .8rem 1.6rem;
       font-size: 1.6rem;
       font-weight: 700;
       border-radius: 0;
       background-color: $color-secondary;
+    }
+
+    &.change-password-form {
+      max-width: 500px;
+      margin: 0 auto;
+
+      .action-box {
+        margin-top: 5rem;
+      }
     }
   }
 

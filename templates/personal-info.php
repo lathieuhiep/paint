@@ -111,7 +111,7 @@ get_header();
             </div>
 
             <div class="action-box text-center">
-              <button type="submit" class="btn btn-submit-update">
+              <button type="submit" class="btn btn-submit">
                 <?php esc_html_e('CẬP NHẬT THÔNG TIN', 'paint'); ?>
               </button>
             </div>
