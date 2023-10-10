@@ -15,7 +15,7 @@ $currentUserId = $current_user->id;
 $old_password = $password = '';
 
 $errors = new WP_Error();
-$errorPassword = $errorPasswordConfirm = '';
+$errorOldPassword = $errorPassword = $errorPasswordConfirm = '';
 
 if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formType'] ) && wp_verify_nonce( $_POST['formType'], 'changePassword' ) ) {
   $old_password = $wpdb->_escape($_POST['old_password']);
@@ -34,6 +34,13 @@ if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formT
   if ( strcmp($password, $passwordConfirm) !== 0 ) {
     $errors->add('password_confirm', esc_html__('Mật khẩu không khớp', 'paint'));
   }
+    
+    // error message
+    if ( $errors->errors ) {
+        $errorOldPassword = $errors->errors['old_password'][0] ?? '';
+        $errorPassword = $errors->errors['password'][0] ?? '';
+        $errorPasswordConfirm = $errors->errors['password_confirm'][0] ?? '';
+    }
 }
 
 get_header();
@@ -64,6 +71,12 @@ get_header();
               class="form-control"
               value=""
             >
+              
+              <?php if ( $errorOldPassword ) : ?>
+                  <p class="error">
+                      <?php echo esc_html($errorOldPassword); ?>
+                  </p>
+              <?php endif; ?>
           </div>
 
           <div class="group-control">
@@ -78,6 +91,12 @@ get_header();
               class="form-control"
               value=""
             >
+              
+              <?php if ( $errorPassword ) : ?>
+                  <p class="error">
+                      <?php echo esc_html($errorPassword); ?>
+                  </p>
+              <?php endif; ?>
           </div>
 
           <div class="group-control">
@@ -92,6 +111,11 @@ get_header();
               name="password_confirm"
               value=""
             >
+              <?php if ( $errorPasswordConfirm ) : ?>
+                  <p class="error">
+                      <?php echo esc_html($errorPasswordConfirm); ?>
+                  </p>
+              <?php endif; ?>
           </div>
 
           <div class="group-control action-box text-center">
