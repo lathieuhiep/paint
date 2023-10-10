@@ -96,6 +96,13 @@ function paint_register_front_end(): void
         wp_enqueue_script('jquery.validate.min', get_theme_file_uri('/assets/libs/validate/jquery.validate.min.js'), array(), '1.19.5', true);
         wp_enqueue_script('template-personal-info', get_theme_file_uri('/assets/js/template-personal-info.js'), array(), '', true);
     }
+
+    // template change password
+  if (is_page_template('templates/change-password.php')) {
+    wp_enqueue_script('jquery.validate.min', get_theme_file_uri('/assets/libs/validate/jquery.validate.min.js'), array(), '1.19.5', true);
+    wp_enqueue_script('template-change-password', get_theme_file_uri('/assets/js/template-change-password.js'), array(), '1.0.0', true);
+    wp_localize_script('template-change-password', 'changePasswordAjax', array('url' => $paint_admin_url_ajax));
+  }
     
     /*
    * End Get Js Front End

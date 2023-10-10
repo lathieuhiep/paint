@@ -17,7 +17,7 @@ $old_password = $password = '';
 $errors = new WP_Error();
 $errorOldPassword = $errorPassword = $errorPasswordConfirm = '';
 
-if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formType'] ) && wp_verify_nonce( $_POST['formType'], 'changePassword' ) ) {
+if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['security'] ) && wp_verify_nonce( $_POST['security'], 'changePassword' ) ) {
   $old_password = $wpdb->_escape($_POST['old_password']);
   $password = $wpdb->_escape($_POST['password']);
   $passwordConfirm = $wpdb->_escape($_POST['password_confirm']);
@@ -28,7 +28,7 @@ if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['formT
   }
 
   if ( !empty($old_password) && !wp_check_password( $old_password, $current_user->user_pass, $currentUserId ) ) {
-    $errors->add('old_password', esc_html__('Mật khẩu không đúng', 'paint'));
+    $errors->add('old_password', esc_html__('Mật khẩu cũ không đúng', 'paint'));
   }
 
   // check validate password
@@ -120,15 +120,21 @@ get_header();
               name="password_confirm"
               value=""
             >
+
+            <?php if ( $errorPasswordConfirm ) : ?>
+              <p class="error">
+                <?php echo esc_html($errorPasswordConfirm); ?>
+              </p>
+            <?php endif; ?>
           </div>
 
           <div class="group-control action-box text-center">
-            <?php wp_nonce_field( 'changePassword', 'formType' ); ?>
-
             <button type="submit" name="f-submit" class="btn btn-submit">
               <?php esc_html_e('ĐỔI MẬT KHẨU', 'paint'); ?>
             </button>
           </div>
+
+          <?php wp_nonce_field( 'changePassword', 'security' ); ?>
         </form>
       </div>
     </div>

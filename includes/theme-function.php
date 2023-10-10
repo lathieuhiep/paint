@@ -421,7 +421,7 @@ function paint_login_from()
   global $wpdb;
 
   // First check the nonce, if it fails the function will break
-  check_ajax_referer( 'ajax-login-nonce', 'security' );
+  check_ajax_referer( 'ajax-login-nonce', $_POST['security'], false );
 
   // Nonce is checked, get the POST data and sign user on
   $info = array();
@@ -462,5 +462,23 @@ function paint_login_from()
     wp_send_json_success($result);
   }
 
-  die();
+  wp_die();
+}
+
+// action change password
+add_action('wp_ajax_nopriv_paint_change_password', 'paint_change_password');
+add_action('wp_ajax_paint_change_password', 'paint_change_password');
+function paint_change_password()
+{
+  // First check the nonce, if it fails the function will break
+  check_ajax_referer( 'changePassword', $_POST['security'], false );
+
+  //
+  global $current_user;
+  $currentUserId = $current_user->id;
+
+  parse_str($_POST['formData'], $formData);
+  var_dump($currentUserId);
+
+  wp_die();
 }

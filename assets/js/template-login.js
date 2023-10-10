@@ -12,9 +12,6 @@
         password: {
           required: true,
         },
-        message: {
-          required: true
-        }
       },
       messages: {
         username: {
