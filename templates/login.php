@@ -8,13 +8,9 @@ if ( is_user_logged_in() ) {
 }
 
 get_header();
-?>
-    <div class="spinner-loading d-none">
-        <div class="spinner-border text-light" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
 
+get_template_part('components/inc', 'spinner-loading');
+?>
     <div class="site-container login-warp user-warp">
         <div class="container">
             <div class="grid">

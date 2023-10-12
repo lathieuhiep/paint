@@ -8,51 +8,9 @@ if (!is_user_logged_in()) {
   exit;
 }
 
-global $wpdb;
-global $current_user;
-$currentUserId = $current_user->id;
-
-$old_password = $password = '';
-
-$errors = new WP_Error();
-$errorOldPassword = $errorPassword = $errorPasswordConfirm = '';
-
-if ( !empty($currentUserId) && isset($_POST['f-submit']) && isset( $_POST['security'] ) && wp_verify_nonce( $_POST['security'], 'changePassword' ) ) {
-  $old_password = $wpdb->_escape($_POST['old_password']);
-  $password = $wpdb->_escape($_POST['password']);
-  $passwordConfirm = $wpdb->_escape($_POST['password_confirm']);
-
-  // check old password
-  if ( empty($old_password) ) {
-    $errors->add('old_password', esc_html__('Mật khẩu cũ không được để trống', 'paint'));
-  }
-
-  if ( !empty($old_password) && !wp_check_password( $old_password, $current_user->user_pass, $currentUserId ) ) {
-    $errors->add('old_password', esc_html__('Mật khẩu cũ không đúng', 'paint'));
-  }
-
-  // check validate password
-  if ( strlen($password) < 8  ) {
-    $errors->add('password', esc_html__('Độ dài tối thiểu của mật khẩu là 8 kí tự', 'paint'));
-  }
-
-  if ( strlen($password) > 32  ) {
-    $errors->add('password', esc_html__('Độ dài tối đa của mật khẩu là 32 kí tự', 'paint'));
-  }
-
-  if ( strcmp($password, $passwordConfirm) !== 0 ) {
-    $errors->add('password_confirm', esc_html__('Mật khẩu không khớp', 'paint'));
-  }
-
-  // error message
-  if ( $errors->errors ) {
-    $errorOldPassword = $errors->errors['old_password'][0] ?? '';
-    $errorPassword = $errors->errors['password'][0] ?? '';
-    $errorPasswordConfirm = $errors->errors['password_confirm'][0] ?? '';
-  }
-}
-
 get_header();
+
+get_template_part('components/inc', 'spinner-loading');
 ?>
 
 <div class="site-container user-info-warp">
@@ -80,12 +38,6 @@ get_header();
               class="form-control"
               value=""
             >
-
-            <?php if ( $errorOldPassword ) : ?>
-              <p class="error">
-                <?php echo esc_html($errorOldPassword); ?>
-              </p>
-            <?php endif; ?>
           </div>
 
           <div class="group-control">
@@ -100,12 +52,6 @@ get_header();
               class="form-control"
               value=""
             >
-
-            <?php if ( $errorPassword ) : ?>
-              <p class="error">
-                <?php echo esc_html($errorPassword); ?>
-              </p>
-            <?php endif; ?>
           </div>
 
           <div class="group-control">
@@ -120,12 +66,6 @@ get_header();
               name="password_confirm"
               value=""
             >
-
-            <?php if ( $errorPasswordConfirm ) : ?>
-              <p class="error">
-                <?php echo esc_html($errorPasswordConfirm); ?>
-              </p>
-            <?php endif; ?>
           </div>
 
           <div class="group-control action-box text-center">

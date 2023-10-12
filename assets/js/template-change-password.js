@@ -2,7 +2,9 @@
   "use strict";
   
   $(document).ready(function () {
-    $('#change-password-form').validate({
+    const changePasswordForm = $('#change-password-form')
+    let errors = {}
+    changePasswordForm.validate({
       ignore: ":hidden",
       rules: {
         old_password: {
@@ -38,8 +40,36 @@
             action: 'paint_change_password',
             formData: $(form).serialize()
           }),
+          beforeSend: function () {
+            $('.spinner-loading').removeClass('d-none')
+          },
           success: function(response) {
+            const { success, data } = response
 
+            if (success === true) {
+              $('body').append(data)
+
+              const modalChangedPasswordSuccess = new bootstrap.Modal('#modalChangedPasswordSuccess', {
+                keyboard: false
+              })
+
+              modalChangedPasswordSuccess.show()
+
+            } else {
+              const validatorFormCustom = changePasswordForm.validate();
+              let customErrors = {}
+
+              $.each(data, function(key, value){
+                customErrors[key] = value[0]
+              })
+
+              if ( Object.keys(customErrors).length ) {
+                validatorFormCustom.showErrors(customErrors)
+              }
+            }
+          },
+          complete: function () {
+            $('.spinner-loading').addClass('d-none')
           }
         })
       }
