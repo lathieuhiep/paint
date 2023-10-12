@@ -543,3 +543,16 @@ function paint_change_password()
     
     wp_die();
 }
+
+// user saved
+add_action('wp_ajax_nopriv_paint_user_saved', 'paint_user_saved');
+add_action('wp_ajax_paint_user_saved', 'paint_user_saved');
+
+function paint_user_saved()
+{
+  $postId = $_POST['postId'];
+
+  var_dump($postId);
+
+  wp_die();
+}

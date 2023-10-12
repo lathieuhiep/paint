@@ -499,3 +499,13 @@ form {
     font-size: 1.6rem;
   }
 }
+
+.btn-user-save {
+  background-color: transparent;
+  font-size: 2.1rem;
+  @include transition();
+
+  &:hover {
+    color: $color-secondary;
+  }
+}

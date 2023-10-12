@@ -102,7 +102,7 @@
           <?php paint_comment_form(); ?>
         </div>
 
-        <div class="post-info__right">
+        <div class="post-info__right d-flex justify-content-between">
           <div class="fb-share-button"
                data-href="<?php the_permalink(); ?>"
                data-layout="button_count"
@@ -116,7 +116,9 @@
             </a>
           </div>
 
-          <div class="fb-save" data-uri="<?php the_permalink(); ?>" data-size="large" data-lazy="true"></div>
+          <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
+            <i class="fa-regular fa-bookmark"></i>
+          </button>
         </div>
       </div>
     </div>
