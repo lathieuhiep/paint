@@ -253,9 +253,11 @@ function paint_child_filter_archive_title()
   }
 }
 
-add_action( 'user_register', function ( $user_id ) {
-  $userdata = array();
-  $userdata['ID'] = $user_id;
-  $userdata['phone_number'] = $_POST['phone_number'] ?? null;
-  wp_update_user( $userdata );
-} );
+//
+add_action('after_setup_theme', 'paint_remove_admin_bar');
+function paint_remove_admin_bar(): void
+{
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}

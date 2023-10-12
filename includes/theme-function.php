@@ -421,14 +421,13 @@ function paint_login_from()
     global $wpdb;
     
     // First check the nonce, if it fails the function will break
-    check_ajax_referer('ajax-login-nonce', $_POST['security'], false);
+    check_ajax_referer('ajax-login-nonce', 'security');
     
     // Nonce is checked, get the POST data and sign user on
     $info = array();
     $info['user_login'] = $_POST['username'];
     $info['user_password'] = $_POST['password'];
     $info['remember'] = true;
-    
     
     if (is_numeric($info['user_login'])) {
         $phone_number = (int)$info['user_login'];
@@ -444,9 +443,10 @@ function paint_login_from()
         }
     }
     
+    // login
     $user_signon = wp_signon($info, false);
     
-    if (is_wp_error($user_signon)) {
+    if ( is_wp_error($user_signon) ) {
         $result = [
           'loggedin' => false,
           'message' => esc_html__('Tên người dùng hoặc mật khẩu sai!', 'paint')
@@ -454,12 +454,29 @@ function paint_login_from()
         
         wp_send_json_error($result);
     } else {
-        $result = [
-          'loggedin' => true,
-          'message' => esc_html__('Đăng nhập thành công!', 'paint')
-        ];
+        $userLogin = get_userdata( $user_signon->ID );
         
-        wp_send_json_success($result);
+        // Check if the role you're interested in, is present in the array.
+        if ( in_array( 'subscriber', $userLogin->roles, true ) ) {
+            $result = [
+              'loggedin' => true,
+              'message' => esc_html__('Đăng nhập thành công!', 'paint')
+            ];
+            
+            wp_send_json_success($result);
+            
+        } else {
+            wp_clear_auth_cookie();
+            
+            $result = [
+              'loggedin' => false,
+              'message' => esc_html__('Tên người dùng hoặc mật khẩu sai!', 'paint')
+            ];
+            
+            wp_send_json_error($result);
+            
+            wp_die();
+        }
     }
     
     wp_die();

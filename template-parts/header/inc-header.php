@@ -74,6 +74,12 @@ $logo = paint_get_option('general_opt_logo', '');
                 <?php esc_html_e('Thông tin tài khoản', 'paint'); ?>
               </a>
             </li>
+            
+            <li>
+              <a href="<?php echo esc_url( paint_get_tpl_url('templates/change-password.php') ); ?>">
+                <?php esc_html_e('Đổi mật khẩu', 'paint'); ?>
+              </a>
+            </li>
 
             <li>
               <a href="<?php echo wp_logout_url( home_url() ); ?>">
