@@ -1,6 +1,12 @@
 <?php
 get_header();
 
+global $current_user;
+$user_id = $current_user->id;
+
+$dataUserSave = paint_get_user_saved($user_id, get_the_ID());
+
+// get metabox
 $banner = get_post_meta(get_the_ID(), 'paint_cmb_project_banner_id', true);
 $gallery = get_post_meta(get_the_ID(), 'paint_cmb_project_gallery', true);
 $model = get_post_meta(get_the_ID(), 'paint_cmb_project_model', true);
@@ -108,10 +114,22 @@ $config_nav_thumbnail = [
 
               <div class="post-content">
                 <div class="post-content__warp">
-                  <h3 class="post-content__heading">
-                    <?php esc_html_e('Tổng quan dự án', 'paint'); ?>
-                  </h3>
+                  <div class="heading-box">
+                      <h3 class="post-content__heading">
+                          <?php esc_html_e('Tổng quan dự án', 'paint'); ?>
+                      </h3>
 
+                      <?php if ( $current_user ) : ?>
+                          <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
+                              <?php if ($dataUserSave && $dataUserSave->status == 1) : ?>
+                                  <i class="fa-solid fa-bookmark"></i>
+                              <?php else: ?>
+                                  <i class="fa-regular fa-bookmark"></i>
+                              <?php endif; ?>
+                          </button>
+                      <?php endif; ?>
+                  </div>
+                  
                   <div class="post-content__desc">
                     <?php the_content(); ?>
                   </div>
@@ -151,8 +169,7 @@ $config_nav_thumbnail = [
           ?>
         </div>
       </div>
-
-
+      
       <?php get_template_part('template-parts/project/inc', 'related-project'); ?>
     </div>
 

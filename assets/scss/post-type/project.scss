@@ -90,6 +90,17 @@
         padding: 2.5rem 3rem;
         color: $color-black;
         background-color: #F1F1F1;
+
+        .heading-box {
+          margin-bottom: 1.2rem;
+          display: grid;
+          grid-gap: 1.2rem;
+          grid-template-columns: 1fr auto;
+
+          .post-content__heading {
+            margin-bottom: 0;
+          }
+        }
       }
 
       &__desc {

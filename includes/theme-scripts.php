@@ -74,7 +74,9 @@ function paint_register_front_end(): void
     if (is_post_type_archive('paint_discover') || is_singular('paint_discover') || (is_search() && $_GET['post_type'] == 'paint_discover')) {
         wp_enqueue_script('discover', get_theme_file_uri('/assets/js/discover.js'), array(), '1.0.0', true);
         wp_localize_script('discover', 'discoverAjax', array('url' => $paint_admin_url_ajax));
-
+    }
+    
+    if ( is_singular( array( 'paint_discover', 'paint_project' ) ) ) {
         wp_enqueue_script('user-save', get_theme_file_uri('/assets/js/user-save.js'), array(), '1.0.0', true);
         wp_localize_script('user-save', 'userSaveAjax', array('url' => $paint_admin_url_ajax));
     }
