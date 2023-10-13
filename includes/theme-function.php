@@ -565,14 +565,21 @@ function paint_user_saved()
     $post = get_post($post_id);
     
     if (empty($post) && empty($currentUserId)) {
+        wp_send_json_error();
         wp_die();
     }
     
     // get data user save
+    $post_type_arr = ['paint_discover', 'paint_project'];
     $table = $wpdb->prefix . 'user_saved';
     $user_id = $current_user->id;
     $post_type = $post->post_type;
     $status = 1;
+    
+    if ( !in_array($post_type, $post_type_arr) ) {
+        wp_send_json_error();
+        wp_die();
+    }
     
     $dataUserSave = paint_get_user_saved($user_id, $post_id);
     
@@ -602,5 +609,11 @@ function paint_user_saved()
     }
     
     wp_die();
+}
+
+//
+function paint_get_all_user_saved($post_type)
+{
+
 }
 
