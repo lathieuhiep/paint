@@ -1,3 +1,10 @@
+<?php
+global $current_user;
+$user_id = $current_user->id;
+
+$dataUserSave = paint_get_user_saved($user_id, get_the_ID());
+?>
+
 <div class="entry-post">
   <?php while (have_posts()) : the_post(); ?>
     <h1 class="title">
@@ -116,9 +123,17 @@
             </a>
           </div>
 
-          <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
-            <i class="fa-regular fa-bookmark"></i>
-          </button>
+            <?php if ( $current_user ) : ?>
+            <div class="action-box">
+                <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
+                    <?php if ($dataUserSave && $dataUserSave->status == 1) : ?>
+                        <i class="fa-solid fa-bookmark"></i>
+                    <?php else: ?>
+                        <i class="fa-regular fa-bookmark"></i>
+                    <?php endif; ?>
+                </button>
+            </div>
+            <?php endif; ?>
         </div>
       </div>
     </div>

@@ -446,7 +446,7 @@ function paint_login_from()
     // login
     $user_signon = wp_signon($info, false);
     
-    if ( is_wp_error($user_signon) ) {
+    if (is_wp_error($user_signon)) {
         $result = [
           'loggedin' => false,
           'message' => esc_html__('Tên người dùng hoặc mật khẩu sai!', 'paint')
@@ -454,10 +454,10 @@ function paint_login_from()
         
         wp_send_json_error($result);
     } else {
-        $userLogin = get_userdata( $user_signon->ID );
+        $userLogin = get_userdata($user_signon->ID);
         
         // Check if the role you're interested in, is present in the array.
-        if ( in_array( 'subscriber', $userLogin->roles, true ) ) {
+        if (in_array('subscriber', $userLogin->roles, true)) {
             $result = [
               'loggedin' => true,
               'message' => esc_html__('Đăng nhập thành công!', 'paint')
@@ -494,7 +494,7 @@ function paint_change_password()
     global $wpdb, $current_user;
     $currentUserId = $current_user->id;
     
-    if (empty( $currentUserId )) {
+    if (empty($currentUserId)) {
         wp_die();
     }
     
@@ -530,18 +530,27 @@ function paint_change_password()
     }
     
     if (count($errors->errors) == 0) {
-        wp_set_password( $password, $currentUserId );
+        wp_set_password($password, $currentUserId);
         
         ob_start();
         get_template_part('components/inc', 'popup-changed-password-success');
         $data = ob_get_clean();
-       
-        wp_send_json_success( $data );
+        
+        wp_send_json_success($data);
     } else {
         wp_send_json_error($errors->errors);
     }
     
     wp_die();
+}
+
+// get data user saved
+function paint_get_user_saved($user_id, $post_id)
+{
+    global $wpdb;
+    $table = $wpdb->prefix . 'user_saved';
+    
+    return $wpdb->get_row("SELECT id, user_id, post_id, post_type, status FROM $table  WHERE user_id = $user_id AND post_id = $post_id");
 }
 
 // user saved
@@ -550,9 +559,48 @@ add_action('wp_ajax_paint_user_saved', 'paint_user_saved');
 
 function paint_user_saved()
 {
-  $postId = $_POST['postId'];
-
-  var_dump($postId);
-
-  wp_die();
+    global $wpdb, $current_user;
+    
+    $post_id = $_POST['postId'];
+    $post = get_post($post_id);
+    
+    if (empty($post) && empty($currentUserId)) {
+        wp_die();
+    }
+    
+    // get data user save
+    $table = $wpdb->prefix . 'user_saved';
+    $user_id = $current_user->id;
+    $post_type = $post->post_type;
+    $status = 1;
+    
+    $dataUserSave = paint_get_user_saved($user_id, $post_id);
+    
+    if ( empty( $dataUserSave ) ) {
+        $result = $wpdb->insert($table, array(
+          'user_id' => $user_id,
+          'post_id' => $post_id,
+          'post_type' => $post_type
+        ));
+    } else {
+        $idUserSaved = $dataUserSave->id;
+        $status = !$dataUserSave->status;
+        
+        $result = $wpdb->update($table, array(
+          'status' => $status
+        ), array( 'ID' => $idUserSaved ));
+    }
+    
+    if ($result) {
+        $response = [
+          'status' => $status
+        ];
+        
+        wp_send_json_success($response);
+    } else {
+        wp_send_json_error();
+    }
+    
+    wp_die();
 }
+
