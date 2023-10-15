@@ -550,7 +550,7 @@ function paint_get_user_saved($user_id, $post_id)
     global $wpdb;
     $table = $wpdb->prefix . 'user_saved';
     
-    return $wpdb->get_row("SELECT id, user_id, post_id, post_type, status FROM $table  WHERE user_id = $user_id AND post_id = $post_id");
+    return $wpdb->get_row("SELECT id, user_id, post_id, post_type, status FROM $table WHERE user_id = $user_id AND post_id = $post_id");
 }
 
 // user saved
@@ -612,8 +612,67 @@ function paint_user_saved()
 }
 
 //
-function paint_get_all_user_saved($post_type)
+function paint_get_all_user_saved($post_type, $start_page = 1)
 {
+  global $wpdb, $current_user;
+  $user_id = $current_user->id;
 
+  $table = $wpdb->prefix . 'user_saved';
+  $per_page = LIMIT_POST_TYPE_USER_SAVED;
+  $offset = ($start_page - 1) * LIMIT_POST_TYPE_USER_SAVED;
+
+  $result = $wpdb->get_results(
+    "SELECT id, post_id FROM
+    $table WHERE user_id = $user_id
+    AND post_type = '".$post_type."'
+    AND status = 1
+    ORDER BY id DESC
+    LIMIT $per_page OFFSET $offset",
+    ARRAY_A
+  );
+
+  if ( $result ) {
+    return array_column($result, 'post_id');
+  }
+
+  return null;
+
+}
+
+//
+add_action('wp_ajax_nopriv_paint_pagination_post_type_user_saved', 'paint_pagination_post_type_user_saved');
+add_action('wp_ajax_paint_pagination_post_type_user_saved', 'paint_pagination_post_type_user_saved');
+
+function paint_pagination_post_type_user_saved()
+{
+  $postType = $_POST['postType'];
+  $paged = (int)$_POST['paged'];
+
+  $ids = paint_get_all_user_saved($postType, $paged);
+
+  if ( !empty( $ids ) ) {
+    $args = array(
+      'post_type' => $postType,
+      'post__in' => $ids,
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+      while ($query->have_posts()):
+        $query->the_post();
+
+        if ( $postType == 'paint_discover' ) {
+          get_template_part('components/inc', 'discover-user-saved');
+        } else {
+          get_template_part('components/inc', 'project-user-saved');
+        }
+
+      endwhile;
+      wp_reset_postdata();
+    }
+  }
+
+  wp_die();
 }
 

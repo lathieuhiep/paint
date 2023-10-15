@@ -1,0 +1,2 @@
+<?php
+const LIMIT_POST_TYPE_USER_SAVED = 4;

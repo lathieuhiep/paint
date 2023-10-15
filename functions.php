@@ -4,6 +4,9 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
+// Required: constant
+require get_parent_theme_file_path('/includes/constant.php');
+
 // Required: Theme Function
 require get_parent_theme_file_path('/includes/theme-function.php');
 

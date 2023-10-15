@@ -3,6 +3,13 @@ global $current_user;
 
 $first_name = get_user_meta($current_user->ID, 'first_name');
 $last_name = get_user_meta($current_user->ID, 'last_name');
+
+if ( !empty( $first_name[0] ) && !empty( $last_name[0] ) ) {
+  $full_name = $first_name[0] . ' ' . $last_name[0];
+} else {
+  $full_name = $current_user->display_name;
+}
+
 ?>
 
 <div class="heading grid-info mb-5">
@@ -14,7 +21,7 @@ $last_name = get_user_meta($current_user->ID, 'last_name');
     </div>
 
     <h3 class="name mt-3 mb-0 fw-normal">
-      <?php echo esc_html($first_name[0] . ' ' . $last_name[0]) ?>
+      <?php echo esc_html($full_name); ?>
     </h3>
 
     <?php if ( !empty( $args['title'] ) ) : ?>
