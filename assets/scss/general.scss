@@ -513,3 +513,9 @@ form {
     color: $color-secondary;
   }
 }
+
+#wpdcom {
+  .ql-editor > * {
+    font-family: $font-primary;
+  }
+}

@@ -285,15 +285,16 @@
 
   .top-action {
     margin: 0 0 3.6rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-gap: 2.5rem 5rem;
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr 20rem;
+    }
   }
 
   .form-search-project {
     position: relative;
-    margin-left: 3.8rem;
 
     &:before {
       position: absolute;
@@ -301,7 +302,7 @@
       top: .5rem;
       bottom: .5rem;
       width: 1px;
-      left: -1.9rem;
+      left: -2.5rem;
       background-color: $color-black;
     }
 
@@ -312,7 +313,7 @@
     .search-field {
       padding: 0;
       border: none;
-      font-size: 2rem;
+      font-size: 1.8rem;
       background-color: transparent;
     }
 
@@ -333,21 +334,22 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    grid-gap: 1.2rem 5rem;
 
     &__item {
       position: relative;
-      font-size: 2rem;
+      font-size: 1.8rem;
+      flex: 1;
+      text-align: center;
 
       ~ .list-cat__item {
-        margin-left: 3.8rem;
-
         &:before {
           position: absolute;
           content: "";
           top: .5rem;
           bottom: .5rem;
           width: 1px;
-          left: -1.9rem;
+          left: -2.5rem;
           background-color: $color-black;
         }
       }

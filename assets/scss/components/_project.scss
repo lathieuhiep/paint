@@ -32,22 +32,27 @@
           width: 100%;
         }
       }
+    }
 
-      &.slick-slide {
+    &.slick-slider {
+      .slick-list {
+        margin: 0;
+      }
+
+      .slick-slide {
+        margin: 0;
         padding: 2.5rem 0;
         @include transition( all 0.2s ease-in-out);
       }
 
-      &.slick-current {
+      .slick-current {
         + .slick-slide {
           position: relative;
           z-index: 2;
           transform: scale(1.12);
         }
       }
-    }
 
-    &.slick-slider {
       .slick-arrow {
         color: $color-black;
         font-size: 3rem;
