@@ -1,8 +1,18 @@
 .site-single-project {
   .grid {
-    display: grid;
-    grid-gap: 2.4rem;
-    grid-template-columns: 1fr 80%;
+    @media (min-width: 992px) {
+      display: grid;
+      grid-gap: 2.4rem;
+      grid-template-columns: 1fr 80%;
+    }
+
+    &__item {
+      @media (max-width: 991px) {
+        &:not(:last-child) {
+          margin-bottom: 3rem;
+        }
+      }
+    }
   }
 
   .form-search-custom {
@@ -29,9 +39,9 @@
     .info {
       position: absolute;
       top: 0;
-      right: 0;
+      right: 2.4rem;
       bottom: 0;
-      left: 0;
+      left: 2.4rem;
 
       .sub-text {
         margin-bottom: 1.2rem;
@@ -41,9 +51,16 @@
 
       .title {
         margin-bottom: 8rem;
-        font-size: 3rem;
         color: $color-white;
         text-transform: uppercase;
+
+        @media (min-width: 992px) {
+          font-size: 3rem;
+        }
+
+        @media (max-width: 991px) {
+          font-size: 2rem;
+        }
       }
 
       .tax {

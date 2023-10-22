@@ -32,7 +32,22 @@
 
       .title-item {
         margin-bottom: .2rem;
-        font-size: 1.8rem;
+
+        @media (min-width: 992px) {
+          font-size: 1.8rem;
+        }
+
+        @media (max-width: 991px) {
+          font-size: 1.4rem;
+        }
+      }
+
+      .meta {
+        a {
+          @media (max-width: 991px) {
+            font-size: 1.2rem;
+          }
+        }
       }
     }
   }

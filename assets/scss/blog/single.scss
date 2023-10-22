@@ -1,10 +1,17 @@
 .site-single {
   .single-content-warp {
-    padding: 2.4rem 3.4rem;
     background-color: $color-white;
 
     > div {
       margin-top: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      padding: 2.4rem 3.4rem;
+    }
+
+    @media (max-width: 991px) {
+      padding: 2rem;
     }
   }
 
@@ -37,6 +44,10 @@
 
       .lwptoc_i {
         padding: 0;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
       }
     }
   }
@@ -138,7 +149,6 @@
     position: relative;
     margin-bottom: 1.6rem;
     padding-bottom: 1.6rem;
-    font-size: 1.8rem;
     flex: 1;
 
     &:after {
@@ -149,6 +159,14 @@
       left: 0;
       bottom: 0;
       background-color: $color-secondary;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 1.8rem;
+    }
+
+    @media (max-width: 1199px) {
+      font-size: 1.6rem;
     }
   }
 

@@ -3,8 +3,28 @@
 
   .grid-info {
     display: grid;
-    grid-template-columns: 15rem 1fr;
-    grid-column-gap: 20rem;
+
+    @media (min-width: 1200px) {
+      grid-column-gap: 20rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+      grid-column-gap: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: 15rem 1fr;
+    }
+
+    @media (max-width: 991px) {
+      grid-column-gap: 2rem;
+    }
+
+    .nav-acc-management {
+      @media (max-width: 767px) {
+        margin-bottom: 3rem;
+      }
+    }
   }
 
   .heading {
@@ -75,8 +95,10 @@
     }
 
     &.change-password-form {
-      max-width: 500px;
-      margin: 0 auto;
+      @media (min-width: 768px) {
+        max-width: 500px;
+        margin: 0 auto;
+      }
 
       .action-box {
         margin-top: 5rem;

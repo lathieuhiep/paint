@@ -6,13 +6,30 @@ $data_config_slider = [
   'slidesToScroll' => 8,
   'arrows' => true,
   'autoplay' => false,
-  'dots' => true,
+  'adaptiveHeight' => true,
   'responsive' => [
+    [
+      'breakpoint' => 1199,
+      'settings' => [
+        'slidesToShow' => 5,
+        'slidesToScroll' => 5,
+        'dots' => true,
+      ]
+    ],
     [
       'breakpoint' => 1023,
       'settings' => [
-        'slidesToShow' => 3,
-        'slidesToScroll' => 3,
+        'slidesToShow' => 4,
+        'slidesToScroll' => 4,
+        'dots' => true,
+      ]
+    ],
+    [
+      'breakpoint' => 991,
+      'settings' => [
+        'slidesToShow' => 4,
+        'slidesToScroll' => 4,
+        'dots' => true,
       ]
     ],
     [
@@ -23,7 +40,7 @@ $data_config_slider = [
       ]
     ],
     [
-      'breakpoint' => 575,
+      'breakpoint' => 479,
       'settings' => [
         'slidesToShow' => 1,
         'slidesToScroll' => 1,

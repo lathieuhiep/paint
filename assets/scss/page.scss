@@ -22,7 +22,14 @@
   &.element-products {
     display: grid;
     grid-gap: 2.4rem;
-    grid-template-columns: repeat(4, 1fr);
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 480px) and (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     .item {
       position: relative;
@@ -97,7 +104,14 @@
 
   &__title {
     margin-bottom: 2rem;
-    font-size: 2.4rem;
+
+    @media (min-width: 992px) {
+      font-size: 2.4rem;
+    }
+
+    @media (max-width: 991px) {
+      font-size: 1.8rem;
+    }
   }
 }
 
@@ -126,16 +140,25 @@
     .thumbnail {
       @include transition();
 
-      img {
-        width: 100%;
-      }
-
       &:hover {
         @include box-shadow(0px 20px 30px rgb(0, 0, 0, 0.5));
       }
 
       .link-image {
         display: block;
+
+        img {
+          width: 100%;
+        }
+
+        @media (min-width: 1200px) {
+          height: 32rem;
+
+          img {
+            height: 100%;
+            object-fit: cover;
+          }
+        }
       }
     }
 
@@ -173,8 +196,15 @@
       .title {
         position: relative;
         margin: 0;
-        font-size: 1.8rem;
         font-weight: 400;
+
+        @media (min-width: 1400px) {
+          font-size: 1.8rem;
+        }
+
+        @media (max-width: 1399px) {
+          font-size: 1.5rem;
+        }
 
         a {
           display: inline-block;
@@ -233,7 +263,10 @@
 
         &__top {
           background-color: transparent;
-          transform: translateY(-50%);
+
+          @media (min-width: 992px) {
+            transform: translateY(-50%);
+          }
 
           &:before {
             border-color: $color-secondary;
@@ -295,6 +328,8 @@
 
   .form-search-project {
     position: relative;
+    display: flex;
+    align-items: center;
 
     &:before {
       position: absolute;
@@ -334,23 +369,50 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    grid-gap: 1.2rem 5rem;
+
+    @media (min-width: 992px) {
+      grid-gap: 1.2rem 5rem;
+    }
+
+    @media (max-width: 991px) {
+      grid-gap: 1.2rem 3rem;
+    }
+
+    @media (max-width: 575px) {
+      flex-direction: column;
+    }
 
     &__item {
       position: relative;
       font-size: 1.8rem;
-      flex: 1;
       text-align: center;
+
+      @media (min-width: 992px) {
+        flex: 1;
+      }
+
+      @media (max-width: 991px) {
+        flex: 0 0 auto;
+      }
 
       ~ .list-cat__item {
         &:before {
-          position: absolute;
-          content: "";
-          top: .5rem;
-          bottom: .5rem;
-          width: 1px;
-          left: -2.5rem;
-          background-color: $color-black;
+          @media (min-width: 992px) {
+            left: -2.5rem;
+          }
+
+          @media (max-width: 991px) {
+            left: -1.5rem;
+          }
+
+          @media (min-width: 576px) {
+            position: absolute;
+            content: "";
+            top: .5rem;
+            bottom: .5rem;
+            width: 1px;
+            background-color: $color-black;
+          }
         }
       }
 

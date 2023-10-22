@@ -11,13 +11,32 @@
         position: relative;
 
         .title {
+          margin: 0;
           position: absolute;
-          left: 6rem;
-          right: 6rem;
-          bottom: 5rem;
-          font-size: 1.7rem;
           text-transform: uppercase;
           text-align: center;
+          line-height: 1.5;
+
+          @media (min-width: 1200px) {
+            left: 6rem;
+            right: 6rem;
+            bottom: 5rem;
+            font-size: 1.5rem;
+          }
+
+          @media (min-width: 992px) and (max-width: 1199px) {
+            left: 3rem;
+            right: 3rem;
+            bottom: 3rem;
+            font-size: 1.4rem;
+          }
+
+          @media (max-width: 991px) {
+            left: 2rem;
+            right: 2rem;
+            bottom: 3rem;
+            font-size: 1.2rem;
+          }
 
           a {
             display: inline-block;
@@ -46,10 +65,12 @@
       }
 
       .slick-current {
-        + .slick-slide {
-          position: relative;
-          z-index: 2;
-          transform: scale(1.12);
+        @media (min-width: 768px) {
+          + .slick-slide {
+            position: relative;
+            z-index: 2;
+            transform: scale(1.12);
+          }
         }
       }
 

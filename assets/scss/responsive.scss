@@ -12,7 +12,7 @@
 
 @media (min-width: 1200px) and (max-width: 1399px) {
   .container {
-    max-width: 1090px;
+    max-width: 1160px;
   }
 
   .slick-slider {
@@ -31,7 +31,7 @@
 @media (max-width: 1199px) {
 
   .container {
-    max-width: none;
+    max-width: 100%;
   }
 
   .element-post-carousel {
@@ -56,28 +56,6 @@
     .slick-slide {
       margin-left: 1.2rem;
       margin-right: 1.2rem;
-    }
-
-    .item {
-      &__info {
-        grid-template-columns: 1fr;
-
-        .right-box {
-          text-align: left;
-        }
-      }
-    }
-  }
-
-  .element-count-up {
-    .item {
-      .count-box {
-        font-size: 2.8rem;
-      }
-
-      .text {
-        font-size: 1.8rem;
-      }
     }
   }
 
@@ -123,7 +101,6 @@
   .site-single-product {
     .tabs-warp {
       .product-color {
-        .pattern__posts,
         .list-color {
           grid-gap: 12px;
         }
@@ -202,12 +179,6 @@
 }
 
 @media (min-width: 992px) {
-  .active-sticky-nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
   .admin-bar {
     .main-navigation {
       &.active-sticky-nav {
@@ -230,12 +201,12 @@
         @include align-items(center);
 
         > a {
-          padding: .5rem 1.2rem;
+          padding: .5rem .8rem;
         }
 
         &.menu-item-has-children {
           > a {
-            padding-right: 3rem;
+            padding-right: 2.5rem;
           }
         }
       }
@@ -345,8 +316,6 @@
     z-index: 99;
 
     .collapse {
-      display: none !important;
-
       &.in {
         display: block !important;
       }
@@ -489,20 +458,6 @@
     }
   }
 
-  .site-tool-warp {
-    .grid-warp {
-      &.active-sidebar {
-        grid-template-columns: 1fr 65%;
-
-        .tools-warp {
-          .tool-list-grid {
-            grid-gap: 16px;
-          }
-        }
-      }
-    }
-  }
-
   .grid-discover {
     &__item {
       width: 20%;
@@ -579,23 +534,9 @@
       }
     }
   }
-
-  .site-single-discover {
-    .entry-post {
-      padding-top: 50px;
-    }
-  }
-
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-
-  .element-count-up {
-    .item {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  }
 
   .grid-discover {
     &__item {
@@ -671,14 +612,6 @@
 }
 
 @media (min-width: 480px) and (max-width: 991px) {
-  .element-products {
-    .item {
-      .title {
-        font-size: 1.6rem;
-      }
-    }
-  }
-
   .project-grid {
     .thumbnail {
       .title {
@@ -735,15 +668,6 @@
     }
   }
 
-  .element-products {
-    .item {
-      .title {
-        padding: 16px 12px;
-        font-size: 1.4rem;
-      }
-    }
-  }
-
   .project-grid {
     .thumbnail {
       .title {
@@ -762,45 +686,9 @@
     }
   }
 
-  .site-single-product {
-    .tabs-warp {
-      .nav-pills {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 12px;
-      }
-    }
-  }
-
   .grid-discover {
     &__item {
       width: 50%;
-    }
-  }
-
-}
-
-@media (min-width: 376px) and (max-width: 575px) {
-
-  .site-tool-warp {
-    .tools-warp {
-      .tool-list-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 12px;
-      }
-    }
-  }
-
-}
-
-@media (max-width: 375px) {
-
-  .site-tool-warp {
-    .tools-warp {
-      .tool-list-grid {
-        grid-template-columns: 1fr;
-        grid-gap: 12px;
-      }
     }
   }
 

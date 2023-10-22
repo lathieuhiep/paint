@@ -18,8 +18,19 @@
 
   .grid {
     display: grid;
-    grid-gap: 5rem 10rem;
-    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 5rem 10rem;
+    }
+
+    @media (max-width: 991px) {
+      grid-gap: 3rem;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      grid-template-columns: 25rem 1fr;
+    }
 
     &__item {
       position: relative;
@@ -204,7 +215,18 @@
   .item {
     margin-bottom: 12px;
     padding: 0 1.2rem;
-    width: 25%;
+
+    @media (min-width: 992px) {
+      width: 25%;
+    }
+
+    @media (min-width: 576px) and (max-width: 991px) {
+      width: 33.33333333%;
+    }
+
+    @media (max-width: 575px) {
+      width: 50%;
+    }
 
     img {
       width: 100%;

@@ -4,7 +4,10 @@
     &.active-sidebar {
       display: grid;
       grid-gap: 2rem 5rem;
-      grid-template-columns: 1fr 75%;
+
+      @media (min-width: 992px) {
+        grid-template-columns: 1fr 75%;
+      }
     }
 
     .sidebar {
@@ -56,8 +59,23 @@
 
     .tool-grid-tax {
       display: grid;
-      grid-gap: 3.6rem 2.4rem;
-      grid-template-columns: repeat(3, 1fr);
+
+      @media (min-width: 992px) {
+        grid-gap: 3.6rem 2.4rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 991px) {
+        grid-gap: 1.6rem;
+      }
+
+      @media (min-width: 768px) and (max-width: 991px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (min-width: 480px) and (max-width: 767px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
 }
@@ -92,27 +110,49 @@
           display: inline-block;
         }
       }
+
+      .image-box {
+        @media (min-width: 768px) {
+          display: block;
+          overflow: hidden;
+          height: 25.5rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
     }
 
     &__info {
       padding: 1rem 1.2rem;
-      display: grid;
-      grid-gap: 1.2rem;
-      grid-template-columns: 17rem 1fr;
+
+      @media (min-width: 1400px) {
+        display: grid;
+        grid-gap: 1.2rem;
+        grid-template-columns: 17rem 1fr;
+      }
 
       .title {
         margin-bottom: 0;
         font-size: 1.5rem;
         color: $color-black;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+
+        @media (min-width: 1400px) {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .meta {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @media (min-width: 1400px) {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
 
         a {
           font-size: 1.4rem;
@@ -122,10 +162,13 @@
     }
 
     .right-box {
-      text-align: right;
       color: #697F94;
       font-weight: 700;
       font-size: 1.4rem;
+
+      @media (min-width: 1400px) {
+        text-align: right;
+      }
     }
   }
 }
@@ -137,6 +180,10 @@
       display: grid;
       grid-gap: 25px;
       grid-template-columns: 50% 1fr;
+    }
+
+    @media (max-width: 991px) {
+      margin-top: 3rem;
     }
   }
 

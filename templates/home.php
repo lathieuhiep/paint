@@ -22,11 +22,11 @@ get_header();
         ?>
 
         <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-4 mb-5 mb-md-0">
             <?php get_template_part('components/inc', 'count-up'); ?>
           </div>
 
-          <div class="col-8">
+          <div class="col-12 col-md-8">
             <?php get_template_part('components/inc', 'services'); ?>
           </div>
         </div>

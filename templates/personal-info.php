@@ -156,7 +156,7 @@ get_header();
             ?>
             
           <form id="user-update-form" class="user-update-form" method="post" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>">
-            <div class="row columns-2">
+            <div class="row row-cols-1 row-cols-sm-2">
               <div class="col">
                 <div class="group-control">
                   <label for="user-name" class="form-label">

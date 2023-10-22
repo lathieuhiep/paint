@@ -5,15 +5,71 @@
     display: grid;
     grid-gap: 3rem 3.6rem;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 768px) {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .item {
       @media screen and (min-width: 1200px) {
         &:first-child {
           grid-column: 1 / span 2;
-          grid-row: 1 / span 2
+          grid-row: 1 / span 2;
+
+          .text-read-more {
+            display: none;
+          }
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          .title-post {
+            margin-bottom: 0;
+            font-size: 2rem;
+          }
+
+          .meta-post,
+          .text-read-more {
+            display: none;
+          }
+        }
+
+        &:nth-child(n+4) {
+          display: flex;
+          flex-direction: column;
+          background-color: #E5E5E5;
+
+          .item {
+            &__entry {
+              padding: 0 1.6rem 1.2rem;
+              display: flex;
+              flex: 1;
+              flex-direction: column;
+            }
+          }
+
+          .title-post {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+          }
+
+          .date {
+            font-size: 1.5rem;
+          }
+
+          .excerpt {
+            margin-bottom: .6rem;
+            flex: 1;
+          }
+        }
+      }
+
+      @media (max-width: 1199px) {
+        .title-post {
+          font-size: 1.6rem;
         }
       }
 
@@ -21,41 +77,8 @@
         margin-bottom: 1rem;
       }
 
-      &:nth-child(2),
-      &:nth-child(3) {
-        .item__title {
-          margin-bottom: 0;
-          font-size: 2rem;
-        }
-      }
-
-      &:nth-child(n+4) {
-        display: flex;
-        flex-direction: column;
-        background-color: #E5E5E5;
-
-        .item {
-          &__entry {
-            padding: 0 1.6rem 1.2rem;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-          }
-
-          &__title {
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-          }
-
-          &__date {
-            font-size: 1.5rem;
-          }
-
-          &__excerpt {
-            margin-bottom: .6rem;
-            flex: 1;
-          }
-        }
+      .text-read-more {
+        margin-top: 2rem;
       }
     }
   }

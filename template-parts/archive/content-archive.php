@@ -2,28 +2,27 @@
   <div class="container">
     <div class="grid">
       <?php
-      if (have_posts()) :
-      $i = 1;
-      while (have_posts()) : the_post();
-        ?>
+      if ( have_posts() ) :
+      while ( have_posts() ) : the_post();
+      ?>
         <div id="post-<?php the_ID(); ?>" class="item">
           <figure class="item__image">
             <?php the_post_thumbnail('large'); ?>
           </figure>
 
           <div class="item__entry">
-            <h2 class="item__title">
+            <h2 class="title-post">
               <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                 <?php the_title(); ?>
               </a>
             </h2>
 
-            <?php if ($i == 1 || $i > 3) : ?>
-              <p class="item__date">
+            <div class="meta-post">
+              <p class="date">
                 <?php echo get_the_date(); ?>
               </p>
 
-              <div class="item__excerpt">
+              <div class="excerpt">
                 <p>
                   <?php
                   if (has_excerpt()) :
@@ -36,23 +35,17 @@
 
                 <?php paint_link_page(); ?>
               </div>
-            <?php
-            endif;
+            </div>
 
-            if ($i > 3) :
-              ?>
-              <a href="<?php the_permalink(); ?>" class="text-read-more">
-                <span><?php esc_html_e('Xem bài viết', 'paint'); ?></span>
+            <a href="<?php the_permalink(); ?>" class="text-read-more">
+              <span><?php esc_html_e('Xem bài viết', 'paint'); ?></span>
 
-                <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            <?php endif; ?>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
         </div>
-        <?php
-        $i++;
+      <?php
       endwhile;
-
       wp_reset_postdata();
       ?>
     </div>

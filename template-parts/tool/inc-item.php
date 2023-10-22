@@ -9,7 +9,7 @@ $price = get_post_meta(get_the_ID(), 'paint_cmb_tool_specifications_price', true
       <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon-shopee.png')); ?>" alt="shopee">
     </a>
 
-    <a href="<?php the_permalink(); ?>">
+    <a class="image-box" href="<?php the_permalink(); ?>">
       <?php the_post_thumbnail('large'); ?>
     </a>
   </div>

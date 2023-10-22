@@ -176,12 +176,36 @@
   .grid-layout {
     display: grid;
     grid-gap: 2.4rem;
-    grid-template-columns: 20rem 1fr;
 
-    .group-check {
-      &__item {
-        &:not(:last-child) {
-          margin-bottom: 1.2rem;
+    @media (min-width: 992px) {
+      grid-template-columns: 20rem 1fr;
+    }
+
+    .search-form {
+      .group-check {
+        @media (max-width: 991px) {
+          margin-bottom: 3rem;
+          display: flex;
+          flex-wrap: wrap;
+          grid-gap: 1.6rem;
+        }
+
+        @media (max-width: 479px) {
+          flex-direction: column;
+        }
+
+        &__item {
+          @media (min-width: 992px) {
+            &:not(:last-child) {
+              margin-bottom: 1.2rem;
+            }
+          }
+
+          @media (max-width: 991px) {
+            .btn {
+              font-size: 1.6rem;
+            }
+          }
         }
       }
     }
@@ -190,7 +214,10 @@
   .entry-content {
     background-color: #ffffff;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     .thumbnail-image {
       img {
@@ -225,10 +252,17 @@
     }
 
     .post-info {
-      padding: 30px 30px 22px;
       display: grid;
       grid-row-gap: 12px;
       grid-template-rows: 1fr auto;
+
+      @media (min-width: 992px) {
+        padding: 30px 30px 22px;
+      }
+
+      @media (max-width: 991px) {
+        padding: 3rem 1.6rem 2.2rem;
+      }
 
       &__left {
         > div {
@@ -325,14 +359,6 @@
 }
 
 .site-discover-related {
-  .slick-slider {
-    margin: 0 -0.8rem;
-  }
-
-  .slick-slide {
-    padding: 0 .8rem;
-  }
-
   .item-post {
     .thumbnail-image {
       margin-bottom: 1rem;
@@ -341,6 +367,24 @@
         display: block;
         overflow: hidden;
         border-radius: 1rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        @media (min-width: 992px) {
+          
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+          height: 25rem;
+        }
+
+        @media (max-width: 767px) {
+          height: 35rem;
+        }
       }
     }
 

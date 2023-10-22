@@ -23,8 +23,19 @@
 
   .element-services {
     display: grid;
-    grid-gap: 2.4rem 12rem;
     grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: 992px) {
+      grid-gap: 2.4rem 12rem;
+    }
+
+    @media (max-width: 991px) {
+      grid-gap: 2.4rem;
+    }
+
+    @media (max-width: 479px) {
+      grid-template-columns: 1fr;
+    }
 
     .item {
       text-align: center;
@@ -35,6 +46,10 @@
         padding: 1.2rem 1.6rem;
         color: $color-secondary;
         background-color: $color-black;
+
+        @media (max-width: 991px) {
+          font-size: 1.6rem;
+        }
       }
 
       &__content {
@@ -47,13 +62,31 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+
+    @media (min-width: 992px) {
+      justify-content: center;
+    }
 
     .item {
-      margin-bottom: 6rem;
-      width: 33.33333333%;
       display: flex;
-      justify-content: center;
+
+      @media (min-width: 992px) {
+        margin-bottom: 6rem;
+        width: 33.33333333%;
+        justify-content: center;
+      }
+
+      @media (max-width: 991px) {
+        margin-bottom: 3rem;
+      }
+
+      @media (min-width: 576px) and (max-width: 991px) {
+        width: 50%;
+      }
+
+      @media (max-width: 575px) {
+        width: 100%;
+      }
 
       &__icon {
         display: none;
@@ -66,8 +99,15 @@
           margin-bottom: 2rem;
           font-weight: 700;
           line-height: 0.8;
-          font-size: 6rem;
           display: flex;
+
+          @media (min-width: 992px) {
+            font-size: 6rem;
+          }
+
+          @media (max-width: 991px) {
+            font-size: 4rem;
+          }
 
           span {
             display: inline-block;
@@ -85,16 +125,21 @@
     padding-top: 5rem;
 
     > div {
-      margin-left: -6rem;
-      margin-right: -6rem;
+      @media (min-width: 992px) {
+        margin-left: -6rem;
+        margin-right: -6rem;
+      }
     }
 
     .item {
       margin-bottom: 5rem;
-      padding-left: 6rem;
-      padding-right: 6rem;
-      width: 50%;
-      flex: 0 0 auto;
+
+      @media (min-width: 992px) {
+        padding-left: 6rem;
+        padding-right: 6rem;
+        width: 50%;
+        flex: 0 0 auto;
+      }
 
       &__title {
         position: relative;
@@ -127,16 +172,36 @@
   .element-technology {
     &:hover {
       .item {
-        width: 16.6666667%;
+        @media (min-width: 992px) {
+          width: 16.6666667%;
+        }
       }
     }
 
     .item {
       padding: 2.5rem;
-      flex: 0 0 auto;
-      width: 25%;
-      min-height: 65rem;
       @include transition();
+
+      @media (min-width: 992px) {
+        width: 25%;
+        min-height: 65rem;
+      }
+
+      @media (max-width: 991px) {
+        min-height: 30rem;
+      }
+
+      @media (min-width: 576px) and (max-width: 991px) {
+        width: 50%;
+      }
+
+      @media (min-width: 576px) {
+        flex: 0 0 auto;
+      }
+
+      @media (max-width: 575px) {
+        width: 100%;
+      }
 
       &__thumbnail {
         margin-bottom: 5rem;
@@ -157,7 +222,9 @@
       }
 
       &:hover {
-        width: 50%;
+        @media (min-width: 576px) {
+          width: 50%;
+        }
 
         .item__title {
           margin-bottom: 3.6rem;
@@ -188,11 +255,20 @@
       .desc {
         position: absolute;
         z-index: 2;
-        width: 130.4rem;
         color: $color-white;
         line-height: 2;
         padding: 2.5rem 1.2rem;
         background-color: rgba(0,0,0,0.5);
+
+        @media (min-width: 1400px) {
+          max-width: 130rem;
+          width: 100%;
+        }
+
+        @media (max-width: 1399px) {
+          left: 1.2rem;
+          right: 1.2rem;
+        }
       }
     }
   }

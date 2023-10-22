@@ -9,14 +9,7 @@ $data_config_slider = [
   'dots' => false,
   'responsive' => [
     [
-      'breakpoint' => 1023,
-      'settings' => [
-        'slidesToShow' => 3,
-        'slidesToScroll' => 3,
-      ]
-    ],
-    [
-      'breakpoint' => 767,
+      'breakpoint' => 991,
       'settings' => [
         'slidesToShow' => 2,
         'slidesToScroll' => 2,

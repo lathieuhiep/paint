@@ -10,19 +10,19 @@ $data_config_slider = [
     [
       'breakpoint' => 1023,
       'settings' => [
-        'slidesToScroll' => 3,
+        'slidesToShow' => 3,
       ]
     ],
     [
       'breakpoint' => 767,
       'settings' => [
-        'slidesToScroll' => 2,
+        'slidesToShow' => 2,
       ]
     ],
     [
-      'breakpoint' => 575,
+      'breakpoint' => 479,
       'settings' => [
-        'slidesToScroll' => 1,
+        'slidesToShow' => 1,
       ]
     ],
   ],
