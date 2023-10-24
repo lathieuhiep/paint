@@ -114,11 +114,9 @@ if (class_exists('CSF')) {
     'title' => esc_html__('Banner 1', 'paint'),
     'fields' => array(
       array(
-        'id' => 'template_home_opt_banner_1',
-        'type' => 'media',
-        'library' => 'image',
-        'url' => false,
-        'preview_size' => 'full'
+        'id' => 'template_home_opt_short_code_slider',
+        'type' => 'text',
+        'title' => esc_attr__('Short code slider', 'paint')
       )
     )
   ));

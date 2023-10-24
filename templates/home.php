@@ -7,9 +7,9 @@ get_header();
 ?>
 
   <div class="content-warp">
-    <!-- banner 1 -->
+    <!-- Slider -->
     <div class="element-section">
-      <?php get_template_part('components/inc', 'banner', array('opt' => 'template_home_opt_banner_1')); ?>
+      <?php get_template_part('components/inc', 'short-code-slider', array('opt' => 'template_home_opt_short_code_slider')); ?>
     </div>
 
     <!-- count up -->
