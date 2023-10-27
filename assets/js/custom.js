@@ -137,37 +137,4 @@
     }
   }
 
-  // function call owlCarousel
-  $.fn.general_owlCarousel_custom = function (class_item) {
-
-    let class_item_owlCarousel = $(class_item);
-
-    if (class_item_owlCarousel.length) {
-
-      class_item_owlCarousel.each(function () {
-
-        let slider = $(this);
-
-        if (!slider.hasClass('owl-carousel-init')) {
-
-          let defaults = {
-            autoplaySpeed: 800,
-            navSpeed: 800,
-            dotsSpeed: 800,
-            autoHeight: false,
-            navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
-          };
-
-          let config = $.extend(defaults, slider.data('settings-owl'));
-
-          slider.owlCarousel(config).addClass('owl-carousel-init');
-
-        }
-
-      })
-
-    }
-
-  }
-
 })(jQuery);
