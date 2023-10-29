@@ -26,8 +26,9 @@ if ($id_color_code_cat) :
   ));
   ?>
   <div class="product-color">
-    <?php if ($query->have_posts()) : ?>
-      <?php if ($count > 1) : ?>
+    <?php
+    if ($query->have_posts()) :
+      if ($count > 1) : ?>
 
         <div class="pattern">
           <h4 class="pattern__title">
@@ -72,22 +73,18 @@ if ($id_color_code_cat) :
           </div>
         </div>
 
-      <?php endif; ?>
+      <?php
+      endif;
 
-      <div class="list-color">
-        <?php
-        while ($query->have_posts()): $query->the_post();
+      while ($query->have_posts()): $query->the_post();
+        get_template_part('template-parts/product/detail/inc', 'content-color');
 
-          get_template_part('template-parts/product/detail/inc', 'content-color');
+        if ($wp_query->current_post == 0) break;
+      endwhile;
 
-          if ($wp_query->current_post == 0) break;
-        endwhile;
-        wp_reset_postdata();
-        ?>
-      </div>
-    <?php endif; ?>
-
-
+      wp_reset_postdata();
+      endif;
+      ?>
   </div>
 <?php
 endif;

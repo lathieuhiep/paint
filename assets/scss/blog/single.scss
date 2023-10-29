@@ -63,49 +63,6 @@
   }
 }
 
-.site-post-slides {
-  position: relative;
-  margin-bottom: 30px;
-
-  &.owl-carousel {
-    .owl-nav {
-      margin: 0;
-
-      .owl-prev,
-      .owl-next {
-        position: absolute;
-        top: 50%;
-        @include transform(translateY(-50%));
-      }
-
-      .owl-prev {
-        left: 10px;
-      }
-
-      .owl-next {
-        right: 10px;
-      }
-    }
-
-    .owl-dots {
-      position: absolute;
-      padding: 0;
-      left: 0;
-      bottom: 15px;
-      width: 100%;
-
-      .owl-dot {
-        &.active,
-        &:hover {
-          span {
-            background-color: $background-hover;
-          }
-        }
-      }
-    }
-  }
-}
-
 .site-post-cat-tag {
   margin-bottom: 20px;
 

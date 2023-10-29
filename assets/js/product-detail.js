@@ -4,6 +4,8 @@
 (function ($) {
   "use strict";
 
+  const body = $('body')
+
   $(document).ready(function () {
     // handle tabs shown
     $('.tabs-warp .nav-link').on('shown.bs.tab', function (event) {
@@ -45,7 +47,7 @@
       const hasActive = thisPattern.hasClass('active');
 
       const spinnerBox = $('.spinner-box');
-      const listColor = $('.list-color');
+      const listColor = $('.group-color');
 
       if (!hasActive) {
         thisPattern.closest('.pattern__posts').find('.item-pattern').removeClass('active');
@@ -71,6 +73,67 @@
       }
 
     })
-  });
 
+    // handle click color product
+    let timeShowColorProduct
+
+    body.on('click', '.product-color .item', function () {
+      window.clearTimeout(timeShowColorProduct)
+
+      const thisItem = $(this)
+      const hasClassActive = thisItem.hasClass('active')
+      const urlImage = thisItem.find('.item__thumbnail').data('image-feature')
+      const productColor = thisItem.closest('.product-color')
+      const hasItemClone =  productColor.find('.item-full')
+      const listColor = thisItem.closest('.list-color')
+      const cloneItem = thisItem.clone().addClass('item-full')
+
+      if ( !hasClassActive ) {
+        if (hasItemClone.length) {
+          $('.product-color').find('.item-full').slideUp()
+
+          timeShowColorProduct = setTimeout(function () {
+
+            $('.product-color').find('.box-full-color').remove()
+            showItemFullColor(listColor, cloneItem, urlImage, thisItem)
+
+          }, 500)
+        } else {
+          showItemFullColor(listColor, cloneItem, urlImage, thisItem)
+        }
+      }
+    })
+
+    body.on('click', '.close-full-color', function () {
+      window.clearTimeout(timeShowColorProduct)
+
+      const boxFullColorItem = $(this).closest('.box-full-color')
+
+      boxFullColorItem.slideUp()
+
+      timeShowColorProduct = setTimeout(function () {
+
+        boxFullColorItem.remove()
+        $('.product-color').find('.list-color .item').removeClass('active')
+
+      }, 500)
+    })
+  })
+
+  function showItemFullColor(element, cloneItem, urlImage, thisItem) {
+    thisItem.closest('.product-color').find('.item').removeClass('active')
+
+    // append item full color
+    element.append('<div class="box-full-color"></div>')
+
+    const findBoxFullColor = body.find('.list-color .box-full-color')
+    findBoxFullColor.append(cloneItem)
+
+    findBoxFullColor.find('.item-full img').attr('src', urlImage)
+    findBoxFullColor.find('.item-full').removeClass('item')
+    findBoxFullColor.find('.info').append('<button class="close-full-color"><i class="fa-solid fa-xmark"></i></button>')
+    findBoxFullColor.slideDown()
+
+    thisItem.addClass('active')
+  }
 })(jQuery);

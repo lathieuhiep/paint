@@ -38,10 +38,6 @@
     }
     /* btn mobile End */
 
-    /* Start Gallery Single */
-    $(document).general_owlCarousel_custom('.site-post-slides');
-    /* End Gallery Single */
-
     /* Start custom owl carousel */
     generalSlickCarousel('.custom-slick-carousel');
     /* End Gallery Single */
