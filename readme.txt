@@ -1,4 +1,4 @@
-=== Basic Theme ===
+=== Paint Theme ===
 
 Theme Name: Paint Theme
 Theme URI: https://getdesign.edu.vn/
