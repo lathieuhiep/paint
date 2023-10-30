@@ -133,9 +133,6 @@ async function buildAll() {
     await buildStyles()
     await buildTemplateStyles()
     await buildPostType()
-    await compressLibraryJsMin()
-
-
 }
 exports.buildAll = buildAll
 
