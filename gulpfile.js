@@ -62,6 +62,22 @@ async function buildSlickJs() {
     compilerLibJs('slick-carousel/slick/slick.js', 'libs/slick-carousel/js')
 }
 
+// Task build masonry
+async function buildMasonryJs() {
+    return src([
+        './node_modules/imagesloaded/imagesloaded.pkgd.js',
+        './node_modules/masonry-layout/dist/masonry.pkgd.js',
+    ], {allowEmpty: true})
+        .pipe(concat('masonry.min.js'))
+        .pipe(uglify())
+        .pipe(dest('./assets/libs/masonry'));
+}
+
+// Task build lity
+async function buildLityJs() {
+    compilerLibJs('lity/dist/lity.js', 'libs/lity')
+}
+
 // Task compress mini library css theme
 async function compressLibraryCssMin() {
     return src([
@@ -97,19 +113,6 @@ async function buildPostType() {
     })
 }
 
-// Task compress lib js & mini file
-async function compressLibraryJsMin() {
-    return src([
-        './node_modules/imagesloaded/imagesloaded.pkgd.js',
-        './node_modules/masonry-layout/dist/masonry.pkgd.js',
-        './node_modules/lity/dist/lity.js'
-    ], {allowEmpty: true})
-        .pipe(concat('library.min.js'))
-        .pipe(uglify())
-        .pipe(dest('./assets/js/'));
-}
-exports.compressLibraryJsMin = compressLibraryJsMin
-
 // Build all
 async function buildAll() {
     // build lib bootstrap
@@ -119,6 +122,12 @@ async function buildAll() {
     // build lib slick
     await buildSlickStyle()
     await buildSlickJs()
+
+    // build lib masonry
+    await buildMasonryJs()
+
+    // build lib lity
+    await buildLityJs()
 
     await compressLibraryCssMin()
     await buildStyles()

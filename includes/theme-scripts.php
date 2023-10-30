@@ -133,8 +133,10 @@ function paint_register_front_end(): void
 		wp_enqueue_script('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/js/slick.min.js'), array('jquery'), '1.8.1', true);
 	}
 
-	//
-    wp_enqueue_script('paint-library', get_theme_file_uri('/assets/js/library.min.js'), array('jquery'), '', true);
+	// get lib lity
+    if ( is_singular('paint_discover') ) {
+	    wp_enqueue_script('paint-library', get_theme_file_uri('/assets/libs/lity/lity.min.js'), array('jquery'), '', true);
+    }
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -148,12 +150,14 @@ function paint_register_front_end(): void
 	}
 
     if ( is_singular('paint_product') ) {
+	    wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
         wp_enqueue_script('product-detail', get_theme_file_uri('/assets/js/product-detail.js'), array(), '1.0.0', true);
         wp_localize_script('product-detail', 'productDetailAjax', array('url' => $paint_admin_url_ajax));
     }
 
     // template discover
     if (is_tax('paint_discover_cat') || is_post_type_archive('paint_discover') || is_singular('paint_discover') || (is_search() && $_GET['post_type'] == 'paint_discover')) {
+	    wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
         wp_enqueue_script('discover', get_theme_file_uri('/assets/js/discover.js'), array(), '1.0.0', true);
         wp_localize_script('discover', 'discoverAjax', array('url' => $paint_admin_url_ajax));
     }
@@ -193,6 +197,7 @@ function paint_register_front_end(): void
 
     // template user saved
     if (is_page_template('templates/saved.php')) {
+	    wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
         wp_enqueue_script('template-user-saved', get_theme_file_uri('/assets/js/template-user-saved.js'), array(), '1.0.0', true);
         wp_localize_script('template-user-saved', 'templateUserSaveAjax', array('url' => $paint_admin_url_ajax));
     }
