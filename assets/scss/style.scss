@@ -16,7 +16,6 @@ Text Domain: paint
 *
 # General
 # WordPress Core
-# Custom Bootstrap
 # Header
   ## Information
   ## Nav
@@ -31,11 +30,6 @@ Text Domain: paint
   ## Testimonial
   ## Post slider
   ## About
-# Templates
-  ## Template Home
-  ## Template Introduce
-  ## Template FAQ
-  ## Template User
 # Sidebar
 # Blog
   ## Single
@@ -46,6 +40,7 @@ Text Domain: paint
 ## Post Type Tool
 ## Post Type Discover
 # Contact Form 7
+# Pagination
 # Footer
 # Responsive
 * -----------------------------------------------------------------------------
@@ -62,10 +57,6 @@ Text Domain: paint
 -------------------------------------------------------------- */
 @import "wp-core";
 
-/* Custom Bootstrap
--------------------------------------------------------------- */
-@import "custom-bootstrap";
-
 /**
 # Header
 -----------------------------------------------------------------------------*/
@@ -77,49 +68,19 @@ Text Domain: paint
 @import "page";
 
 /**
-# Components
------------------------------------------------------------------------------*/
-@import "components/components";
-
-/**
-# Templates
------------------------------------------------------------------------------*/
-@import "templates/templates";
-
-/**
 # Sidebar
 -----------------------------------------------------------------------------*/
 @import "sidebar";
 
 /**
-# Blog
------------------------------------------------------------------------------*/
-@import "blog/blog";
-
-/**
-# Post Type Project
------------------------------------------------------------------------------*/
-@import "post-type/project";
-
-/**
-# Post Type Product
------------------------------------------------------------------------------*/
-@import "post-type/product";
-
-/**
-# Post Type Tool
------------------------------------------------------------------------------*/
-@import "post-type/tool";
-
-/**
-# Post Type Discover
------------------------------------------------------------------------------*/
-@import "post-type/discover";
-
-/**
 # Contact Form 7
 -----------------------------------------------------------------------------*/
 @import "cf7";
+
+/**
+# Pagination
+-----------------------------------------------------------------------------*/
+@import "components/pagination";
 
 /**
 # 404

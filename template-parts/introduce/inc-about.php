@@ -20,8 +20,10 @@ $opt_desc = paint_get_option('template_introduce_opt_desc', '');
       </div>
     </div>
 
-    <div class="col desc">
-      <?php echo wpautop($opt_desc); ?>
+    <div class="col">
+        <div class="desc">
+	        <?php echo wpautop($opt_desc); ?>
+        </div>
     </div>
   </div>
 </div>

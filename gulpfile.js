@@ -1,79 +1,146 @@
 'use strict';
 
-const gulp = require('gulp');
+const {src, dest, watch, series} = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const minifyCss = require('gulp-clean-css');
 const concatCss = require('gulp-concat-css');
+const rename = require("gulp-rename");
+const {merge} = require("browser-sync/dist/cli/cli-options");
 
+// compiler folder css
 function compilerFolderCss(folder) {
-  return gulp.src(`./assets/scss/${folder}/*.scss`)
-      .pipe(sourcemaps.init())
-      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest(`./assets/css/${folder}`));
+    return src(`./assets/scss/${folder}/*.scss`)
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`./assets/css/${folder}`));
+}
+
+// compiler lib css
+function compilerLibCss(folder, folderDesc) {
+    return src(`./node_modules/${folder}`)
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(minifyCss({
+            compatibility: 'ie8',
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest(`./assets/${folderDesc}`))
+}
+
+// compiler lib js
+function compilerLibJs(folder, folderDesc) {
+    return src(`./node_modules/${folder}`, {allowEmpty: true})
+        .pipe(uglify())
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(dest(`./assets/${folderDesc}`))
+}
+
+// Task build Bootstrap
+async function buildStylesBootstrap() {
+    return src('./assets/scss/bootstrap.scss')
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(minifyCss({
+            compatibility: 'ie8',
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest('./assets/libs/bootstrap/css'));
+}
+async function buildJsBootstrap() {
+    compilerLibJs('bootstrap/dist/js/bootstrap.bundle.js', 'libs/bootstrap/js')
+}
+
+// Task build slick
+async function buildSlickStyle() {
+    compilerLibCss('slick-carousel/slick/slick.css', 'libs/slick-carousel/css')
+}
+async function buildSlickJs() {
+    compilerLibJs('slick-carousel/slick/slick.js', 'libs/slick-carousel/js')
 }
 
 // Task compress mini library css theme
 async function compressLibraryCssMin() {
-  return gulp.src([
-    './node_modules/bootstrap/dist/css/bootstrap.css',
-    './node_modules/slick-carousel/slick/slick.css',
-    './node_modules/lity/dist/lity.css'
-  ]).pipe(concatCss("library.min.css"))
-      .pipe(minifyCss({
-        compatibility: 'ie8',
-        level: {1: {specialComments: 0}}
-      }))
-      .pipe(gulp.dest('./assets/css/'));
+    return src([
+        './node_modules/lity/dist/lity.css'
+    ]).pipe(concatCss("library.min.css"))
+        .pipe(minifyCss({
+            compatibility: 'ie8',
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(dest('./assets/css/'));
 }
-exports.compressLibraryCssMin = compressLibraryCssMin
 
 // Task build styles
 async function buildStyles() {
-  return gulp.src('./assets/scss/style.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./'));
+    return src('./assets/scss/style.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(dest('./'));
 }
-exports.buildStyles = buildStyles;
+
+// Task build template page
+async function buildTemplateStyles() {
+    compilerFolderCss('templates')
+}
 
 // Task build post type
+const postTypeFolders = ['post', 'discover', 'product', 'project', 'tool'];
+
 async function buildPostType() {
-  compilerFolderCss('post-type')
+     postTypeFolders.map(function (element) {
+        compilerFolderCss(`post-type/${element}`)
+    })
 }
-exports.buildPostType = buildPostType
 
 // Task compress lib js & mini file
 async function compressLibraryJsMin() {
-  return gulp.src([
-    './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
-    './node_modules/slick-carousel/slick/slick.js',
-    './node_modules/imagesloaded/imagesloaded.pkgd.js',
-    './node_modules/masonry-layout/dist/masonry.pkgd.js',
-    './node_modules/lity/dist/lity.js'
-  ], {allowEmpty: true})
-    .pipe(concat('library.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./assets/js/'));
+    return src([
+        './node_modules/imagesloaded/imagesloaded.pkgd.js',
+        './node_modules/masonry-layout/dist/masonry.pkgd.js',
+        './node_modules/lity/dist/lity.js'
+    ], {allowEmpty: true})
+        .pipe(concat('library.min.js'))
+        .pipe(uglify())
+        .pipe(dest('./assets/js/'));
 }
 exports.compressLibraryJsMin = compressLibraryJsMin
 
 // Build all
 async function buildAll() {
-  await compressLibraryCssMin()
-  await buildStyles()
-  await buildPostType()
-  await compressLibraryJsMin()
+    // build lib bootstrap
+    await buildStylesBootstrap()
+    await buildJsBootstrap()
+
+    // build lib slick
+    await buildSlickStyle()
+    await buildSlickJs()
+
+    await compressLibraryCssMin()
+    await buildStyles()
+    await buildTemplateStyles()
+    await buildPostType()
+    await compressLibraryJsMin()
+
 
 }
 exports.buildAll = buildAll
 
 // watch
 async function watchRun() {
-  return gulp.watch('./assets/scss/**/*.scss', buildStyles)
+    watch('./assets/scss/bootstrap.scss', buildStylesBootstrap)
+    watch([
+        './assets/scss/**/*.scss',
+        '!./assets/scss/bootstrap.scss',
+        '!./assets/scss/post-type/**/*.scss',
+        '!./assets/scss/templates/*.scss',
+    ], buildStyles)
+    watch('./assets/scss/templates/*.scss', buildTemplateStyles)
+    watch('./assets/scss/post-type/**/*.scss', buildPostType)
 }
+
 exports.watchRun = watchRun;

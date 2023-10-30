@@ -1,0 +1,166 @@
+@import "../../variables-site/variables";
+
+@import "../../components/project-related";
+
+.project-grid {
+  display: grid;
+  grid-gap: 2.4rem;
+
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 576px) and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.site-project-cat {
+  .heading {
+    margin-bottom: 3.2rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+
+  .top-action {
+    margin: 0 0 3.6rem;
+    display: grid;
+    grid-gap: 2.5rem 5rem;
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr 20rem;
+    }
+  }
+
+  .form-search-project {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:before {
+      position: absolute;
+      content: "";
+      top: .5rem;
+      bottom: .5rem;
+      width: 1px;
+      left: -2.5rem;
+      background-color: $color-black;
+    }
+
+    .group-control {
+      position: relative;
+    }
+
+    .search-field {
+      padding: 0;
+      border: none;
+      font-size: 1.8rem;
+      background-color: transparent;
+    }
+
+    .search-submit {
+      display: none;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 3rem;
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  .list-cat {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media (min-width: 992px) {
+      grid-gap: 1.2rem 5rem;
+    }
+
+    @media (max-width: 991px) {
+      grid-gap: 1.2rem 3rem;
+    }
+
+    @media (max-width: 575px) {
+      flex-direction: column;
+    }
+
+    &__item {
+      position: relative;
+      font-size: 1.8rem;
+      text-align: center;
+
+      @media (min-width: 992px) {
+        flex: 1;
+      }
+
+      @media (max-width: 991px) {
+        flex: 0 0 auto;
+      }
+
+      ~ .list-cat__item {
+        &:before {
+          @media (min-width: 992px) {
+            left: -2.5rem;
+          }
+
+          @media (max-width: 991px) {
+            left: -1.5rem;
+          }
+
+          @media (min-width: 576px) {
+            position: absolute;
+            content: "";
+            top: .5rem;
+            bottom: .5rem;
+            width: 1px;
+            background-color: $color-black;
+          }
+        }
+      }
+
+      &.active,
+      &:hover {
+        a {
+          color: $color-secondary;
+        }
+      }
+    }
+  }
+
+  .element-section-newsletter {
+    margin-top: 5rem;
+  }
+}
+
+.site-result-project {
+  .heading {
+    margin-bottom: 2.4rem;
+
+    .page-title {
+      font-size: 2.4rem;
+    }
+  }
+
+  .form-search-project {
+    margin-bottom: 3rem;
+    display: grid;
+    grid-gap: 2.4rem;
+    grid-template-columns: repeat(2, 1fr) 25rem;
+
+    .group-control {
+      margin: 0;
+    }
+
+    .search-submit {
+      margin: 0;
+    }
+  }
+}

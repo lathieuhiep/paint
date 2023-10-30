@@ -676,3 +676,6 @@ function paint_pagination_post_type_user_saved()
   wp_die();
 }
 
+function paint_is_blog () {
+	return ( is_archive() || is_author() || is_category() || is_home() || is_tag()) && 'post' == get_post_type();
+}

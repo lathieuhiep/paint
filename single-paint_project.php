@@ -20,7 +20,8 @@ $config_feature = [
   'slidesToScroll' => 1,
   'arrows' => false,
   'fade' => true,
-  'asNavFor' => '.slider-nav'
+  'asNavFor' => '.slider-nav',
+  'adaptiveHeight' => true
 ];
 
 $config_nav_thumbnail = [

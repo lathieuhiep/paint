@@ -26,7 +26,7 @@ $color_board = (int)get_post_meta(get_the_ID(), 'paint_cmb_options_product_color
       </h2>
 
       <?php if ($color_board) : ?>
-        <a href="<?php echo esc_url(get_term_link($color_board, 'paint_color_code_cat')) ?>" class="box-group__link">
+        <a href="<?php the_permalink(); ?>" class="box-group__link">
           <?php esc_html_e('Bảng màu', 'paint'); ?>
         </a>
       <?php endif; ?>

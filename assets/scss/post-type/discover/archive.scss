@@ -1,0 +1,122 @@
+@import "../../variables-site/variables";
+
+@import "../../components/discover_search_form";
+
+.search-form-discover {
+  margin-bottom: 2.8rem;
+  display: grid;
+  grid-gap: 2.5rem 5rem;
+
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr 20rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  .group-check {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @media screen and (min-width: 992px) {
+      grid-gap: 1.2rem 5rem;
+    }
+
+    @media screen and (max-width: 991px) {
+      grid-gap: 1.2rem 2rem;
+    }
+
+    &__item {
+      position: relative;
+
+      @media screen and (min-width: 992px) {
+        flex: 1;
+      }
+
+      @media screen and (max-width: 991px) {
+        flex: 0 0 auto;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: #9B9797;
+
+        @media screen and (min-width: 992px) {
+          right: -2.5rem;
+        }
+
+        @media screen and (max-width: 991px) {
+          right: -1rem;
+        }
+      }
+
+      &:last-child {
+        &:after {
+          @media screen and (max-width: 991px) {
+            display: none;
+          }
+        }
+      }
+
+      .btn {
+        display: block;
+
+        @media screen and (max-width: 991px) {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+.site-discover-cat {
+  .title {
+    margin-bottom: 2.8rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.grid-discover {
+  margin: 0 -6px;
+
+  &__item {
+    margin-bottom: 12px;
+    padding: 0 6px;
+    width: 16.66666667%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .thumbnail-image {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .title {
+    margin-bottom: 2px;
+    font-size: 1.2rem;
+  }
+
+  .meta {
+    font-size: 1.4rem;
+  }
+
+  .view-detail {
+    margin-bottom: .6rem;
+    cursor: pointer;
+    font-size: 1.7rem;
+  }
+}

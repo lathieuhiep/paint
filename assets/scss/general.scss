@@ -27,19 +27,10 @@ html {
 
 body {
   min-height: 100vh;
-  line-height: 1.5;
   overflow-x: hidden;
-  color: $color-primary;
-  font-family: $font-primary;
-  font-weight: 400;
   word-break: break-word;
-  background-color: #F7F7F7;
   @include flexbox();
   @include flex-direction(column);
-
-  @media (min-width: 992px) {
-    font-size: 1.7rem;
-  }
 
   @media (max-width: 991px) {
     font-size: 1.5rem;
@@ -58,18 +49,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 1.2rem;
-  font-weight: 700;
-  line-height: 1.5;
   color: $color-primary;
-}
-
-h2 {
-  font-size: 2.4rem;
-}
-
-h3 {
-  font-size: 2rem;
 }
 
 a {
