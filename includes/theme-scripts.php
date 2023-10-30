@@ -115,6 +115,16 @@ function paint_register_front_end(): void
     wp_enqueue_style('single-post', get_theme_file_uri('/assets/css/post-type/post/single.css'), array(), '');
   }
 
+  // get style template register, login
+  if ( is_page_template('templates/register.php') || is_page_template('templates/login.php') || is_page_template('templates/saved.php') || is_page_template('templates/change-password.php') || is_page_template('templates/personal-info.php') ) {
+    wp_enqueue_style('template_user', get_theme_file_uri('/assets/css/templates/template_user.css'), array(), '');
+  }
+
+  // get style template personal-info
+  if ( is_page_template('templates/personal-info.php') || is_page_template('templates/saved.php') || is_page_template('templates/change-password.php') ) {
+    wp_enqueue_style('template_acc_info', get_theme_file_uri('/assets/css/templates/template_acc_info.css'), array(), '');
+  }
+
   /*
   * End Get Css Front End
   * */

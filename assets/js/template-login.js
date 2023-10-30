@@ -39,6 +39,7 @@
           }),
           beforeSend: function () {
             $('.spinner-loading').removeClass('d-none')
+            $('.txt-error').remove()
           },
           success: function (result) {
             const { success, data } = result
