@@ -1,7 +1,7 @@
 === Basic Theme ===
 
-Theme Name: Basic Theme
-Theme URI: https://uxui.vn/
+Theme Name: Paint Theme
+Theme URI: https://getdesign.edu.vn/
 Author: DiepLK
 Author URI: https://www.facebook.com/lathieuhiep
 Version: 1.0.0
