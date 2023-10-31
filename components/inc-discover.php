@@ -36,7 +36,7 @@ if ($query->have_posts()) :
         <div class="item">
           <figure class="thumbnail-image">
             <a href="<?php the_permalink(); ?>">
-              <?php the_post_thumbnail('large'); ?>
+              <?php the_post_thumbnail('medium_large'); ?>
             </a>
           </figure>
 

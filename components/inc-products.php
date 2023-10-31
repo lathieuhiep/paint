@@ -40,7 +40,7 @@ if ($query->have_posts()) :
           <div class="thumbnail">
             <a class="link-image" href="<?php the_permalink(); ?>">
               <?php
-              the_post_thumbnail('large', ['class' => 'img-feature']);
+              the_post_thumbnail('medium_large', ['class' => 'img-feature']);
               echo wp_get_attachment_image($image_hover, 'large', '', array("class" => "img-feature-hover"));
               ?>
             </a>
