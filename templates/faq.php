@@ -36,7 +36,7 @@ $query = new WP_Query($args);
       </div>
 
       <?php if ($query->have_posts()) : ?>
-        <div class="accordion accordion-faq">
+        <div class="accordion accordion-my-theme accordion-faq">
           <?php
           $i = 1;
           while ($query->have_posts()): $query->the_post();

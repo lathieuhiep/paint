@@ -3,7 +3,7 @@
 <div class="construction-process-product">
   <div class="content">
     <?php if ($opt_process) : ?>
-      <div class="accordion accordion-process" id="accordionProcess">
+      <div class="accordion accordion-my-theme accordion-process" id="accordionProcess">
         <?php foreach ($opt_process as $key => $item) : ?>
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading-<?php echo esc_html($key); ?>">
