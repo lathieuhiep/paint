@@ -43,9 +43,9 @@ function paint_register_front_end(): void
     wp_enqueue_style('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/css/slick.min.css'), array(), '1.8.1');
   }
 
-  /* Start main Css */
-  wp_enqueue_style('paint-library', get_theme_file_uri('/assets/css/library.min.css'), array(), '');
-  /* End main Css */
+  if (is_singular('paint_discover')) {
+    wp_enqueue_style('lity', get_theme_file_uri('/assets/libs/lity/lity.min.css'), array(), '');
+  }
 
   /* Start main Css */
   wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '5.12.1');
@@ -145,7 +145,7 @@ function paint_register_front_end(): void
 
   // get lib lity
   if (is_singular('paint_discover')) {
-    wp_enqueue_script('paint-library', get_theme_file_uri('/assets/libs/lity/lity.min.js'), array('jquery'), '', true);
+    wp_enqueue_script('lity', get_theme_file_uri('/assets/libs/lity/lity.min.js'), array('jquery'), '', true);
   }
 
   if (is_singular() && comments_open() && get_option('thread_comments')) {

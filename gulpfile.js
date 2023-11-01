@@ -74,20 +74,12 @@ async function buildMasonryJs() {
 }
 
 // Task build lity
-async function buildLityJs() {
-    compilerLibJs('lity/dist/lity.js', 'libs/lity')
+async function buildLityStyle() {
+    compilerLibCss('lity/dist/lity.css', 'libs/lity')
 }
 
-// Task compress mini library css theme
-async function compressLibraryCssMin() {
-    return src([
-        './node_modules/lity/dist/lity.css'
-    ]).pipe(concatCss("library.min.css"))
-        .pipe(minifyCss({
-            compatibility: 'ie8',
-            level: {1: {specialComments: 0}}
-        }))
-        .pipe(dest('./assets/css/'));
+async function buildLityJs() {
+    compilerLibJs('lity/dist/lity.js', 'libs/lity')
 }
 
 // Task build styles
@@ -127,9 +119,9 @@ async function buildAll() {
     await buildMasonryJs()
 
     // build lib lity
+    await buildLityStyle()
     await buildLityJs()
 
-    await compressLibraryCssMin()
     await buildStyles()
     await buildTemplateStyles()
     await buildPostType()
