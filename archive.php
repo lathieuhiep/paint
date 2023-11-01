@@ -2,11 +2,7 @@
 
   <div class="site-container">
     <div class="container">
-      <?php
-      get_template_part('template-parts/breadcrumbs/inc', 'breadcrumbs');
-
-      get_template_part('template-parts/archive/content', 'archive');
-      ?>
+      <?php get_template_part('template-parts/archive/content', 'archive'); ?>
     </div>
   </div>
 

@@ -351,35 +351,6 @@ pre {
   }
 }
 
-/* Breadcrumbs */
-.breadcrumbs-title {
-  margin-bottom: 4rem;
-  display: grid;
-  grid-gap: 12px;
-  grid-template-columns: max-content 1fr;
-  align-items: center;
-
-  .right-box {
-    text-align: center;
-  }
-}
-
-.breadcrumbs {
-  margin-bottom: 4rem;
-  padding-bottom: 2.2rem;
-  font-size: 1.2rem;
-  color: $color-primary;
-  border-bottom: 1px solid #C2C2C2;
-
-  a {
-    color: #959595;
-
-    &:hover {
-      color: $color-primary;
-    }
-  }
-}
-
 /* Slick Slider */
 .slick-dots {
   margin: 30px 0 0;
