@@ -145,8 +145,14 @@ async function watchRun() {
         '!./assets/scss/post-type/**/*.scss',
         '!./assets/scss/templates/*.scss',
     ], buildStyles)
-    watch('./assets/scss/templates/*.scss', buildTemplateStyles)
-    watch('./assets/scss/post-type/**/*.scss', buildPostType)
+    watch([
+        './assets/scss/components/*.scss',
+        './assets/scss/templates/*.scss'
+    ], buildTemplateStyles)
+    watch([
+        './assets/scss/components/*.scss',
+        './assets/scss/post-type/**/*.scss'
+    ], buildPostType)
 }
 
 exports.watchRun = watchRun;
