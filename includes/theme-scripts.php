@@ -39,7 +39,7 @@ function paint_register_front_end(): void
   wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/css/bootstrap.min.css'), array(), '5.2.3');
 
   // get style lib slick
-  if (is_page_template('templates/home.php') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post')) {
+  if (is_page_template('templates/home.php') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
     wp_enqueue_style('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/css/slick.min.css'), array(), '1.8.1');
   }
 
@@ -139,7 +139,7 @@ function paint_register_front_end(): void
   wp_enqueue_script('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/js/bootstrap.bundle.min.js'), array('jquery'), '5.2.3', true);
 
   // get lib slick
-  if (is_page_template('templates/home.php') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post')) {
+  if (is_page_template('templates/home.php') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
     wp_enqueue_script('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/js/slick.min.js'), array('jquery'), '1.8.1', true);
   }
 

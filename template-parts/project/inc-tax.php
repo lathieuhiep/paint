@@ -1,4 +1,46 @@
 <?php
+// config slider
+$data_config_slider = [
+  'infinite' => false,
+  'slidesToShow' => 5,
+  'slidesToScroll' => 1,
+  'arrows' => true,
+  'autoplay' => false,
+  'variableWidth' => true,
+  'responsive' => [
+    [
+      'breakpoint' => 1199,
+      'settings' => [
+        'slidesToShow' => 5
+      ]
+    ],
+    [
+      'breakpoint' => 1023,
+      'settings' => [
+        'slidesToShow' => 4
+      ]
+    ],
+    [
+      'breakpoint' => 991,
+      'settings' => [
+        'slidesToShow' => 4
+      ]
+    ],
+    [
+      'breakpoint' => 767,
+      'settings' => [
+        'slidesToShow' => 2
+      ]
+    ],
+    [
+      'breakpoint' => 479,
+      'settings' => [
+        'slidesToShow' => 1
+      ]
+    ],
+  ],
+];
+
 $term = [];
 
 if (is_post_type_archive('paint_project')) {
@@ -22,28 +64,30 @@ if (is_post_type_archive('paint_project')) {
       ));
     ?>
       <div class="top-action">
-        <ul class="list-cat d-flex align-items-center justify-content-center flex-wrap">
-          <li class="list-cat__item<?php echo esc_attr( is_post_type_archive('paint_project') ? ' active' : '' ); ?>">
-            <a href="<?php echo esc_url(get_post_type_archive_link('paint_project')); ?>">
-              <?php esc_html_e('Tất cả', 'paint'); ?>
-            </a>
-          </li>
-
-          <?php
-          if ($taxonomies) :
-            foreach ($taxonomies as $taxonomy):
-          ?>
-            <li class="list-cat__item<?php echo esc_attr( !empty($term) && $term->term_id == $taxonomy->term_id ? ' active' : '' ); ?>">
-              <a href="<?php echo esc_url(get_term_link($taxonomy->slug, 'paint_project_cat')); ?>"
-                 title="<?php echo esc_attr($taxonomy->name); ?>">
-                <?php echo esc_html($taxonomy->name); ?>
+        <div class="scroll-box">
+          <ul class="list-cat custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
+            <li class="list-cat__item<?php echo esc_attr( is_post_type_archive('paint_project') ? ' active' : '' ); ?>">
+              <a href="<?php echo esc_url(get_post_type_archive_link('paint_project')); ?>">
+                <?php esc_html_e('Tất cả', 'paint'); ?>
               </a>
             </li>
-          <?php
-            endforeach;
-          endif;
-          ?>
-        </ul>
+
+            <?php
+            if ($taxonomies) :
+              foreach ($taxonomies as $taxonomy):
+                ?>
+                <li class="list-cat__item<?php echo esc_attr( !empty($term) && $term->term_id == $taxonomy->term_id ? ' active' : '' ); ?>">
+                  <a href="<?php echo esc_url(get_term_link($taxonomy->slug, 'paint_project_cat')); ?>"
+                     title="<?php echo esc_attr($taxonomy->name); ?>">
+                    <?php echo esc_html($taxonomy->name); ?>
+                  </a>
+                </li>
+              <?php
+              endforeach;
+            endif;
+            ?>
+          </ul>
+        </div>
 
         <?php get_template_part('template-parts/project/inc', 'search'); ?>
       </div>

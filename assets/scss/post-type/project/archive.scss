@@ -32,8 +32,14 @@
     grid-gap: 2.5rem 5rem;
 
     @media (min-width: 992px) {
-      grid-template-columns: 1fr 20rem;
+      grid-template-columns: max-content 1fr;
     }
+  }
+
+  .scroll-box {
+    padding: 0 3.5rem;
+    max-width: 112rem;
+    width: 100%;
   }
 
   .form-search-project {
@@ -80,40 +86,22 @@
     padding: 0;
     list-style: none;
 
-    @media (min-width: 992px) {
-      grid-gap: 1.2rem 5rem;
-    }
-
-    @media (max-width: 991px) {
-      grid-gap: 1.2rem 3rem;
-    }
-
-    @media (max-width: 575px) {
-      flex-direction: column;
-    }
-
     &__item {
       position: relative;
+      display: inline-block;
       font-size: 1.8rem;
       text-align: center;
 
-      @media (min-width: 992px) {
-        flex: 1;
-      }
-
-      @media (max-width: 991px) {
-        flex: 0 0 auto;
+      a {
+        display: block;
       }
 
       ~ .list-cat__item {
-        &:before {
-          @media (min-width: 992px) {
-            left: -2.5rem;
-          }
+        margin-left: 1.2rem;
+        padding-left: 1.2rem;
 
-          @media (max-width: 991px) {
-            left: -1.5rem;
-          }
+        &:before {
+          left: 0;
 
           @media (min-width: 576px) {
             position: absolute;
@@ -130,6 +118,27 @@
       &:hover {
         a {
           color: $color-secondary;
+        }
+      }
+    }
+
+    &.slick-slider {
+      .slick-arrow {
+        padding: 0;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+
+        &:hover {
+          color: $color-hover;
+        }
+
+        &.slick-prev {
+          left: -3.5rem;
+        }
+
+        &.slick-next {
+          right: -3.5rem;
         }
       }
     }
