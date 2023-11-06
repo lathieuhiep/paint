@@ -11,19 +11,7 @@ $data_config_slider = [
     [
       'breakpoint' => 1199,
       'settings' => [
-        'slidesToShow' => 5
-      ]
-    ],
-    [
-      'breakpoint' => 1023,
-      'settings' => [
-        'slidesToShow' => 4
-      ]
-    ],
-    [
-      'breakpoint' => 991,
-      'settings' => [
-        'slidesToShow' => 4
+        'slidesToShow' => 3
       ]
     ],
     [
@@ -65,12 +53,12 @@ if (is_post_type_archive('paint_project')) {
     ?>
       <div class="top-action">
         <div class="scroll-box">
-          <ul class="list-cat custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
-            <li class="list-cat__item<?php echo esc_attr( is_post_type_archive('paint_project') ? ' active' : '' ); ?>">
+          <div class="list-cat custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
+            <div class="list-cat__item<?php echo esc_attr( is_post_type_archive('paint_project') ? ' active' : '' ); ?>">
               <a href="<?php echo esc_url(get_post_type_archive_link('paint_project')); ?>">
                 <?php esc_html_e('Tất cả', 'paint'); ?>
               </a>
-            </li>
+            </div>
 
             <?php
             if ($taxonomies) :
@@ -86,7 +74,7 @@ if (is_post_type_archive('paint_project')) {
               endforeach;
             endif;
             ?>
-          </ul>
+          </div>
         </div>
 
         <?php get_template_part('template-parts/project/inc', 'search'); ?>

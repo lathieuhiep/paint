@@ -1,4 +1,34 @@
 <?php
+// config slider
+$data_config_slider = [
+  'infinite' => false,
+  'slidesToShow' => 5,
+  'slidesToScroll' => 1,
+  'arrows' => true,
+  'autoplay' => false,
+  'variableWidth' => true,
+  'responsive' => [
+    [
+      'breakpoint' => 1199,
+      'settings' => [
+        'slidesToShow' => 3
+      ]
+    ],
+    [
+      'breakpoint' => 767,
+      'settings' => [
+        'slidesToShow' => 2
+      ]
+    ],
+    [
+      'breakpoint' => 479,
+      'settings' => [
+        'slidesToShow' => 1
+      ]
+    ],
+  ],
+];
+
 $paint_unique_id = esc_attr(uniqid('search-form-'));
 
 $terms = get_terms(array(
@@ -23,27 +53,29 @@ if (is_singular('paint_discover')) {
       data-limit="<?php echo esc_attr(posts_per_page_discover) ?>"
 >
   <?php if ($terms) : ?>
-    <div class="group-check">
-      <div class="group-check__item">
-        <input type="radio" class="btn-check" name="cat" id="all-cat" value=""
-               autocomplete="off" <?php echo esc_attr(empty($cat) ? 'checked' : ''); ?>>
-        <label class="btn btn-secondary" for="all-cat">
-          <?php esc_html_e('Tất cả', 'paint'); ?>
-        </label>
-      </div>
-
-      <?php foreach ($terms as $term) : ?>
-
+    <div class="scroll-box">
+      <div class="group-check custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
         <div class="group-check__item">
-          <input type="radio" class="btn-check" name="cat" id="<?php echo esc_attr($term->slug); ?>"
-                 value="<?php echo esc_attr($term->slug); ?>"
-                 autocomplete="off" <?php echo esc_attr(!empty($cat) && $cat == $term->slug ? 'checked' : ''); ?>>
-          <label class="btn btn-secondary" for="<?php echo esc_attr($term->slug); ?>">
-            <?php echo esc_html($term->name); ?>
+          <input type="radio" class="btn-check" name="cat" id="all-cat" value=""
+                 autocomplete="off" <?php echo esc_attr(empty($cat) ? 'checked' : ''); ?>>
+          <label class="btn btn-secondary" for="all-cat">
+            <?php esc_html_e('Tất cả', 'paint'); ?>
           </label>
         </div>
 
-      <?php endforeach; ?>
+        <?php foreach ($terms as $term) : ?>
+
+          <div class="group-check__item">
+            <input type="radio" class="btn-check" name="cat" id="<?php echo esc_attr($term->slug); ?>"
+                   value="<?php echo esc_attr($term->slug); ?>"
+                   autocomplete="off" <?php echo esc_attr(!empty($cat) && $cat == $term->slug ? 'checked' : ''); ?>>
+            <label class="btn btn-secondary" for="<?php echo esc_attr($term->slug); ?>">
+              <?php echo esc_html($term->name); ?>
+            </label>
+          </div>
+
+        <?php endforeach; ?>
+      </div>
     </div>
   <?php endif; ?>
 

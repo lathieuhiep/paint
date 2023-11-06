@@ -169,13 +169,6 @@
       }
     }
   }
-
-  .grid-discover {
-    &__item {
-      width: 16.66666667%;
-    }
-  }
-
 }
 
 @media (min-width: 992px) {
@@ -457,13 +450,6 @@
       width: 100%;
     }
   }
-
-  .grid-discover {
-    &__item {
-      width: 20%;
-    }
-  }
-
 }
 
 @media (max-width: 767px) {
@@ -534,16 +520,6 @@
       }
     }
   }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-
-  .grid-discover {
-    &__item {
-      width: 25%;
-    }
-  }
-
 }
 
 @media (max-width: 575px) {
@@ -629,21 +605,9 @@
       }
     }
   }
-
-}
-
-@media (min-width: 480px) and (max-width: 575px) {
-
-  .grid-discover {
-    &__item {
-      width: 33.33333333%;
-    }
-  }
-
 }
 
 @media (max-width: 479px) {
-
   .comments-area {
     .comment-list {
       li {
@@ -685,11 +649,4 @@
       }
     }
   }
-
-  .grid-discover {
-    &__item {
-      width: 50%;
-    }
-  }
-
 }

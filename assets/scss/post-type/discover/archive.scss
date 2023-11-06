@@ -4,11 +4,12 @@
 
 .search-form-discover {
   margin-bottom: 2.8rem;
-  display: grid;
-  grid-gap: 2.5rem 5rem;
 
-  @media screen and (min-width: 992px) {
-    grid-template-columns: 1fr 20rem;
+  @media screen and (min-width: 1200px) {
+    display: grid;
+    grid-gap: 2.5rem 5rem;
+    align-items: center;
+    grid-template-columns: 80% 1fr;
   }
 
   input:-webkit-autofill,
@@ -18,46 +19,17 @@
     transition: background-color 9999s ease-in-out 0s;
   }
 
+  .scroll-box {
+    padding: 0 3.5rem;
+
+    @media (max-width: 1199px) {
+      margin-bottom: 3rem;
+    }
+  }
+
   .group-check {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    @media screen and (min-width: 992px) {
-      grid-gap: 1.2rem 5rem;
-    }
-
-    @media screen and (max-width: 991px) {
-      grid-gap: 1.2rem 2rem;
-    }
-
     &__item {
       position: relative;
-
-      @media screen and (min-width: 992px) {
-        flex: 1;
-      }
-
-      @media screen and (max-width: 991px) {
-        flex: 0 0 auto;
-      }
-
-      &:after {
-        position: absolute;
-        content: "";
-        width: 1px;
-        top: 0;
-        bottom: 0;
-        background-color: #9B9797;
-
-        @media screen and (min-width: 992px) {
-          right: -2.5rem;
-        }
-
-        @media screen and (max-width: 991px) {
-          right: -1rem;
-        }
-      }
 
       &:last-child {
         &:after {
@@ -72,6 +44,47 @@
 
         @media screen and (max-width: 991px) {
           text-align: left;
+        }
+      }
+    }
+
+    .slick-slide {
+      position: relative;
+      padding-right: 2rem;
+
+      ~ .slick-slide {
+        &:before {
+          left: -2.2rem;
+
+          @media (min-width: 576px) {
+            position: absolute;
+            content: "";
+            top: .5rem;
+            bottom: .5rem;
+            width: 1px;
+            background-color: $color-black;
+          }
+        }
+      }
+    }
+
+    &.slick-slider {
+      .slick-arrow {
+        padding: 0;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+
+        &:hover {
+          color: $color-hover;
+        }
+
+        &.slick-prev {
+          left: -3.5rem;
+        }
+
+        &.slick-next {
+          right: -3.5rem;
         }
       }
     }
@@ -92,7 +105,26 @@
   &__item {
     margin-bottom: 12px;
     padding: 0 6px;
-    width: 16.66666667%;
+
+    @media (min-width: 992px) {
+      width: 16.66666667%;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      width: 20%;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      width: 25%;
+    }
+
+    @media (min-width: 480px) and (max-width: 575px) {
+      width: 33.33333333%;
+    }
+
+    @media (max-width: 479px) {
+      width: 50%;
+    }
 
     img {
       width: 100%;
