@@ -1,6 +1,6 @@
 <?php $paint_unique_id = esc_attr(uniqid('search-form-')); ?>
 
-<form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="form-search-project">
+<form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="form-search-box">
   <input type="hidden" readonly name="post_type" value="paint_project">
 
   <div class="group-control">

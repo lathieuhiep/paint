@@ -51,7 +51,7 @@ if (is_post_type_archive('paint_project')) {
         'hide_empty' => false
       ));
     ?>
-      <div class="top-action">
+      <div class="action-tax-search">
         <div class="scroll-box">
           <div class="list-cat custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
             <div class="list-cat__item<?php echo esc_attr( is_post_type_archive('paint_project') ? ' active' : '' ); ?>">
@@ -64,12 +64,12 @@ if (is_post_type_archive('paint_project')) {
             if ($taxonomies) :
               foreach ($taxonomies as $taxonomy):
                 ?>
-                <li class="list-cat__item<?php echo esc_attr( !empty($term) && $term->term_id == $taxonomy->term_id ? ' active' : '' ); ?>">
+                <div class="list-cat__item<?php echo esc_attr( !empty($term) && $term->term_id == $taxonomy->term_id ? ' active' : '' ); ?>">
                   <a href="<?php echo esc_url(get_term_link($taxonomy->slug, 'paint_project_cat')); ?>"
                      title="<?php echo esc_attr($taxonomy->name); ?>">
                     <?php echo esc_html($taxonomy->name); ?>
                   </a>
-                </li>
+                </div>
               <?php
               endforeach;
             endif;

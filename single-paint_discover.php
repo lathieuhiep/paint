@@ -4,7 +4,7 @@
     <div class="container">
       <div class="grid-layout">
         <?php
-        get_template_part('template-parts/discover/inc', 'search-form');
+        get_template_part('template-parts/discover/inc', 'search-cat');
 
         get_template_part('template-parts/discover/inc', 'detail');
         ?>

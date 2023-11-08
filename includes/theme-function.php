@@ -355,11 +355,11 @@ add_action('wp_ajax_paint_pagination_discover', 'paint_pagination_discover');
 
 function paint_pagination_discover()
 {
-    $keyWord = $_POST['keyWord'];
+    $keyword = $_POST['keyword'];
     $limit = (int)$_POST['limit'];
     $paged = (int)$_POST['paged'];
     $cat = $_POST['cat'];
-    
+
     $tax_query = array();
     if (!empty($cat)) {
         $tax_query = array(
@@ -370,12 +370,12 @@ function paint_pagination_discover()
           ),
         );
     }
-    
+
     $args = array(
       'post_type' => 'paint_discover',
       'ignore_sticky_posts' => 1,
       'posts_per_page' => $limit,
-      's' => $keyWord,
+      's' => $keyword,
       'paged' => $paged,
       'tax_query' => $tax_query
     );

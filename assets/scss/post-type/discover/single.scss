@@ -16,34 +16,13 @@
     grid-gap: 2.4rem;
 
     @media (min-width: 992px) {
-      grid-template-columns: 20rem 1fr;
+      grid-template-columns: 25rem 1fr;
     }
 
-    .search-form {
-      .group-check {
-        @media (max-width: 991px) {
-          margin-bottom: 3rem;
-          display: flex;
-          flex-wrap: wrap;
-          grid-gap: 1.6rem;
-        }
-
-        @media (max-width: 479px) {
-          flex-direction: column;
-        }
-
-        &__item {
-          @media (min-width: 992px) {
-            &:not(:last-child) {
-              margin-bottom: 1.2rem;
-            }
-          }
-
-          @media (max-width: 991px) {
-            .btn {
-              font-size: 1.6rem;
-            }
-          }
+    .form-search-custom {
+      .group-control {
+        ~ .group-control {
+          margin-top: 2.4rem;
         }
       }
     }

@@ -27,9 +27,13 @@ $args = array(
 $query = new WP_Query($args);
 ?>
 
-  <div class="site-result-discover site-discover-warp element-spacer-pb">
+  <div class="site-container site-result-discover">
     <div class="container">
-      <?php if ($search_query) : ?>
+      <?php
+      get_template_part('template-parts/discover/inc', 'search-cat');
+
+      if ($search_query) :
+      ?>
         <header class="heading">
           <h1 class="page-title">
             <?php _e('Kết quả tìm kiếm cho', 'paint'); ?>: "<?php echo esc_html($search_query); ?>"
@@ -39,7 +43,7 @@ $query = new WP_Query($args);
 
       <div class="result-discover-warp content-warp">
         <?php if ($query->have_posts()) : ?>
-          <div class="grid-discover">
+          <div class="grid-discover" data-cat="<?php echo esc_attr( $cat ); ?>" data-keyword="<?php echo esc_attr( $s ); ?>">
             <?php
             while ($query->have_posts()) :
               $query->the_post();

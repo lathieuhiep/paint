@@ -237,7 +237,6 @@ function paint_template_search_post_type($template)
   }
 
   if ($wp_query->is_search && $post_type == 'paint_project') {
-
     return locate_template('search-paint_project.php');
   }
 

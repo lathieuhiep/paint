@@ -120,7 +120,7 @@ $config_nav_thumbnail = [
                           <?php esc_html_e('Tổng quan dự án', 'paint'); ?>
                       </h3>
 
-                      <?php if ( $current_user ) : ?>
+                      <?php if ( $user_id ) : ?>
                           <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
                               <?php if ($dataUserSave && $dataUserSave->status == 1) : ?>
                                   <i class="fa-solid fa-bookmark"></i>

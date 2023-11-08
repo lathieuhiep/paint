@@ -31,40 +31,41 @@
   });
 
   // create paged discover
-  let paged = 2;
   $(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
       const contentWarpGrid = $('.content-warp');
       const hasScrollLoading = contentWarpGrid.hasClass('scroll-loading');
 
       if (!hasScrollLoading) {
         contentWarpGrid.addClass('scroll-loading');
 
-        scrollLoadDiscover(contentWarpGrid);
+        scrollLoadDiscover();
       }
 
     }
   });
 
   // function ajax pagination discover
-  const scrollLoadDiscover = (contentWarpGrid) => {
-    const formSearchDiscover = $('.search-form-discover');
-    const keyWord = formSearchDiscover.find('.search-field').val();
-    const limit = formSearchDiscover.data('limit');
-    const cat = formSearchDiscover.find('.btn-check:checked').val();
-
+  const gridDiscover = $('.grid-discover')
+  const keyword = gridDiscover.data('keyword')
+  const limit = gridDiscover.data('limit')
+  const cat = gridDiscover.data('cat')
+  let paged = 2
+  let removeNotice
+  const scrollLoadDiscover = () => {
     $.ajax({
       url: discoverAjax.url,
       type: 'POST',
       data: ({
         action: 'paint_pagination_discover',
-        keyWord: keyWord,
+        keyword: keyword,
         limit: limit,
         cat: cat,
         paged: paged
       }),
       beforeSend: function () {
         $('.spinner-warp').removeClass('d-none');
+        clearTimeout(removeNotice);
       },
       success: function (result) {
         if (result) {
@@ -74,6 +75,13 @@
           $('.content-warp').removeClass('scroll-loading');
 
           paged++;
+
+        } else {
+          $('.content-warp').append('<p class="text-center txt-no-data">Không có bài viết mới</p>')
+
+          removeNotice = setTimeout(function(){
+            $('.content-warp').find('.txt-no-data').remove()
+          }, 3000);
         }
       },
       complete: function () {

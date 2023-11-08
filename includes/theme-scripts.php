@@ -80,7 +80,7 @@ function paint_register_front_end(): void
   }
 
   // get style post type project
-  if (is_tax('paint_project_cat') || is_post_type_archive('paint_project')) {
+  if (is_tax('paint_project_cat') || is_post_type_archive('paint_project') || (is_search() && $_GET['post_type'] == 'paint_project')) {
     wp_enqueue_style('archive-project', get_theme_file_uri('/assets/css/post-type/project/archive.css'), array(), '');
   }
 
@@ -98,7 +98,7 @@ function paint_register_front_end(): void
   }
 
   // get style post type discover
-  if (is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
+  if (is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')  || (is_search() && $_GET['post_type'] == 'paint_discover')) {
     wp_enqueue_style('archive-discover', get_theme_file_uri('/assets/css/post-type/discover/archive.css'), array(), '');
   }
 

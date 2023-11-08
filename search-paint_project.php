@@ -33,9 +33,11 @@ $query = new WP_Query($args);
 
 <div class="site-container site-result-project">
   <div class="container">
-    <?php get_template_part('template-parts/project/inc', 'search-cat'); ?>
+    <?php
+    get_template_part('template-parts/project/inc', 'search-cat');
 
-    <?php if ($search_query) : ?>
+    if ($search_query) :
+    ?>
       <header class="heading">
         <h1 class="page-title">
           <?php _e('Kết quả tìm kiếm cho', 'paint'); ?>: "<?php echo esc_html($search_query); ?>"

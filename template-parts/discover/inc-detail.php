@@ -123,7 +123,7 @@ $dataUserSave = paint_get_user_saved($user_id, get_the_ID());
             </a>
           </div>
 
-            <?php if ( $current_user ) : ?>
+            <?php if ( $user_id ) : ?>
             <div class="action-box">
                 <button type="button" class="btn-user-save border-0 p-0" data-post-id="<?php echo esc_attr(get_the_ID()) ?>">
                     <?php if ($dataUserSave && $dataUserSave->status == 1) : ?>
