@@ -6,7 +6,7 @@ $color_board = (int)get_post_meta(get_the_ID(), 'paint_cmb_options_product_color
 <div class="item">
   <div class="thumbnail">
     <a class="link-image" href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('large', ['class' => 'img-feature']); ?>
+      <?php the_post_thumbnail('medium_large', ['class' => 'img-feature']); ?>
       <img src="<?php echo esc_url( $image_hover ) ?>" alt="<?php the_title() ?>" class="img-feature-hover">
     </a>
 

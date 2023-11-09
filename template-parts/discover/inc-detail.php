@@ -18,11 +18,11 @@ $dataUserSave = paint_get_user_saved($user_id, get_the_ID());
           <span class="txt"><?php esc_html_e('Lưu', 'pain'); ?></span>
         </a>
 
-        <a class="view-popup position-absolute" href="<?php the_post_thumbnail_url('full'); ?>" data-lity>
+        <a class="view-popup position-absolute" href="<?php the_post_thumbnail_url('large'); ?>" data-lity>
           <i class="fa-solid fa-magnifying-glass"></i>
         </a>
 
-        <?php the_post_thumbnail('full'); ?>
+        <?php the_post_thumbnail('large'); ?>
       </div>
 
       <div class="post-info">

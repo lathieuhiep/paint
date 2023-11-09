@@ -32,7 +32,7 @@
 
   // create paged discover
   $(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() + 100 >= $(document).height()) {
+    if ($(window).scrollTop() + $(window).height() + 250 >= $(document).height()) {
       const contentWarpGrid = $('.content-warp');
       const hasScrollLoading = contentWarpGrid.hasClass('scroll-loading');
 

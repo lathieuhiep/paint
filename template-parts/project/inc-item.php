@@ -5,7 +5,7 @@ $terms = get_the_terms(get_the_ID(), 'paint_project_cat');
 <div class="item">
   <div class="thumbnail">
     <a class="link-image" href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('large'); ?>
+      <?php the_post_thumbnail('medium_large'); ?>
     </a>
   </div>
 

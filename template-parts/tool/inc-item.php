@@ -10,7 +10,7 @@ $price = get_post_meta(get_the_ID(), 'paint_cmb_tool_specifications_price', true
     </a>
 
     <a class="image-box" href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('large'); ?>
+      <?php the_post_thumbnail('medium_large'); ?>
     </a>
   </div>
 
