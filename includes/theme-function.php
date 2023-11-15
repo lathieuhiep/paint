@@ -352,7 +352,6 @@ function paint_get_color_code()
 // action ajax pagination discover
 add_action('wp_ajax_nopriv_paint_pagination_discover', 'paint_pagination_discover');
 add_action('wp_ajax_paint_pagination_discover', 'paint_pagination_discover');
-
 function paint_pagination_discover()
 {
     $keyword = $_POST['keyword'];
@@ -553,10 +552,9 @@ function paint_get_user_saved($user_id, $post_id)
     return $wpdb->get_row("SELECT id, user_id, post_id, post_type, status FROM $table WHERE user_id = $user_id AND post_id = $post_id");
 }
 
-// user saved
+// action user saved ajax
 add_action('wp_ajax_nopriv_paint_user_saved', 'paint_user_saved');
 add_action('wp_ajax_paint_user_saved', 'paint_user_saved');
-
 function paint_user_saved()
 {
     global $wpdb, $current_user;
@@ -639,10 +637,9 @@ function paint_get_all_user_saved($post_type, $start_page = 1)
 
 }
 
-//
+// action get post type user save ajax
 add_action('wp_ajax_nopriv_paint_pagination_post_type_user_saved', 'paint_pagination_post_type_user_saved');
 add_action('wp_ajax_paint_pagination_post_type_user_saved', 'paint_pagination_post_type_user_saved');
-
 function paint_pagination_post_type_user_saved()
 {
   $postType = $_POST['postType'];
@@ -676,6 +673,33 @@ function paint_pagination_post_type_user_saved()
   wp_die();
 }
 
+// check is blog
 function paint_is_blog () {
 	return ( is_archive() || is_author() || is_category() || is_home() || is_tag()) && 'post' == get_post_type();
+}
+
+// action get tab product detail ajax
+add_action('wp_ajax_nopriv_paint_get_tab_product_detail', 'paint_get_tab_product_detail');
+add_action('wp_ajax_paint_get_tab_product_detail', 'paint_get_tab_product_detail');
+function paint_get_tab_product_detail()
+{
+  $idTabs = ['gallery-tab', 'product-info-tab', 'product-construction-process-tab'];
+  $idTab = $_POST['idTab'];
+  $idProduct = $_POST['idProduct'];
+
+  if ( in_array($idTab, $idTabs) ) {
+    if ( $idTab == 'gallery-tab' ) {
+      get_template_part('template-parts/product/detail/inc', 'product-gallery', array('idProduct' => $idProduct));
+    }
+
+    if ( $idTab == 'product-info-tab' ) {
+      get_template_part('template-parts/product/detail/inc', 'product-info', array('idProduct' => $idProduct));
+    }
+
+    if ( $idTab == 'product-construction-process-tab' ) {
+      get_template_part('template-parts/product/detail/inc', 'construction-process', array('idProduct' => $idProduct));
+    }
+  }
+
+  wp_die();
 }

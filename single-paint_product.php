@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-  <div class="site-container site-single-product">
+  <div class="site-container site-single-product" data-product-id="<?php echo esc_attr( get_the_ID() ) ?>">
     <div class="container">
       <?php
       while (have_posts()) :

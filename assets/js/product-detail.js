@@ -8,34 +8,65 @@
 
   $(document).ready(function () {
     // handle tabs shown
+    const idProduct = parseInt( $('.site-single-product').data('product-id') );
+
     $('.tabs-warp .nav-link').on('shown.bs.tab', function (event) {
-      const eventTarget = $(event.target);
-      const hasIdGallery = eventTarget.attr('id');
+      const thisItem = $(this)
+      const eventTarget = $(event.target)
+      const getIdTab = eventTarget.attr('id')
+      const hasSuccessLoading = thisItem.hasClass('success-loading')
 
-      if (hasIdGallery === 'gallery-tab') {
-        const hasCallMasonry = eventTarget.hasClass('success-masonry');
+      if ( !hasSuccessLoading ) {
+        $.ajax({
+          url: productDetailAjax.url,
+          type: 'POST',
+          data: ({
+            action: 'paint_get_tab_product_detail',
+            idTab: getIdTab,
+            idProduct: idProduct
+          }),
+          beforeSend: function () {
+            $('.spinner-warp').removeClass('d-none');
+          },
+          success: function (result) {
+            if ( result ) {
+              $(`.${getIdTab}`).append(result)
 
-        if (!hasCallMasonry) {
-          // Masonry
-          const productGallery = $('.product-gallery-grid');
+              // call masonry
+              if (getIdTab === 'gallery-tab') {
+                const hasCallMasonry = eventTarget.hasClass('success-masonry');
 
-          if (productGallery.length) {
-            // int masonry
-            const $grid = productGallery.masonry({
-              percentPosition: true,
-              horizontalOrder: true,
-              columnWidth: '.grid-sizer-normal',
-              itemSelector: '.item'
-            });
+                if (!hasCallMasonry) {
+                  // Masonry
+                  const productGallery = $('.product-gallery-grid');
 
-            // layout Masonry after each image loads
-            $grid.imagesLoaded().progress(function () {
-              $grid.masonry('layout');
-            });
+                  if (productGallery.length) {
+                    // int masonry
+                    const $grid = productGallery.masonry({
+                      percentPosition: true,
+                      horizontalOrder: true,
+                      columnWidth: '.grid-sizer-normal',
+                      itemSelector: '.item'
+                    });
+
+                    // layout Masonry after each image loads
+                    $grid.imagesLoaded().progress(function () {
+                      $grid.masonry('layout');
+                    });
+                  }
+
+                  eventTarget.addClass('success-masonry');
+                }
+              }
+
+              // add class success
+              thisItem.addClass('success-loading')
+            }
+          },
+          complete: function () {
+            $('.spinner-warp').addClass('d-none');
           }
-
-          eventTarget.addClass('success-masonry');
-        }
+        })
       }
     })
 

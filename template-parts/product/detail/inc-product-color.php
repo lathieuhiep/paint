@@ -29,7 +29,6 @@ if ($id_color_code_cat) :
     <?php
     if ($query->have_posts()) :
       if ($count > 1) : ?>
-
         <div class="pattern">
           <h4 class="pattern__title">
             <?php esc_html_e('Kiểu vân', 'paint'); ?>
@@ -72,7 +71,6 @@ if ($id_color_code_cat) :
             </div>
           </div>
         </div>
-
       <?php
       endif;
 

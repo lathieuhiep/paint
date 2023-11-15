@@ -1,10 +1,17 @@
-<?php $opt_process = get_post_meta(get_the_ID(), 'paint_cmb_product_construction_process', true); ?>
+<?php
+$idProduct = $args['idProduct'] ?? '';
+
+if ( $idProduct ) :
+$opt_process = get_post_meta($idProduct, 'paint_cmb_product_construction_process', true); ?>
 
 <div class="construction-process-product">
   <div class="content">
     <?php if ($opt_process) : ?>
       <div class="accordion accordion-my-theme accordion-process" id="accordionProcess">
-        <?php foreach ($opt_process as $key => $item) : ?>
+        <?php
+        foreach ($opt_process as $key => $item) :
+          if ( !empty( $item['content'] ) ) :
+        ?>
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading-<?php echo esc_html($key); ?>">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo esc_html($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_html($key); ?>">
@@ -18,8 +25,14 @@
               </div>
             </div>
           </div>
-        <?php endforeach; ?>
+        <?php
+          endif;
+        endforeach;
+        ?>
       </div>
     <?php endif; ?>
   </div>
 </div>
+
+<?php
+endif;

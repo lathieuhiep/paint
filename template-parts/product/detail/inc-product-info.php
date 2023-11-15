@@ -1,3 +1,7 @@
+<?php
+$idProduct = $args['idProduct'] ?? '';
+$productDetail = get_post($idProduct);
+?>
 <div class="info-product">
-  <?php the_content(); ?>
+  <?php echo wpautop($productDetail->post_content) ?>
 </div>

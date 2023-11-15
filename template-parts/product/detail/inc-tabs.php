@@ -15,7 +15,7 @@
 <div class="tabs-warp">
   <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="color-code-tab" data-bs-toggle="pill" data-bs-target="#color-code"
+      <button class="nav-link active success-loading" id="color-code-tab" data-bs-toggle="pill" data-bs-target="#color-code"
               type="button" role="tab" aria-controls="color-code" aria-selected="true">
         <?php esc_html_e('Mã màu', 'paint'); ?>
       </button>
@@ -46,22 +46,22 @@
     </li>
   </ul>
 
+  <div class="spinner-warp text-center d-none">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
   <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="color-code" role="tabpanel" aria-labelledby="color-code-tab"
+    <div class="color-code-tab tab-pane fade show active" id="color-code" role="tabpanel" aria-labelledby="color-code-tab"
          tabindex="0">
       <?php get_template_part('template-parts/product/detail/inc', 'product-color'); ?>
     </div>
 
-    <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0">
-      <?php get_template_part('template-parts/product/detail/inc', 'product-gallery'); ?>
-    </div>
+    <div class="gallery-tab tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0"></div>
 
-    <div class="tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-info-tab" tabindex="0">
-      <?php get_template_part('template-parts/product/detail/inc', 'product-info'); ?>
-    </div>
+    <div class="product-info-tab tab-pane fade" id="product-info" role="tabpanel" aria-labelledby="product-info-tab" tabindex="0"></div>
 
-    <div class="tab-pane fade" id="product-construction-process" role="tabpanel" aria-labelledby="product-construction-process-tab" tabindex="0">
-      <?php get_template_part('template-parts/product/detail/inc', 'construction-process'); ?>
-    </div>
+    <div class="product-construction-process-tab tab-pane fade" id="product-construction-process" role="tabpanel" aria-labelledby="product-construction-process-tab" tabindex="0"></div>
   </div>
 </div>
