@@ -148,13 +148,14 @@
           }
 
           .item-name {
+            padding: 1.2rem;
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             font-weight: 600;
-            font-size: 2rem;
+            font-size: 1.8rem;
             @include flexbox();
             @include align-items(center);
             @include justify-content(center);

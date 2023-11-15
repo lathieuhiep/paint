@@ -51,8 +51,7 @@ if ($id_color_code_cat) :
                 <?php endif; ?>
 
                 <figcaption class="item-name">
-                  <?php esc_html_e('Vân', 'paint');
-                  echo ' ' . esc_html($stt); ?>
+                  <?php the_title() ?>
                 </figcaption>
               </figure>
 
