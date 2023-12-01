@@ -2,6 +2,7 @@
 $color_code_name = get_post_meta(get_the_ID(), 'paint_cmb_color_code_name', true);
 $color_code_list = get_post_meta(get_the_ID(), 'paint_cmb_color_code_standard', true);
 
+var_dump(array_chunk($color_code_list, 15));
 if (!empty($color_code_list)) :
   $i = 1;
 ?>
