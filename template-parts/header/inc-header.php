@@ -49,7 +49,7 @@ $logo = paint_get_option('general_opt_logo', '');
         <?php endif; ?>
 
         <div class="site-user">
-          <div class="site-user__box">
+          <div class="site-user__box text-lg-end">
             <i class="fa-regular fa-circle-user"></i>
 
             <?php
