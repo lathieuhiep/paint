@@ -14,11 +14,13 @@ function paint_register_required_plugins(): void
   $paint_plugins = array(
 
     // This is an example of how to include a plugin from the WordPress Plugin Repository
-    array(
-      'name' => 'Codestar Framework',
-      'slug' => 'codestar-framework',
-      'required' => true,
-    ),
+      // This is an example of how to include a plugin from the WordPress Plugin Repository
+      array(
+          'name'      =>  'Codestar Framework',
+          'slug'      =>  'codestar-framework',
+          'required'  =>  true,
+          'source' => 'https://github.com/Codestar/codestar-framework/archive/refs/heads/master.zip'
+      ),
 
     // This is an example of how to include a plugin from the WordPress Plugin Repository
     array(
@@ -26,6 +28,13 @@ function paint_register_required_plugins(): void
       'slug' => 'cmb2',
       'required' => true,
     ),
+
+      // This is an example of how to include a plugin from the WordPress Plugin Repository
+      array(
+          'name'      =>  'Elementor',
+          'slug'      =>  'elementor',
+          'required'  =>  true,
+      ),
 
     // This is an example of how to include a plugin from the WordPress Plugin Repository
     array(
@@ -36,18 +45,10 @@ function paint_register_required_plugins(): void
 
     // This is an example of how to include a plugin from the WordPress Plugin Repository
     array(
-      'name' => 'Newsletter',
-      'slug' => 'newsletter',
-      'required' => true,
-    ),
-
-    // This is an example of how to include a plugin from the WordPress Plugin Repository
-    array(
       'name' => 'WPDiscuz',
       'slug' => 'wpdiscuz',
       'required' => true,
     ),
-
   );
 
   /**

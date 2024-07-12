@@ -1,40 +1,11 @@
-/*
-Theme Name: Paint
-Theme URI: https://uxui.vn/
-Author: DiepLK
-Author URI: https://www.facebook.com/lathieuhiep
-Version: 1.1.0
-Description: Basic Theme
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: one-column, two-columns, three-columns, four-columns, right-sidebar,  theme-options
-Text Domain: paint
-*/
-
 /**
 * Table of Contents:
 *
 # General
 # WordPress Core
 # Header
-  ## Information
-  ## Nav
 # Page
-# Components
-  ## Banner
-  ## Products
-  ## Tool
-  ## Our Maxim
-  ## Count Up
-  ## Services
-  ## Testimonial
-  ## Post slider
-  ## About
 # Sidebar
-# Blog
-  ## Single
-  ## Pagination
-  ## Comment
 # Contact Form 7
 # Pagination
 # Footer
@@ -47,11 +18,11 @@ Text Domain: paint
 /**
 # General
 -----------------------------------------------------------------------------*/
-@import "general";
+@import "base/general";
 
 /* WordPress Core
 -------------------------------------------------------------- */
-@import "wp-core";
+@import "base/wp-core";
 
 /**
 # Header
@@ -61,32 +32,27 @@ Text Domain: paint
 /**
 # Page
 -----------------------------------------------------------------------------*/
-@import "page";
+@import "base/page";
 
 /**
 # Sidebar
 -----------------------------------------------------------------------------*/
-@import "sidebar";
+@import "base/sidebar";
 
 /**
 # Contact Form 7
 -----------------------------------------------------------------------------*/
-@import "cf7";
+@import "base/cf7";
 
 /**
 # Pagination
 -----------------------------------------------------------------------------*/
-@import "components/pagination";
-
-/**
-# 404
------------------------------------------------------------------------------*/
-@import "404";
+@import "base/pagination";
 
 /**
 # Footer
 -----------------------------------------------------------------------------*/
-@import "footer/footer";
+@import "base/footer";
 
 /**
 # Responsive

@@ -1,34 +1,83 @@
 'use strict';
 
-const {src, dest, watch, series} = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const sourcemaps = require('gulp-sourcemaps');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const minifyCss = require('gulp-clean-css');
-const concatCss = require('gulp-concat-css');
-const rename = require("gulp-rename");
-const {merge} = require("browser-sync/dist/cli/cli-options");
+const {src, dest, watch, series} = require('gulp')
+const sass = require('gulp-sass')(require('sass'))
+const sourcemaps = require('gulp-sourcemaps')
+const browserSync = require('browser-sync').create()
+const concat = require('gulp-concat')
+const uglify = require('gulp-uglify')
+const minifyCss = require('gulp-clean-css')
+const rename = require("gulp-rename")
 
-// compiler folder css
-function compilerFolderCss(folder) {
-    return src(`./assets/scss/${folder}/*.scss`)
+const pathAssets = './assets'
+const pathAssetsScss = `${pathAssets}/scss`
+const pathAssetsCss = `${pathAssets}/css`
+
+// Hàm để lấy tên miền localhost
+const execSync = require('child_process').execSync;
+function getLocalhostDomain() {
+    const hostname = execSync('hostname').toString().trim();
+
+    return `localhost/${hostname}`;
+}
+
+// server
+const domain = getLocalhostDomain();
+function server() {
+    browserSync.init({
+        proxy: domain,
+        open: false,
+        cors: true,
+        ghostMode: false
+    })
+}
+
+// compiler file scss
+function compilerFileScss(fileScss, desc = '') {
+    return src(`${pathAssetsScss}/${fileScss}`)
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${pathAssetsCss}/${desc}`))
+        .pipe(sourcemaps.init())
+        .pipe(minifyCss({
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${pathAssetsCss}/${desc}`))
+        .pipe(browserSync.stream({ match: '**/*.css' }));
+}
+
+// compiler folder scss
+function compilerFolderScss(folder) {
+    return src(`${pathAssetsScss}/${folder}/*/**.scss`)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(dest(`./assets/css/${folder}`));
+        .pipe(dest(`${pathAssetsCss}/${folder}`))
+        .pipe(sourcemaps.init())
+        .pipe(minifyCss({
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${pathAssetsCss}/${folder}`))
+        .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 
-// compiler lib css
+// compiler lib scss
 function compilerLibCss(folder, folderDesc) {
     return src(`./node_modules/${folder}`)
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(minifyCss({
-            compatibility: 'ie8',
             level: {1: {specialComments: 0}}
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`./assets/${folderDesc}`))
+        .pipe(dest(`${pathAssets}/${folderDesc}`))
+        .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 
 // compiler lib js
@@ -36,30 +85,33 @@ function compilerLibJs(folder, folderDesc) {
     return src(`./node_modules/${folder}`, {allowEmpty: true})
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
-        .pipe(dest(`./assets/${folderDesc}`))
+        .pipe(dest(`${pathAssets}/${folderDesc}`))
+        .pipe(browserSync.stream())
 }
 
 // Task build Bootstrap
 async function buildStylesBootstrap() {
-    return src('./assets/scss/bootstrap.scss')
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    return src(`${pathAssetsScss}/bootstrap.scss`)
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }).on('error', sass.logError))
         .pipe(minifyCss({
-            compatibility: 'ie8',
             level: {1: {specialComments: 0}}
         }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest('./assets/libs/bootstrap/css'));
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(dest(`${pathAssets}/libs/bootstrap`))
+        .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 async function buildJsBootstrap() {
-    compilerLibJs('bootstrap/dist/js/bootstrap.bundle.js', 'libs/bootstrap/js')
+    compilerLibJs('bootstrap/dist/js/bootstrap.bundle.js', 'libs/bootstrap')
 }
 
 // Task build slick
 async function buildSlickStyle() {
-    compilerLibCss('slick-carousel/slick/slick.css', 'libs/slick-carousel/css')
+    compilerLibCss('slick-carousel/slick/slick.css', 'libs/slick-carousel')
 }
 async function buildSlickJs() {
-    compilerLibJs('slick-carousel/slick/slick.js', 'libs/slick-carousel/js')
+    compilerLibJs('slick-carousel/slick/slick.js', 'libs/slick-carousel')
 }
 
 // Task build masonry
@@ -83,26 +135,18 @@ async function buildLityJs() {
 }
 
 // Task build styles
-async function buildStyles() {
-    return src('./assets/scss/style.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(dest('./'));
+async function buildStylesTheme() {
+    compilerFileScss('style-theme.scss')
 }
 
 // Task build template page
 async function buildTemplateStyles() {
-    compilerFolderCss('templates')
+    compilerFolderScss('templates')
 }
 
 // Task build post type
-const postTypeFolders = ['post', 'discover', 'product', 'project', 'tool'];
-
 async function buildPostType() {
-     postTypeFolders.map(function (element) {
-        compilerFolderCss(`post-type/${element}`)
-    })
+    compilerFolderScss('post-type')
 }
 
 // Build all
@@ -125,18 +169,27 @@ async function buildAll() {
     await buildStyles()
     await buildTemplateStyles()
     await buildPostType()
+
+    browserSync.reload()
 }
 exports.buildAll = buildAll
 
 // watch
 async function watchRun() {
-    watch('./assets/scss/bootstrap.scss', buildStylesBootstrap)
+    server()
+
     watch([
-        './assets/scss/**/*.scss',
-        '!./assets/scss/bootstrap.scss',
-        '!./assets/scss/post-type/**/*.scss',
-        '!./assets/scss/templates/*.scss',
-    ], buildStyles)
+        `${pathAssetsScss}/variables-site/*.scss`,
+        `${pathAssetsScss}/bootstrap.scss`
+    ], buildStylesBootstrap)
+
+    watch([
+        `${pathAssetsScss}/variables-site/*.scss`,
+        `${pathAssetsScss}/base/*.scss`,
+        `${pathAssetsScss}/style-theme.scss`,
+    ], buildStylesTheme)
+
+
     watch([
         './assets/scss/components/*.scss',
         './assets/scss/templates/*.scss'

@@ -1,8 +1,7 @@
 {
   "devDependencies": {
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-concat-css": "^3.1.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
@@ -10,8 +9,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
-    "bootstrap": "^5.2.3",
-    "browser-sync": "^2.27.11",
+    "bootstrap": "^5.3.3",
+    "browser-sync": "^3.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-sourcemaps": "^3.0.0",
     "imagesloaded": "^5.0.0",
