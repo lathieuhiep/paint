@@ -13,16 +13,8 @@ const pathAssets = './assets'
 const pathAssetsScss = `${pathAssets}/scss`
 const pathAssetsCss = `${pathAssets}/css`
 
-// Hàm để lấy tên miền localhost
-const execSync = require('child_process').execSync;
-function getLocalhostDomain() {
-    const hostname = execSync('hostname').toString().trim();
-
-    return `localhost/${hostname}`;
-}
-
 // server
-const domain = getLocalhostDomain();
+const domain = 'localhost/bcolor.vn';
 function server() {
     browserSync.init({
         proxy: domain,
@@ -52,8 +44,8 @@ function compilerFileScss(fileScss, desc = '') {
 }
 
 // compiler folder scss
-function compilerFolderScss(folder) {
-    return src(`${pathAssetsScss}/${folder}/*/**.scss`)
+function compilerFolderScss(folder, levelFile = '*.scss') {
+    return src(`${pathAssetsScss}/${folder}/${levelFile}`)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -146,7 +138,19 @@ async function buildTemplateStyles() {
 
 // Task build post type
 async function buildPostType() {
-    compilerFolderScss('post-type')
+    compilerFolderScss('post-type', '*/**.scss')
+}
+
+// buildJSTheme
+async function buildJSTheme() {
+    return src([
+        `${pathAssets}/js/**.js`,
+        `!${pathAssets}/js/**.min.js`
+    ], {allowEmpty: true})
+        .pipe(uglify())
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(dest(`${pathAssets}/js/`))
+        .pipe(browserSync.stream());
 }
 
 // Build all
@@ -166,9 +170,10 @@ async function buildAll() {
     await buildLityStyle()
     await buildLityJs()
 
-    await buildStyles()
+    await buildStylesTheme()
     await buildTemplateStyles()
     await buildPostType()
+    await buildJSTheme()
 
     browserSync.reload()
 }
@@ -189,15 +194,25 @@ async function watchRun() {
         `${pathAssetsScss}/style-theme.scss`,
     ], buildStylesTheme)
 
+    watch([
+        `${pathAssetsScss}/variables-site/*.scss`,
+        `${pathAssetsScss}/components/*.scss`,
+        `${pathAssetsScss}/templates/*.scss`
+    ], buildTemplateStyles)
+    
+    watch([
+        `${pathAssetsScss}/variables-site/*.scss`,
+        `${pathAssetsScss}/components/*.scss`,
+        `${pathAssetsScss}/post-type/*/**.scss`
+    ], buildPostType)
+
+    watch([`${pathAssets}/js/**.js`, `!${pathAssets}/js/**.min.js`], buildJSTheme)
 
     watch([
-        './assets/scss/components/*.scss',
-        './assets/scss/templates/*.scss'
-    ], buildTemplateStyles)
-    watch([
-        './assets/scss/components/*.scss',
-        './assets/scss/post-type/**/*.scss'
-    ], buildPostType)
+        './*.php',
+        './**/*.php',
+        './assets/images/*/**.{png,jpg,jpeg,gif}'
+    ], browserSync.reload);
 }
 
 exports.watchRun = watchRun;

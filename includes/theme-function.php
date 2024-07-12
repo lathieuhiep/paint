@@ -1,7 +1,16 @@
 <?php
-// Callback Comment List
-use JetBrains\PhpStorm\NoReturn;
+// get version theme
+function paint_get_version_theme(): string {
+    return wp_get_theme()->get( 'Version' );
+}
 
+add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
+function disable_gutenberg_editor(): false
+{
+    return false;
+}
+
+// Callback Comment List
 function paint_comments($paint_comment, $paint_comment_args, $paint_comment_depth): void
 {
     
