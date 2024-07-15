@@ -42,6 +42,11 @@ if (!class_exists('CMB2')) {
   require get_parent_theme_file_path('/extension/meta-box/add-fields/fieldset-color.php');
 }
 
+// Required: Elementor
+if ( did_action( 'elementor/loaded' ) ) :
+    require get_parent_theme_file_path( '/extension/elementor-addon/elementor-addon.php' );
+endif;
+
 // Require Widgets
 foreach (glob(get_parent_theme_file_path('/extension/widgets/*.php')) as $paint_file_widgets) {
   require $paint_file_widgets;
