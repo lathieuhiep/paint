@@ -154,6 +154,34 @@ async function buildJSTheme() {
         .pipe(browserSync.stream());
 }
 
+// Task build style elementor
+async function buildStylesElementor() {
+    return src(`${pathAssetsScss}/elementor-addon/elementor-addon.scss`)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`./extension/elementor-addon/css/`))
+        .pipe(sourcemaps.init())
+        .pipe(minifyCss({
+            level: {1: {specialComments: 0}}
+        }))
+        .pipe(rename( {suffix: '.min'} ))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`./extension/elementor-addon/css/`))
+        .pipe(browserSync.stream());
+}
+
+async function buildJSElementor() {
+    return src([
+        './extension/elementor-addon/js/*.js',
+        '!./extension/elementor-addon/js/*.min.js'
+    ], {allowEmpty: true})
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest('./extension/elementor-addon/js/'))
+        .pipe(browserSync.stream());
+}
+
 // Build all
 async function buildAll() {
     // build lib bootstrap
@@ -175,6 +203,9 @@ async function buildAll() {
     await buildTemplateStyles()
     await buildPostType()
     await buildJSTheme()
+
+    await buildStylesElementor()
+    await buildJSElementor()
 
     browserSync.reload()
 }
@@ -207,7 +238,17 @@ async function watchRun() {
         `${pathAssetsScss}/post-type/*/**.scss`
     ], buildPostType)
 
+    watch([
+        `${pathAssetsScss}/variables-site/*.scss`,
+        `${pathAssetsScss}/elementor-addon/*.scss`
+    ], buildStylesElementor)
+
     watch([`${pathAssets}/js/**.js`, `!${pathAssets}/js/**.min.js`], buildJSTheme)
+
+    watch([
+        './extension/elementor-addon/js/*.js',
+        '!./extension/elementor-addon/js/*.min.js'
+    ], buildJSElementor)
 
     watch([
         './*.php',

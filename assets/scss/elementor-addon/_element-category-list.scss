@@ -1,0 +1,21 @@
+.element-category-list {
+  &__grid {
+    display: grid;
+
+    .item {
+      padding: 1rem .8rem;
+      min-height: 15.2rem;
+      border: .1rem solid #FFC3D9;
+      border-radius: 1rem;
+      box-shadow: 0 .4rem .4rem 0 rgba(0, 0, 0, 0.25);
+
+      &__image {
+        margin-bottom: 1rem;
+      }
+
+      &__title {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
