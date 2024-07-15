@@ -467,3 +467,17 @@ form {
     font-family: $font-primary;
   }
 }
+
+.modal {
+  &.mode-quick-view-product {
+    .modal-dialog {
+      @media (min-width: 992px) {
+        max-width: 850px;
+      }
+    }
+  }
+}
+
+.reset-list {
+  @include reset-list();
+}

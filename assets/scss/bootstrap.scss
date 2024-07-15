@@ -56,6 +56,12 @@ $paragraph-margin-bottom: 1.2rem;
 $nav-link-font-size: $font-size-base;
 $nav-link-font-weight: 40;
 
+// scss-docs-start container-max-widths
+$container-max-widths: (
+        xl: 1200px,
+        xxl: 1350px
+) !default;
+
 // Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
@@ -81,6 +87,7 @@ $nav-link-font-weight: 40;
 @import "../../node_modules/bootstrap/scss/navbar";
 @import "../../node_modules/bootstrap/scss/accordion";
 @import "../../node_modules/bootstrap/scss/modal";
+@import "../../node_modules/bootstrap/scss/offcanvas";
 @import "../../node_modules/bootstrap/scss/spinners";
 
 // Helpers

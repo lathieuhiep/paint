@@ -1,3 +1,9 @@
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 // Border radius
 @mixin border-radius( $radius ) {
   -webkit-border-radius: $radius;
@@ -8,6 +14,15 @@
 // Box shadow
 @mixin box-shadow( $box-shadow : 0 4px 4px rgba(0, 0, 0, 0.25) ) {
   box-shadow: $box-shadow;
+}
+
+@mixin square($size, $radius: 0) {
+  width: $size;
+  height: $size;
+
+  @if $radius != 0 {
+    border-radius: $radius;
+  }
 }
 
 // Transition
@@ -152,4 +167,10 @@
 @mixin align-self( $align ) {
   -webkit-align-self: $align;
   align-self: $align;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

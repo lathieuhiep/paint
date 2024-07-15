@@ -8,6 +8,8 @@
 <?php
 endif;
 
+get_template_part('template-parts/header/inc','menu-mobile');
+
 wp_footer();
 ?>
 

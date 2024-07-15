@@ -866,13 +866,9 @@ if (class_exists('CSF')) {
 
                     array(
                         'id' => 'link',
-                        'type' => 'link',
+                        'type' => 'text',
                         'title' => 'Link',
-                        'default' => array(
-                            'url' => '#',
-                            'text' => 'facebook',
-                            'target' => '_blank'
-                        ),
+                        'default' => '#',
                     ),
 
                 ),

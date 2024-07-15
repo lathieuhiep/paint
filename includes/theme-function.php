@@ -116,11 +116,10 @@ function paint_get_social_url(): void
     foreach ($opt_social_networks as $item) :
         $link = $item['link'];
         
-        if (!empty($link['url'])) :
+        if ($link) :
             ?>
             <div class="social-network-item">
-                <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target']); ?>"
-                   title="<?php echo esc_attr($link['text']); ?>">
+                <a href="<?php echo esc_url($link); ?>" target="_blank">
                     <i class="<?php echo $item['icon']; ?>"></i>
                 </a>
             </div>

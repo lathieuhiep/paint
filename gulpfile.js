@@ -20,7 +20,8 @@ function server() {
         proxy: domain,
         open: false,
         cors: true,
-        ghostMode: false
+        ghostMode: false,
+        notify: false
     })
 }
 
