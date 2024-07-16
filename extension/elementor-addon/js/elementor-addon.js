@@ -35,7 +35,7 @@
             navSpeed: 800,
             dotsSpeed: 800,
             dragEndSpeed: 800,
-            navText: ['<i class="icon-angle-left" aria-hidden="true"></i>','<i class="icon-angle-right" aria-hidden="true"></i>'],
+            navText: ['<i class="fa-solid fa-angle-left"></i>','<i class="fa-solid fa-angle-right"></i>'],
         }
 
         // extend options
@@ -164,18 +164,18 @@
 
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/clinic-slider.default', elementSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
 
         /* Element testimonial slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/clinic-testimonial-slider.default', elementTestimonialSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-testimonial-slider.default', elementTestimonialSlider);
 
         /* Element doctor slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/clinic-doctor-slider.default', elementDoctorSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-doctor-slider.default', elementDoctorSlider);
 
         /* Element doctor slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/clinic-package-slider.default', elementPackageSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-package-slider.default', elementPackageSlider);
 
         /* Element circular progress */
-        elementorFrontend.hooks.addAction('frontend/element_ready/clinic-circular-progress.default', elementCircularProgress);
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-circular-progress.default', elementCircularProgress);
     });
 })(jQuery);

@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-class Clinic_Elementor_Circular_Progress extends Widget_Base
+class Paint_Elementor_Circular_Progress extends Widget_Base
 {
 
     /**

@@ -99,6 +99,17 @@ async function buildJsBootstrap() {
     compilerLibJs('bootstrap/dist/js/bootstrap.bundle.js', 'libs/bootstrap')
 }
 
+/*
+Task build owl carousel
+* */
+async function buildStylesOwlCarousel() {
+    compilerLibCss('owl.carousel/dist/assets/owl.carousel.css', 'libs/owl.carousel')
+}
+
+async function buildJsOwlCarouse() {
+    compilerLibJs('owl.carousel/dist/owl.carousel.js', 'libs/owl.carousel')
+}
+
 // Task build slick
 async function buildSlickStyle() {
     compilerLibCss('slick-carousel/slick/slick.css', 'libs/slick-carousel')
@@ -187,6 +198,10 @@ async function buildAll() {
     // build lib bootstrap
     await buildStylesBootstrap()
     await buildJsBootstrap()
+
+    // build lib owl carousel
+    await buildStylesOwlCarousel()
+    await buildJsOwlCarouse()
 
     // build lib slick
     await buildSlickStyle()

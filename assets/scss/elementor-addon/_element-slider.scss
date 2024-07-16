@@ -1,0 +1,38 @@
+.element-slider {
+  &__warp {
+    .owl-nav {
+      margin: 0;
+
+      button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        i {
+          font-size: 3rem;
+          @include transition();
+
+          &:hover {
+            color: $color-hover;
+          }
+        }
+
+        &.owl-prev {
+          left: 1.2rem
+        }
+
+        &.owl-next {
+          right: 1.2rem
+        }
+      }
+    }
+
+    .owl-dots {
+      margin: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1.2rem;
+    }
+  }
+}

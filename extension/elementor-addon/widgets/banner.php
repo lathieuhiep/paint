@@ -8,7 +8,7 @@ use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Clinic_Elementor_Banner extends Widget_Base {
+class Paint_Elementor_Banner extends Widget_Base {
     public function get_categories(): array {
         return array( 'my-theme' );
     }

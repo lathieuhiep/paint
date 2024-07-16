@@ -17,6 +17,7 @@
     "jquery.scrollbar": "^0.2.11",
     "lity": "^2.4.1",
     "masonry-layout": "^4.2.2",
+    "owl.carousel": "^2.3.4",
     "slick-carousel": "^1.8.1"
   }
 }

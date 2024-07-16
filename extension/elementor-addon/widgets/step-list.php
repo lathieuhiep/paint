@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-class Clinic_Elementor_Step_List extends Widget_Base
+class Paint_Elementor_Step_List extends Widget_Base
 {
 
     /**

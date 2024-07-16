@@ -35,7 +35,7 @@ $logo = paint_get_option('general_opt_logo', '');
                         <?php endif; ?>
                     </a>
 
-                    <button class="btn btn-primary btn-close-canvas" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                    <button class="btn btn-primary btn-close-canvas d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
                 </div>

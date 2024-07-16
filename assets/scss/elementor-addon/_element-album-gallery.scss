@@ -1,0 +1,11 @@
+.element-album-gallery {
+  &__warp {
+    display: grid;
+
+    .item {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
