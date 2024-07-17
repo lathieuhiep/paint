@@ -1,5 +1,9 @@
 form {
   &.wpcf7-form {
+    br {
+      display: none;
+    }
+
     p {
       position: relative;
       margin: 0;

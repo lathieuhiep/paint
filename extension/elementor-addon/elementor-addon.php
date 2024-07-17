@@ -25,18 +25,24 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/image-grid-box.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/gallery-grid-box.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/album-gallery.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-form-7.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/heading-between-line.php' );
 
+
+//    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-grid.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/banner.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/about-us.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/category-list.php' );
-//    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-form-7.php' );
+
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/circular-progress.php' );
 
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/safety-principles.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/doctor-slider.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/step-list.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/testimonial-slider.php' );
-//    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-grid.php' );
+
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/list-image-content.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/list-content-number.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-us.php' );
@@ -46,18 +52,23 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     $widgets_manager->register( new \Paint_Elementor_Image_Grid_Box() );
     $widgets_manager->register( new \Paint_Elementor_Gallery_Grid_Box() );
     $widgets_manager->register( new \Paint_Elementor_Album_Gallery() );
+    $widgets_manager->register( new \Paint_Elementor_Slider_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Post_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Contact_Form_7() );
+    $widgets_manager->register( new \Paint_Elementor_Heading_Between_Line() );
 
+//    $widgets_manager->register( new \Paint_Elementor_Post_Grid() );
 //    $widgets_manager->register( new \Paint_Elementor_Banner() );
 //    $widgets_manager->register( new \Paint_Elementor_About_Us() );
 //    $widgets_manager->register( new \Paint_Elementor_Category_List() );
-//    $widgets_manager->register( new \Paint_Elementor_Contact_Form_7() );
+
 //    $widgets_manager->register( new \Paint_Elementor_Circular_Progress() );
 
 //    $widgets_manager->register( new \Paint_Elementor_Safety_Principles() );
 //    $widgets_manager->register( new \Paint_Elementor_Doctor_Slider() );
 //    $widgets_manager->register( new \Paint_Elementor_Step_List() );
 //    $widgets_manager->register( new \Paint_Elementor_Testimonial_Slider() );
-//    $widgets_manager->register( new \Paint_Elementor_Post_Grid() );
+
 //    $widgets_manager->register( new \Paint_Elementor_List_image_Content() );
 //    $widgets_manager->register( new \Paint_Elementor_List_Content_Number() );
 //    $widgets_manager->register( new \Paint_Elementor_Contact_Us() );
