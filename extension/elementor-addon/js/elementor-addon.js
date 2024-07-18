@@ -71,6 +71,20 @@
         }
     }
 
+    // element about slider
+    const elementAboutSlider = ($scope, $) => {
+        const slider = $scope.find('.element-about-slider__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
@@ -83,5 +97,8 @@
 
         /* Element testimonial slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-testimonial-slider.default', elementTestimonialSlider);
+
+        // element about slider
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-about-slider.default', elementAboutSlider);
     });
 })(jQuery);
