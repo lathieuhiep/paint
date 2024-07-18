@@ -1,4 +1,13 @@
 (function ($) {
+    // Hàm kiểm tra nếu phần tử trong khung nhìn
+    const isElementInViewport = (element) => {
+        const rect = element.getBoundingClientRect(); // Lấy vị trí phần tử
+        const windowHeight = window.innerHeight; // Chiều cao cửa sổ
+
+        // Kiểm tra nếu phần tử trong khung nhìn
+        return rect.top >= 0 && rect.bottom <= windowHeight;
+    }
+
     // setting owlCarousel
     const owlCarouselElementorOptions = (options) => {
         let defaults = {
@@ -85,6 +94,45 @@
         }
     }
 
+    // element count up
+    const elementCountUp = ($scope, $) => {
+        let start = 0
+        const numberBox = $scope.find('.element-count-up .number-box')
+
+        if ( numberBox.length ) {
+            $(window).on('scroll', function() {
+                numberBox.each(function () {
+                    const thisNumberBox = $(this)
+
+                    if ( isElementInViewport( thisNumberBox[0] ) ) {
+                        const countBox = thisNumberBox.find('.count-box')
+                        const countTo = countBox.data('number')
+
+                        $({countNum: countBox.text()}).animate(
+                            {
+                                countNum: countTo
+                            },
+                            {
+                                duration: 850,
+                                easing: "swing",
+                                step: function () {
+                                    countBox.text(
+                                        Math.ceil(this.countNum)
+                                    );
+                                },
+                                complete: function () {
+                                    countBox.text(
+                                        Math.ceil(this.countNum)
+                                    );
+                                }
+                            }
+                        )
+                    }
+                })
+            })
+        }
+    }
+
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
@@ -100,5 +148,8 @@
 
         // element about slider
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-about-slider.default', elementAboutSlider);
+
+        // element count up
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-count-up.default', elementCountUp);
     });
 })(jQuery);

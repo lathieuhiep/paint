@@ -21,16 +21,17 @@ function paint_add_elementor_widget_categories( $elements_manager ): void {
 add_action( 'elementor/widgets/register', 'paint_register_widget_elementor_addon' );
 function paint_register_widget_elementor_addon( $widgets_manager ): void {
 	// include add on
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider.php' );
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/image-grid-box.php' );
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/gallery-grid-box.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/about-slider.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/album-gallery.php' );
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider-carousel.php' );
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-form-7.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/heading-between-line.php' );
-    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/about-slider.php' );
-
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/image-grid-box.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/image-grid-overlay.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/gallery-grid-box.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/count-up.php' );
 
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-grid.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/banner.php' );
@@ -49,15 +50,17 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-us.php' );
 
 	// register add on
-    $widgets_manager->register( new \Paint_Elementor_Slider() );
-    $widgets_manager->register( new \Paint_Elementor_Image_Grid_Box() );
-    $widgets_manager->register( new \Paint_Elementor_Gallery_Grid_Box() );
+    $widgets_manager->register( new \Paint_Elementor_About_Slider() );
     $widgets_manager->register( new \Paint_Elementor_Album_Gallery() );
-    $widgets_manager->register( new \Paint_Elementor_Slider_Carousel() );
-    $widgets_manager->register( new \Paint_Elementor_Post_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Contact_Form_7() );
     $widgets_manager->register( new \Paint_Elementor_Heading_Between_Line() );
-    $widgets_manager->register( new \Paint_Elementor_About_Slider() );
+    $widgets_manager->register( new \Paint_Elementor_Image_Grid_Box() );
+    $widgets_manager->register( new \Paint_Elementor_Image_Grid_Overlay() );
+    $widgets_manager->register( new \Paint_Elementor_Gallery_Grid_Box() );
+    $widgets_manager->register( new \Paint_Elementor_Post_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Slider() );
+    $widgets_manager->register( new \Paint_Elementor_Slider_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Count_Up() );
 
 //    $widgets_manager->register( new \Paint_Elementor_Post_Grid() );
 //    $widgets_manager->register( new \Paint_Elementor_Banner() );
