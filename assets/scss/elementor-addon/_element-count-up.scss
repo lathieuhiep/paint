@@ -3,8 +3,9 @@
 
   .heading {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
+    font-size: 1.8rem;
 
     &:after {
       position: absolute;
@@ -16,5 +17,12 @@
       background-color: currentColor;
       transform: translateX(-50%);
     }
+  }
+
+  .txt {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 4.5rem;
+    line-height: 1.1;
   }
 }

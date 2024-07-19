@@ -197,7 +197,6 @@ class Paint_Elementor_Count_Up extends Widget_Base {
                 'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
                 'type'      =>  Controls_Manager::COLOR,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-count-up .number-box' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .element-count-up .txt' => 'color: {{VALUE}}',
                 ],
             ]
@@ -208,7 +207,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
             [
                 'name' => 'number_or_text_typography',
                 'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-count-up .number-box',
+                'selector' => '{{WRAPPER}} .element-count-up .txt',
             ]
         );
 
@@ -259,14 +258,14 @@ class Paint_Elementor_Count_Up extends Widget_Base {
             </p>
 
             <?php if ( $settings['number_active'] ) : ?>
-                <div class="number-box">
+                <div class="txt number-box">
                     <span class="count-box" data-number="<?php echo esc_attr( $settings['number'] ); ?>">0</span>
                     <span class="symbol">+</span>
                 </div>
             <?php else: ?>
-                <p class="txt">
+                <div class="txt">
                     <?php echo esc_html( $settings['text'] ); ?>
-                </p>
+                </div>
             <?php endif; ?>
 
             <div class="desc">

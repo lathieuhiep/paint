@@ -1,6 +1,7 @@
 <?php
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
@@ -378,6 +379,174 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        // title style
+        $this->start_controls_section(
+            'title_style_section',
+            [
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_margin',
+            [
+                'label' => esc_html__( 'Margin', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .title-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_align',
+            [
+                'label'     =>  esc_html__( 'Alignment', 'paint' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    'left'  =>  [
+                        'title' =>  esc_html__( 'Left', 'paint' ),
+                        'icon'  =>  'eicon-text-align-left',
+                    ],
+
+                    'center' => [
+                        'title' =>  esc_html__( 'Center', 'paint' ),
+                        'icon'  =>  'eicon-text-align-center',
+                    ],
+
+                    'right' => [
+                        'title' =>  esc_html__( 'Right', 'paint' ),
+                        'icon'  =>  'eicon-text-align-right',
+                    ],
+
+                    'justify' => [
+                        'title' =>  esc_html__( 'Justify', 'paint' ),
+                        'icon'  =>  'eicon-text-align-justify',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-slider-carousel__warp .title-box' => 'text-align: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'title_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'paint' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-slider-carousel__warp .title-box' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'label' => esc_html__( 'Typography', 'paint' ),
+                'selector' => '{{WRAPPER}} .element-slider-carousel__warp .title-box',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // content style
+        $this->start_controls_section(
+            'content_style_section',
+            [
+                'label' => esc_html__( 'Nội dung', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'content_margin',
+            [
+                'label' => esc_html__( 'Margin', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .content-box' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'content_align',
+            [
+                'label'     =>  esc_html__( 'Alignment', 'paint' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    'left'  =>  [
+                        'title' =>  esc_html__( 'Left', 'paint' ),
+                        'icon'  =>  'eicon-text-align-left',
+                    ],
+
+                    'center' => [
+                        'title' =>  esc_html__( 'Center', 'paint' ),
+                        'icon'  =>  'eicon-text-align-center',
+                    ],
+
+                    'right' => [
+                        'title' =>  esc_html__( 'Right', 'paint' ),
+                        'icon'  =>  'eicon-text-align-right',
+                    ],
+
+                    'justify' => [
+                        'title' =>  esc_html__( 'Justify', 'paint' ),
+                        'icon'  =>  'eicon-text-align-justify',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-slider-carousel__warp .content-box' => 'text-align: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'content_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'paint' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-slider-carousel__warp .content-box' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'content_typography',
+                'label' => esc_html__( 'Typography', 'paint' ),
+                'selector' => '{{WRAPPER}} .element-slider-carousel__warp .content-box',
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     /**
@@ -441,15 +610,21 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
                             ?>
                         </div>
 
-                        <div class="item__body">
-                            <h3 class="title-box">
-                                <?php echo esc_html( $item['list_title'] ); ?>
-                            </h3>
+                        <?php if ( $item['list_title'] || $item['list_content'] ) : ?>
+                            <div class="item__body">
+                                <?php if ( $item['list_title'] ) : ?>
+                                    <h3 class="title-box">
+                                        <?php echo esc_html( $item['list_title'] ); ?>
+                                    </h3>
+                                <?php endif; ?>
 
-                            <div class="content-box">
-                                <?php echo wpautop( $item['list_content'] ); ?>
+                                <?php if ( $item['list_content'] ) : ?>
+                                    <div class="content-box">
+                                        <?php echo wpautop( $item['list_content'] ); ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     </div>
 
                 <?php endforeach; ?>

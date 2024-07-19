@@ -120,8 +120,8 @@ class Paint_Elementor_Heading_Between_Line extends Widget_Base
 					],
 				],
 				'default' => [
-					'unit' => 'px',
-					'size' => '',
+					'unit' => '%',
+					'size' => 100,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .element-heading-between-line__warp' => 'width: {{SIZE}}{{UNIT}};',

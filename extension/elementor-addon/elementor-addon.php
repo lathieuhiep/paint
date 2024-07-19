@@ -32,6 +32,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/slider-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/count-up.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/content-box-grid.php' );
 
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-grid.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/banner.php' );
@@ -61,6 +62,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     $widgets_manager->register( new \Paint_Elementor_Slider() );
     $widgets_manager->register( new \Paint_Elementor_Slider_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Count_Up() );
+    $widgets_manager->register( new \Paint_Elementor_Content_Box_Grid() );
 
 //    $widgets_manager->register( new \Paint_Elementor_Post_Grid() );
 //    $widgets_manager->register( new \Paint_Elementor_Banner() );

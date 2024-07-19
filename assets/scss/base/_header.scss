@@ -14,7 +14,6 @@
 
 .site-header {
   background-color: $color-secondary;
-  @include box-shadow();
 
   .top-box {
     padding-top: 1.2rem;
@@ -72,7 +71,7 @@
 }
 
 .active-sticky-nav {
-  z-index: 10;
+  z-index: 6;
 
   @media (min-width: 992px) {
     position: sticky;

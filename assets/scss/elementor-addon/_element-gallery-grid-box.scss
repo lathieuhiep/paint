@@ -8,8 +8,13 @@
       flex-direction: column;
 
       &__thumbnail {
-        margin-bottom: 2rem;
+        position: relative;
         overflow: hidden;
+
+        .image-box {
+          margin-bottom: 2rem;
+          overflow: hidden;
+        }
 
         img {
           object-fit: cover;
