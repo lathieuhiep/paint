@@ -94,6 +94,34 @@
         }
     }
 
+    // element tool carousel
+    const elementToolSlider = ($scope, $) => {
+        const slider = $scope.find('.element-tool-carousel__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
+    // element project carousel
+    const elementProjectSlider = ($scope, $) => {
+        const slider = $scope.find('.element-project-carousel__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
     // element count up
     const elementCountUp = ($scope, $) => {
         let start = 0
@@ -148,6 +176,12 @@
 
         // element about slider
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-about-slider.default', elementAboutSlider);
+
+        // element tool carousel
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-tool-carousel.default', elementToolSlider);
+
+        // element project carousel
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-project-carousel.default', elementProjectSlider);
 
         // element count up
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-count-up.default', elementCountUp);

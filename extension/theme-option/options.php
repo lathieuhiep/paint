@@ -908,71 +908,207 @@ if (class_exists('CSF')) {
         'title' => esc_html__('Chân trang', 'paint'),
     ));
 
-    // Create section footer columns
-    CSF::createSection($paint_prefix, array(
+    // footer columns
+    CSF::createSection( $paint_prefix, array(
         'parent' => 'parent_footer',
-        'title' => esc_html__('Thiết lâp cột', 'paint'),
+        'title'  => esc_html__( 'Thiết lâp cột', 'paint' ),
         'fields' => array(
             // select columns
             array(
-                'id' => 'paint_opt_footer_columns',
-                'type' => 'select',
-                'title' => esc_html__('Số cột hiển thị', 'paint'),
+                'id'      => 'paint_opt_footer_columns',
+                'type'    => 'select',
+                'title'   => esc_html__( 'Number of footer columns', 'paint' ),
                 'options' => array(
-                    '0' => esc_html__('Không sử dụng', 'paint'),
-                    '1' => esc_html__('1 cột', 'paint'),
-                    '2' => esc_html__('2 cột', 'paint'),
-                    '3' => esc_html__('3 cột', 'paint'),
-                    '4' => esc_html__('4 cột', 'paint'),
+                    '0' => esc_html__( 'Hide', 'paint' ),
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
                 ),
                 'default' => '4'
             ),
 
             // column width 1
             array(
-                'id' => 'paint_opt_footer_column_width_1',
-                'type' => 'slider',
-                'title' => esc_html__('Độ rộng cột 1', 'paint'),
-                'default' => 3,
-                'min' => 1,
-                'max' => 12,
-                'dependency' => array('paint_opt_footer_columns', '!=', '0')
+                'id'        => 'paint_opt_footer_column_width_1',
+                'type'      => 'fieldset',
+                'title'     => esc_html__( 'Column width 1', 'paint' ),
+                'fields'    => array(
+                    array(
+                        'id'         => 'sm',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
+                        'default'    => 12,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'md',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
+                        'default'    => 6,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'lg',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'xl',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+                ),
+                'dependency' => array( 'paint_opt_footer_columns', '!=', '0' )
             ),
 
             // column width 2
             array(
-                'id' => 'paint_opt_footer_column_width_2',
-                'type' => 'slider',
-                'title' => esc_html__('Độ rộng cột 2', 'paint'),
-                'default' => 3,
-                'min' => 1,
-                'max' => 12,
-                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1')
+                'id'        => 'paint_opt_footer_column_width_2',
+                'type'      => 'fieldset',
+                'title'     => esc_html__( 'Column width 2', 'paint' ),
+                'fields'    => array(
+                    array(
+                        'id'         => 'sm',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
+                        'default'    => 12,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'md',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
+                        'default'    => 6,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'lg',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'xl',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+                ),
+                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1' )
             ),
 
             // column width 3
             array(
-                'id' => 'paint_opt_footer_column_width_3',
-                'type' => 'slider',
-                'title' => esc_html__('Độ rộng cột 3', 'paint'),
-                'default' => 3,
-                'min' => 1,
-                'max' => 12,
-                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1,2')
+                'id'        => 'paint_opt_footer_column_width_3',
+                'type'      => 'fieldset',
+                'title'     => esc_html__( 'Column width 3', 'paint' ),
+                'fields'    => array(
+                    array(
+                        'id'         => 'sm',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
+                        'default'    => 12,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'md',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
+                        'default'    => 6,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'lg',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'xl',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+                ),
+                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1,2' )
             ),
 
             // column width 4
             array(
-                'id' => 'paint_opt_footer_column_width_4',
-                'type' => 'slider',
-                'title' => esc_html__('Độ rộng cột 4', 'paint'),
-                'default' => 3,
-                'min' => 1,
-                'max' => 12,
-                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1,2,3')
+                'id'        => 'paint_opt_footer_column_width_4',
+                'type'      => 'fieldset',
+                'title'     => esc_html__( 'Column width 3', 'paint' ),
+                'fields'    => array(
+                    array(
+                        'id'         => 'sm',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
+                        'default'    => 12,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'md',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
+                        'default'    => 6,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'lg',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+
+                    array(
+                        'id'         => 'xl',
+                        'type'       => 'slider',
+                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
+                        'default'    => 3,
+                        'min'        => 1,
+                        'max'        => 12,
+                    ),
+                ),
+                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1,2,3' )
             ),
         )
-    ));
+    ) );
 
     // -> End create a section footer
 
