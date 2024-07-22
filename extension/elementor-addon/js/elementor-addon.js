@@ -125,72 +125,44 @@
     // element procedure carousel
     const elementProcedureCarousel = ($scope, $) => {
         const syncedSecondary = true
-        const sliderMain = $scope.find('.procedure-slider-main')
-        const sliderNumber = $scope.find('.procedure-slider-number')
+        const sliderBlock = $scope.find('.element-procedure-carousel')
 
-        if (sliderMain.length) {
+        if ( sliderBlock.length ) {
+            const sliderMain = sliderBlock.find('.procedure-slider-main')
+            const sliderNumber = sliderBlock.find('.procedure-slider-number')
+
             // slider main
             const sliderMainOptions = {
                 items: 1,
-                autoHeight: true
+                autoHeight: true,
+                dots: false
             }
 
-            sliderMain.each(function () {
-                const thisSlider = $(this)
-                const parent = thisSlider.closest('.element-procedure-carousel')
-                const sync2 = parent.find('.procedure-slider-number')
-
-                thisSlider.owlCarousel(owlCarouselElementorOptions(sliderMainOptions)).on('changed.owl.carousel', function (el) {
-                    //if you set loop to false, you have to restore this next line
-                    //var current = el.item.index;
-
-                    //if you disable loop you have to comment this block
-                    const count = el.item.count - 1;
-                    let current = Math.round(el.item.index - (el.item.count / 2) - .5);
-
-                    if (current < 0) {
-                        current = count;
-                    }
-                    if (current > count) {
-                        current = 0;
-                    }
-
-                    //end block
-
-                    sync2.find(".owl-item").removeClass("current").eq(current).addClass("current")
-                    const onscreen = sync2.find('.owl-item.active').length - 1;
-                    const start = sync2.find('.owl-item.active').first().index();
-                    const end = sync2.find('.owl-item.active').last().index();
-
-                    if (current > end) {
-                        sync2.data('owl.carousel').to(current, 100, true);
-                    }
-                    if (current < start) {
-                        sync2.data('owl.carousel').to(current - onscreen, 100, true);
-                    }
-                })
-            })
+            sliderMain.owlCarousel( owlCarouselElementorOptions( sliderMainOptions ) )
 
             // slider number
             const sliderNumberOptions = {
                 items: 2,
-                autoHeight: true
+                autoHeight: true,
+                dots: false,
+                mouseDrag: false,
+                touchDrag: false
             }
+            sliderNumber.owlCarousel( owlCarouselElementorOptions( sliderNumberOptions ) )
 
-            sliderNumber.each(function () {
-                const thisSlider = $(this)
-                const parent = thisSlider.closest('.element-procedure-carousel')
-                const sync1 = parent.find('.procedure-slider-main')
+            // event slider main changed
+            sliderMain.on('changed.owl.carousel', function(event) {
+                const index = event.item.index;
+                const count = event.item.count;
+                const currentIndex = (index - event.relatedTarget._clones.length / 2 + count) % count;
 
-                thisSlider.on('initialized.owl.carousel', function() {
-                    thisSlider.find(".owl-item").eq(0).addClass("current")
-                }).owlCarousel( owlCarouselElementorOptions(sliderNumberOptions) ).on('changed.owl.carousel', function (el) {
-                    if (syncedSecondary) {
-                        const number = el.item.index;
-                        sync1.data('owl.carousel').to(number, 800, true)
-                    }
-                })
+                sliderNumber.trigger('to.owl.carousel', [currentIndex, 300]);
+                sliderNumber.find('.thumb').removeClass('active-thumb');
+                sliderNumber.find('.thumb').eq(currentIndex).addClass('active-thumb');
             })
+
+            // slider number active first
+            sliderNumber.find('.thumb').eq(0).addClass('active-thumb');
         }
     }
 

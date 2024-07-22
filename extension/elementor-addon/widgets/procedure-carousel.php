@@ -175,10 +175,10 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
             <div class="grid-item">
                 <div class="procedure-slider-main owl-carousel owl-theme">
                     <?php
-                    foreach ( $settings['list'] as $item ) :
+                    foreach ( $settings['list'] as $index => $item ) :
                         $imageId = $item['list_image']['id'];
                     ?>
-                        <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                        <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-index="<?php echo esc_html__( $index + 1 ); ?>">
                             <div class="item__thumbnail">
                                 <?php
                                 if ( $imageId ) :
@@ -202,9 +202,14 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
             </div>
 
             <div class="grid-item">
+                <div class="custom-nav">
+                    <button class="prev-btn">Previous</button>
+                    <button class="next-btn">Next</button>
+                </div>
+
                 <div class="procedure-slider-number owl-carousel owl-theme">
                     <?php foreach ( $settings['list'] as $index => $item ) : ?>
-                    <div class="item">
+                    <div class="item thumb" data-index="<?php echo esc_html__( $index + 1 ); ?>">
                         <span class="number"><?php echo esc_html( $index + 1 ); ?></span>
                     </div>
                     <?php endforeach; ?>
