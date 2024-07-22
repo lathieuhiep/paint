@@ -36,6 +36,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/tool-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/commit-box-grid.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/project-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/procedure-carousel.php' );
 
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/post-grid.php' );
 //    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/banner.php' );
@@ -69,6 +70,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     $widgets_manager->register( new \Paint_Elementor_Tool_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Commit_Box_Grid() );
     $widgets_manager->register( new \Paint_Elementor_Project_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Procedure_Carousel() );
 
 //    $widgets_manager->register( new \Paint_Elementor_Post_Grid() );
 //    $widgets_manager->register( new \Paint_Elementor_Banner() );
@@ -97,8 +99,6 @@ function paint_load_script_libs(): void
         // owl carousel
         wp_enqueue_style( 'owl.carousel.min', get_theme_file_uri( '/assets/libs/owl.carousel/owl.carousel.min.css' ), array(), null );
         wp_enqueue_script( 'owl.carousel.min', get_theme_file_uri( '/assets/libs/owl.carousel/owl.carousel.min.js' ), array( 'jquery' ), '2.3.4', true );
-
-
     }
 }
 
