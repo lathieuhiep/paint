@@ -124,7 +124,6 @@
 
     // element procedure carousel
     const elementProcedureCarousel = ($scope, $) => {
-        const syncedSecondary = true
         const sliderBlock = $scope.find('.element-procedure-carousel')
 
         if ( sliderBlock.length ) {
@@ -132,10 +131,34 @@
             const sliderNumber = sliderBlock.find('.procedure-slider-number')
 
             // slider main
+            const syncPosition = (el) => {
+                const current = el.item.index - el.relatedTarget._clones.length / 2;
+                const allItems = $(el.target).find('.owl-item').not('.cloned');
+                const thumbItems = sliderNumber.find('.owl-item').not('.cloned');
+
+                allItems.removeClass('current');
+                thumbItems.removeClass('current');
+                allItems.eq(current).addClass('current');
+                thumbItems.eq(current).addClass('current');
+
+                const onScreen = sliderNumber.find('.owl-item.active').length - 1;
+                const start = sliderNumber.find('.owl-item.active').first().index();
+                const end = sliderNumber.find('.owl-item.active').last().index();
+
+                if (current > end) {
+                    sliderNumber.trigger('to.owl.carousel', [current - onScreen, 800]);
+                }
+
+                if (current < start) {
+                    sliderNumber.trigger('to.owl.carousel', [current, 800]);
+                }
+            }
+
             const sliderMainOptions = {
                 items: 1,
                 autoHeight: true,
-                dots: false
+                dots: false,
+                onChanged: syncPosition
             }
 
             sliderMain.owlCarousel( owlCarouselElementorOptions( sliderMainOptions ) )
@@ -146,23 +169,24 @@
                 autoHeight: true,
                 dots: false,
                 mouseDrag: false,
-                touchDrag: false
+                touchDrag: false,
+                onInitialized: function() {
+                    sliderNumber.find('.owl-item').not('.cloned').eq(0).addClass('current')
+                }
             }
             sliderNumber.owlCarousel( owlCarouselElementorOptions( sliderNumberOptions ) )
 
-            // event slider main changed
-            sliderMain.on('changed.owl.carousel', function(event) {
-                const index = event.item.index;
-                const count = event.item.count;
-                const currentIndex = (index - event.relatedTarget._clones.length / 2 + count) % count;
+            // custom nav
+            const prevBtn = sliderBlock.find('.prev-btn')
+            const nextBtn = sliderBlock.find('.next-btn')
 
-                sliderNumber.trigger('to.owl.carousel', [currentIndex, 300]);
-                sliderNumber.find('.thumb').removeClass('active-thumb');
-                sliderNumber.find('.thumb').eq(currentIndex).addClass('active-thumb');
+            prevBtn.on('click', function() {
+                sliderMain.trigger('prev.owl.carousel')
             })
 
-            // slider number active first
-            sliderNumber.find('.thumb').eq(0).addClass('active-thumb');
+            nextBtn.on('click', function() {
+                sliderMain.trigger('next.owl.carousel')
+            })
         }
     }
 

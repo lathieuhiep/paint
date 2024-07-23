@@ -991,7 +991,7 @@ class Paint_Elementor_Gallery_Grid_Box extends Widget_Base
     protected function render(): void
     {
         $settings = $this->get_settings_for_display();
-        ?>
+    ?>
         <div class="element-gallery-grid-box">
             <div class="element-gallery-grid-box__warp">
                 <?php foreach ( $settings['list'] as $item ) : ?>
@@ -1021,6 +1021,6 @@ class Paint_Elementor_Gallery_Grid_Box extends Widget_Base
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php
+    <?php
     }
 }

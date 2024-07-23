@@ -1,6 +1,9 @@
 <?php
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Text_Stroke;
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
@@ -135,6 +138,53 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
             ]
         );
 
+        // title options
+        $repeater->add_control(
+            'list_title_options',
+            [
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $repeater->add_control(
+            'list_show_gradient',
+            [
+                'label' => esc_html__( 'Dùng Gradient', 'paint' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'paint' ),
+                'label_off' => esc_html__( 'Hide', 'paint' ),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+
+        $repeater->add_control(
+            'list_title_color', [
+                'label' => esc_html__( 'Màu tiêu đề', 'paint' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .element-procedure-carousel .procedure-slider-main {{CURRENT_ITEM}}.item .title' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'list_show_gradient' => '',
+                ],
+            ]
+        );
+
+        $repeater->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'list_title_background',
+                'types' => ['gradient' ],
+                'selector' => '{{WRAPPER}} .element-procedure-carousel .procedure-slider-main {{CURRENT_ITEM}}.item .title',
+                'condition' => [
+                    'list_show_gradient' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'list',
             [
@@ -150,6 +200,63 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
                     ],
                 ],
                 'title_field' => '{{{ list_title }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // style title
+        $this->start_controls_section(
+            'style_title_section',
+            [
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'show_gradient',
+            [
+                'label' => esc_html__( 'Dùng Gradient', 'paint' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'paint' ),
+                'label_off' => esc_html__( 'Hide', 'paint' ),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+
+        $this->add_control(
+            'title_color',
+            [
+                'label' => esc_html__( 'Màu', 'paint' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .element-procedure-carousel .procedure-slider-main .item .title' => 'color: {{VALUE}}'
+                ],
+                'condition' => [
+                    'show_gradient' => '',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .element-procedure-carousel .procedure-slider-main .item .title',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'title_background',
+                'types' => ['gradient' ],
+                'selector' => '{{WRAPPER}} .element-procedure-carousel .procedure-slider-main .item .title',
+                'condition' => [
+                    'show_gradient' => 'yes',
+                ],
             ]
         );
 
@@ -177,8 +284,10 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
                     <?php
                     foreach ( $settings['list'] as $index => $item ) :
                         $imageId = $item['list_image']['id'];
+
+                        $class_gradient = $item['list_show_gradient'] || $settings['show_gradient'] == 'yes' ? ' show-gradient' : '';
                     ?>
-                        <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-index="<?php echo esc_html__( $index + 1 ); ?>">
+                        <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-index="<?php echo esc_html__( $index ); ?>">
                             <div class="item__thumbnail">
                                 <?php
                                 if ( $imageId ) :
@@ -188,9 +297,19 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
                             </div>
 
                             <div class="item__body">
-                                <h3 class="title">
-                                    <?php echo esc_html( $item['list_title'] ); ?>
-                                </h3>
+                                <div class="top-box">
+                                    <div class="top-box__inner">
+                                        <h3 class="title<?php echo esc_attr( $class_gradient ); ?>">
+                                            <?php echo esc_html( $item['list_title'] ); ?>
+                                        </h3>
+
+                                        <?php if ( $item['list_sub_title'] ) : ?>
+                                            <p class="sub-title">
+                                                <?php echo esc_html( $item['list_sub_title'] ); ?>
+                                            </p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
 
                                 <div class="desc">
                                     <?php echo wpautop( $item['list_content'] ); ?>
@@ -201,16 +320,16 @@ class Paint_Elementor_Procedure_Carousel extends Widget_Base
                 </div>
             </div>
 
-            <div class="grid-item">
+            <div class="grid-item d-flex flex-column">
                 <div class="custom-nav">
-                    <button class="prev-btn">Previous</button>
-                    <button class="next-btn">Next</button>
+                    <button class="prev-btn"><i class="fa-solid fa-arrow-left-long"></i></button>
+                    <button class="next-btn"><i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
 
-                <div class="procedure-slider-number owl-carousel owl-theme">
+                <div class="procedure-slider-number owl-carousel owl-theme flex-grow-1">
                     <?php foreach ( $settings['list'] as $index => $item ) : ?>
-                    <div class="item thumb" data-index="<?php echo esc_html__( $index + 1 ); ?>">
-                        <span class="number"><?php echo esc_html( $index + 1 ); ?></span>
+                    <div class="item thumb" data-index="<?php echo esc_html__( $index ); ?>">
+                        <span class="number"><?php echo esc_html( addZeroBeforeNumber( $index + 1 ) ); ?></span>
                     </div>
                     <?php endforeach; ?>
                 </div>
