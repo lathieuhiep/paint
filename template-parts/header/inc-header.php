@@ -4,20 +4,6 @@ $logo = paint_get_option('general_opt_logo', '');
 ?>
 
 <header class="site-header<?php echo esc_attr($sticky_menu ? ' active-sticky-nav' : ''); ?>">
-    <div class="top-box">
-        <div class="container">
-            <div class="grid-content">
-                <div class="search-form-warp">
-                    <?php get_search_form(); ?>
-                </div>
-
-                <div class="social-warp">
-                    <?php paint_get_social_url(); ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <nav class="main-navigation">
         <div class="container">
             <div class="site-navbar">
@@ -61,7 +47,17 @@ $logo = paint_get_option('general_opt_logo', '');
                         </ul>
                     <?php endif; ?>
 
-                    <?php get_template_part('template-parts/header/inc','user'); ?>
+<!--                    --><?php //get_template_part('template-parts/header/inc','user'); ?>
+                </div>
+
+                <div class="box-action">
+                    <button type="button" id="btn-header-search" class="btn btn-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                    <button type="button" id="btn-header-account" class="btn btn-account">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </button>
                 </div>
             </div>
         </div>
