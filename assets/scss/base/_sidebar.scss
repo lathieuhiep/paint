@@ -6,11 +6,16 @@
   .search-field {
     padding: 12px 12px 12px 50px;
     width: 100%;
+    color: #000000;
     border-radius: 12px;
     border: 1px solid #B9B9B9;
     overflow: hidden;
     box-shadow: none;
     background-color: #FCFCFC;
+
+    &::placeholder {
+      color: inherit;
+    }
   }
 
   .search-submit {
@@ -21,6 +26,7 @@
     padding: 0;
     width: 50px;
     color: $color-primary;
+    font-size: 2.2rem;
     border: none;
     background-color: transparent;
   }

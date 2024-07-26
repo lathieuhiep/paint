@@ -79,8 +79,10 @@ function paint_register_front_end(): void
     }
 
     // get style post type project
-    if (is_tax('paint_project_cat') || is_post_type_archive('paint_project') || (is_search() && $_GET['post_type'] == 'paint_project')) {
-        wp_enqueue_style('archive-project', get_theme_file_uri('/assets/css/post-type/project/archive.min.css'), array(), '');
+    if ( !empty( $_GET['post_type'] ) ) {
+        if ( ( is_tax('paint_project_cat') || is_post_type_archive('paint_project') || (is_search() ) && $_GET['post_type'] == 'paint_project')) {
+            wp_enqueue_style('archive-project', get_theme_file_uri('/assets/css/post-type/project/archive.min.css'), array(), '');
+        }
     }
 
     if (is_singular('paint_project')) {
@@ -97,8 +99,10 @@ function paint_register_front_end(): void
     }
 
     // get style post type discover
-    if (is_tax('paint_discover_cat') || is_post_type_archive('paint_discover') || (is_search() && $_GET['post_type'] == 'paint_discover')) {
-        wp_enqueue_style('archive-discover', get_theme_file_uri('/assets/css/post-type/discover/archive.min.css'), array(), '');
+    if ( !empty( $_GET['post_type'] ) ) {
+        if ( ( is_tax('paint_discover_cat') || is_post_type_archive('paint_discover') ) || (is_search() && $_GET['post_type'] == 'paint_discover') ) {
+            wp_enqueue_style('archive-discover', get_theme_file_uri('/assets/css/post-type/discover/archive.min.css'), array(), '');
+        }
     }
 
     if (is_singular('paint_discover')) {
@@ -165,10 +169,12 @@ function paint_register_front_end(): void
     }
 
     // template discover
-    if (is_tax('paint_discover_cat') || is_post_type_archive('paint_discover') || is_singular('paint_discover') || (is_search() && $_GET['post_type'] == 'paint_discover')) {
-        wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
-        wp_enqueue_script('discover', get_theme_file_uri('/assets/js/discover.min.js'), array(), '1.0.0', true);
-        wp_localize_script('discover', 'discoverAjax', array('url' => $paint_admin_url_ajax));
+    if ( !empty( $_GET['post_type'] ) ) {
+        if ( ( is_tax('paint_discover_cat') || is_post_type_archive('paint_discover') || is_singular('paint_discover') ) || (is_search() && $_GET['post_type'] == 'paint_discover')) {
+            wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
+            wp_enqueue_script('discover', get_theme_file_uri('/assets/js/discover.min.js'), array(), '1.0.0', true);
+            wp_localize_script('discover', 'discoverAjax', array('url' => $paint_admin_url_ajax));
+        }
     }
 
     if (is_singular(array('paint_discover', 'paint_project'))) {

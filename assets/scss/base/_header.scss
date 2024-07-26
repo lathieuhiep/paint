@@ -64,10 +64,121 @@
   }
 
   .box-action {
+    display: grid;
+    grid-gap: 1.6rem;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: inherit;
+
     .btn {
       padding: 0;
-      font-size: 2rem;
+      font-size: 2.2rem;
       border: 0;
+    }
+
+    .dropdown-account-warp {
+      .dropdown-user-manager {
+        display: none;
+        padding: 2.4rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 29.7rem;
+        width: max-content;
+        max-width: 40rem;
+        height: auto;
+        line-height: 1.5;
+        font-size: 1.4rem;
+        color: #012169;
+        border: .1rem solid #f1f1f1;
+        box-shadow: 0 .2rem .4rem 0 rgba(0,0,0,.1);
+        background-color: #fff;
+
+        &.show {
+          display: block;
+          animation: slideIn 0.5s forwards;
+        }
+
+        &.hide {
+          display: block;
+          animation: slideOut 0.5s forwards;
+        }
+
+        &:before {
+          position: absolute;
+          content: "";
+          top: -1rem;
+          right: 1rem;
+          border-left: 1rem solid transparent;
+          border-right: 1rem solid transparent;
+          border-bottom: 1rem solid #ffffff;
+        }
+
+        i {
+          font-size: 2.2rem;
+        }
+
+        .details {
+          .title {
+            margin-top: 1.6rem;
+            margin-bottom: 1.6rem;
+            font-size: 1.8rem;
+          }
+
+          .user-name {
+            font-size: 1.5rem
+          }
+
+          .btn {
+            padding: 0;
+            line-height: inherit;
+            @include transition();
+          }
+
+          .btn-login-user {
+            padding: 1rem 1.6rem;
+            width: 100%;
+            font-size: 1.5rem;
+            color: #000000;
+            box-shadow: inset 0 -.3rem 0 0 rgba(0, 0, 0, .1);
+            border-radius: .4rem;
+            background: #fdcd26;
+
+            &:hover {
+              background: #fdcd26;
+            }
+          }
+
+          .register-warp {
+            margin-top: 1.6rem;
+          }
+
+          .btn-register-user {
+            font-size: inherit;
+            color: #000000;
+            line-height: inherit;
+            background-image: linear-gradient(0deg, currentColor, currentColor);
+            background-repeat: no-repeat;
+            background-size: 0 .1rem;
+            background-position: 50% 100%;
+
+            &:hover {
+              color: #fdcd26;
+              background-size: 100% .1rem;
+            }
+          }
+
+          .account-footer {
+            border-top: .1rem solid #f1f1f1;
+            text-align: center;
+            margin-top: 2.4rem;
+            padding-top: 2.4rem;
+
+            a {
+              color: #012169;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -365,6 +476,43 @@
     }
   }
 
+  .search-box-warp {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .search-form {
+      height: 100%;
+
+      > div {
+        height: 100%;
+      }
+
+      .search-field {
+        height: 100%;
+        border-radius: 0;
+        border: 0;
+        background-color: #faca26;
+      }
+
+      .btn-close-search {
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 50px;
+        color: #000;
+        font-size: 2.2rem;
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+
   .site-user {
     position: relative;
     min-height: inherit;
@@ -609,5 +757,23 @@
         color: #ffffff;
       }
     }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -100%;
   }
 }

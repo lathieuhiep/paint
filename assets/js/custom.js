@@ -11,13 +11,13 @@
 
     /* Start back top */
     $('#back-top').on('click', function (e) {
-      e.preventDefault();
-      $('html').scrollTop(0);
-    });
+      e.preventDefault()
+      $('html').scrollTop(0)
+    })
     /* End back top */
 
     /* btn mobile Start*/
-    let subMenuToggle = $('.sub-menu-toggle');
+    let subMenuToggle = $('.sub-menu-toggle')
 
     if (subMenuToggle.length) {
 
@@ -37,6 +37,49 @@
 
     }
     /* btn mobile End */
+    
+    // show search header
+    $('#btn-header-search').on('click', function () {
+      $('.search-box-warp').fadeIn()
+      $('.box-action').addClass('hide')
+    })
+
+    $('#btn-close-search').on('click', function () {
+      $('.search-box-warp').fadeOut()
+      $('.box-action').removeClass('hide')
+    })
+
+    // dropdown account
+    const dropUserManager = $('#dropdown-user-manager')
+
+    $('#btn-header-account').click(function(event) {
+      event.stopPropagation()
+
+      if ( dropUserManager.hasClass('show')) {
+        dropUserManager.removeClass('show').addClass('hide')
+
+        setTimeout(function() {
+          dropUserManager.removeClass('hide').hide();
+        }, 500)
+
+      } else {
+        dropUserManager.removeClass('hide').addClass('show').show();
+      }
+    })
+
+    $(document).click(function(event) {
+      if (!$(event.target).closest('#btn-header-account, #dropdown-user-manager').length) {
+
+        if ( dropUserManager.hasClass('show') ) {
+          dropUserManager.removeClass('show').addClass('hide');
+
+          setTimeout(function() {
+            dropUserManager.removeClass('hide').hide();
+          }, 500)
+        }
+
+      }
+    })
 
     /* Start custom owl carousel */
     generalSlickCarousel('.custom-slick-carousel');
@@ -49,10 +92,10 @@
     setTimeout(function () {
       $('#site-loadding').remove();
     }, 300);
-  });
+  })
 
   // scroll event
-  let timer_clear;
+  let timer_clear
 
   $(window).scroll(function () {
     // handle show back to top
@@ -72,7 +115,7 @@
     }, 100);
 
 
-  });
+  })
 
   // function slick carousel
   const generalSlickCarousel = (classSelector) => {

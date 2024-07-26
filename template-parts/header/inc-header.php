@@ -26,7 +26,7 @@ $logo = paint_get_option('general_opt_logo', '');
                     </button>
                 </div>
 
-                <div id="site-menu" class="site-menu collapse navbar-collapse d-lg-flex">
+                <div id="site-menu" class="site-menu collapse navbar-collapse d-lg-flex position-relative">
                     <?php
                     if (has_nav_menu('primary')) :
 
@@ -47,17 +47,66 @@ $logo = paint_get_option('general_opt_logo', '');
                         </ul>
                     <?php endif; ?>
 
-<!--                    --><?php //get_template_part('template-parts/header/inc','user'); ?>
+                    <div class="search-box-warp">
+                        <?php get_template_part('searchform', 'header'); ?>
+                    </div>
                 </div>
 
                 <div class="box-action">
-                    <button type="button" id="btn-header-search" class="btn btn-search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+                    <div class="search-header-warp d-flex align-items-center">
+                        <button type="button" id="btn-header-search" class="btn btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
 
-                    <button type="button" id="btn-header-account" class="btn btn-account">
-                        <i class="fa-regular fa-circle-user"></i>
-                    </button>
+                    <div class="dropdown-account-warp position-relative text-center d-flex align-items-center">
+                        <button type="button" id="btn-header-account" class="btn btn-account">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </button>
+
+                        <div id="dropdown-user-manager" class="dropdown-user-manager">
+                            <i class="fa-solid fa-circle-user"></i>
+
+                            <div class="details">
+                                <p class="title"><?php esc_html_e( 'Tài khoản của tôi', 'paint' ); ?></p>
+
+                                <?php
+                                if ( is_user_logged_in() ):
+                                    $current_user = wp_get_current_user();
+                                ?>
+                                    <span class="txt user-name"><?php echo esc_html($current_user->user_nicename); ?></span>
+
+                                    <div class="account-footer d-flex justify-content-between align-items-center">
+                                        <div class="account-footer__item">
+                                            <a class="logout d-flex align-items-center gap-2" href="<?php echo wp_logout_url(home_url()); ?>">
+                                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
+                                                <span><?php esc_html_e('Đăng xuất', 'paint'); ?></span>
+                                            </a>
+                                        </div>
+
+                                        <div class="account-footer__item">
+                                            <a href="<?php echo esc_url(paint_get_tpl_url('templates/personal-info.php')); ?>">
+                                                <i class="fa-solid fa-user-pen"></i>
+                                                <span><?php esc_html_e('Thông tin', 'paint'); ?></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <a id="btn-login-user" class="btn btn-login-user" href="<?php echo esc_url(paint_get_tpl_url('templates/login.php')) ?>">
+                                        <?php esc_html_e( 'Đăng nhập', 'paint' ); ?>
+                                    </a>
+
+                                    <div class="register-warp d-flex align-items-center gap-2">
+                                        <span class="txt"><?php esc_html_e( 'Chưa có tài khoản?', 'paint' ); ?></span>
+
+                                        <a id="btn-register-user" class="btn btn-register-user" href="<?php echo esc_url(paint_get_tpl_url('templates/register.php')); ?>">
+                                            <?php esc_html_e( 'Đăng ký tại đây', 'paint' ); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
