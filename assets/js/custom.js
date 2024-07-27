@@ -98,6 +98,15 @@
   let timer_clear
 
   $(window).scroll(function () {
+    // scroll menu
+    const menu = $('.site-header');
+
+    if ($(this).scrollTop() > menu.outerHeight()) {
+      menu.addClass('scrolled');
+    } else {
+      menu.removeClass('scrolled');
+    }
+
     // handle show back to top
     if (timer_clear) clearTimeout(timer_clear);
     timer_clear = setTimeout(function () {

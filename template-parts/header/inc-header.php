@@ -7,7 +7,11 @@ $logo = paint_get_option('general_opt_logo', '');
     <nav class="main-navigation">
         <div class="container">
             <div class="site-navbar">
-                <div class="site-logo d-flex align-items-lg-center">
+                <div class="site-logo d-flex align-items-center">
+                    <button class="btn btn-primary btn-close-canvas d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+
                     <a href="<?php echo esc_url(get_home_url('/')); ?>" title="<?php bloginfo('name'); ?>">
                         <?php
                         if (!empty($logo['id'])) :
@@ -20,13 +24,9 @@ $logo = paint_get_option('general_opt_logo', '');
 
                         <?php endif; ?>
                     </a>
-
-                    <button class="btn btn-primary btn-close-canvas d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
                 </div>
 
-                <div id="site-menu" class="site-menu collapse navbar-collapse d-lg-flex position-relative">
+                <div id="site-menu" class="site-menu navbar-collapse d-lg-flex">
                     <?php
                     if (has_nav_menu('primary')) :
 
