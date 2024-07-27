@@ -4,26 +4,40 @@
 @import "../../components/project-related";
 
 .site-single-project {
-  .grid {
-    @media (min-width: 992px) {
+  padding-top: .8rem;
+
+  .form-search-project {
+    margin-bottom: 3.6rem;
+
+    .control-warp {
       display: grid;
-      grid-gap: 2.4rem;
-      grid-template-columns: 1fr 80%;
+      grid-template-columns: 1fr 37.5rem;
     }
 
-    &__item {
-      @media (max-width: 991px) {
-        &:not(:last-child) {
-          margin-bottom: 3rem;
-        }
+    .group-control-radio {
+      display: grid;
+      grid-template-columns: repeat(6, auto);
+    }
+
+    .group-search-key {
+      position: relative;
+
+      .search-field {
+        padding: 0 3.2rem 0 1rem;
+        height: 100%;
       }
-    }
-  }
 
-  .form-search-custom {
-    .group-control {
-      ~ .group-control {
-        margin-top: 2.4rem;
+      .search-submit {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 3rem;
+        color: #000000;
+        border: 0;
+        background-color: transparent;
       }
     }
   }
@@ -137,7 +151,7 @@
 
           &.model {
             .txt-value {
-              color:$color-secondary;
+              color: $color-secondary;
             }
           }
         }

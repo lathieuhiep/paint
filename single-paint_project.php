@@ -51,15 +51,12 @@ $config_nav_thumbnail = [
   <div class="site-container site-single-project">
     <div class="container">
       <div class="grid">
-        <div class="grid__item">
-          <?php get_template_part('template-parts/project/inc', 'search-cat'); ?>
-        </div>
+        <?php
+          get_template_part('template-parts/project/inc', 'search-cat');
 
-        <div class="grid__item">
-          <?php
           while (have_posts()) : the_post();
             $terms = get_the_terms(get_the_ID(), 'paint_project_cat');
-            ?>
+        ?>
             <div class="banner">
               <?php echo wp_get_attachment_image($banner, 'full') ?>
 
@@ -167,8 +164,7 @@ $config_nav_thumbnail = [
           <?php
           endwhile;
           wp_reset_postdata();
-          ?>
-        </div>
+        ?>
       </div>
       
       <?php get_template_part('template-parts/project/inc', 'related-project'); ?>

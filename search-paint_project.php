@@ -4,7 +4,6 @@ get_header();
 $search_query = get_search_query();
 $s = $_GET['s'];
 $cat = !empty($_GET['cat']) ? (int) $_GET['cat'] : '';
-
 $opt_project_limit = paint_get_option('template_project_opt_limit', 12);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
