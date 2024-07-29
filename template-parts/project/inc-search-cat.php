@@ -33,7 +33,7 @@ $cat = !empty($_GET['cat']) ? (int)$_GET['cat'] : '';
         </div>
 
         <div class="group-control group-search-key">
-            <input type="search" id="<?php echo $paint_unique_id; ?>" class="search-field form-control"
+            <input type="text" id="<?php echo $paint_unique_id; ?>" class="search-field form-control"
                    placeholder="<?php echo esc_attr_x('Nhập từ khóa...', 'placeholder', 'paint'); ?>"
                    value="<?php echo get_search_query(); ?>" name="s" aria-label=""/>
 

@@ -4,30 +4,25 @@ $color_board = (int)get_post_meta(get_the_ID(), 'paint_cmb_options_product_color
 ?>
 
 <div class="item">
-  <div class="thumbnail">
-    <a class="link-image" href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('medium_large', ['class' => 'img-feature']); ?>
-      <img src="<?php echo esc_url( $image_hover ) ?>" alt="<?php the_title() ?>" class="img-feature-hover">
-    </a>
+    <a class="item__link" href="<?php the_permalink(); ?>"></a>
 
-    <h2 class="title">
-      <a href="<?php the_permalink(); ?>">
-        <?php the_title() ?>
-      </a>
-    </h2>
+    <div class="item__image">
+        <?php
+        $attr = array(
+            'class' => 'featured-image w-100'
+        );
 
-    <div class="box-group">
-      <h2 class="box-group__title m-0">
-        <a href="<?php the_permalink(); ?>">
-          <?php the_title() ?>
-        </a>
-      </h2>
+        the_post_thumbnail('large', $attr);
+        ?>
 
-      <?php if ($color_board) : ?>
-        <a href="<?php the_permalink(); ?>" class="box-group__link">
-          <?php esc_html_e('Bảng màu', 'paint'); ?>
-        </a>
-      <?php endif; ?>
+        <?php if ( $image_hover ) : ?>
+            <div class="secondary-image">
+                <img src="<?php echo esc_url( $image_hover ); ?>" alt="<?php the_title() ?>">
+            </div>
+        <?php endif; ?>
     </div>
-  </div>
+
+    <h3 class="item__title text-center">
+        <?php the_title(); ?>
+    </h3>
 </div>

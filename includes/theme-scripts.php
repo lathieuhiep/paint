@@ -84,6 +84,7 @@ function paint_register_front_end(): void
     }
 
     if (is_singular('paint_project')) {
+        wp_enqueue_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
         wp_enqueue_style('single-project', get_theme_file_uri('/assets/css/post-type/project/single.min.css'), array(), '');
     }
 
@@ -174,6 +175,12 @@ function paint_register_front_end(): void
     if (is_singular(array('paint_discover', 'paint_project'))) {
         wp_enqueue_script('user-save', get_theme_file_uri('/assets/js/user-save.min.js'), array(), '1.0.0', true);
         wp_localize_script('user-save', 'userSaveAjax', array('url' => $paint_admin_url_ajax));
+    }
+
+    if (is_singular('paint_project')) {
+        wp_enqueue_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
+
+        wp_enqueue_script('project-detail', get_theme_file_uri('/assets/js/project-detail.min.js'), array(), '', true);
     }
 
     // template register

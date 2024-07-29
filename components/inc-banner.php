@@ -6,7 +6,9 @@ if (!empty($args['opt'])) :
   if ($id_image) :
     ?>
     <div class="element-banner">
-      <?php echo wp_get_attachment_image($id_image, 'full'); ?>
+      <?php echo wp_get_attachment_image($id_image, 'full', '', array(
+              'class' => 'w-100'
+      )); ?>
     </div>
   <?php
   endif;

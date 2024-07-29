@@ -1,46 +1,11 @@
 @import "../../variables-site/variables";
 
+@import "../../components/form-search-project";
 @import "../../components/newsletter";
 @import "../../components/project-related";
 
 .site-single-project {
   padding-top: .8rem;
-
-  .form-search-project {
-    margin-bottom: 3.6rem;
-
-    .control-warp {
-      display: grid;
-      grid-template-columns: 1fr 37.5rem;
-    }
-
-    .group-control-radio {
-      display: grid;
-      grid-template-columns: repeat(6, auto);
-    }
-
-    .group-search-key {
-      position: relative;
-
-      .search-field {
-        padding: 0 3.2rem 0 1rem;
-        height: 100%;
-      }
-
-      .search-submit {
-        margin: 0;
-        padding: 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 3rem;
-        color: #000000;
-        border: 0;
-        background-color: transparent;
-      }
-    }
-  }
 
   .banner {
     margin-bottom: 6rem;
@@ -97,16 +62,32 @@
   }
 
   .entry-content {
-    display: grid;
-    grid-gap: 24px 32px;
-    grid-template-columns: 50% 1fr;
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      @media (min-width: 768px) {
+        width: 50%;
+      }
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
 
     .post-image {
       &__feature {
-        margin-bottom: 20px;
+        margin-bottom: 3rem;
+
+        .item {
+          height: 42.1rem;
+          overflow: hidden;
+        }
 
         img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
 
@@ -122,10 +103,21 @@
     }
 
     .post-content {
+      @media (min-width: 768px) {
+        padding-left: 2.8rem;
+      }
+
       &__warp {
-        padding: 2.5rem 3rem;
+        padding: 2.2rem 6rem 2.2rem 2.6rem;
+        position: relative;
+        max-height: 56rem;
+        overflow: hidden;
         color: $color-black;
         background-color: #F1F1F1;
+
+        &.simplebar-active {
+          overflow: auto;
+        }
 
         .heading-box {
           margin-bottom: 1.2rem;
@@ -135,6 +127,25 @@
 
           .post-content__heading {
             margin-bottom: 0;
+          }
+        }
+
+        .simplebar-track {
+          &.simplebar-vertical {
+            top: 1.8rem;
+            right: 1.4rem;
+            bottom: 2.7rem;
+            width: 1.8rem;
+            border-radius: 2rem;
+            background: rgba(217, 217, 217, 0.6);
+
+          }
+        }
+
+        .simplebar-scrollbar {
+          &:before{
+            border-radius: 2rem;
+            background: rgba(211, 210, 210, 1);
           }
         }
       }
@@ -169,5 +180,22 @@
 
   .title {
     margin-bottom: 3rem;
+  }
+
+  .action-box {
+    margin-top: 4.2rem;
+    text-align: center;
+
+    .btn {
+      padding: .3rem 1rem;
+      font-weight: 700;
+      border: .1rem solid #FDCD27;
+      border-radius: 0;
+      @include transition();
+
+      &:hover {
+        background-color: #FDCD27;
+      }
+    }
   }
 }

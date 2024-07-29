@@ -40,12 +40,12 @@
     
     // show search header
     $('#btn-header-search').on('click', function () {
-      $('.search-box-warp').fadeIn()
+      $('.search-box-warp').fadeIn().addClass('visible')
       $('.box-action').addClass('hide')
     })
 
     $('#btn-close-search').on('click', function () {
-      $('.search-box-warp').fadeOut()
+      $('.search-box-warp').fadeOut().removeClass('visible')
       $('.box-action').removeClass('hide')
     })
 

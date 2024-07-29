@@ -1,5 +1,6 @@
 @import "../../variables-site/variables";
 
+@import "../../components/form-search-project";
 @import "../../components/action-tax-search";
 @import "../../components/project-related";
 @import "../../components/newsletter";
@@ -8,11 +9,7 @@
   display: grid;
   grid-gap: 2.4rem;
 
-  @media screen and (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1199px) {
+  @media screen and (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -39,21 +36,6 @@
 
     .page-title {
       font-size: 2.4rem;
-    }
-  }
-
-  .form-search-project {
-    margin-bottom: 3rem;
-    display: grid;
-    grid-gap: 2.4rem;
-    grid-template-columns: repeat(2, 1fr) 25rem;
-
-    .group-control {
-      margin: 0;
-    }
-
-    .search-submit {
-      margin: 0;
     }
   }
 }

@@ -234,6 +234,7 @@
     left: -1.2rem;
     right: -1.2rem;
     height: 6rem;
+    visibility: hidden;
   }
 
   .navbar-nav {
@@ -521,9 +522,12 @@
       .search-field {
         height: 100%;
         border-radius: 0;
-        border: 0;
         background-color: #faca26;
         @include transition();
+
+        @media (max-width: 991px) {
+          border-top: .1rem solid #ffffff;
+        }
       }
 
       .btn-close-search {
