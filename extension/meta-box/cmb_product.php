@@ -59,6 +59,31 @@ function paint_cmb_product(): void
         'options' => paint_check_get_cat('paint_color_code_cat')
     ));
 
+    $cmb_options->add_field(array(
+        'name' => esc_html__('Album sản phẩm', 'paint'),
+        'id' => 'paint_cmb_product_image_gallery',
+        'type' => 'file_list',
+        'options' => array(
+            'url' => false,
+        ),
+        'text' => array(
+            'add_upload_files_text' => esc_html__('Chọn ảnh', 'paint'),
+            'remove_image_text' => esc_html__('Xóa ảnh', 'paint'),
+            'file_text' => esc_html__('Ảnh', 'paint'),
+        ),
+        'query_args' => array(
+            'type' => array(
+                'image/gif',
+                'image/jpeg',
+                'image/png',
+            ),
+        ),
+        'preview_size' => 'thumbnail',
+        'escape_cb' => false,
+        'sanitization_cb' => false,
+        'desc' => esc_html__('Ảnh sẽ hiển thị ở chi tiết sản phẩm, nếu không có sẽ thay bằng ảnh đại diện', 'paint'),
+    ));
+
     // group field gallery
     $gallery_field = $cmb_options->add_field(array(
         'id' => 'paint_cmb_product_gallery',
@@ -102,7 +127,7 @@ function paint_cmb_product(): void
                 'image/png',
             ),
         ),
-        'preview_size' => 'large',
+        'preview_size' => 'thumbnail',
     ));
 
     // group field construction process
@@ -132,7 +157,7 @@ function paint_cmb_product(): void
         'id' => 'content',
         'type' => 'wysiwyg',
         'options' => array(
-            'textarea_rows' => 11,
+            'textarea_rows' => 10,
         )
     ));
 }

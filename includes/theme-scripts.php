@@ -38,7 +38,16 @@ function paint_register_front_end(): void
     wp_dequeue_style('wc-blocks-style');
     wp_dequeue_style('storefront-gutenberg-blocks');
 
+    // register simplebar
+    wp_register_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
+    wp_register_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
+
     /** Load css **/
+
+    // font google
+    if ( is_singular('paint_product') ) {
+        wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap', array(), null );
+    }
 
     /* Start main Css */
     wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '5.12.1');
@@ -47,11 +56,13 @@ function paint_register_front_end(): void
     // get style bootstrap
     wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/bootstrap.min.css'), array(), '5.3.3');
 
+
+
     // style theme
     wp_enqueue_style( 'paint-style', get_theme_file_uri( '/assets/css/style-theme.min.css' ), array(), paint_get_version_theme() );
 
     // get style lib slick
-    if ( is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
+    if ( is_singular('paint_product') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
         wp_enqueue_style('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/css/slick.min.css'), array(), '1.8.1');
     }
 
@@ -74,7 +85,8 @@ function paint_register_front_end(): void
         wp_enqueue_style('archive-product', get_theme_file_uri('/assets/css/post-type/product/archive.min.css'), array(), '');
     }
 
-    if (is_singular('paint_product')) {
+    if ( is_singular('paint_product') ) {
+        wp_enqueue_style('simplebar');
         wp_enqueue_style('single-product', get_theme_file_uri('/assets/css/post-type/product/single.min.css'), array(), '');
     }
 
@@ -83,8 +95,8 @@ function paint_register_front_end(): void
         wp_enqueue_style('archive-project', get_theme_file_uri('/assets/css/post-type/project/archive.min.css'), array(), '');
     }
 
-    if (is_singular('paint_project')) {
-        wp_enqueue_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
+    if ( is_singular('paint_project') ) {
+        wp_enqueue_style('simplebar');
         wp_enqueue_style('single-project', get_theme_file_uri('/assets/css/post-type/project/single.min.css'), array(), '');
     }
 
@@ -139,7 +151,7 @@ function paint_register_front_end(): void
     wp_enqueue_script('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/bootstrap.bundle.min.js'), array('jquery'), '5.3.3', true);
 
     // get lib slick
-    if ( is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
+    if (  is_singular('paint_product') || is_singular('paint_project') || is_singular('paint_tool') || is_singular('paint_discover') || is_singular('post') || is_tax('paint_project_cat') || is_post_type_archive('paint_project') || is_tax('paint_discover_cat') || is_post_type_archive('paint_discover')) {
         wp_enqueue_script('slick-carousel', get_theme_file_uri('/assets/libs/slick-carousel/js/slick.min.js'), array('jquery'), '1.8.1', true);
     }
 
@@ -159,8 +171,10 @@ function paint_register_front_end(): void
         wp_enqueue_script('count-up-scroll', get_theme_file_uri('/assets/js/count-up-scroll.min.js'), array('jquery'), '', true);
     }
 
-    if (is_singular('paint_product')) {
+    if ( is_singular('paint_product') ) {
+        wp_enqueue_script('simplebar');
         wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
+
         wp_enqueue_script('product-detail', get_theme_file_uri('/assets/js/product-detail.min.js'), array(), '1.0.0', true);
         wp_localize_script('product-detail', 'productDetailAjax', array('url' => $paint_admin_url_ajax));
     }
@@ -177,9 +191,8 @@ function paint_register_front_end(): void
         wp_localize_script('user-save', 'userSaveAjax', array('url' => $paint_admin_url_ajax));
     }
 
-    if (is_singular('paint_project')) {
-        wp_enqueue_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
-
+    if ( is_singular('paint_project') ) {
+        wp_enqueue_script('simplebar');
         wp_enqueue_script('project-detail', get_theme_file_uri('/assets/js/project-detail.min.js'), array(), '', true);
     }
 

@@ -843,6 +843,36 @@ if (class_exists('CSF')) {
                 'title' => esc_html__('Số sản phẩm cần lấy', 'paint'),
                 'default' => 8,
             ),
+
+            // contact
+            array(
+                'id'       => 'opt-link-2',
+                'type'     => 'link',
+                'title'    => 'Link',
+                'default'  => array(
+                    'url'    => 'http://codestarframework.com/',
+                    'text'   => 'Codestar Framework',
+                    'target' => '_blank'
+                ),
+            ),
+
+        )
+    ));
+
+    // product detail
+    CSF::createSection($paint_prefix, array(
+        'parent' => 'paint_opt_product',
+        'title' => esc_html__('Chi tiết', 'paint'),
+        'fields' => array(
+            // contact
+            array(
+                'id'       => 'paint_opt_product_detail_contact',
+                'type'     => 'link',
+                'title'    => esc_html__('Link liên hệ', 'paint'),
+                'default'  => array(
+                    'url'    => '#',
+                ),
+            ),
         )
     ));
 

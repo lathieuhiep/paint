@@ -570,3 +570,19 @@ form {
     }
   }
 }
+
+.btn-global {
+  padding: .3rem 1rem;
+  border: .1rem solid #FDCD27;
+  font-size: 1.4rem;
+  font-weight: 700;
+  @include transition();
+
+  &:hover {
+    background-color: #FDCD27;
+  }
+}
+
+.font-f-seconder {
+  font-family: $font-f-second;
+}

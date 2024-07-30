@@ -5,15 +5,128 @@
 @import "../../components/accordion-my-theme";
 
 .site-single-product {
-  .product-title {
-    margin-bottom: 0;
+  .product-info-warp {
+    display: flex;
+    flex-wrap: wrap;
 
-    @media (min-width: 992px) {
+    > div {
+      @media (min-width: 576px) and (max-width: 991px) {
+        width: 50%;
+      }
+
+      @media (max-width: 575px) {
+        width: 100%;
+      }
+    }
+
+    .thumbnail-box {
+      @media (min-width: 992px) {
+        width: 40%;
+      }
+    }
+
+    .slider-product-galleries {
+      .item {
+        padding: 2.4rem;
+        border: .1rem solid #000000;
+
+        @media (min-width: 768px) {
+          height: 60rem;
+        }
+
+        @media (max-width: 767px) {
+          height: 50rem;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .slider-product-gallery-nav {
+      margin-top: 3.3rem;
+    }
+
+    .body-box {
+      @media (min-width: 992px) {
+        padding-left: 7rem;
+        width: 60%;
+      }
+
+      @media (min-width: 576px) and (max-width: 991px) {
+        padding-left: 3rem;
+      }
+
+      .heading {
+        margin-bottom: 1rem;
+        display: flex;
+
+        @media (min-width: 992px) {
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        @media (max-width: 991px) {
+          flex-direction: column;
+          align-items: start;
+        }
+      }
+
+      .action-box {
+        margin-top: 2.7rem;
+
+        .link {
+          display: inline-block;
+          padding: .5rem 3rem;
+          font-size: 1.6rem;
+          line-height: 1.8rem;
+          border-radius: .5rem;
+
+          &:hover {
+            color: #000000;
+          }
+        }
+      }
+    }
+
+    .product-title {
+      margin: 0;
       font-size: 2.4rem;
     }
 
-    @media (max-width: 991px) {
-      font-size: 1.8rem;
+    .content-product-detail {
+      padding: 1.5rem 6rem 1.5rem 3rem;
+      position: relative;
+      max-height: 58rem;
+      overflow: hidden;
+      color: $color-black;
+      background-color: #F1F1F1;
+
+      &.simplebar-active {
+        overflow: auto;
+      }
+
+      .simplebar-track {
+        &.simplebar-vertical {
+          top: 1.8rem;
+          right: 1.4rem;
+          bottom: 2.7rem;
+          width: 1.8rem;
+          border-radius: 2rem;
+          background: rgba(217, 217, 217, 0.6);
+
+        }
+      }
+
+      .simplebar-scrollbar {
+        &:before{
+          border-radius: 2rem;
+          background: rgba(211, 210, 210, 1);
+        }
+      }
     }
   }
 
@@ -43,16 +156,17 @@
       }
 
       .nav-item {
-        margin-bottom: 1.6rem;
-        padding: 0 33px;
+        margin-bottom: .8rem;
+        padding: 0 1.4rem;
       }
 
       .nav-link {
         position: relative;
-        padding: 0 0 3px;
-        font-weight: 700;
-        font-size: 2.2rem;
-        color: $color-primary;
+        padding: .3rem 3rem;
+        font-size: 1.4rem;
+        color: #FDCD26;
+        border: .1rem solid currentColor;
+        border-radius: 0;
         background-color: transparent;
         @include transition();
 
@@ -60,7 +174,7 @@
           position: absolute;
           content: "";
           left: 0;
-          bottom: 0;
+          bottom: -1rem;
           right: 0;
           height: 3px;
           opacity: 0;
@@ -68,8 +182,15 @@
           @include transition();
         }
 
-        &.active,
         &:hover {
+          border-color: #000000;
+          background-color: #000000;
+        }
+
+        &.active {
+          border-color: #000000;
+          background-color: #000000;
+
           &::after {
             opacity: 1;
           }
@@ -202,8 +323,19 @@
       .list-color {
         display: grid;
         grid-gap: 3rem;
-        grid-template-columns: repeat(5, 1fr);
         @include transition();
+
+        @media (min-width: 992px) {
+          grid-template-columns: repeat(5, 1fr);
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 767px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
 
         ~ .list-color {
           margin-top: 3rem;
@@ -275,7 +407,18 @@
 
         .box-full-color {
           display: none;
-          grid-column: 1 / span 5;
+
+          @media (min-width: 992px) {
+            grid-column: 1 / span 5;
+          }
+
+          @media (min-width: 768px) and (max-width: 991px) {
+            grid-column: 1 / span 4;
+          }
+
+          @media (max-width: 767px) {
+            grid-column: 1 / span 2;
+          }
 
           img {
             width: auto;
@@ -347,16 +490,55 @@
 
 .related-product {
   margin-top: 5rem;
+  margin-bottom: 2rem;
 
   &__title {
     margin-bottom: 2rem;
+    text-align: center;
 
     @media (min-width: 992px) {
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
 
     @media (max-width: 991px) {
       font-size: 1.8rem;
+    }
+  }
+
+  &__grid {
+    .item {
+      margin-bottom: 2rem;
+      padding: 2.4rem 2.4rem 4rem;
+      position: relative;
+      border: .1rem solid rgba(114, 114, 114, 0.2);
+      border-radius: 2rem;
+
+      &__thumbnail {
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        margin-bottom: 0;
+        font-size: 1.4rem;
+        text-align: center;
+      }
+
+      .action-box {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1.8rem;
+        text-align: center;
+
+        .link-detail {
+          display: inline-block;
+          padding: .35rem 2.3rem;
+          font-size: 1.4rem;
+          color: #000000;
+          font-weight: 700;
+          background-color: #FDCD26;
+        }
+      }
     }
   }
 }

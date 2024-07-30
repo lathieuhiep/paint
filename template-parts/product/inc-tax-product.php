@@ -17,7 +17,7 @@ $color_board = (int)get_post_meta(get_the_ID(), 'paint_cmb_options_product_color
 
         <?php if ( $image_hover ) : ?>
             <div class="secondary-image">
-                <img src="<?php echo esc_url( $image_hover ); ?>" alt="<?php the_title() ?>">
+                <img src="<?php echo esc_url( $image_hover ); ?>" alt="<?php the_title() ?>" width="768">
             </div>
         <?php endif; ?>
     </div>
