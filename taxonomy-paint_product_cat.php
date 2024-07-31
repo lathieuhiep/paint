@@ -15,7 +15,6 @@
               <?php
               while (have_posts()) :
                 the_post();
-
                 get_template_part('template-parts/product/inc', 'tax-product');
               endwhile;
               wp_reset_postdata();

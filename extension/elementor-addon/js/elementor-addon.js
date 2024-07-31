@@ -66,20 +66,6 @@
         }
     }
 
-    // element testimonial slider
-    const elementTestimonialSlider = ($scope, $) => {
-        const slider = $scope.find('.element-testimonial-slider__warp')
-
-        if (slider.length) {
-            slider.each(function () {
-                const thisSlider = $(this)
-                const options = slider.data('owl-options')
-
-                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
-            })
-        }
-    }
-
     // element about slider
     const elementAboutSlider = ($scope, $) => {
         const slider = $scope.find('.element-about-slider__warp')
@@ -238,9 +224,6 @@
 
         // element post carousel
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-post-carousel.default', elementPostCarousel);
-
-        /* Element testimonial slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/paint-testimonial-slider.default', elementTestimonialSlider);
 
         // element about slider
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-about-slider.default', elementAboutSlider);
