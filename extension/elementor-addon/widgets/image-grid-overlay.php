@@ -139,12 +139,11 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
         );
 
         $repeater->add_control(
-            'list_link',
-            [
-                'label'         =>  esc_html__( 'Link', 'paint' ),
-                'type'          =>  Controls_Manager::URL,
-                'label_block'   =>  true,
-                'placeholder'   =>  esc_html__( 'https://your-link.com', 'paint' ),
+            'list_content', [
+                'label' => esc_html__( 'Nội dung', 'paint' ),
+                'type' => Controls_Manager::WYSIWYG,
+                'default' => esc_html__( 'Nội dung' , 'paint' ),
+                'show_label' => false,
             ]
         );
 
@@ -168,19 +167,19 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
 
         $this->end_controls_section();
 
-        // image style
+        // item style
         $this->start_controls_section(
-            'image_style_section',
+            'item_style_section',
             [
-                'label' => esc_html__( 'Hộp chứa ảnh', 'clinic' ),
+                'label' => esc_html__( 'Hộp chứa', 'clinic' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_responsive_control(
-            'image_height',
+            'item_height',
             [
-                'label' => esc_html__( 'Chiều cao ảnh', 'paint' ),
+                'label' => esc_html__( 'Chiều cao', 'paint' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
                 'range' => [
@@ -198,7 +197,7 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
                     'size' => '235',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .element-image-grid-overlay .item__image' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .element-image-grid-overlay .item' => 'min-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -220,7 +219,7 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
                 'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
                 'type'      =>  Controls_Manager::COLOR,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-image-grid-overlay .item__body .title' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .element-image-grid-overlay .item__heading .title' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -230,7 +229,38 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
             [
                 'name' => 'title_typography',
                 'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-image-grid-overlay .item__body .title',
+                'selector' => '{{WRAPPER}} .element-image-grid-overlay .item__heading .title',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // content style
+        $this->start_controls_section(
+            'content_style_section',
+            [
+                'label' => esc_html__( 'Nội dung', 'clinic' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'content_color',
+            [
+                'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-image-grid-overlay .item__body' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'content_typography',
+                'label' => esc_html__( 'Typography', 'paint' ),
+                'selector' => '{{WRAPPER}} .element-image-grid-overlay .item__body',
             ]
         );
 
@@ -248,24 +278,20 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
         ?>
 
         <div class="element-image-grid-overlay">
-            <?php foreach ( $list as $index => $item ) : ?>
+            <?php foreach ( $list as $item ) : ?>
                 <div class="item">
-                    <?php
-                    if ( ! empty( $item['list_link']['url'] ) ) :
-                        $link_key = 'link_' . $index;
-                        $this->add_link_attributes( $link_key, $item['list_link'] );
-                    ?>
-                        <a class="item__link" <?php $this->print_render_attribute_string( $link_key ); ?>></a>
-                    <?php endif; ?>
-
                     <div class="item__image">
                         <?php echo wp_get_attachment_image( $item['list_image']['id'], 'large'); ?>
                     </div>
 
-                    <div class="item__body">
+                    <div class="item__heading">
                         <h3 class="title">
                             <?php echo esc_html( $item['list_title'] ); ?>
                         </h3>
+                    </div>
+
+                    <div class="item__body">
+                        <?php echo wpautop( $item['list_content'] ); ?>
                     </div>
                 </div>
             <?php endforeach; ?>
