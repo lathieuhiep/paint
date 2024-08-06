@@ -1,0 +1,59 @@
+.element-slider {
+  &__warp {
+    .item {
+      position: relative;
+
+      .link {
+        display: inline-block;
+        padding: .3rem 2rem;
+        position: absolute;
+        left: 3rem;
+        bottom: 3rem;
+        color: #ffffff;
+        text-align: center;
+        min-width: 12rem;
+      }
+    }
+
+    &.owl-carousel {
+      .owl-nav {
+        margin: 0;
+
+        button {
+          margin: 0;
+          position: absolute;
+          bottom: 1.2rem;
+          @include square(4rem, 50%);
+          background-color: #ffffff;
+          transform: translateY(-50%);
+
+          i {
+            font-size: 2.8rem;
+            color: $color-quaternary;
+            @include transition();
+
+            &:hover {
+              color: #000000;
+            }
+          }
+
+          &.owl-prev {
+            right: 8rem;
+          }
+
+          &.owl-next {
+            right: 3.2rem;
+          }
+        }
+      }
+
+      .owl-dots {
+        margin: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 1.2rem;
+      }
+    }
+  }
+}

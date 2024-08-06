@@ -8,9 +8,10 @@ const concat = require('gulp-concat')
 const uglify = require('gulp-uglify')
 const minifyCss = require('gulp-clean-css')
 const rename = require("gulp-rename")
+const imagemin = require('gulp-imagemin')
 
+const pathSrc = './src'
 const pathAssets = './assets'
-const pathAssetsScss = `${pathAssets}/scss`
 const pathAssetsCss = `${pathAssets}/css`
 
 // server
@@ -27,14 +28,11 @@ function server() {
 
 // compiler file scss
 function compilerFileScss(fileScss, desc = '') {
-    return src(`${pathAssetsScss}/${fileScss}`)
+    return src(`${pathSrc}/scss/${fileScss}`)
         .pipe(sourcemaps.init())
         .pipe(sass({
             outputStyle: 'expanded'
-        }).on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`${pathAssetsCss}/${desc}`))
-        .pipe(sourcemaps.init())
+        }, '').on('error', sass.logError))
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
@@ -46,12 +44,11 @@ function compilerFileScss(fileScss, desc = '') {
 
 // compiler folder scss
 function compilerFolderScss(folder, levelFile = '*.scss') {
-    return src(`${pathAssetsScss}/${folder}/${levelFile}`)
+    return src(`${pathSrc}/scss/${folder}/${levelFile}`)
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`${pathAssetsCss}/${folder}`))
-        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
@@ -64,7 +61,9 @@ function compilerFolderScss(folder, levelFile = '*.scss') {
 // compiler lib scss
 function compilerLibCss(folder, folderDesc) {
     return src(`./node_modules/${folder}`)
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
@@ -84,10 +83,10 @@ function compilerLibJs(folder, folderDesc) {
 
 // Task build Bootstrap
 async function buildStylesBootstrap() {
-    return src(`${pathAssetsScss}/bootstrap.scss`)
+    return src(`${pathSrc}/scss/bootstrap.scss`)
         .pipe(sass({
             outputStyle: 'expanded'
-        }).on('error', sass.logError))
+        }, '').on('error', sass.logError))
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
@@ -156,8 +155,7 @@ async function buildPostType() {
 // buildJSTheme
 async function buildJSTheme() {
     return src([
-        `${pathAssets}/js/**.js`,
-        `!${pathAssets}/js/**.min.js`
+        `${pathSrc}/js/**.js`
     ], {allowEmpty: true})
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
@@ -167,12 +165,11 @@ async function buildJSTheme() {
 
 // Task build style elementor
 async function buildStylesElementor() {
-    return src(`${pathAssetsScss}/elementor-addon/elementor-addon.scss`)
+    return src(`${pathSrc}/scss/elementor-addon/elementor-addon.scss`)
         .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`./extension/elementor-addon/css/`))
-        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
         .pipe(minifyCss({
             level: {1: {specialComments: 0}}
         }))
@@ -184,13 +181,25 @@ async function buildStylesElementor() {
 
 async function buildJSElementor() {
     return src([
-        './extension/elementor-addon/js/*.js',
-        '!./extension/elementor-addon/js/*.min.js'
+        `${pathSrc}/js/elementor-addon/*.js`
     ], {allowEmpty: true})
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(dest('./extension/elementor-addon/js/'))
         .pipe(browserSync.stream());
+}
+
+// Task optimize images
+function optimizeImages() {
+    const imgDst = `${pathAssets}/images/`;
+
+    return src([
+        `${pathSrc}/images/*`,
+        `${pathSrc}/images/*/**`
+    ], {encoding: false})
+        .pipe(imagemin())
+        .pipe(dest(imgDst))
+        .pipe(browserSync.stream())
 }
 
 // Build all
@@ -231,44 +240,50 @@ async function watchRun() {
     server()
 
     watch([
-        `${pathAssetsScss}/variables-site/*.scss`,
-        `${pathAssetsScss}/bootstrap.scss`
+        `${pathSrc}/scss/variables-site/*.scss`,
+    ], series(
+        buildStylesBootstrap,
+        buildStylesTheme,
+        buildTemplateStyles,
+        buildPostType,
+        buildStylesElementor
+    ))
+
+    watch([
+        `${pathSrc}/scss/bootstrap.scss`
     ], buildStylesBootstrap)
 
     watch([
-        `${pathAssetsScss}/variables-site/*.scss`,
-        `${pathAssetsScss}/base/*.scss`,
-        `${pathAssetsScss}/style-theme.scss`,
+        `${pathSrc}/scss/base/*.scss`,
+        `${pathSrc}/scss/style-theme.scss`,
     ], buildStylesTheme)
 
     watch([
-        `${pathAssetsScss}/variables-site/*.scss`,
-        `${pathAssetsScss}/components/*.scss`,
-        `${pathAssetsScss}/templates/*.scss`
+        `${pathSrc}/scss/components/*.scss`,
+        `${pathSrc}/scss/templates/*.scss`
     ], buildTemplateStyles)
     
     watch([
-        `${pathAssetsScss}/variables-site/*.scss`,
-        `${pathAssetsScss}/components/*.scss`,
-        `${pathAssetsScss}/post-type/*/**.scss`
+        `${pathSrc}/scss/components/*.scss`,
+        `${pathSrc}/scss/post-type/*/**.scss`
     ], buildPostType)
 
     watch([
-        `${pathAssetsScss}/variables-site/*.scss`,
-        `${pathAssetsScss}/elementor-addon/*.scss`
+        `${pathSrc}/scss/elementor-addon/*.scss`
     ], buildStylesElementor)
 
-    watch([`${pathAssets}/js/**.js`, `!${pathAssets}/js/**.min.js`], buildJSTheme)
+    watch([`${pathSrc}/js/**.js`], buildJSTheme)
 
     watch([
-        './extension/elementor-addon/js/*.js',
-        '!./extension/elementor-addon/js/*.min.js'
+        `${pathSrc}/js/elementor-addon/*.js`
     ], buildJSElementor)
+
+    watch(`${pathSrc}/images/**/*`, optimizeImages)
 
     watch([
         './*.php',
         './**/*.php',
-        './assets/images/*/**.{png,jpg,jpeg,gif}'
+        `${pathAssets}/images/**/*`
     ], browserSync.reload);
 }
 

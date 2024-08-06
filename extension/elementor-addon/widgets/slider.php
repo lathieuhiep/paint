@@ -1,5 +1,7 @@
 <?php
 
+use Elementor\Repeater;
+use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -36,23 +38,65 @@ class Paint_Elementor_Slider extends Widget_Base {
     }
 
     protected function register_controls(): void {
-
-        // Content testimonial
+        // list
         $this->start_controls_section(
-            'content_section',
+            'list_section',
             [
-                'label' => esc_html__( 'Nội dung', 'paint' ),
+                'label' => esc_html__( 'Danh sách ảnh', 'paint' ),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
 
-        $this->add_control(
-            'gallery',
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'list_title', [
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Slider' , 'paint' ),
+                'label_block' => true,
+            ]
+        );
+
+        $repeater->add_control(
+            'list_image',
             [
-                'label' => esc_html__( 'Thêm ảnh', 'textdomain' ),
-                'type' => Controls_Manager::GALLERY,
-                'show_label' => false,
-                'default' => [],
+                'label' => esc_html__( 'Ảnh', 'paint' ),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'list_link',
+            [
+                'label'         =>  esc_html__( 'Link', 'paint' ),
+                'type'          =>  Controls_Manager::URL,
+                'label_block'   =>  true,
+                'placeholder'   =>  esc_html__( 'https://your-link.com', 'paint' ),
+                'default' => [
+                    'url' => '#'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'list',
+            [
+                'label' => esc_html__( 'Danh sách', 'paint' ),
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'list_title' => esc_html__( 'Slider #1', 'paint' ),
+                    ],
+                    [
+                        'list_title' => esc_html__( 'Slider #2', 'paint' ),
+                    ],
+                ],
+                'title_field' => '{{{ list_title }}}',
             ]
         );
 
@@ -111,7 +155,11 @@ class Paint_Elementor_Slider extends Widget_Base {
 
     protected function render(): void {
         $settings = $this->get_settings_for_display();
-        $gallery = $settings['gallery'];
+        $list = $settings['list'];
+
+        if ( empty( $list ) ) {
+            return;
+        }
 
 	    $owl_options = [
             'items' => 1,
@@ -124,15 +172,27 @@ class Paint_Elementor_Slider extends Widget_Base {
     ?>
 
         <div class="element-slider">
-            <?php if ( !empty( $gallery ) ) : ?>
-                <div class="element-slider__warp owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ); ?>'>
-                    <?php foreach ( $gallery as $image ): ?>
-                        <div class="item">
-                            <?php echo wp_get_attachment_image( $image['id'], 'full' ); ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <div class="element-slider__warp owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ); ?>'>
+                <?php
+                foreach ( $list as $index => $item ):
+                    $imageId = $item['list_image']['id'];
+                    $url = $item['list_link']['url'];
+                ?>
+                    <div class="item">
+                        <?php echo wp_get_attachment_image( $imageId, 'full' ); ?>
+
+                        <?php
+                        if ( !empty( $url ) ) :
+                            $link_key = 'link_' . $index;
+                            $this->add_link_attributes( $link_key, $item['list_link'] );
+                        ?>
+                            <a class="link btn-global" <?php $this->print_render_attribute_string( $link_key ); ?>>
+                                <?php echo esc_html( $item['list_title'] ); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
 
     <?php

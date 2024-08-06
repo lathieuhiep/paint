@@ -38,6 +38,8 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/commit-box-grid.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/project-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/procedure-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/color-code-carousel.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/discover-grid.php' );
 
 	// register add on
     $widgets_manager->register( new \Paint_Elementor_About_Slider() );
@@ -57,6 +59,8 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     $widgets_manager->register( new \Paint_Elementor_Commit_Box_Grid() );
     $widgets_manager->register( new \Paint_Elementor_Project_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Procedure_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Color_Code_Carousel() );
+    $widgets_manager->register( new \Paint_Elementor_Discover_Grid() );
 }
 
 // Register scripts lib
@@ -91,4 +95,28 @@ function addZeroBeforeNumber(int $number): int|string {
 	}
 
 	return $number;
+}
+
+// get all paint color code
+function paint_get_all_post_type($post_type): array
+{
+    $args = [
+        'post_type' => $post_type,
+        'posts_per_page' => -1,
+    ];
+
+    $query = new WP_Query( $args );
+
+    $posts = [];
+
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $posts[ get_the_ID() ] = get_the_title();
+        }
+    }
+
+    wp_reset_postdata();
+
+    return $posts;
 }

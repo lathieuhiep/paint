@@ -36,6 +36,19 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         );
 
         $this->add_control(
+            'style',
+            [
+                'label' => esc_html__( 'Kiểu giao diện', 'paint' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'style-1',
+                'options' => [
+                    'style-1'  => esc_html__( 'Kiểu 1', 'paint' ),
+                    'style-2'  => esc_html__( 'Kiểu 2', 'paint' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'select_cat',
             [
                 'label'         =>  esc_html__( 'Chọn danh mục', 'paint' ),
@@ -150,7 +163,73 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         $this->add_control(
             'margin_item',
             [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  24,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 1200px
+        $this->add_control(
+            'min_width_1200',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 1200px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  5,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 992px
+        $this->add_control(
+            'min_width_992',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 992px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_992',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  3,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 768px
+        $this->add_control(
+            'min_width_768',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 768px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_768',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  24,
                 'min'       =>  0,
@@ -160,60 +239,9 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-            'min_width_1200',
-            [
-                'label'     =>  esc_html__( 'Min Width 1200px', 'paint' ),
-                'type'      =>  Controls_Manager::HEADING,
-                'separator' =>  'before',
-            ]
-        );
-
-        $this->add_control(
-            'item',
-            [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  3,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-            ]
-        );
-
-        $this->add_control(
-            'min_width_992',
-            [
-                'label'     =>  esc_html__( 'Min Width 992px', 'paint' ),
-                'type'      =>  Controls_Manager::HEADING,
-                'separator' =>  'before',
-            ]
-        );
-
-        $this->add_control(
-            'item_992',
-            [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  2,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-            ]
-        );
-
-        $this->add_control(
-            'min_width_768',
-            [
-                'label'     =>  esc_html__( 'Min Width 768px', 'paint' ),
-                'type'      =>  Controls_Manager::HEADING,
-                'separator' =>  'before',
-            ]
-        );
-
-        $this->add_control(
             'item_768',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  2,
                 'min'       =>  1,
@@ -222,19 +250,20 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
             ]
         );
 
+        // greater 576px
         $this->add_control(
-            'min_width_576',
+            'width_greater_576',
             [
-                'label'     =>  esc_html__( 'Min Width 568px', 'paint' ),
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 576px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'item_576',
+            'item_greater_576',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  2,
                 'min'       =>  1,
@@ -244,30 +273,65 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-            'margin_item_576',
+            'margin_item_greater_576',
             [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  15,
+                'default'   =>  12,
                 'min'       =>  0,
                 'max'       =>  100,
                 'step'      =>  1,
             ]
         );
 
+        // greater 480px
         $this->add_control(
-            'max_width_575',
+            'width_greater_480',
             [
-                'label'     =>  esc_html__( 'Max Width 567px', 'paint' ),
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 480px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'item_480',
+            'item_greater_480',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_480',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // less 480px
+        $this->add_control(
+            'max_width_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Nhỏ hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_less_480',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  1,
                 'min'       =>  1,
@@ -277,14 +341,127 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-            'margin_item_480',
+            'margin_item_less_480',
             [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  0,
                 'min'       =>  0,
                 'max'       =>  100,
                 'step'      =>  1,
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // image style
+        $this->start_controls_section(
+            'image_style_section',
+            [
+                'label' => esc_html__( 'Hộp chứa ảnh', 'clinic' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_width',
+            [
+                'label' => esc_html__( 'Chiều rộng ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-project-carousel .item .thumbnail .link-image img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_height',
+            [
+                'label' => esc_html__( 'Chiều cao ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 1000,
+                    ],
+                    'vh' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'rem',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-project-carousel .item .thumbnail .link-image img' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'object-fit',
+            [
+                'label' => esc_html__( 'Object Fit', 'elementor' ),
+                'type' => Controls_Manager::SELECT,
+                'condition' => [
+                    'image_height[size]!' => '',
+                ],
+                'options' => [
+                    '' => esc_html__( 'Default', 'elementor' ),
+                    'fill' => esc_html__( 'Fill', 'elementor' ),
+                    'cover' => esc_html__( 'Cover', 'elementor' ),
+                    'contain' => esc_html__( 'Contain', 'elementor' ),
+                    'scale-down' => esc_html__( 'Scale Down', 'elementor' ),
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .element-project-carousel .item .thumbnail .link-image img' => 'object-fit: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'object-position',
+            [
+                'label' => esc_html__( 'Object Position', 'elementor' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'center center' => esc_html__( 'Center Center', 'elementor' ),
+                    'center left' => esc_html__( 'Center Left', 'elementor' ),
+                    'center right' => esc_html__( 'Center Right', 'elementor' ),
+                    'top center' => esc_html__( 'Top Center', 'elementor' ),
+                    'top left' => esc_html__( 'Top Left', 'elementor' ),
+                    'top right' => esc_html__( 'Top Right', 'elementor' ),
+                    'bottom center' => esc_html__( 'Bottom Center', 'elementor' ),
+                    'bottom left' => esc_html__( 'Bottom Left', 'elementor' ),
+                    'bottom right' => esc_html__( 'Bottom Right', 'elementor' ),
+                ],
+                'default' => 'center center',
+                'selectors' => [
+                    '{{WRAPPER}} .element-project-carousel .item .thumbnail .link-image img' => 'object-position: {{VALUE}};',
+                ],
+                'condition' => [
+                    'image_height[size]!' => '',
+                    'object-fit' => [ 'cover', 'contain', 'scale-down' ],
+                ],
             ]
         );
 
@@ -306,7 +483,7 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
                 'type'      =>  Controls_Manager::COLOR,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-post-carousel .item-post__content .title a'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-project-carousel .item .content-box .title'   =>  'color: {{VALUE}};',
                 ],
             ]
         );
@@ -318,7 +495,7 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
                 'type'      =>  Controls_Manager::COLOR,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-post-carousel .item-post__content .title a:hover'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-project-carousel .item:hover .content-box .title'   =>  'color: {{VALUE}};',
                 ],
             ]
         );
@@ -327,40 +504,7 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'selector' => '{{WRAPPER}} .element-post-carousel .item-post__content .title',
-            ]
-        );
-
-        $this->add_control(
-            'title_alignment',
-            [
-                'label'     =>  esc_html__( 'Title Alignment', 'paint' ),
-                'type'      =>  Controls_Manager::CHOOSE,
-                'options'   =>  [
-                    'left'  =>  [
-                        'title' =>  esc_html__( 'Left', 'paint' ),
-                        'icon'  =>  'eicon-text-align-left',
-                    ],
-
-                    'center' => [
-                        'title' =>  esc_html__( 'Center', 'paint' ),
-                        'icon'  =>  'eicon-text-align-center',
-                    ],
-
-                    'right' => [
-                        'title' =>  esc_html__( 'Right', 'paint' ),
-                        'icon'  =>  'eicon-text-align-right',
-                    ],
-
-                    'justify'=> [
-                        'title' =>  esc_html__( 'Justified', 'paint' ),
-                        'icon'  =>  'eicon-text-align-justify',
-                    ],
-                ],
-                'toggle'    =>  true,
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-post-carousel .item-post__content .title'   =>  'text-align: {{VALUE}};',
-                ]
+                'selector' => '{{WRAPPER}} .element-project-carousel .item .content-box .title',
             ]
         );
 
@@ -382,23 +526,24 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
             'margin' => $settings['margin_item'],
             'responsive' => [
                 '0' => array(
-                    'items' => $settings['item_480'],
-                    'margin' => $settings['margin_item_480']
+                    'items' => $settings['item_less_480'],
+                    'margin' => $settings['margin_item_less_480']
                 ),
-
+                '480' => array(
+                    'items' => $settings['item_greater_480'],
+                    'margin' => $settings['margin_item_greater_480']
+                ),
                 '576' => array(
-                    'items' => $settings['item_576'],
-                    'margin' => $settings['margin_item_576']
+                    'items' => $settings['item_greater_576'],
+                    'margin' => $settings['margin_item_greater_576']
                 ),
-
                 '768' => array(
-                    'items' => $settings['item_768']
+                    'items' => $settings['item_768'],
+                    'margin' => $settings['margin_item_greater_768']
                 ),
-
                 '992' => array(
                     'items' => $settings['item_992']
                 ),
-
                 '1200' => array(
                     'items' => $settings['item']
                 ),
@@ -430,7 +575,7 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
         if ( $query->have_posts() ) :
 
             ?>
-            <div class="element-project-carousel">
+            <div class="element-project-carousel <?php echo esc_attr( $settings['style'] ); ?>">
                 <div class="element-project-carousel__warp custom-owl-carousel owl-carousel" data-owl-options='<?php echo wp_json_encode( $owl_options ) ; ?>'>
                     <?php
                     while ( $query->have_posts() ):
@@ -441,19 +586,19 @@ class Paint_Elementor_Project_Carousel extends Widget_Base {
                         <div class="item">
                             <div class="thumbnail">
                                 <a class="link-image" href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium_large'); ?>
+                                    <?php the_post_thumbnail('large'); ?>
                                 </a>
                             </div>
 
                             <div class="content-box">
                                 <div class="content-box__top">
-                                    <h3 class="title text-center">
+                                    <h4 class="title text-center">
                                         <a href="<?php the_permalink(); ?>">
                                             <?php the_title() ?>
                                         </a>
-                                    </h3>
+                                    </h4>
 
-                                    <?php if ($terms) : ?>
+                                    <?php if ( $settings['style'] == 'style-2' && !empty( $terms ) ) : ?>
                                         <div class="line"></div>
 
                                         <div class="tax">

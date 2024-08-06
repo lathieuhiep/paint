@@ -572,6 +572,7 @@ form {
 }
 
 .btn-global {
+  display: inline-block;
   padding: .3rem 1rem;
   border: .1rem solid #FDCD27;
   font-size: 1.4rem;
@@ -579,6 +580,7 @@ form {
   @include transition();
 
   &:hover {
+    color: #ffffff;
     background-color: #FDCD27;
   }
 }

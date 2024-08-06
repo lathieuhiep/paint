@@ -32,6 +32,7 @@
             slider.each(function () {
                 const thisSlider = $(this)
                 const options = slider.data('owl-options')
+                options.navText = ['<i class="fa-solid fa-arrow-left-long"></i>','<i class="fa-solid fa-arrow-right-long"></i>']
 
                 thisSlider.owlCarousel(owlCarouselElementorOptions(options))
             })
@@ -215,6 +216,20 @@
         }
     }
 
+    // element code carousel
+    const elementColorCodeSlider = ($scope, $) => {
+        const slider = $scope.find('.element-color-code-carousel__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
@@ -239,5 +254,8 @@
 
         // element count up
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-count-up.default', elementCountUp);
+
+        // element code carousel
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-color-code-carousel.default', elementColorCodeSlider);
     });
 })(jQuery);
