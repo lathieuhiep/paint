@@ -22,7 +22,7 @@ class paint_recent_post_widget extends WP_Widget
       'description' => esc_html__('A widget show post', 'paint'),
     );
 
-    parent::__construct('paint_recent_post_widget', 'Basic Theme: Recent Post', $widget_ops);
+    parent::__construct('paint_recent_post_widget', 'My Theme: Recent Post', $widget_ops);
 
   }
 

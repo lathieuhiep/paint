@@ -1,0 +1,15 @@
+.media-uploader-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.media-uploader-preview {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.media-uploader-remove {
+    display: block;
+    margin-top: 5px;
+}

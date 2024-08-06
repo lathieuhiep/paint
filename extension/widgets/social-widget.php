@@ -22,7 +22,7 @@ class paint_social_widget extends WP_Widget
       'description' => 'A widget that displays your social icons',
     );
 
-    parent::__construct('paint_social_widget', 'Basic Theme: Social Icons', $paint_social_widget_ops);
+    parent::__construct('paint_social_widget', 'My Theme: Social Icons', $paint_social_widget_ops);
 
   }
 
@@ -32,7 +32,7 @@ class paint_social_widget extends WP_Widget
    * @param array $args
    * @param array $instance
    */
-  function widget($args, $instance)
+  function widget($args, $instance): void
   {
 
     echo $args['before_widget'];
@@ -57,7 +57,7 @@ class paint_social_widget extends WP_Widget
    *
    * @param array $instance The widget options
    */
-  function form($instance)
+  function form($instance): void
   {
 
     $defaults = array(
@@ -93,7 +93,7 @@ class paint_social_widget extends WP_Widget
    *
    * @return array
    */
-  function update($new_instance, $old_instance)
+  function update($new_instance, $old_instance): array
   {
     $instance = array();
 
@@ -105,7 +105,7 @@ class paint_social_widget extends WP_Widget
 }
 
 // Register social widget
-function paint_social_widget_register()
+function paint_social_widget_register(): void
 {
   register_widget('paint_social_widget');
 }

@@ -48,6 +48,8 @@ if ( did_action( 'elementor/loaded' ) ) :
 endif;
 
 // Require Widgets
+require get_parent_theme_file_path( '/includes/Media_Uploader.php' );
+
 foreach (glob(get_parent_theme_file_path('/extension/widgets/*.php')) as $paint_file_widgets) {
   require $paint_file_widgets;
 }
