@@ -68,19 +68,33 @@
 
     &.widget_logo_and_slogan {
       .widget-warp {
-        min-height: 24.4rem;
+        @media (min-width: 576px) {
+          min-height: 24.4rem;
+        }
       }
     }
 
     &.widget_info_company {
       .widget-title {
-        margin-bottom: 3.9rem;
+        @media (min-width: 768px) {
+          margin-bottom: 3.9rem;
+        }
+
+        @media (max-width: 767px) {
+          margin-bottom: 2rem;
+        }
       }
     }
 
     &.widget_social_networks {
       .widget-title {
-        margin-bottom: 3rem;
+        @media (min-width: 768px) {
+          margin-bottom: 3rem;
+        }
+
+        @media (max-width: 767px) {
+          margin-bottom: 2rem;
+        }
       }
     }
   }
