@@ -1,6 +1,7 @@
 <?php
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
@@ -380,6 +381,342 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
 
         $this->end_controls_section();
 
+        // box style
+        $this->start_controls_section(
+            'box_style_section',
+            [
+                'label' => esc_html__( 'Hộp chứa', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'box_padding',
+            [
+                'label' => esc_html__( 'Padding', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'box_border',
+                'selector' => '{{WRAPPER}} .element-slider-carousel__warp .item',
+            ]
+        );
+
+        $this->add_control(
+            'box_border_radius',
+            [
+                'label' => esc_html__( 'Border radius', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // image box style
+        $this->start_controls_section(
+            'image_box_style_section',
+            [
+                'label' => esc_html__( 'Hộp chứa ảnh', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_margin',
+            [
+                'label' => esc_html__( 'Margin', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_padding',
+            [
+                'label' => esc_html__( 'Padding', 'paint' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'default' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_width',
+            [
+                'label' => esc_html__( 'Chiều rộng hộp chứa ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'max-width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_height',
+            [
+                'label' => esc_html__( 'Chiều cao hộp chứa ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'min-height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_vertical_position',
+            [
+                'label' => esc_html__( 'Căn chỉnh các mục', 'paint' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'start' => [
+                        'title' => esc_html__( 'Bắt đầu', 'paint' ),
+                        'icon' => 'eicon-align-start-v',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Giữa', 'paint' ),
+                        'icon' => 'eicon-align-center-v',
+                    ],
+                    'end' => [
+                        'title' => esc_html__( 'Kết thúc', 'paint' ),
+                        'icon' => 'eicon-align-end-v',
+                    ],
+                    'stretch' => [
+                        'title' => esc_html__( 'Nới rộng', 'paint' ),
+                        'icon' => 'eicon-align-stretch-v',
+                    ],
+                ],
+                'default' => 'center',
+                'toggle' => true,
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'align-items: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_box_horizontal_position',
+            [
+                'label' => esc_html__( 'Căn chỉnh nội dung', 'paint' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'start' => [
+                        'title' => esc_html__( 'Bắt đầu', 'paint' ),
+                        'icon' => 'eicon-justify-start-h',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Giữa', 'paint' ),
+                        'icon' => 'eicon-justify-center-h',
+                    ],
+                    'end' => [
+                        'title' => esc_html__( 'Kết thúc', 'paint' ),
+                        'icon' => 'eicon-justify-end-h',
+                    ],
+                ],
+                'default' => 'center',
+                'toggle' => true,
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail' => 'justify-content: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // image style
+        $this->start_controls_section(
+            'image_style_section',
+            [
+                'label' => esc_html__( 'Ảnh', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_width',
+            [
+                'label' => esc_html__( 'Chiều rộng hộp chứa ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_height',
+            [
+                'label' => esc_html__( 'Chiều cao hộp chứa ảnh', 'paint' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail img' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'object-fit',
+            [
+                'label' => esc_html__( 'Object Fit', 'elementor' ),
+                'type' => Controls_Manager::SELECT,
+                'condition' => [
+                    'image_height[size]!' => '',
+                ],
+                'options' => [
+                    '' => esc_html__( 'Default', 'elementor' ),
+                    'fill' => esc_html__( 'Fill', 'elementor' ),
+                    'cover' => esc_html__( 'Cover', 'elementor' ),
+                    'contain' => esc_html__( 'Contain', 'elementor' ),
+                    'scale-down' => esc_html__( 'Scale Down', 'elementor' ),
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail img' => 'object-fit: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'object-position',
+            [
+                'label' => esc_html__( 'Object Position', 'elementor' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'center center' => esc_html__( 'Center Center', 'elementor' ),
+                    'center left' => esc_html__( 'Center Left', 'elementor' ),
+                    'center right' => esc_html__( 'Center Right', 'elementor' ),
+                    'top center' => esc_html__( 'Top Center', 'elementor' ),
+                    'top left' => esc_html__( 'Top Left', 'elementor' ),
+                    'top right' => esc_html__( 'Top Right', 'elementor' ),
+                    'bottom center' => esc_html__( 'Bottom Center', 'elementor' ),
+                    'bottom left' => esc_html__( 'Bottom Left', 'elementor' ),
+                    'bottom right' => esc_html__( 'Bottom Right', 'elementor' ),
+                ],
+                'default' => 'center center',
+                'selectors' => [
+                    '{{WRAPPER}} .element-slider-carousel__warp .item__thumbnail img' => 'object-position: {{VALUE}};',
+                ],
+                'condition' => [
+                    'image_height[size]!' => '',
+                    'object-fit' => [ 'cover', 'contain', 'scale-down' ],
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         // title style
         $this->start_controls_section(
             'title_style_section',
@@ -595,20 +932,17 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
         ];
     ?>
         <div class="element-slider-carousel">
-            <div class="element-slider-carousel__warp custom-owl-carousel owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ); ?>'>
+            <div class="element-slider-carousel__warp custom-owl-carousel custom-equal-height-owl owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ); ?>'>
                 <?php
                 foreach ( $settings['list'] as $item ) :
                     $imageId = $item['list_image']['id'];
                 ?>
-
                     <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                        <div class="item__thumbnail">
-                            <?php
-                            if ( $imageId ) :
-                                echo wp_get_attachment_image( $imageId, 'large' );
-                            endif;
-                            ?>
-                        </div>
+                        <?php if ( $imageId ) : ?>
+                            <div class="item__thumbnail">
+                                <?php echo wp_get_attachment_image( $imageId, 'large' ); ?>
+                            </div>
+                        <?php endif; ?>
 
                         <?php if ( $item['list_title'] || $item['list_content'] ) : ?>
                             <div class="item__body">
@@ -626,7 +960,6 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
                             </div>
                         <?php endif; ?>
                     </div>
-
                 <?php endforeach; ?>
             </div>
         </div>
