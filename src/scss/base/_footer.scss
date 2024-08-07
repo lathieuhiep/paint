@@ -3,53 +3,84 @@
   border-top: .8rem solid #FDCD26;
   background-color: $background-primary;
 
-  section {
-    &.widget {
-      margin-bottom: 15px;
+  &__column {
+    .warp {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      margin: 0 auto;
+      max-width: 1440px;
+    }
+  }
+
+  .widget {
+    margin-bottom: 0;
+    color: $color-white;
+
+    ~ .widget {
+      margin-top: 1.2rem;
+    }
+
+    a {
       color: $color-white;
 
+      &:hover {
+        color: $color-hover;
+      }
+    }
+
+    .widget-title {
+      margin-bottom: 1.2rem;
+      color: $color-white;
+      font-weight: 400;
+    }
+
+    &.widget_text {
+      p {
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      img {
+        &.alignnone {
+          margin: 0;
+        }
+      }
+    }
+
+    .social-network-item {
+      width: auto;
+      height: auto;
+      line-height: 1;
+      border-radius: unset;
+
       a {
-        color: $color-white;
+        font-size: 2.5rem;
+        color: $color-hover;
 
         &:hover {
-          color: $color-hover;
+          color: $color-white;
         }
       }
+    }
 
+    &.widget_logo_and_slogan {
+      .widget-warp {
+        min-height: 24.4rem;
+      }
+    }
+
+    &.widget_info_company {
       .widget-title {
-        color: $color-white;
+        margin-bottom: 3.9rem;
       }
+    }
 
-      &.widget_text {
-        p {
-          margin-bottom: 0.5rem;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-
-        img {
-          &.alignnone {
-            margin: 0;
-          }
-        }
-      }
-
-      .social-network-item {
-        width: auto;
-        height: auto;
-        line-height: 1;
-        border-radius: unset;
-
-        a {
-          font-size: 2.5rem;
-          color: $color-hover;
-
-          &:hover {
-            color: $color-white;
-          }
-        }
+    &.widget_social_networks {
+      .widget-title {
+        margin-bottom: 3rem;
       }
     }
   }

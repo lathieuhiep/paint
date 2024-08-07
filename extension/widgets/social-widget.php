@@ -1,8 +1,4 @@
 <?php
-/**
- * Widget Name: Social Widget
- */
-
 if (!defined('ABSPATH')) {
   exit;
 }
@@ -18,11 +14,10 @@ class paint_social_widget extends WP_Widget
   {
 
     $paint_social_widget_ops = array(
-      'classname' => 'paint_social_widget',
       'description' => 'A widget that displays your social icons',
     );
 
-    parent::__construct('paint_social_widget', 'My Theme: Social Icons', $paint_social_widget_ops);
+    parent::__construct('social_networks', 'My Theme: Social Networks', $paint_social_widget_ops);
 
   }
 
@@ -34,21 +29,34 @@ class paint_social_widget extends WP_Widget
    */
   function widget($args, $instance): void
   {
-
     echo $args['before_widget'];
 
     if (!empty($instance['title'])) {
       echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
     }
 
+    $opt_social_networks = paint_get_option('paint_opt_social_network', '');
+
+    if ( empty($opt_social_networks) ) {
+        return;
+    }
     ?>
 
-    <div class="social-widget social-network-toTopFromBottom">
-      <?php paint_get_social_url(); ?>
+    <div class="widget-warp">
+        <div class="social-list">
+            <?php foreach ( $opt_social_networks as $network ) : ?>
+                <div class="item">
+                    <div class="item__thumbnail">
+                        <?php echo wp_get_attachment_image($network['icon']['id'], 'medium'); ?>
+                    </div>
+
+                    <a href="<?php echo esc_url( $network['url'] ) ?>" target="_blank"><?php echo esc_html( $network['title'] ); ?></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <?php
-
     echo $args['after_widget'];
   }
 
@@ -78,7 +86,7 @@ class paint_social_widget extends WP_Widget
     </p>
 
     <p>
-      <?php esc_html_e('Note: Set your social links in the paint Options', 'paint'); ?>
+      <?php esc_html_e('Mạng xã hội được thiết lập ở theme options ở mục "Mạng xã hội"', 'paint'); ?>
     </p>
 
     <?php

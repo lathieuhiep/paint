@@ -108,26 +108,6 @@ function paint_comment_nav(): void
     endif;
 }
 
-// Social Network
-function paint_get_social_url(): void
-{
-    $opt_social_networks = paint_get_option('paint_opt_social_network', '');
-    
-    foreach ($opt_social_networks as $item) :
-        $link = $item['link'];
-        
-        if ($link) :
-            ?>
-            <div class="social-network-item">
-                <a href="<?php echo esc_url($link); ?>" target="_blank">
-                    <i class="<?php echo $item['icon']; ?>"></i>
-                </a>
-            </div>
-        <?php
-        endif;
-    endforeach;
-}
-
 // Pagination
 function paint_pagination(): void
 {
@@ -710,4 +690,15 @@ function paint_get_tab_product_detail()
   }
 
   wp_die();
+}
+
+function paint_preg_replace_ony_number($string): string|null
+{
+    $number = '';
+
+    if (!empty( $string )) {
+        $number = preg_replace('/[^0-9]/', '', strip_tags( $string ) );
+    }
+
+    return $number;
 }

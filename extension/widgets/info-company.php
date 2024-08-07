@@ -11,11 +11,10 @@ class clinic_info_company_widget extends WP_Widget {
 	/* Widget setup */
     public function __construct() {
         $clinic_info_company_widget_ops = array(
-            'classname'     =>  'info-company-widget',
             'description'   =>  esc_html__( 'A widget that displays your info company', 'clinic' ),
         );
 
-        parent::__construct( 'info-company-widget', 'My Theme: Thông tin công ty', $clinic_info_company_widget_ops );
+        parent::__construct( 'info_company', 'My Theme: Thông tin công ty', $clinic_info_company_widget_ops );
     }
 
     /**
@@ -31,40 +30,56 @@ class clinic_info_company_widget extends WP_Widget {
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
         }
+
+        $address = paint_get_option('opt-info-company-address');
+        $phones = paint_get_option('opt-info-company-phone');
+        $email = paint_get_option('opt-info-company-email');
     ?>
-        <div class="widget-warp info-company-widget">
-            <?php if ( $instance['address'] ) : ?>
+        <div class="widget-warp">
+            <?php if ( !empty( $address ) ) : ?>
                 <div class="item">
-                    <div class="item__icon">
-                        <i class="icon-house-light"></i>
+                    <div class="item__thumbnail">
+                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-map.png')) ?>" alt="" />
                     </div>
 
-                    <div class="item__content">
-                        <?php echo esc_html( $instance['address'] ); ?>
+                    <div class="item__info">
+                        <?php echo esc_html( $address ) ?>
                     </div>
                 </div>
             <?php endif; ?>
 
-            <?php if ( $instance['hotline'] ) : ?>
+            <?php if ( !empty( $phones ) ) : ?>
                 <div class="item">
-                    <div class="item__icon">
-                        <i class="icon-phone-circle"></i>
+                    <div class="item__thumbnail">
+                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-phone.png')) ?>" alt="" />
                     </div>
 
-                    <div class="item__content">
-			            <?php echo esc_html( $instance['hotline'] ); ?>
+                    <div class="item__info">
+                        <?php
+                        foreach ( $phones as $index => $item ):
+                            if ( !empty( $item ) ) :
+                        ?>
+                            <?php if ( $index + 1 > 1 ) : ?>
+                                <span class="txt"><?php esc_html_e('hoặc', 'paint'); ?></span>
+                            <?php endif; ?>
+
+                            <a href="tel:<?php echo esc_attr( paint_preg_replace_ony_number( $item['phone'] ) ) ?>"><?php echo esc_html( $item['phone'] ); ?></a>
+                        <?php
+                            endif;
+                        endforeach;
+                        ?>
                     </div>
                 </div>
             <?php endif; ?>
 
-            <?php if ( $instance['mail'] ) : ?>
+            <?php if ( !empty( $email ) ) : ?>
                 <div class="item">
-                    <div class="item__icon">
-                        <i class="icon-envelope"></i>
+                    <div class="item__thumbnail">
+                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-mail.png')) ?>" alt="" />
                     </div>
 
-                    <div class="item__content">
-			            <?php echo esc_html( $instance['mail'] ); ?>
+                    <div class="item__info">
+                        <?php echo esc_html( $email ) ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -79,15 +94,14 @@ class clinic_info_company_widget extends WP_Widget {
      *
      * @param array $instance The widget options
      */
-	function form( $instance ) {
+	function form( $instance ): void
+    {
 		$defaults = array(
-            'title' => '',
-            'address' => '',
-            'hotline' => '',
-            'mail' => '',
+            'title' => ''
         );
 
-		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
+		$instance = wp_parse_args( (array) $instance, $defaults );
+        ?>
 
 		<!-- Widget Title: Text Input -->
 		<p>
@@ -97,29 +111,9 @@ class clinic_info_company_widget extends WP_Widget {
 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
-		
-		<p>
-            <label for="<?php echo $this->get_field_id( 'address' ); ?>">
-				<?php esc_html_e( 'Địa chỉ:', 'clinic' ); ?>
-            </label>
-
-            <input class="widefat" id="<?php echo $this->get_field_id( 'address' ); ?>" name="<?php echo $this->get_field_name( 'address' ); ?>" value="<?php echo $instance['address']; ?>" />
-        </p>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'hotline' ); ?>">
-				<?php esc_html_e( 'Hotline:', 'clinic' ); ?>
-            </label>
-
-            <input class="widefat" id="<?php echo $this->get_field_id( 'hotline' ); ?>" name="<?php echo $this->get_field_name( 'hotline' ); ?>" value="<?php echo $instance['hotline']; ?>" />
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'mail' ); ?>">
-				<?php esc_html_e( 'Mail:', 'clinic' ); ?>
-            </label>
-
-            <input class="widefat" id="<?php echo $this->get_field_id( 'mail' ); ?>" name="<?php echo $this->get_field_name( 'mail' ); ?>" value="<?php echo $instance['mail']; ?>" />
+            <?php esc_html_e('Các giá trị trường được lấy trong theme options mục "thông tin công ty"', 'paint'); ?>
         </p>
 	<?php
 
@@ -133,13 +127,11 @@ class clinic_info_company_widget extends WP_Widget {
      *
      * @return array
      */
-    function update( $new_instance, $old_instance ) {
+    function update( $new_instance, $old_instance ): array
+    {
         $instance = array();
 
         $instance['title'] = strip_tags( $new_instance['title'] );
-        $instance['address'] = strip_tags( $new_instance['address'] );
-        $instance['hotline'] = strip_tags( $new_instance['hotline'] );
-        $instance['mail'] = strip_tags( $new_instance['mail'] );
 
         return $instance;
     }
