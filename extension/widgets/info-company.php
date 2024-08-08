@@ -7,14 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class clinic_info_company_widget extends WP_Widget {
+class paint_info_company_widget extends WP_Widget {
 	/* Widget setup */
     public function __construct() {
-        $clinic_info_company_widget_ops = array(
-            'description'   =>  esc_html__( 'A widget that displays your info company', 'clinic' ),
+        $paint_info_company_widget_ops = array(
+            'description'   =>  esc_html__( 'A widget that displays your info company', 'paint' ),
         );
 
-        parent::__construct( 'info_company', 'My Theme: Thông tin công ty', $clinic_info_company_widget_ops );
+        parent::__construct( 'info_company', 'My Theme: Thông tin công ty', $paint_info_company_widget_ops );
     }
 
     /**
@@ -106,7 +106,7 @@ class clinic_info_company_widget extends WP_Widget {
 		<!-- Widget Title: Text Input -->
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>">
-                <?php esc_html_e( 'Tiêu đề:', 'clinic' ); ?>
+                <?php esc_html_e( 'Tiêu đề:', 'paint' ); ?>
             </label>
 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
@@ -138,8 +138,8 @@ class clinic_info_company_widget extends WP_Widget {
 }
 
 // Register widget
-function clinic_info_company_widget_register(): void {
-    register_widget( 'clinic_info_company_widget' );
+function paint_info_company_widget_register(): void {
+    register_widget( 'paint_info_company_widget' );
 }
 
-add_action( 'widgets_init', 'clinic_info_company_widget_register' );
+add_action( 'widgets_init', 'paint_info_company_widget_register' );

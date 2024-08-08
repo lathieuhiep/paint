@@ -171,7 +171,7 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
         $this->start_controls_section(
             'item_style_section',
             [
-                'label' => esc_html__( 'Hộp chứa', 'clinic' ),
+                'label' => esc_html__( 'Hộp chứa', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -208,7 +208,7 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
         $this->start_controls_section(
             'title_style_section',
             [
-                'label' => esc_html__( 'Tiêu đề', 'clinic' ),
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -239,7 +239,7 @@ class Paint_Elementor_Image_Grid_Overlay extends Widget_Base {
         $this->start_controls_section(
             'content_style_section',
             [
-                'label' => esc_html__( 'Nội dung', 'clinic' ),
+                'label' => esc_html__( 'Nội dung', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );

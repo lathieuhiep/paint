@@ -209,173 +209,195 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
             ]
         );
 
-        // min width 1200
+        $this->add_control(
+            'margin_item',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  24,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 1200px
         $this->add_control(
             'min_width_1200',
             [
-                'label'     => esc_html__( 'Min Width 1200px', 'paint' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 1200px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'item_1200',
+            'item',
             [
-                'label'   => esc_html__( 'Số lượng hiển thị', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 4,
-                'min'     => 1,
-                'max'     => 10,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  5,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
-        $this->add_control(
-            'margin_item_1200',
-            [
-                'label'   => esc_html__( 'Khoảng cách', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 24,
-                'min'     => 0,
-                'max'     => 100,
-                'step'    => 1,
-            ]
-        );
-
-        // min width 992
+        // greater 992px
         $this->add_control(
             'min_width_992',
             [
-                'label'     => esc_html__( 'Min Width 992px', 'paint' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 992px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
             'item_992',
             [
-                'label'   => esc_html__( 'Số lượng hiển thị', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 2,
-                'min'     => 1,
-                'max'     => 10,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  3,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
-        $this->add_control(
-            'margin_item_992',
-            [
-                'label'   => esc_html__( 'Khoảng cách', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 24,
-                'min'     => 0,
-                'max'     => 100,
-                'step'    => 1,
-            ]
-        );
-
-        // min width 768
+        // greater 768px
         $this->add_control(
             'min_width_768',
             [
-                'label'     => esc_html__( 'Min Width 768px', 'paint' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 768px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_768',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  24,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
         $this->add_control(
             'item_768',
             [
-                'label'   => esc_html__( 'Số lượng hiển thị', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 2,
-                'min'     => 1,
-                'max'     => 10,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 576px
+        $this->add_control(
+            'width_greater_576',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 576px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'margin_item_768',
+            'item_greater_576',
             [
-                'label'   => esc_html__( 'Khoảng cách', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 12,
-                'min'     => 0,
-                'max'     => 100,
-                'step'    => 1,
-            ]
-        );
-
-        // min width 576
-        $this->add_control(
-            'min_width_576',
-            [
-                'label'     => esc_html__( 'Min Width 576px', 'paint' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
         $this->add_control(
-            'item_576',
+            'margin_item_greater_576',
             [
-                'label'   => esc_html__( 'Số lượng hiển thị', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 2,
-                'min'     => 1,
-                'max'     => 10,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 480px
+        $this->add_control(
+            'width_greater_480',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'margin_item_576',
+            'item_greater_480',
             [
-                'label'   => esc_html__( 'Space Between Item', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 12,
-                'min'     => 0,
-                'max'     => 100,
-                'step'    => 1,
-            ]
-        );
-
-        // max width 575
-        $this->add_control(
-            'max_width_575',
-            [
-                'label'     => esc_html__( 'Max Width 575px', 'paint' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
         $this->add_control(
-            'item_575',
+            'margin_item_greater_480',
             [
-                'label'   => esc_html__( 'Số lượng hiển thị', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 1,
-                'min'     => 1,
-                'max'     => 10,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // less 480px
+        $this->add_control(
+            'max_width_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Nhỏ hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'margin_item_575',
+            'item_less_480',
             [
-                'label'   => esc_html__( 'Khoảng cách', 'paint' ),
-                'type'    => Controls_Manager::NUMBER,
-                'default' => 12,
-                'min'     => 0,
-                'max'     => 100,
-                'step'    => 1,
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  1,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  0,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
@@ -899,34 +921,33 @@ class Paint_Elementor_Slider_Carousel extends Widget_Base
 
         // owl options
         $owl_options = [
-            'loop'       => ( 'yes' === $settings['loop'] ),
-            'nav'        => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
-            'dots'       => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
-            'autoplay'   => ( 'yes' === $settings['autoplay'] ),
+            'loop' => ('yes' === $settings['loop']),
+            'nav' => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
+            'dots' => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
+            'autoplay' => ('yes' === $settings['autoplay']),
+            'margin' => $settings['margin_item'],
             'responsive' => [
                 '0' => array(
-                    'items'  => $settings['item_575'],
-                    'margin' => $settings['margin_item_575']
+                    'items' => $settings['item_less_480'],
+                    'margin' => $settings['margin_item_less_480']
                 ),
-
+                '480' => array(
+                    'items' => $settings['item_greater_480'],
+                    'margin' => $settings['margin_item_greater_480']
+                ),
                 '576' => array(
-                    'items'  => $settings['item_576'],
-                    'margin' => $settings['margin_item_576']
+                    'items' => $settings['item_greater_576'],
+                    'margin' => $settings['margin_item_greater_576']
                 ),
-
                 '768' => array(
                     'items' => $settings['item_768'],
-                    'margin' => $settings['margin_item_768'],
+                    'margin' => $settings['margin_item_greater_768']
                 ),
-
                 '992' => array(
-                    'items' => $settings['item_992'],
-                    'margin' => $settings['margin_item_992'],
+                    'items' => $settings['item_992']
                 ),
-
                 '1200' => array(
-                    'items' => $settings['item_1200'],
-                    'margin' => $settings['margin_item_1200'],
+                    'items' => $settings['item']
                 ),
             ],
         ];

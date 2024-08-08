@@ -34,7 +34,7 @@ class Logo_And_Slogan_Widget extends WP_Widget {
 
         <p>
             <label for="<?php echo $this->get_field_id( 'slogan' ); ?>">
-                <?php esc_html_e( 'Khẩu hiệu:', 'clinic' ); ?>
+                <?php esc_html_e( 'Khẩu hiệu:', 'paint' ); ?>
             </label>
 
             <input class="widefat" id="<?php echo $this->get_field_id( 'slogan' ); ?>" name="<?php echo $this->get_field_name( 'slogan' ); ?>" value="<?php echo esc_attr( $instance['slogan'] ); ?>" />

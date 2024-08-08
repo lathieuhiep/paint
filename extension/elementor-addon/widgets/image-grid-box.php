@@ -183,7 +183,7 @@ class Paint_Elementor_Image_Grid_Box extends Widget_Base {
         $this->start_controls_section(
             'image_style_section',
             [
-                'label' => esc_html__( 'Hộp chứa ảnh', 'clinic' ),
+                'label' => esc_html__( 'Hộp chứa ảnh', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -296,7 +296,7 @@ class Paint_Elementor_Image_Grid_Box extends Widget_Base {
         $this->start_controls_section(
             'title_style_section',
             [
-                'label' => esc_html__( 'Tiêu đề', 'clinic' ),
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );

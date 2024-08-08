@@ -1,5 +1,7 @@
 <?php
 
+use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Text_Stroke;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
@@ -8,21 +10,21 @@ use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Paint_Elementor_Count_Up extends Widget_Base {
+class Paint_Elementor_Introduce extends Widget_Base {
     public function get_categories(): array {
         return array( 'my-theme' );
     }
 
     public function get_name(): string {
-        return 'paint-count-up';
+        return 'paint-introduce';
     }
 
     public function get_title(): string {
-        return esc_html__( 'Đếm tăng dần', 'paint' );
+        return esc_html__( 'Giới thiệu', 'paint' );
     }
 
     public function get_icon(): string {
-        return 'eicon-counter';
+        return 'eicon-post-list';
     }
 
     /**
@@ -35,12 +37,12 @@ class Paint_Elementor_Count_Up extends Widget_Base {
      */
     public function get_keywords(): array
     {
-        return ['count' ];
+        return ['introduce', 'text', 'image', 'grid' ];
     }
 
     protected function register_controls(): void {
 
-        // Content testimonial
+        // Content
         $this->start_controls_section(
             'content_section',
             [
@@ -70,41 +72,12 @@ class Paint_Elementor_Count_Up extends Widget_Base {
         );
 
         $this->add_control(
-            'number_active',
+            'image',
             [
-                'label' => esc_html__( 'Sử dụng số', 'paint' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Có', 'paint' ),
-                'label_off' => esc_html__( 'Không', 'paint' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-        $this->add_control(
-            'number',
-            [
-                'label' => esc_html__( 'Nhập số', 'textdomain' ),
-                'type' => Controls_Manager::NUMBER,
-                'min' => 0,
-                'max' => 9999,
-                'step' => 1,
-                'default' => 1000,
-                'condition' => [
-                    'number_active' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'text',
-            [
-                'label'       => esc_html__( 'Văn bản phụ trợ', 'paint' ),
-                'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__( 'Văn bản phụ trợ', 'paint' ),
-                'label_block' => true,
-                'condition' => [
-                    'number_active' => '',
+                'label' => esc_html__( 'Ảnh', 'paint' ),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => Utils::get_placeholder_image_src(),
                 ],
             ]
         );
@@ -115,6 +88,28 @@ class Paint_Elementor_Count_Up extends Widget_Base {
                 'label'     =>  esc_html__( 'Mô tả', 'paint' ),
                 'type'      =>  Controls_Manager::WYSIWYG,
                 'default'   =>  esc_html__( 'Mổ tả', 'paint' ),
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // content box style
+        $this->start_controls_section(
+            'content_box_style_section',
+            [
+                'label' => esc_html__( 'Vùng chứa nội dung', 'paint' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'content_box_background_color',
+            [
+                'label' => esc_html__( 'Màu nền', 'paint' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .element-introduce .body-box__warp' => 'background-color: {{VALUE}}',
+                ],
             ]
         );
 
@@ -135,7 +130,18 @@ class Paint_Elementor_Count_Up extends Widget_Base {
                 'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
                 'type'      =>  Controls_Manager::COLOR,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-count-up .heading' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .element-introduce .heading span' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'line_color',
+            [
+                'label'     =>  esc_html__( 'Màu gạch chân', 'paint' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-introduce .heading span' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -145,7 +151,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
             [
                 'name' => 'heading_typography',
                 'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-count-up .heading',
+                'selector' => '{{WRAPPER}} .element-introduce .heading span',
             ]
         );
 
@@ -166,7 +172,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
                 'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
                 'type'      =>  Controls_Manager::COLOR,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-count-up .sub-heading' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .element-introduce .sub-heading' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -176,38 +182,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
             [
                 'name' => 'sub_heading_typography',
                 'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-count-up .sub-heading',
-            ]
-        );
-
-        $this->end_controls_section();
-
-        // number or text style
-        $this->start_controls_section(
-            'number_or_text_style_section',
-            [
-                'label' => esc_html__( 'Số hoặc văn bản phụ trợ', 'paint' ),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'number_or_text_color',
-            [
-                'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
-                'type'      =>  Controls_Manager::COLOR,
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-count-up .txt' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'number_or_text_typography',
-                'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-count-up .txt',
+                'selector' => '{{WRAPPER}} .element-introduce .sub-heading',
             ]
         );
 
@@ -228,7 +203,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
                 'label'     =>  esc_html__( 'Màu chữ', 'paint' ),
                 'type'      =>  Controls_Manager::COLOR,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-count-up .desc' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .element-introduce .desc' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -238,7 +213,7 @@ class Paint_Elementor_Count_Up extends Widget_Base {
             [
                 'name' => 'desc_typography',
                 'label' => esc_html__( 'Typography', 'paint' ),
-                'selector' => '{{WRAPPER}} .element-count-up .desc',
+                'selector' => '{{WRAPPER}} .element-introduce .desc',
             ]
         );
 
@@ -247,31 +222,28 @@ class Paint_Elementor_Count_Up extends Widget_Base {
 
     protected function render(): void {
         $settings = $this->get_settings_for_display();
-    ?>
-        <div class="element-count-up">
-            <h3 class="heading">
-                <?php echo esc_html( $settings['heading'] ); ?>
-            </h3>
+        ?>
+        <div class="element-introduce">
+            <div class="thumbnail-box">
+                <?php echo wp_get_attachment_image( $settings['image']['id'], 'large' ); ?>
+            </div>
 
-            <p class="sub-heading">
-                <?php echo esc_html( $settings['sub_heading'] ); ?>
-            </p>
+            <div class="body-box">
+                <div class="body-box__warp">
+                    <h3 class="heading">
+                        <span class="heading__txt"><?php echo esc_html( $settings['heading'] ); ?></span>
+                    </h3>
 
-            <?php if ( $settings['number_active'] ) : ?>
-                <div class="txt number-box">
-                    <span class="count-box" data-number="<?php echo esc_attr( $settings['number'] ); ?>">0</span>
-                    <span class="symbol">+</span>
+                    <p class="sub-heading">
+                        <?php echo esc_html( $settings['sub_heading'] ); ?>
+                    </p>
+
+                    <div class="desc">
+                        <?php echo wpautop( $settings['desc'] ); ?>
+                    </div>
                 </div>
-            <?php else: ?>
-                <div class="txt">
-                    <?php echo esc_html( $settings['text'] ); ?>
-                </div>
-            <?php endif; ?>
-
-            <div class="desc">
-                <?php echo wpautop( $settings['desc'] ); ?>
             </div>
         </div>
-    <?php
+        <?php
     }
 }

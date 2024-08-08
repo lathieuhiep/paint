@@ -40,6 +40,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/procedure-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/color-code-carousel.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/discover-grid.php' );
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/introduce.php' );
 
 	// register add on
     $widgets_manager->register( new \Paint_Elementor_About_Slider() );
@@ -61,6 +62,7 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     $widgets_manager->register( new \Paint_Elementor_Procedure_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Color_Code_Carousel() );
     $widgets_manager->register( new \Paint_Elementor_Discover_Grid() );
+    $widgets_manager->register( new \Paint_Elementor_Introduce() );
 }
 
 // Register scripts lib

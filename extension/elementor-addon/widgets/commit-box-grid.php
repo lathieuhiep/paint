@@ -160,7 +160,7 @@ class Paint_Elementor_Commit_Box_Grid extends Widget_Base {
         $this->start_controls_section(
             'title_style_section',
             [
-                'label' => esc_html__( 'Tiêu đề', 'clinic' ),
+                'label' => esc_html__( 'Tiêu đề', 'paint' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
