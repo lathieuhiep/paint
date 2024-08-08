@@ -120,11 +120,11 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
 
         $this->end_controls_section();
 
-        // Content additional options
+        // carousel options
         $this->start_controls_section(
-            'additional_options_section',
+            'options_section',
             [
-                'label' => esc_html__( 'Additional Options', 'paint' ),
+                'label' => esc_html__( 'Tùy chọn bổ sung', 'paint' ),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -133,9 +133,9 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
             'loop',
             [
                 'type'          =>  Controls_Manager::SWITCHER,
-                'label'         =>  esc_html__('Loop Slider?', 'paint'),
-                'label_off'     =>  esc_html__('No', 'paint'),
-                'label_on'      =>  esc_html__('Yes', 'paint'),
+                'label'         =>  esc_html__('Lặp lại vô hạn', 'paint'),
+                'label_off'     =>  esc_html__('Không', 'paint'),
+                'label_on'      =>  esc_html__('Có', 'paint'),
                 'return_value'  =>  'yes',
                 'default'       =>  'yes',
             ]
@@ -144,55 +144,58 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label'         =>  esc_html__('Autoplay?', 'paint'),
+                'label'         =>  esc_html__('Tự động chạy', 'paint'),
                 'type'          =>  Controls_Manager::SWITCHER,
-                'label_off'     =>  esc_html__('No', 'paint'),
-                'label_on'      =>  esc_html__('Yes', 'paint'),
+                'label_off'     =>  esc_html__('Không', 'paint'),
+                'label_on'      =>  esc_html__('Có', 'paint'),
                 'return_value'  =>  'yes',
                 'default'       =>  'no',
             ]
         );
 
         $this->add_control(
-            'nav',
+            'navigation',
             [
-                'label'         =>  esc_html__('Nav Slider', 'paint'),
-                'type'          =>  Controls_Manager::SWITCHER,
-                'label_on'      =>  esc_html__('Yes', 'paint'),
-                'label_off'     =>  esc_html__('No', 'paint'),
-                'return_value'  =>  'yes',
-                'default'       =>  'yes',
+                'label' => esc_html__( 'Thanh điều hướng', 'paint' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'arrows',
+                'options' => [
+                    'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'paint' ),
+                    'arrows'  => esc_html__( 'Mũi tên', 'paint' ),
+                    'dots'  => esc_html__( 'Dấu chấm', 'paint' ),
+                    'none' => esc_html__( 'Không', 'paint' ),
+                ],
             ]
         );
 
-        $this->add_control(
-            'dots',
+        $this->end_controls_section();
+
+        // responsive
+        $this->start_controls_section(
+            'responsive_section',
             [
-                'label'         =>  esc_html__('Dots Slider', 'paint'),
-                'type'          =>  Controls_Manager::SWITCHER,
-                'label_on'      =>  esc_html__('Yes', 'paint'),
-                'label_off'     =>  esc_html__('No', 'paint'),
-                'return_value'  =>  'yes',
-                'default'       =>  'yes',
+                'label' => esc_html__( 'Responsive', 'paint' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
 
         $this->add_control(
             'margin_item',
             [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  30,
+                'default'   =>  24,
                 'min'       =>  0,
                 'max'       =>  100,
                 'step'      =>  1,
             ]
         );
 
+        // greater 1200px
         $this->add_control(
             'min_width_1200',
             [
-                'label'     =>  esc_html__( 'Min Width 1200px', 'paint' ),
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 1200px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
@@ -201,19 +204,20 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         $this->add_control(
             'item',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  3,
+                'default'   =>  5,
                 'min'       =>  1,
                 'max'       =>  100,
                 'step'      =>  1,
             ]
         );
 
+        // greater 992px
         $this->add_control(
             'min_width_992',
             [
-                'label'     =>  esc_html__( 'Min Width 992px', 'paint' ),
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 992px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
@@ -222,63 +226,31 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         $this->add_control(
             'item_992',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  2,
+                'default'   =>  3,
                 'min'       =>  1,
                 'max'       =>  100,
                 'step'      =>  1,
             ]
         );
 
+        // greater 768px
         $this->add_control(
             'min_width_768',
             [
-                'label'     =>  esc_html__( 'Min Width 768px', 'paint' ),
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 768px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'item_768',
+            'margin_item_greater_768',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  2,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-            ]
-        );
-
-        $this->add_control(
-            'min_width_576',
-            [
-                'label'     =>  esc_html__( 'Min Width 568px', 'paint' ),
-                'type'      =>  Controls_Manager::HEADING,
-                'separator' =>  'before',
-            ]
-        );
-
-        $this->add_control(
-            'item_576',
-            [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  2,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-            ]
-        );
-
-        $this->add_control(
-            'margin_item_576',
-            [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  15,
+                'default'   =>  24,
                 'min'       =>  0,
                 'max'       =>  100,
                 'step'      =>  1,
@@ -286,18 +258,99 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-            'max_width_575',
+            'item_768',
             [
-                'label'     =>  esc_html__( 'Max Width 567px', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 576px
+        $this->add_control(
+            'width_greater_576',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 576px', 'paint' ),
                 'type'      =>  Controls_Manager::HEADING,
                 'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'item_480',
+            'item_greater_576',
             [
-                'label'     =>  esc_html__( 'Number of Item', 'paint' ),
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_576',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 480px
+        $this->add_control(
+            'width_greater_480',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_greater_480',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_480',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // less 480px
+        $this->add_control(
+            'max_width_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Nhỏ hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_less_480',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  1,
                 'min'       =>  1,
@@ -307,9 +360,9 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-            'margin_item_480',
+            'margin_item_less_480',
             [
-                'label'     =>  esc_html__( 'Space Between Item', 'paint' ),
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  0,
                 'min'       =>  0,
@@ -604,33 +657,34 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
         $order_by_post  =   $settings['order_by'];
         $order_post     =   $settings['order'];
 
-        $data_settings_owl  =   [
-            'loop'          =>  ( 'yes' === $settings['loop'] ),
-            'nav'           =>  ( 'yes' === $settings['nav'] ),
-            'dots'          =>  ( 'yes' === $settings['dots'] ),
-            'margin'        =>  $settings['margin_item'],
-            'autoplay'      =>  ( 'yes' === $settings['autoplay'] ),
-            'responsive'    => [
+        $owl_options = [
+            'loop' => ('yes' === $settings['loop']),
+            'nav' => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
+            'dots' => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
+            'autoplay' => ('yes' === $settings['autoplay']),
+            'margin' => $settings['margin_item'],
+            'responsive' => [
                 '0' => array(
-                    'items'     =>  $settings['item_480'],
-                    'margin'    =>  $settings['margin_item_480']
+                    'items' => $settings['item_less_480'],
+                    'margin' => $settings['margin_item_less_480']
                 ),
-
+                '480' => array(
+                    'items' => $settings['item_greater_480'],
+                    'margin' => $settings['margin_item_greater_480']
+                ),
                 '576' => array(
-                    'items'     =>  $settings['item_576'],
-                    'margin'    =>  $settings['margin_item_576']
+                    'items' => $settings['item_greater_576'],
+                    'margin' => $settings['margin_item_greater_576']
                 ),
-
                 '768' => array(
-                    'items'     =>  $settings['item_768']
+                    'items' => $settings['item_768'],
+                    'margin' => $settings['margin_item_greater_768']
                 ),
-
                 '992' => array(
-                    'items'     =>  $settings['item_992']
+                    'items' => $settings['item_992']
                 ),
-
                 '1200' => array(
-                    'items'     =>  $settings['item']
+                    'items' => $settings['item']
                 ),
             ],
         ];
@@ -651,7 +705,7 @@ class Paint_Elementor_Post_Carousel extends Widget_Base {
 
             ?>
             <div class="element-post-carousel">
-                <div class="element-post-carousel__warp custom-owl-carousel owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $data_settings_owl ) ; ?>'>
+                <div class="element-post-carousel__warp custom-owl-carousel owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ) ; ?>'>
                     <?php while ( $query->have_posts() ):
                         $query->the_post();
                     ?>

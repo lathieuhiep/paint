@@ -142,7 +142,7 @@ class Paint_Elementor_Album_Gallery extends Widget_Base {
             <div class="element-album-gallery__warp">
                 <?php foreach ( $settings['gallery'] as $image  ): ?>
                     <div class="item">
-                        <?php echo wp_get_attachment_image( $image['id'], 'full' ); ?>
+                        <?php echo wp_get_attachment_image( $image['id'], 'large' ); ?>
                     </div>
                 <?php endforeach; ?>
             </div>

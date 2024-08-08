@@ -230,6 +230,19 @@
         }
     }
 
+    const elementImageSlider = ($scope, $) => {
+        const slider = $scope.find('.element-image-carousel__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
@@ -257,5 +270,7 @@
 
         // element code carousel
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-color-code-carousel.default', elementColorCodeSlider);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-image-carousel.default', elementImageSlider);
     });
 })(jQuery);
