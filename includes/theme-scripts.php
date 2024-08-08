@@ -45,9 +45,7 @@ function paint_register_front_end(): void
     /** Load css **/
 
     // font google
-    if ( is_singular('paint_product') ) {
-        wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap', array(), null );
-    }
+    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap', array(), null );
 
     /* Start main Css */
     wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '5.12.1');

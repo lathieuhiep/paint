@@ -22,7 +22,14 @@
         margin-bottom: .8rem;
         font-style: italic;
         font-weight: 900;
-        font-size: 1.6rem
+
+        @media (min-width: 576px) {
+          font-size: 1.6rem;
+        }
+
+        @media (min-width: 575px) {
+          font-size: 1.2rem;
+        }
       }
 
       .group-box {
@@ -34,7 +41,10 @@
       .grid-field {
         display: grid;
         grid-gap: 2.4rem;
-        grid-template-columns: repeat(2, 1fr);
+
+        @media (min-width: 576px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       .wpcf7-form-control-wrap {
@@ -43,6 +53,10 @@
         .wpcf7-form-control {
           border-radius: .5rem;
           border-color: #D9D9D9
+        }
+
+        .wpcf7-textarea {
+          height: 15rem;
         }
       }
 
@@ -70,9 +84,9 @@
       .group-grid-check {
         .wpcf7-checkbox {
           display: grid;
-          grid-gap: 1.2rem 2.4rem;
 
           @media (min-width: 480px) {
+            grid-gap: 1.2rem 2.4rem;
             grid-template-columns: repeat(2, 1fr);
           }
         }
@@ -81,9 +95,9 @@
       .group-box {
         .grid-column {
           display: grid;
-          grid-gap: 2.4rem;
 
           @media (min-width: 480px) {
+            grid-gap: 2.4rem;
             grid-template-columns: repeat(2, 1fr);
           }
 
@@ -95,6 +109,12 @@
               @media (min-width: 768px) {
                 grid-template-columns: max-content 1fr;
               }
+
+              @media (max-width: 479px) {
+                .item__left {
+                  display: none;
+                }
+              }
             }
           }
         }
@@ -102,16 +122,27 @@
 
       p {
         &:has(.wpcf7-submit) {
+          position: relative;
           margin-top: 3rem;
           text-align: center;
+
+          .wpcf7-spinner {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
       }
 
       .wpcf7-submit {
-        padding: .6rem 1fr;
-        font-weight: 900;
+        padding: .7rem 2.6rem 0.5rem;
+        font-weight: 700;
         color: #000000;
         font-size: 1.6rem;
+        line-height: 1.2;
+        font-family: $font-f-second;
         border: 1px solid #FDCD27;
         border-radius: .5rem;
         background: transparent;
