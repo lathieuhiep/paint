@@ -55,7 +55,6 @@ function paint_register_front_end(): void
     wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/bootstrap.min.css'), array(), '5.3.3');
 
 
-
     // style theme
     wp_enqueue_style( 'paint-style', get_theme_file_uri( '/assets/css/style-theme.min.css' ), array(), paint_get_version_theme() );
 
@@ -85,6 +84,7 @@ function paint_register_front_end(): void
 
     if ( is_singular('paint_product') ) {
         wp_enqueue_style('simplebar');
+        wp_enqueue_style('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/magnific-popup.min.css'), array(), '');
         wp_enqueue_style('single-product', get_theme_file_uri('/assets/css/post-type/product/single.min.css'), array(), '');
     }
 
@@ -172,6 +172,7 @@ function paint_register_front_end(): void
     if ( is_singular('paint_product') ) {
         wp_enqueue_script('simplebar');
         wp_enqueue_script('masonry.min', get_theme_file_uri('/assets/libs/masonry/masonry.min.js'), array('jquery'), '', true);
+        wp_enqueue_script('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/jquery.magnific-popup.min.js'), array('jquery'), '', true);
 
         wp_enqueue_script('product-detail', get_theme_file_uri('/assets/js/product-detail.min.js'), array(), '1.0.0', true);
         wp_localize_script('product-detail', 'productDetailAjax', array('url' => $paint_admin_url_ajax));

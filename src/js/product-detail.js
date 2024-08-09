@@ -18,6 +18,14 @@
                 arrows: false,
                 asNavFor: '.slider-product-gallery-nav'
             })
+
+            sliderProductGalleries.magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery:{
+                    enabled:true
+                }
+            })
         }
 
         if (sliderProductGalleryNav.length) {

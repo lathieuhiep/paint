@@ -100,10 +100,10 @@
     .content-product-detail {
       padding: 1.5rem 6rem 1.5rem 3rem;
       position: relative;
-      max-height: 58rem;
+      max-height: 55rem;
       overflow: hidden;
       color: $color-black;
-      background-color: #F1F1F1;
+      background-color: #F9F8F8;
 
       &.simplebar-active {
         overflow: auto;
@@ -325,16 +325,8 @@
         grid-gap: 3rem;
         @include transition();
 
-        @media (min-width: 992px) {
-          grid-template-columns: repeat(5, 1fr);
-        }
-
-        @media (min-width: 768px) and (max-width: 991px) {
-          grid-template-columns: repeat(4, 1fr);
-        }
-
-        @media (max-width: 767px) {
-          grid-template-columns: repeat(2, 1fr);
+        @media (min-width: 576px) {
+          grid-template-columns: repeat(3, 1fr);
         }
 
         ~ .list-color {
@@ -408,16 +400,8 @@
         .box-full-color {
           display: none;
 
-          @media (min-width: 992px) {
-            grid-column: 1 / span 5;
-          }
-
-          @media (min-width: 768px) and (max-width: 991px) {
-            grid-column: 1 / span 4;
-          }
-
-          @media (max-width: 767px) {
-            grid-column: 1 / span 2;
+          @media (min-width: 576px) {
+            grid-column: 1 / span 3;
           }
 
           img {
@@ -512,9 +496,14 @@
       position: relative;
       border: .1rem solid rgba(114, 114, 114, 0.2);
       border-radius: 2rem;
+      @include transition();
 
       &__thumbnail {
         margin-bottom: 1rem;
+
+        img {
+          @include transition();
+        }
       }
 
       .title {
@@ -537,6 +526,18 @@
           color: #000000;
           font-weight: 700;
           background-color: #FDCD26;
+        }
+      }
+
+      &:hover {
+        box-shadow: 0 .3rem .5rem #888888;
+
+        .item {
+          &__thumbnail {
+            img {
+              transform: scale(1.2);
+            }
+          }
         }
       }
     }

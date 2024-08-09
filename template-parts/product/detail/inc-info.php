@@ -8,9 +8,9 @@ $contact = paint_get_option('paint_opt_product_detail_contact');
         <?php if ( $galleries ) : ?>
             <div class="slider-product-galleries">
                 <?php foreach ($galleries as $attachment_id => $attachment_url) : ?>
-                    <div class="item d-flex align-items-center justify-content-center">
+                    <a href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>" class="item d-flex align-items-center justify-content-center">
                         <?php echo wp_get_attachment_image( $attachment_id, 'large' ) ?>
-                    </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
 
