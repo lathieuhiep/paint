@@ -19,7 +19,7 @@ if (!empty($color_code_list)) :
             <div class="item">
                 <figure class="item__thumbnail"
                         data-image-feature="<?php echo wp_get_attachment_image_url($color_code_item['image_id'], 'full') ?>">
-                    <?php echo wp_get_attachment_image($color_code_item['image_id'], 'large'); ?>
+                    <?php echo wp_get_attachment_image($color_code_item['image_id'], 'medium_large'); ?>
                 </figure>
 
                 <div class="info">
@@ -38,9 +38,9 @@ if (!empty($color_code_list)) :
                     <div class="color-mix">
                         <?php foreach ($color_code_item['color_mix'] as $itemColorMix) : ?>
                             <div class="color-mix__item">
-                <span style="background-color: <?php echo esc_attr($itemColorMix['color']); ?>">
-                  <?php echo esc_html($itemColorMix['name']); ?>
-                </span>
+                                <span style="background-color: <?php echo esc_attr($itemColorMix['color']); ?>">
+                                  <?php echo esc_html($itemColorMix['name']); ?>
+                                </span>
                             </div>
                         <?php endforeach; ?>
                     </div>

@@ -116,6 +116,12 @@ function paint_register_front_end(): void
         wp_enqueue_style('single-discover', get_theme_file_uri('/assets/css/post-type/discover/single.min.css'), array(), '');
     }
 
+    // get css single color code
+    if (is_singular('paint_color_code')) {
+        wp_enqueue_style('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/magnific-popup.min.css'), array(), '');
+        wp_enqueue_style('single-color-code', get_theme_file_uri('/assets/css/post-type/color-code/single.min.css'), array(), '');
+    }
+
     // get style post
     if (paint_is_blog()) {
         wp_enqueue_style('archive-post', get_theme_file_uri('/assets/css/post-type/post/archive.min.css'), array(), '');
@@ -193,6 +199,11 @@ function paint_register_front_end(): void
     if ( is_singular('paint_project') ) {
         wp_enqueue_script('simplebar');
         wp_enqueue_script('project-detail', get_theme_file_uri('/assets/js/project-detail.min.js'), array(), '', true);
+    }
+
+    if (is_singular('paint_color_code')) {
+        wp_enqueue_script('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/jquery.magnific-popup.min.js'), array('jquery'), '', true);
+        wp_enqueue_script('color-code-detail', get_theme_file_uri('/assets/js/color-code-detail.min.js'), array(), '1.0.0', true);
     }
 
     // template register
