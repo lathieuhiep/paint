@@ -337,6 +337,50 @@ function paint_get_color_code()
     wp_die();
 }
 
+// action ajax get color code standard
+add_action('wp_ajax_nopriv_paint_get_color_code_standard', 'paint_get_color_code_standard');
+add_action('wp_ajax_paint_get_color_code_standard', 'paint_get_color_code_standard');
+function paint_get_color_code_standard()
+{
+    $idColorCode = (int)$_POST['idColorCode'];
+    $key = $_POST['key'];
+
+    $color_code_list = get_post_meta($idColorCode, 'paint_cmb_color_code_standard', true);
+
+    if ( $color_code_list ) {
+        $itemCode = $color_code_list[$key];
+?>
+        <div class="box-full-color">
+            <?php if ( $itemCode ) : ?>
+                <div class="item-full">
+                    <figure class="item__thumbnail">
+                        <?php echo wp_get_attachment_image( $itemCode['featured_image_id'], 'medium_large' ); ?>
+                    </figure>
+
+                    <div class="info">
+                        <h4 class="name">
+                            <?php echo esc_html( $itemCode['paint_number'] ); ?>
+                        </h4>
+
+                        <div class="desc">
+                            <?php echo wpautop( $itemCode['describe'] ); ?>
+                        </div>
+
+                        <div class="note">
+                            <?php echo esc_html( $itemCode['note'] ); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <p><?php esc_html_e('Thông tin đang cập nhật', 'paint'); ?></p>
+            <?php endif; ?>
+        </div>
+<?php
+    }
+
+    wp_die();
+}
+
 // action ajax pagination discover
 add_action('wp_ajax_nopriv_paint_pagination_discover', 'paint_pagination_discover');
 add_action('wp_ajax_paint_pagination_discover', 'paint_pagination_discover');

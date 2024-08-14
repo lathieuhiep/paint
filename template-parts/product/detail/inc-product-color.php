@@ -70,18 +70,21 @@ if ($id_color_code_cat) :
                         </div>
                     </div>
                 </div>
-            <?php
-            endif;
+            <?php endif; ?>
 
-            while ($query->have_posts()): $query->the_post();
-                get_template_part('template-parts/product/detail/inc', 'content-color');
+            <div class="group-color">
+                <?php
+                while ($query->have_posts()):
+                    $query->the_post();
 
-                if ($wp_query->current_post == 0) break;
-            endwhile;
+                    get_template_part('template-parts/product/detail/inc', 'content-color');
 
-            wp_reset_postdata();
-        endif;
-        ?>
+                    if ($wp_query->current_post == 0) break;
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 <?php
 endif;

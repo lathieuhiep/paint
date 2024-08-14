@@ -6,9 +6,17 @@ if (!empty($color_code_list)) :
     $i = 1;
     ?>
 
-    <div class="group-color">
+    <div class="group-color__grid" data-color-code-id="<?php echo esc_attr( get_the_ID() ); ?>">
         <?php
-        foreach ($color_code_list as $color_code_item) :
+        foreach ($color_code_list as $key => $color_code_item) :
+//            $data_standard = [
+//                'key' => $key,
+//                'featured_image' => $color_code_item['featured_image_id'],
+//                'paint_number' => $color_code_item['paint_number'],
+//                'describe' => $color_code_item['describe'],
+//                'note' => $color_code_item['note'],
+//            ];
+
             if ($i == 1 || $i % 3 == 1) :
                 ?>
                 <div class="list-color">
@@ -17,34 +25,27 @@ if (!empty($color_code_list)) :
             <?php endif; ?>
 
             <div class="item">
-                <figure class="item__thumbnail"
-                        data-image-feature="<?php echo wp_get_attachment_image_url($color_code_item['image_id'], 'full') ?>">
+                <figure class="item__thumbnail" data-key="<?php echo esc_attr($key); ?>">
                     <?php echo wp_get_attachment_image($color_code_item['image_id'], 'medium_large'); ?>
                 </figure>
 
-                <div class="info">
+                <div class="info text-center">
                     <?php if (!empty($color_code_name)) : ?>
-                        <p class="name">
+                        <span class="name">
                             <?php echo esc_html($color_code_name); ?>
-                        </p>
+                        </span>
                     <?php endif; ?>
 
-                    <p class="paint-number text-center">
+                    <span class="paint-number">
                         <?php echo esc_html($color_code_item['paint_number']) ?>
-                    </p>
+                    </span>
                 </div>
 
-                <?php if (!empty($color_code_item['color_mix'])) : ?>
-                    <div class="color-mix">
-                        <?php foreach ($color_code_item['color_mix'] as $itemColorMix) : ?>
-                            <div class="color-mix__item">
-                                <span style="background-color: <?php echo esc_attr($itemColorMix['color']); ?>">
-                                  <?php echo esc_html($itemColorMix['name']); ?>
-                                </span>
-                            </div>
-                        <?php endforeach; ?>
+                <div class="spinner-load-color d-none">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                <?php endif; ?>
+                </div>
             </div>
 
             <?php if ($i % 3 == 0 || $i == count($color_code_list)) : ?>

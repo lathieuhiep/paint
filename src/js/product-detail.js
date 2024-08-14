@@ -154,25 +154,57 @@
 
             const thisItem = $(this)
             const hasClassActive = thisItem.hasClass('active')
-            const urlImage = thisItem.find('.item__thumbnail').data('image-feature')
+            const itemThumbnail = thisItem.find('.item__thumbnail')
+
+            const groupColorGrid = thisItem.closest('.group-color__grid')
+            const idColorCode = groupColorGrid.data('color-code-id')
+            const key = itemThumbnail.data('key')
+
             const productColor = thisItem.closest('.product-color')
             const hasItemClone = productColor.find('.item-full')
             const listColor = thisItem.closest('.list-color')
             const cloneItem = thisItem.clone().addClass('item-full')
 
+            console.log(idColorCode)
+            console.log(key)
+
             if (!hasClassActive) {
-                if (hasItemClone.length) {
-                    $('.product-color').find('.item-full').slideUp()
+                const spinnerBox = thisItem.find('.spinner-load-color')
+                const row = thisItem.closest('.list-color')
 
-                    timeShowColorProduct = setTimeout(function () {
+                $.ajax({
+                    url: productDetailAjax.url,
+                    type: 'POST',
+                    data: ({
+                        action: 'paint_get_color_code_standard',
+                        idColorCode: idColorCode,
+                        key: key
+                    }),
+                    beforeSend: function () {
+                        spinnerBox.removeClass('d-none')
+                        groupColorGrid.find('.box-full-color').remove()
+                    },
+                    success: function (result) {
+                        if ( $(window).width() > 575 ) {
+                            row.after(result)
+                        }
 
-                        $('.product-color').find('.box-full-color').remove()
-                        showItemFullColor(listColor, cloneItem, urlImage, thisItem)
+                        spinnerBox.addClass('d-none');
+                    },
+                })
 
-                    }, 500)
-                } else {
-                    showItemFullColor(listColor, cloneItem, urlImage, thisItem)
-                }
+                // if (hasItemClone.length) {
+                //     $('.product-color').find('.item-full').slideUp()
+                //
+                //     timeShowColorProduct = setTimeout(function () {
+                //
+                //         $('.product-color').find('.box-full-color').remove()
+                //         showItemFullColor(listColor, cloneItem, urlImage, thisItem)
+                //
+                //     }, 500)
+                // } else {
+                //     showItemFullColor(listColor, cloneItem, urlImage, thisItem)
+                // }
             }
         })
 

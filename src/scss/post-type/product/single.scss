@@ -385,6 +385,19 @@
             }
           }
 
+          .info {
+            span {
+              position: relative;
+              display: inline-block;
+
+              ~ span {
+                &:before {
+                  content: "-";
+                }
+              }
+            }
+          }
+
           &:hover {
             .color-mix {
               opacity: 1;
@@ -396,49 +409,30 @@
         &.hidden-item {
           opacity: 0;
         }
+      }
+
+      .group-color {
+        &__grid {
+          .item {
+            position: relative;
+
+            .spinner-load-color {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: rgba(0,0,0,0.5);
+              @include flex-center();
+            }
+          }
+        }
 
         .box-full-color {
-          display: none;
-
-          @media (min-width: 576px) {
-            grid-column: 1 / span 3;
-          }
-
-          img {
-            width: auto;
-          }
-
           .item-full {
             display: grid;
-            grid-gap: 3rem;
-
-            .info {
-              position: relative;
-              padding-right: 2rem;
-
-              .name {
-                font-weight: 700;
-              }
-
-              .paint-number {
-                font-size: 1.6rem;
-              }
-
-              .close-full-color {
-                position: absolute;
-                padding: 0;
-                top: 0;
-                right: 0;
-                border: 0;
-                width: 1.5rem;
-                background-color: transparent;
-              }
-            }
-
-            @media (min-width: 992px) {
-              grid-template-columns: max-content 25rem;
-            }
-
+            grid-gap: 2.4rem;
+            grid-template-columns: 70rem 1fr;
           }
         }
       }
