@@ -298,11 +298,6 @@
               transition: width 0.1s ease 0.2s, height 0.1s ease 0.3s, visibility 0s 0.2s;
             }
           }
-
-          &.active,
-          &:hover {
-            //@include box-shadow(0px 20px 30px rgba(0, 0, 0, 0.5))
-          }
         }
 
         &__style {
@@ -325,7 +320,7 @@
         grid-gap: 3rem;
         @include transition();
 
-        @media (min-width: 576px) {
+        @media (min-width: 480px) {
           grid-template-columns: repeat(3, 1fr);
         }
 
@@ -337,6 +332,13 @@
           position: relative;
           overflow: hidden;
           cursor: pointer;
+          @include transition();
+
+          &:hover,
+          &.active {
+            transform: scale(1.05);
+            box-shadow: 0 .6rem 1rem 0 rgba(0,0,0,.2);
+          }
 
           img {
             width: 100%;
@@ -390,6 +392,10 @@
               position: relative;
               display: inline-block;
 
+              @media (max-width: 768px) {
+                font-size: 1.6rem;
+              }
+
               ~ span {
                 &:before {
                   content: "-";
@@ -429,10 +435,67 @@
         }
 
         .box-full-color {
+          display: none;
+          margin-top: 3rem;
+
           .item-full {
             display: grid;
             grid-gap: 2.4rem;
-            grid-template-columns: 70rem 1fr;
+
+            @media (min-width: 1200px) {
+              grid-template-columns: 70rem 1fr;
+            }
+
+            @media (min-width: 992px) and (max-width: 1199px) {
+              grid-template-columns: 50rem 1fr;
+            }
+
+            @media (min-width: 768px) and (max-width: 991px) {
+              grid-template-columns: 40rem 1fr;
+            }
+
+            .info {
+              &__top {
+                margin-bottom: 1.6rem;
+                padding-bottom: 1rem;
+                display: grid;
+                grid-gap: 1.2rem;
+                grid-template-columns: 1fr max-content;
+                align-items: center;
+                border-bottom: .1rem solid #dddddd;
+
+                .name {
+                  margin: 0;
+                }
+
+                .btn {
+                  padding: 0;
+                  line-height: normal;
+
+                  i {
+                    font-size: 2rem;
+                    @include transition();
+
+                    &:hover {
+                      color: $color-hover;
+                    }
+                  }
+                }
+              }
+            }
+
+            .txt-box {
+              font-size: 1.7rem;
+              line-height: 1.6;
+
+              ~ .txt-box {
+                margin-top: 1.2rem;
+              }
+
+              &__title {
+                margin-bottom: .6rem;
+              }
+            }
           }
         }
       }

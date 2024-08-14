@@ -160,17 +160,11 @@
             const idColorCode = groupColorGrid.data('color-code-id')
             const key = itemThumbnail.data('key')
 
-            const productColor = thisItem.closest('.product-color')
-            const hasItemClone = productColor.find('.item-full')
-            const listColor = thisItem.closest('.list-color')
-            const cloneItem = thisItem.clone().addClass('item-full')
-
-            console.log(idColorCode)
-            console.log(key)
-
             if (!hasClassActive) {
                 const spinnerBox = thisItem.find('.spinner-load-color')
                 const row = thisItem.closest('.list-color')
+
+                groupColorGrid.find('.item').removeClass('active')
 
                 $.ajax({
                     url: productDetailAjax.url,
@@ -181,46 +175,51 @@
                         key: key
                     }),
                     beforeSend: function () {
+                        thisItem.append('<div class="spinner-load-color">\n' +
+                            '<div class="spinner-border text-warning" role="status">\n' +
+                            '<span class="visually-hidden">Loading...</span>\n' +
+                            '</div>\n' +
+                            '</div>')
+
                         spinnerBox.removeClass('d-none')
-                        groupColorGrid.find('.box-full-color').remove()
+                        const boxFullColor = groupColorGrid.find('.box-full-color')
+
+                        if ( boxFullColor.length ) {
+                            boxFullColor.slideUp(500, function() {
+                                $(this).remove();
+                            })
+                        }
                     },
                     success: function (result) {
-                        if ( $(window).width() > 575 ) {
+                        if ( $(window).width() > 479 ) {
                             row.after(result)
+                        } else {
+                            thisItem.after(result)
                         }
 
                         spinnerBox.addClass('d-none');
                     },
-                })
+                    complete: function () {
+                        thisItem.addClass('active')
+                        thisItem.find('.spinner-load-color').remove()
 
-                // if (hasItemClone.length) {
-                //     $('.product-color').find('.item-full').slideUp()
-                //
-                //     timeShowColorProduct = setTimeout(function () {
-                //
-                //         $('.product-color').find('.box-full-color').remove()
-                //         showItemFullColor(listColor, cloneItem, urlImage, thisItem)
-                //
-                //     }, 500)
-                // } else {
-                //     showItemFullColor(listColor, cloneItem, urlImage, thisItem)
-                // }
+                        groupColorGrid.find('.box-full-color').slideDown(500, function () {
+                            $('html, body').animate({
+                                scrollTop: groupColorGrid.find('.box-full-color').offset().top - $('.site-header').outerHeight() - 50
+                            }, 400);
+                        })
+                    }
+                })
             }
         })
 
         body.on('click', '.close-full-color', function () {
-            window.clearTimeout(timeShowColorProduct)
-
             const boxFullColorItem = $(this).closest('.box-full-color')
 
-            boxFullColorItem.slideUp()
-
-            timeShowColorProduct = setTimeout(function () {
-
-                boxFullColorItem.remove()
+            boxFullColorItem.slideUp(500, function() {
+                $(this).remove()
                 $('.product-color').find('.list-color .item').removeClass('active')
-
-            }, 500)
+            })
         })
 
         // related product

@@ -49,7 +49,7 @@ function paint_cmb_tool(): void
       'min' => '1',
     ),
     'column' => array(
-      'position' => 1
+      'position' => 2
     ),
     'display_cb' => 'paint_display_tool_price',
   ));

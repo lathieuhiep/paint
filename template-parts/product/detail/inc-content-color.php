@@ -9,20 +9,11 @@ if (!empty($color_code_list)) :
     <div class="group-color__grid" data-color-code-id="<?php echo esc_attr( get_the_ID() ); ?>">
         <?php
         foreach ($color_code_list as $key => $color_code_item) :
-//            $data_standard = [
-//                'key' => $key,
-//                'featured_image' => $color_code_item['featured_image_id'],
-//                'paint_number' => $color_code_item['paint_number'],
-//                'describe' => $color_code_item['describe'],
-//                'note' => $color_code_item['note'],
-//            ];
-
             if ($i == 1 || $i % 3 == 1) :
-                ?>
-                <div class="list-color">
+        ?>
+            <div class="list-color">
 
-
-            <?php endif; ?>
+        <?php endif; ?>
 
             <div class="item">
                 <figure class="item__thumbnail" data-key="<?php echo esc_attr($key); ?>">
@@ -40,19 +31,12 @@ if (!empty($color_code_list)) :
                         <?php echo esc_html($color_code_item['paint_number']) ?>
                     </span>
                 </div>
-
-                <div class="spinner-load-color d-none">
-                    <div class="spinner-border text-warning" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
             </div>
 
-            <?php if ($i % 3 == 0 || $i == count($color_code_list)) : ?>
+        <?php if ($i % 3 == 0 || $i == count($color_code_list)) : ?>
             </div>
         <?php
         endif;
-
             $i++;
         endforeach;
         ?>

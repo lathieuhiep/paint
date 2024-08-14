@@ -351,24 +351,51 @@ function paint_get_color_code_standard()
         $itemCode = $color_code_list[$key];
 ?>
         <div class="box-full-color">
-            <?php if ( $itemCode ) : ?>
+            <?php
+            if ( $itemCode ) :
+                $image_id = $itemCode['featured_image_id'] ?: $itemCode['image_id'];
+            ?>
                 <div class="item-full">
                     <figure class="item__thumbnail">
-                        <?php echo wp_get_attachment_image( $itemCode['featured_image_id'], 'medium_large' ); ?>
+                        <?php echo wp_get_attachment_image( $image_id, 'medium_large' ); ?>
                     </figure>
 
                     <div class="info">
-                        <h4 class="name">
-                            <?php echo esc_html( $itemCode['paint_number'] ); ?>
-                        </h4>
+                        <div class="info__top">
+                            <h4 class="name">
+                                <?php echo esc_html( $itemCode['paint_number'] ); ?>
+                            </h4>
 
-                        <div class="desc">
-                            <?php echo wpautop( $itemCode['describe'] ); ?>
+                            <div class="action-box">
+                                <button type="button" class="btn close-full-color">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="note">
-                            <?php echo esc_html( $itemCode['note'] ); ?>
-                        </div>
+                        <?php if ( $itemCode['describe'] ) : ?>
+                            <div class="desc txt-box">
+                                <h4 class="txt-box__title">
+                                    <?php esc_html_e('Mô tả mã màu:', 'paint'); ?>
+                                </h4>
+
+                                <div class="desc__content">
+                                    <?php echo wpautop( $itemCode['describe'] ); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ( $itemCode['note'] ) : ?>
+                            <div class="note txt-box">
+                                <h4 class="txt-box__title">
+                                    <?php esc_html_e('Lưu ý:', 'paint'); ?>
+                                </h4>
+
+                                <div class="note__content">
+                                    <?php echo esc_html( $itemCode['note'] ); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php else: ?>

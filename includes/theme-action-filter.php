@@ -153,7 +153,7 @@ function paint_custom_product_columns($columns)
 }
 
 // order column products
-add_filter('manage_paint_product_posts_columns', 'paint_order_product_columns');
+//add_filter('manage_paint_product_posts_columns', 'paint_order_product_columns');
 function paint_order_product_columns($columns): array
 {
   return array(
@@ -175,7 +175,7 @@ function paint_custom_tool_columns($columns)
 }
 
 // order column post type tool
-add_filter('manage_paint_tool_posts_columns', 'paint_order_tool_columns');
+//add_filter('manage_paint_tool_posts_columns', 'paint_order_tool_columns');
 function paint_order_tool_columns($columns): array
 {
   return array(
