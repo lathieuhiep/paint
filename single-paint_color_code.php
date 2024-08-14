@@ -37,7 +37,7 @@
                         </a>
                     </div>
 
-                    <p class="paint-number fw-bold">
+                    <p class="paint-number fw-bold text-center">
                         <?php echo esc_html($item['paint_number']) ?>
                     </p>
                 </div>

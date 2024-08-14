@@ -29,7 +29,7 @@ if (!empty($color_code_list)) :
                         </p>
                     <?php endif; ?>
 
-                    <p class="paint-number">
+                    <p class="paint-number text-center">
                         <?php echo esc_html($color_code_item['paint_number']) ?>
                     </p>
                 </div>
