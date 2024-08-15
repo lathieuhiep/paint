@@ -6,20 +6,36 @@ $contact = paint_get_option('paint_opt_product_detail_contact');
 <div class="product-info-warp">
     <div class="thumbnail-box">
         <?php if ( $galleries ) : ?>
-            <div class="slider-product-galleries">
-                <?php foreach ($galleries as $attachment_id => $attachment_url) : ?>
-                    <a href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>" class="item d-flex align-items-center justify-content-center">
-                        <?php echo wp_get_attachment_image( $attachment_id, 'large' ) ?>
-                    </a>
-                <?php endforeach; ?>
+            <div class="slider-product-galleries owl-carousel">
+                <?php
+                $sttMain = 0;
+                foreach ($galleries as $attachment_id => $attachment_url) :
+                ?>
+                    <div class="item d-flex align-items-center justify-content-center image-container" data-index="<?php echo esc_attr( $sttMain ); ?>">
+                        <a class="item__thumbnail zoom-box" href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>">
+                            <?php echo wp_get_attachment_image( $attachment_id, 'large' ) ?>
+                        </a>
+
+                        <div class="zoom-overlay" data-zoom-src="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>"></div>
+                    </div>
+                <?php
+                    $sttMain++;
+                endforeach;
+                ?>
             </div>
 
-            <div class="slider-product-gallery-nav">
-                <<?php foreach ($galleries as $attachment_id => $attachment_url) : ?>
-                    <div class="item">
+            <div class="slider-product-gallery-nav owl-carousel">
+                <?php
+                $sttNav = 0;
+                foreach ($galleries as $attachment_id => $attachment_url) :
+                ?>
+                    <div class="item" data-index="<?php echo esc_attr( $sttNav ); ?>">
                         <?php echo wp_get_attachment_image( $attachment_id, 'medium' ) ?>
                     </div>
-                <?php endforeach; ?>
+                <?php
+                    $sttNav++;
+                endforeach;
+                ?>
             </div>
         <?php endif; ?>
     </div>

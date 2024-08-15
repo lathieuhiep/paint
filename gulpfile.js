@@ -15,7 +15,7 @@ const pathAssets = './assets'
 const pathAssetsCss = `${pathAssets}/css`
 
 // server
-const domain = 'localhost/bcolor';
+const domain = 'localhost/bcolor.vn';
 function server() {
     browserSync.init({
         proxy: domain,

@@ -19,13 +19,51 @@
                 asNavFor: '.slider-product-gallery-nav'
             })
 
+            const delegateImage = sliderProductGalleries.find('.slick-slide').not('.slick-cloned').find('a')
             sliderProductGalleries.magnificPopup({
-                delegate: 'a',
+                delegate: delegateImage,
                 type: 'image',
                 gallery:{
                     enabled:true
                 }
             })
+
+            const imageContainers = $('.image-container').not('.slick-cloned .image-container'); // Lọc bỏ các phần tử clone
+
+            // hover image
+            imageContainers.each(function() {
+                const container = $(this);
+                const img = container.find('img');
+                const overlay = container.find('.zoom-overlay');
+                const zoomSrc = overlay.data('zoom-src');
+
+                // Cập nhật URL ảnh gốc cho lớp phủ zoom
+                overlay.css('background-image', `url(${zoomSrc})`);
+
+                container.on('mousemove', function(e) {
+                    const rect = img[0].getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // Tính toán vị trí và kích thước của ảnh zoom
+                    const scale = 2;
+                    const backgroundX = -(x * scale - overlay.width() / 2);
+                    const backgroundY = -(y * scale - overlay.height() / 2);
+
+                    overlay.css('background-position', `${backgroundX}px ${backgroundY}px`);
+                });
+
+                container.on('mouseenter', function() {
+                    img.css('opacity', '0');
+                    overlay.css('opacity', '1');
+                });
+
+                container.on('mouseleave', function() {
+                    img.css('opacity', '1');
+                    overlay.css('opacity', '0');
+                    overlay.css('background-position', 'center');
+                });
+            });
         }
 
         if (sliderProductGalleryNav.length) {
@@ -113,6 +151,7 @@
 
         // handle pattern
         $('.item-pattern').on('click', function () {
+            let isLoading = false
             const thisPattern = $(this);
             const postId = thisPattern.data('id');
             const stt = thisPattern.data('stt');
@@ -121,7 +160,8 @@
             const spinnerBox = $('.spinner-box');
             const listColor = $('.group-color');
 
-            if (!hasActive) {
+            if (!hasActive && !isLoading) {
+                isLoading = true
                 thisPattern.closest('.pattern__posts').find('.item-pattern').removeClass('active');
                 thisPattern.addClass('active');
 
@@ -141,17 +181,16 @@
                         listColor.append(result);
                         spinnerBox.addClass('d-none');
                     },
+                    complete: function () {
+                        isLoading = false
+                    }
                 })
             }
-
         })
 
         // handle click color product
-        let timeShowColorProduct
-
         body.on('click', '.product-color .item', function () {
-            window.clearTimeout(timeShowColorProduct)
-
+            let isLoading = false
             const thisItem = $(this)
             const hasClassActive = thisItem.hasClass('active')
             const itemThumbnail = thisItem.find('.item__thumbnail')
@@ -160,7 +199,8 @@
             const idColorCode = groupColorGrid.data('color-code-id')
             const key = itemThumbnail.data('key')
 
-            if (!hasClassActive) {
+            if ( !hasClassActive && !isLoading ) {
+                isLoading = true
                 const spinnerBox = thisItem.find('.spinner-load-color')
                 const row = thisItem.closest('.list-color')
 
@@ -208,6 +248,8 @@
                                 scrollTop: groupColorGrid.find('.box-full-color').offset().top - $('.site-header').outerHeight() - 50
                             }, 400);
                         })
+
+                        isLoading = false
                     }
                 })
             }

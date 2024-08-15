@@ -85,6 +85,7 @@ function paint_register_front_end(): void
     if ( is_singular('paint_product') ) {
         wp_enqueue_style('simplebar');
         wp_enqueue_style('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/magnific-popup.min.css'), array(), '');
+
         wp_enqueue_style('single-product', get_theme_file_uri('/assets/css/post-type/product/single.min.css'), array(), '');
     }
 

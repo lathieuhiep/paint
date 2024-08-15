@@ -27,21 +27,36 @@
 
     .slider-product-galleries {
       .item {
-        padding: 2.4rem;
-        border: .1rem solid #000000;
+        position: relative;
 
-        @media (min-width: 768px) {
-          height: 60rem;
+        &__thumbnail {
+          display: block;
+          height: inherit;
+          transition: opacity 0.5s ease;
         }
 
-        @media (max-width: 767px) {
-          height: 50rem;
-        }
-
-        img {
+        .zoom-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          background-repeat: no-repeat;
+          background-size: 200%; /* Tùy chỉnh kích thước để phù hợp với ảnh gốc */
+          pointer-events: none; /* Cho phép di chuột qua lớp phủ */
+          transition: opacity 0.5s ease;
+          opacity: 0;
+          background-position: center;
+        }
+
+        &:hover {
+          .item__thumbnail {
+            opacity: 0;
+          }
+
+          .zoom-overlay {
+            opacity: 1;
+          }
         }
       }
     }
@@ -282,7 +297,8 @@
             @include justify-content(center);
           }
 
-          &:hover {
+          &:hover,
+          &.active {
             &:before,
             &:after {
               width: 100%;
@@ -302,7 +318,6 @@
 
         &__style {
           margin-bottom: 0;
-          padding-left: 3rem;
           font-size: 1.6rem;
           text-transform: uppercase;
         }
