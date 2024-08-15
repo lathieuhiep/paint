@@ -32,31 +32,6 @@
         &__thumbnail {
           display: block;
           height: inherit;
-          transition: opacity 0.5s ease;
-        }
-
-        .zoom-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-repeat: no-repeat;
-          background-size: 200%; /* Tùy chỉnh kích thước để phù hợp với ảnh gốc */
-          pointer-events: none; /* Cho phép di chuột qua lớp phủ */
-          transition: opacity 0.5s ease;
-          opacity: 0;
-          background-position: center;
-        }
-
-        &:hover {
-          .item__thumbnail {
-            opacity: 0;
-          }
-
-          .zoom-overlay {
-            opacity: 1;
-          }
         }
       }
     }
@@ -510,6 +485,44 @@
               &__title {
                 margin-bottom: .6rem;
               }
+            }
+          }
+
+          .image-container {
+            position: relative;
+
+            .image-box {
+              img {
+                @include transition();
+              }
+            }
+
+            .zoom-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-repeat: no-repeat;
+              background-size: 200%;
+              pointer-events: none;
+              opacity: 0;
+              background-position: center;
+              @include transition();
+            }
+          }
+
+          &:hover {
+            .item__thumbnail {
+              .image-box {
+                img {
+                  opacity: 0;
+                }
+              }
+            }
+
+            .zoom-overlay {
+              opacity: 1;
             }
           }
         }

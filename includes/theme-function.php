@@ -356,8 +356,12 @@ function paint_get_color_code_standard()
                 $image_id = $itemCode['featured_image_id'] ?: $itemCode['image_id'];
             ?>
                 <div class="item-full">
-                    <figure class="item__thumbnail">
-                        <?php echo wp_get_attachment_image( $image_id, 'medium_large' ); ?>
+                    <figure class="item__thumbnail image-container">
+                        <div class="image-box">
+                            <?php echo wp_get_attachment_image( $image_id, 'medium_large' ); ?>
+                        </div>
+
+                        <div class="zoom-overlay" data-zoom-src="<?php echo esc_url( wp_get_attachment_url( $image_id ) ); ?>"></div>
                     </figure>
 
                     <div class="info">

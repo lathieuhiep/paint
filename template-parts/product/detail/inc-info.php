@@ -7,35 +7,21 @@ $contact = paint_get_option('paint_opt_product_detail_contact');
     <div class="thumbnail-box">
         <?php if ( $galleries ) : ?>
             <div class="slider-product-galleries owl-carousel">
-                <?php
-                $sttMain = 0;
-                foreach ($galleries as $attachment_id => $attachment_url) :
-                ?>
-                    <div class="item d-flex align-items-center justify-content-center image-container" data-index="<?php echo esc_attr( $sttMain ); ?>">
+                <?php foreach ($galleries as $attachment_id => $attachment_url) : ?>
+                    <div class="item d-flex align-items-center justify-content-center">
                         <a class="item__thumbnail zoom-box" href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>">
                             <?php echo wp_get_attachment_image( $attachment_id, 'large' ) ?>
                         </a>
-
-                        <div class="zoom-overlay" data-zoom-src="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>"></div>
                     </div>
-                <?php
-                    $sttMain++;
-                endforeach;
-                ?>
+                <?php endforeach; ?>
             </div>
 
             <div class="slider-product-gallery-nav owl-carousel">
-                <?php
-                $sttNav = 0;
-                foreach ($galleries as $attachment_id => $attachment_url) :
-                ?>
-                    <div class="item" data-index="<?php echo esc_attr( $sttNav ); ?>">
+                <?php foreach ($galleries as $attachment_id => $attachment_url) :?>
+                    <div class="item">
                         <?php echo wp_get_attachment_image( $attachment_id, 'medium' ) ?>
                     </div>
-                <?php
-                    $sttNav++;
-                endforeach;
-                ?>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </div>

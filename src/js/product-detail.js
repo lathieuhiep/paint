@@ -27,43 +27,6 @@
                     enabled:true
                 }
             })
-
-            const imageContainers = $('.image-container').not('.slick-cloned .image-container'); // Lọc bỏ các phần tử clone
-
-            // hover image
-            imageContainers.each(function() {
-                const container = $(this);
-                const img = container.find('img');
-                const overlay = container.find('.zoom-overlay');
-                const zoomSrc = overlay.data('zoom-src');
-
-                // Cập nhật URL ảnh gốc cho lớp phủ zoom
-                overlay.css('background-image', `url(${zoomSrc})`);
-
-                container.on('mousemove', function(e) {
-                    const rect = img[0].getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-
-                    // Tính toán vị trí và kích thước của ảnh zoom
-                    const scale = 2;
-                    const backgroundX = -(x * scale - overlay.width() / 2);
-                    const backgroundY = -(y * scale - overlay.height() / 2);
-
-                    overlay.css('background-position', `${backgroundX}px ${backgroundY}px`);
-                });
-
-                container.on('mouseenter', function() {
-                    img.css('opacity', '0');
-                    overlay.css('opacity', '1');
-                });
-
-                container.on('mouseleave', function() {
-                    img.css('opacity', '1');
-                    overlay.css('opacity', '0');
-                    overlay.css('background-position', 'center');
-                });
-            });
         }
 
         if (sliderProductGalleryNav.length) {
@@ -250,6 +213,7 @@
                         })
 
                         isLoading = false
+                        applyZoomEffect()
                     }
                 })
             }
@@ -263,6 +227,43 @@
                 $('.product-color').find('.list-color .item').removeClass('active')
             })
         })
+
+        // hover image
+        const imageContainers = $('.image-container')
+
+        imageContainers.each(function() {
+            const container = $(this);
+            const img = container.find('img');
+            const overlay = container.find('.zoom-overlay');
+            const zoomSrc = overlay.data('zoom-src');
+
+            // Cập nhật URL ảnh gốc cho lớp phủ zoom
+            overlay.css('background-image', `url(${zoomSrc})`);
+
+            container.on('mousemove', function(e) {
+                const rect = img[0].getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Tính toán vị trí và kích thước của ảnh zoom
+                const scale = 2;
+                const backgroundX = -(x * scale - overlay.width() / 2);
+                const backgroundY = -(y * scale - overlay.height() / 2);
+
+                overlay.css('background-position', `${backgroundX}px ${backgroundY}px`);
+            });
+
+            container.on('mouseenter', function() {
+                img.css('opacity', '0');
+                overlay.css('opacity', '1');
+            });
+
+            container.on('mouseleave', function() {
+                img.css('opacity', '1');
+                overlay.css('opacity', '0');
+                overlay.css('background-position', 'center');
+            });
+        });
 
         // related product
         const relatedProductGrid = $('.related-product__grid')
@@ -315,6 +316,46 @@
         findBoxFullColor.slideDown()
 
         thisItem.addClass('active')
+    }
+
+    //
+    function applyZoomEffect() {
+        $('.image-container').each(function() {
+            const container = $(this);
+            const img = container.find('img');
+            const overlay = container.find('.zoom-overlay');
+            const zoomSrc = overlay.data('zoom-src');
+
+            // Cập nhật URL ảnh gốc cho lớp phủ zoom
+            overlay.css('background-image', `url(${zoomSrc})`);
+
+            // Loại bỏ các sự kiện cũ trước khi gắn lại sự kiện mới
+            container.off('mousemove.zoom mouseenter.zoom mouseleave.zoom');
+
+            container.on('mousemove.zoom', function(e) {
+                const rect = img[0].getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Tính toán vị trí và kích thước của ảnh zoom
+                const scale = 2;
+                const backgroundX = -(x * scale - overlay.width() / 2);
+                const backgroundY = -(y * scale - overlay.height() / 2);
+
+                overlay.css('background-position', `${backgroundX}px ${backgroundY}px`);
+            });
+
+            container.on('mouseenter.zoom', function() {
+                img.css('opacity', '0');
+                overlay.css('opacity', '1');
+            });
+
+            container.on('mouseleave.zoom', function() {
+                img.css('opacity', '1');
+                overlay.css('opacity', '0');
+                overlay.css('background-position', 'center');
+            });
+        });
     }
 })(jQuery);
 
