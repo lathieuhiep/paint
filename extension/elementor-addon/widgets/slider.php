@@ -38,6 +38,30 @@ class Paint_Elementor_Slider extends Widget_Base {
     }
 
     protected function register_controls(): void {
+        // layout
+        $this->start_controls_section(
+            'layout_section',
+            [
+                'label' => esc_html__( 'Bố cục', 'paint' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'style',
+            [
+                'label' => esc_html__( 'Kiểu giao diện', 'paint' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'style-1',
+                'options' => [
+                    'style-1'  => esc_html__( 'Kiểu 1', 'paint' ),
+                    'style-2'  => esc_html__( 'Kiểu 2', 'paint' ),
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         // list
         $this->start_controls_section(
             'list_section',
@@ -97,6 +121,74 @@ class Paint_Elementor_Slider extends Widget_Base {
                     ],
                 ],
                 'title_field' => '{{{ list_title }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // anchor link
+        $this->start_controls_section(
+            'anchor_link_section',
+            [
+                'label' => esc_html__( 'Điểm neo', 'paint' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
+                'condition' => [
+                    'style' => 'style-2',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'anchor_link_1',
+            [
+                'label'     => esc_html__( 'Điểm neo 1', 'paint' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'url_anchor_link_1', [
+                'label' => esc_html__( 'Url', 'paint' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => '#',
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'text_anchor_link_1', [
+                'label' => esc_html__( 'Văn bản', 'paint' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Quy trình thi công', 'paint'),
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'anchor_link_2',
+            [
+                'label'     => esc_html__( 'Điểm neo 2', 'paint' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'url_anchor_link_2', [
+                'label' => esc_html__( 'Url', 'paint' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => '#',
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'text_anchor_link_2', [
+                'label' => esc_html__( 'Văn bản', 'paint' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Xem báo giá', 'paint'),
+                'label_block' => true,
             ]
         );
 
@@ -182,7 +274,7 @@ class Paint_Elementor_Slider extends Widget_Base {
                         <?php echo wp_get_attachment_image( $imageId, 'full' ); ?>
 
                         <?php
-                        if ( !empty( $url ) ) :
+                        if ( $settings['style'] == 'style-1' && !empty( $url ) ) :
                             $link_key = 'link_' . $index;
                             $this->add_link_attributes( $link_key, $item['list_link'] );
                         ?>
@@ -193,6 +285,22 @@ class Paint_Elementor_Slider extends Widget_Base {
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <?php if ( $settings['style'] == 'style-2' ) : ?>
+                <div class="action-anchor-link">
+                    <?php if ( $settings['url_anchor_link_1'] ) : ?>
+                        <a class="btn-global" href="<?php echo esc_attr( $settings['url_anchor_link_1'] ) ?>">
+                            <?php echo esc_html( $settings['text_anchor_link_1'] ); ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if ( $settings['url_anchor_link_2'] ) : ?>
+                        <a class="btn-global" href="<?php echo esc_attr( $settings['url_anchor_link_2'] ) ?>">
+                            <?php echo esc_html( $settings['text_anchor_link_2'] ); ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
     <?php
