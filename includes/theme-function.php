@@ -392,7 +392,7 @@ function paint_get_color_code_standard()
                                 </h4>
 
                                 <div class="note__content">
-                                    <?php echo esc_html( $itemCode['note'] ); ?>
+                                    <?php echo wpautop( $itemCode['note'] ); ?>
                                 </div>
                             </div>
                         <?php endif; ?>

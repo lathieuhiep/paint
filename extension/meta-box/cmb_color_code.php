@@ -93,6 +93,9 @@ function paint_cmb_color_code(): void
     $cmb->add_group_field($type_standard, array(
         'name' => esc_html__('Ghi chú', 'paint'),
         'id' => 'note',
-        'type' => 'textarea',
+        'type' => 'wysiwyg',
+        'options' => array(
+            'textarea_rows' => 16,
+        )
     ));
 }

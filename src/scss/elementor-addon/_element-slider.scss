@@ -27,6 +27,10 @@
       ~ .btn-global {
         margin-left: 2rem;
       }
+
+      &:hover {
+        color: $color-hover;
+      }
     }
   }
 
