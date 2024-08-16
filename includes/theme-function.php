@@ -737,7 +737,8 @@ function paint_pagination_post_type_user_saved()
 }
 
 // check is blog
-function paint_is_blog () {
+function paint_is_blog (): bool
+{
 	return ( is_archive() || is_author() || is_category() || is_home() || is_tag()) && 'post' == get_post_type();
 }
 
@@ -753,10 +754,6 @@ function paint_get_tab_product_detail()
   if ( in_array($idTab, $idTabs) ) {
     if ( $idTab == 'gallery-tab' ) {
       get_template_part('template-parts/product/detail/inc', 'product-gallery', array('idProduct' => $idProduct));
-    }
-
-    if ( $idTab == 'product-info-tab' ) {
-      get_template_part('template-parts/product/detail/inc', 'product-info', array('idProduct' => $idProduct));
     }
 
     if ( $idTab == 'product-construction-process-tab' ) {
