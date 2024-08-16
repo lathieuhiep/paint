@@ -128,6 +128,8 @@
                 thisPattern.closest('.pattern__posts').find('.item-pattern').removeClass('active');
                 thisPattern.addClass('active');
 
+                const targetProductColor = $('.color-code-load')
+
                 $.ajax({
                     url: productDetailAjax.url,
                     type: 'POST',
@@ -146,6 +148,7 @@
                     },
                     complete: function () {
                         isLoading = false
+                        targetProductColor.addClass('more-data')
                     }
                 })
             }
@@ -155,18 +158,24 @@
         body.on('click', '.product-color .item', function () {
             let isLoading = false
             const thisItem = $(this)
-            const hasClassActive = thisItem.hasClass('active')
-            const itemThumbnail = thisItem.find('.item__thumbnail')
+            const index = thisItem.index()
 
+            // tinh toan vi tri chen
+            const itemWidth = thisItem.outerWidth(true);
+            const containerWidth = thisItem.parent().width()
+            const itemsPerRow = Math.floor(containerWidth / itemWidth)
+            const rowIndex = Math.floor(index / itemsPerRow)
+            const row = thisItem.parent().children().slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow)
+
+            // xac dinh gia tri
+            const hasClassActive = thisItem.hasClass('active')
             const groupColorGrid = thisItem.closest('.group-color__grid')
             const idColorCode = groupColorGrid.data('color-code-id')
-            const key = itemThumbnail.data('key')
 
             if ( !hasClassActive && !isLoading ) {
                 isLoading = true
-                const spinnerBox = thisItem.find('.spinner-load-color')
-                const row = thisItem.closest('.list-color')
 
+                const spinnerBox = thisItem.find('.spinner-load-color')
                 groupColorGrid.find('.item').removeClass('active')
 
                 $.ajax({
@@ -175,7 +184,7 @@
                     data: ({
                         action: 'paint_get_color_code_standard',
                         idColorCode: idColorCode,
-                        key: key
+                        key: index
                     }),
                     beforeSend: function () {
                         thisItem.append('<div class="spinner-load-color">\n' +
@@ -194,12 +203,7 @@
                         }
                     },
                     success: function (result) {
-                        if ( $(window).width() > 479 ) {
-                            row.after(result)
-                        } else {
-                            thisItem.after(result)
-                        }
-
+                        row.last().after(result)
                         spinnerBox.addClass('d-none');
                     },
                     complete: function () {
@@ -224,7 +228,7 @@
 
             boxFullColorItem.slideUp(500, function() {
                 $(this).remove()
-                $('.product-color').find('.list-color .item').removeClass('active')
+                $('.group-color__grid').find('.item').removeClass('active')
             })
         })
 
@@ -299,26 +303,74 @@
                 ]
             })
         }
+
+        // load ajax product color
+        const groupColorGrid = $('.group-color__grid')
+        const itemsPerLoadProductColor = groupColorGrid.data('items-per')
+        let isLoadingProductColorScroll = false
+        let currentOffsetProductColor = itemsPerLoadProductColor
+
+        $(window).on('scroll', function () {
+            const tabColorCodeActive = $('#color-code').hasClass('active')
+
+            if ( tabColorCodeActive ) {
+                const colorCodeId = groupColorGrid.data('color-code-id')
+                console.log(colorCodeId)
+                const targetProductColor = $('.color-code-load')
+                const targetProductColorHasData = targetProductColor.hasClass('more-data')
+
+                if ( targetProductColorHasData && targetProductColor.offset().top + 110 < $(window).scrollTop() + $(window).height() && !isLoadingProductColorScroll ) {
+                    isLoadingProductColorScroll = true
+
+                    $.ajax({
+                        url: productDetailAjax.url,
+                        type: 'POST',
+                        data: ({
+                            action: 'paint_get_product_color_ajax',
+                            colorCodeId: colorCodeId,
+                            offset: currentOffsetProductColor,
+                            itemsPerLoad: itemsPerLoadProductColor
+                        }),
+                        beforeSend: function () {
+                            targetProductColor.find('.box-load').fadeIn()
+                        },
+                        success: function (response) {
+                            try {
+                                const jsonResponse = JSON.parse(response);
+
+                                if ( jsonResponse.html ) {
+                                    const newItems = $(jsonResponse.html)
+
+                                    // Đếm số lượng phần tử
+                                    newItems.each(function(index) {
+                                        // Thêm lớp và độ trễ cho từng phần tử
+                                        $(this).addClass('slide-up').css({
+                                            'animation-delay': (index * 0.2) + 's',
+                                            'opacity': 0
+                                        });
+                                    })
+
+                                    groupColorGrid.append(newItems);
+
+                                    currentOffsetProductColor += itemsPerLoadProductColor
+                                } else {
+                                    targetProductColor.removeClass('more-data')
+                                }
+                            } catch (e) {
+                                console.error('Invalid JSON response:', e);
+                            }
+                        },
+                        complete: function () {
+                            isLoadingProductColorScroll = false
+                            targetProductColor.find('.box-load').fadeOut()
+                        }
+                    })
+                }
+            }
+        })
     })
 
-    function showItemFullColor(element, cloneItem, urlImage, thisItem) {
-        thisItem.closest('.product-color').find('.item').removeClass('active')
-
-        // append item full color
-        element.append('<div class="box-full-color"></div>')
-
-        const findBoxFullColor = body.find('.list-color .box-full-color')
-        findBoxFullColor.append(cloneItem)
-
-        findBoxFullColor.find('.item-full img').attr('src', urlImage)
-        findBoxFullColor.find('.item-full').removeClass('item')
-        findBoxFullColor.find('.info').append('<button class="close-full-color"><i class="fa-solid fa-xmark"></i></button>')
-        findBoxFullColor.slideDown()
-
-        thisItem.addClass('active')
-    }
-
-    //
+    // function hover zoom image
     function applyZoomEffect() {
         $('.image-container').each(function() {
             const container = $(this);

@@ -10,7 +10,7 @@ $code_product = get_post_meta(get_the_ID(), 'paint_cmb_product_code', true);
     </div>
 <?php endif; ?>
 
-<div class="tabs-warp">
+<div class="tabs-warp" data-id="<?php get_the_ID() ?>">
     <ul class="nav nav-pills justify-content-center gap-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active success-loading" id="color-code-tab" data-bs-toggle="pill"
@@ -45,16 +45,24 @@ $code_product = get_post_meta(get_the_ID(), 'paint_cmb_product_code', true);
     </div>
 
     <div class="tab-content" id="pills-tabContent">
-        <div class="color-code-tab tab-pane fade show active" id="color-code" role="tabpanel"
-             aria-labelledby="color-code-tab"
-             tabindex="0">
-            <?php get_template_part('template-parts/product/detail/inc', 'product-color'); ?>
+        <div class="color-code-tab tab-pane fade show active" id="color-code" role="tabpanel" aria-labelledby="color-code-tab" tabindex="0">
+            <div class="product-color">
+                <?php get_template_part('template-parts/product/detail/inc', 'product-color'); ?>
+            </div>
+
+            <div class="color-code-load more-data">
+                <div class="box-load">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="gallery-tab tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab"
-             tabindex="0"></div>
+        <div class="gallery-tab tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0"></div>
 
-        <div class="product-construction-process-tab tab-pane fade" id="product-construction-process" role="tabpanel"
-             aria-labelledby="product-construction-process-tab" tabindex="0"></div>
+        <div class="product-construction-process-tab tab-pane fade" id="product-construction-process" role="tabpanel" aria-labelledby="product-construction-process-tab" tabindex="0"></div>
     </div>
 </div>

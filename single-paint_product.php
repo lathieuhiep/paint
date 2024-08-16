@@ -8,7 +8,6 @@
 
                 get_template_part('template-parts/product/detail/inc', 'info');
                 get_template_part('template-parts/product/detail/inc', 'tabs');
-
             endwhile;
 
             get_template_part('template-parts/product/detail/inc', 'related');

@@ -313,7 +313,6 @@ function paint_get_form_cf7(): array
 // action ajax get color code
 add_action('wp_ajax_nopriv_paint_get_color_code', 'paint_get_color_code');
 add_action('wp_ajax_paint_get_color_code', 'paint_get_color_code');
-
 function paint_get_color_code()
 {
     $postId = (int)$_POST['postId'];
@@ -334,6 +333,46 @@ function paint_get_color_code()
         esc_html_e('Không có dữ liệu', 'paint');
     endif;
     
+    wp_die();
+}
+
+// action ajax get product color
+add_action('wp_ajax_nopriv_paint_get_product_color_ajax', 'paint_get_product_color_ajax');
+add_action('wp_ajax_paint_get_product_color_ajax', 'paint_get_product_color_ajax');
+function paint_get_product_color_ajax()
+{
+    $colorCodeId = intval( $_POST['colorCodeId'] );
+    $offset = intval( $_POST['offset'] );
+    $items_per_load = intval( $_POST['itemsPerLoad'] );
+
+    $color_code_name = get_post_meta($colorCodeId, 'paint_cmb_color_code_name', true);
+    $color_code_list = get_post_meta($colorCodeId, 'paint_cmb_color_code_standard', true);
+    $response = [];
+
+    if ( $color_code_list ) {
+        $group_data = array_slice($color_code_list, $offset, $items_per_load);
+
+        if ( empty($group_data) ) {
+            return;
+        }
+
+        ob_start();
+        $args = [
+            'color_code_name' => $color_code_name,
+            'color_code_list' => $group_data
+        ];
+
+        get_template_part('template-parts/product/detail/components/inc', 'item-color-code', $args);
+
+        $html = ob_get_clean();
+
+        $response['html'] = $html;
+    } else {
+        $response['no_more_data'] = true;
+    }
+
+    echo json_encode($response);
+
     wp_die();
 }
 
