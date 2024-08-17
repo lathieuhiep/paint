@@ -6,8 +6,7 @@
 */
 
 add_action('init', 'paint_create_project', 10);
-
-function paint_create_project()
+function paint_create_project(): void
 {
 
   /* Start post type */
@@ -75,3 +74,5 @@ function paint_create_project()
   /* End taxonomy */
 
 }
+
+//

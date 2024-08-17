@@ -86,12 +86,16 @@ $config_nav_thumbnail = [
                             <div class="post-image__feature custom-slick-carousel slider-for"
                                  data-config-slick='<?php echo wp_json_encode($config_feature); ?>'>
                                 <div class="item">
-                                    <?php the_post_thumbnail('large'); ?>
+                                    <a class="item__thumbnail" href="<?php the_post_thumbnail_url('full'); ?>">
+                                        <?php the_post_thumbnail('large'); ?>
+                                    </a>
                                 </div>
 
                                 <?php foreach ($gallery as $key => $item) : ?>
                                     <div class="item">
-                                        <?php echo wp_get_attachment_image($key, 'large') ?>
+                                        <a class="item__thumbnail" href="<?php echo esc_url( wp_get_attachment_url($key) ); ?>">
+                                            <?php echo wp_get_attachment_image($key, 'large') ?>
+                                        </a>
                                     </div>
                                 <?php endforeach; ?>
                             </div>

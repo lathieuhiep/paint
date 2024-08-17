@@ -1,3 +1,19 @@
+(function ($) {
+    "use strict";
+
+    const postImageFeature = $('.post-image__feature')
+    if ( postImageFeature.length ) {
+        postImageFeature.magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery:{
+                enabled:true
+            }
+        })
+    }
+
+})(jQuery)
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const contentElement = document.getElementById('customScrollbar')
 
@@ -15,4 +31,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     resizeObserver.observe(contentElement);
-});
+})

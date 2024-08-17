@@ -6,7 +6,7 @@ $taxonomies = get_terms(array(
     'hide_empty' => false
 ));
 
-$cat = !empty($_GET['cat']) ? (int)$_GET['cat'] : '';
+$cat = !empty($_GET['cat']) ? $_GET['cat'] : '';
 ?>
 
 <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="form-search-project">
@@ -18,15 +18,14 @@ $cat = !empty($_GET['cat']) ? (int)$_GET['cat'] : '';
                     ?>
                     <div class="radio-list">
                         <input type="radio" class="btn-check" name="cat"
-                               id="cat-<?php echo esc_attr($taxonomy->term_id) ?>" autocomplete="off"
-                               value="<?php echo esc_attr($taxonomy->term_id) ?>" <?php echo esc_attr(!empty($cat) && $cat == $taxonomy->term_id ? 'checked' : '') ?>>
-                        <label class="btn"
-                               for="cat-<?php echo esc_attr($taxonomy->term_id) ?>"><?php echo esc_html($taxonomy->name) ?></label>
+                               id="<?php echo esc_attr($taxonomy->slug) ?>" autocomplete="off"
+                               value="<?php echo esc_attr($taxonomy->slug) ?>" <?php echo esc_attr(!empty($cat) && $cat == $taxonomy->slug ? 'checked' : '') ?>>
+                        <label class="btn" for="<?php echo esc_attr($taxonomy->slug) ?>"><?php echo esc_html($taxonomy->name) ?></label>
                     </div>
                 <?php endforeach; ?>
                 <div class="radio-list">
                     <input type="radio" class="btn-check" name="cat" id="cat-0" autocomplete="off"
-                           value="0" <?php echo esc_attr(!empty($cat) && $cat == 'cat-0' ? 'checked' : '') ?>>
+                           value="cat-0" <?php echo esc_attr(!empty($cat) && $cat == 'cat-0' ? 'checked' : '') ?>>
                     <label class="btn" for="cat-0"><?php esc_html_e('Tất cả', 'paint'); ?></label>
                 </div>
             <?php endif; ?>

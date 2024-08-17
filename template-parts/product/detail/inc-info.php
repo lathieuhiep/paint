@@ -6,17 +6,17 @@ $contact = paint_get_option('paint_opt_product_detail_contact');
 <div class="product-info-warp">
     <div class="thumbnail-box">
         <?php if ( $galleries ) : ?>
-            <div class="slider-product-galleries owl-carousel">
+            <div class="slider-product-galleries">
                 <?php foreach ($galleries as $attachment_id => $attachment_url) : ?>
                     <div class="item d-flex align-items-center justify-content-center">
-                        <a class="item__thumbnail zoom-box" href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>">
+                        <a class="item__thumbnail" href="<?php echo esc_url( wp_get_attachment_url($attachment_id) ); ?>">
                             <?php echo wp_get_attachment_image( $attachment_id, 'large' ) ?>
                         </a>
                     </div>
                 <?php endforeach; ?>
             </div>
 
-            <div class="slider-product-gallery-nav owl-carousel">
+            <div class="slider-product-gallery-nav">
                 <?php foreach ($galleries as $attachment_id => $attachment_url) :?>
                     <div class="item">
                         <?php echo wp_get_attachment_image( $attachment_id, 'medium' ) ?>
