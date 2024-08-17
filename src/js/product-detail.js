@@ -7,6 +7,11 @@
     const body = $('body')
 
     $(document).ready(function () {
+        const groupColorGrid = $('.group-color__grid')
+        const itemsPerLoadProductColor = groupColorGrid.data('items-per')
+        let isLoadingProductColorScroll = false
+        let currentOffsetProductColor = itemsPerLoadProductColor
+
         // galleries
         const sliderProductGalleries = $('.slider-product-galleries')
         const sliderProductGalleryNav = $('.slider-product-gallery-nav')
@@ -149,8 +154,69 @@
                     complete: function () {
                         isLoading = false
                         targetProductColor.addClass('more-data')
+                        currentOffsetProductColor = itemsPerLoadProductColor
                     }
                 })
+            }
+        })
+
+        // load ajax product color
+        $(window).on('scroll', function () {
+            const tabColorCodeActive = $('#color-code').hasClass('active')
+
+            if ( tabColorCodeActive ) {
+                const targetProductColor = $('.color-code-load')
+                const targetProductColorHasData = targetProductColor.hasClass('more-data')
+
+                if ( targetProductColorHasData && targetProductColor.offset().top + 110 < $(window).scrollTop() + $(window).height() && !isLoadingProductColorScroll ) {
+                    const colorCodeId = $(document).find('.group-color__grid').attr('data-color-code-id')
+
+                    isLoadingProductColorScroll = true
+
+                    $.ajax({
+                        url: productDetailAjax.url,
+                        type: 'POST',
+                        data: ({
+                            action: 'paint_get_product_color_ajax',
+                            colorCodeId: colorCodeId,
+                            offset: currentOffsetProductColor,
+                            itemsPerLoad: itemsPerLoadProductColor
+                        }),
+                        beforeSend: function () {
+                            targetProductColor.find('.box-load').fadeIn()
+                        },
+                        success: function (response) {
+                            try {
+                                const jsonResponse = JSON.parse(response);
+
+                                if ( jsonResponse.html ) {
+                                    const newItems = $(jsonResponse.html)
+
+                                    // Đếm số lượng phần tử
+                                    newItems.each(function(index) {
+                                        // Thêm lớp và độ trễ cho từng phần tử
+                                        $(this).addClass('slide-up').css({
+                                            'animation-delay': (index * 0.2) + 's',
+                                            'opacity': 0
+                                        });
+                                    })
+
+                                    $(document).find('.group-color__grid').append(newItems);
+
+                                    currentOffsetProductColor += itemsPerLoadProductColor
+                                } else {
+                                    targetProductColor.removeClass('more-data')
+                                }
+                            } catch (e) {
+                                console.error('Invalid JSON response:', e);
+                            }
+                        },
+                        complete: function () {
+                            isLoadingProductColorScroll = false
+                            targetProductColor.find('.box-load').fadeOut()
+                        }
+                    })
+                }
             }
         })
 
@@ -303,71 +369,6 @@
                 ]
             })
         }
-
-        // load ajax product color
-        const groupColorGrid = $('.group-color__grid')
-        const itemsPerLoadProductColor = groupColorGrid.data('items-per')
-        let isLoadingProductColorScroll = false
-        let currentOffsetProductColor = itemsPerLoadProductColor
-
-        $(window).on('scroll', function () {
-            const tabColorCodeActive = $('#color-code').hasClass('active')
-
-            if ( tabColorCodeActive ) {
-                const colorCodeId = groupColorGrid.data('color-code-id')
-                console.log(colorCodeId)
-                const targetProductColor = $('.color-code-load')
-                const targetProductColorHasData = targetProductColor.hasClass('more-data')
-
-                if ( targetProductColorHasData && targetProductColor.offset().top + 110 < $(window).scrollTop() + $(window).height() && !isLoadingProductColorScroll ) {
-                    isLoadingProductColorScroll = true
-
-                    $.ajax({
-                        url: productDetailAjax.url,
-                        type: 'POST',
-                        data: ({
-                            action: 'paint_get_product_color_ajax',
-                            colorCodeId: colorCodeId,
-                            offset: currentOffsetProductColor,
-                            itemsPerLoad: itemsPerLoadProductColor
-                        }),
-                        beforeSend: function () {
-                            targetProductColor.find('.box-load').fadeIn()
-                        },
-                        success: function (response) {
-                            try {
-                                const jsonResponse = JSON.parse(response);
-
-                                if ( jsonResponse.html ) {
-                                    const newItems = $(jsonResponse.html)
-
-                                    // Đếm số lượng phần tử
-                                    newItems.each(function(index) {
-                                        // Thêm lớp và độ trễ cho từng phần tử
-                                        $(this).addClass('slide-up').css({
-                                            'animation-delay': (index * 0.2) + 's',
-                                            'opacity': 0
-                                        });
-                                    })
-
-                                    groupColorGrid.append(newItems);
-
-                                    currentOffsetProductColor += itemsPerLoadProductColor
-                                } else {
-                                    targetProductColor.removeClass('more-data')
-                                }
-                            } catch (e) {
-                                console.error('Invalid JSON response:', e);
-                            }
-                        },
-                        complete: function () {
-                            isLoadingProductColorScroll = false
-                            targetProductColor.find('.box-load').fadeOut()
-                        }
-                    })
-                }
-            }
-        })
     })
 
     // function hover zoom image
