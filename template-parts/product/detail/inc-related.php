@@ -13,7 +13,7 @@ if ( $query->have_posts() ) :
             <?php esc_html_e('Xem sản phẩm tương tự', 'paint'); ?>
         </h3>
 
-        <div class="related-product__grid owl-carousel">
+        <div class="related-product__grid">
             <?php
             while ($query->have_posts()) :
                 $query->the_post();

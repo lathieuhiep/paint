@@ -226,6 +226,10 @@
           }
 
           @media (min-width: 576px) and (max-width: 991px) {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          @media (max-width: 575px) {
             grid-template-columns: repeat(2, 1fr);
           }
         }
@@ -275,9 +279,14 @@
             bottom: 0;
             font-weight: 600;
             font-size: 1.8rem;
+            text-align: center;
             @include flexbox();
             @include align-items(center);
             @include justify-content(center);
+
+            @media (max-width: 575px) {
+              font-size: 1.6rem;
+            }
           }
 
           &:hover,
@@ -330,7 +339,7 @@
             grid-template-columns: repeat(3, 1fr);
           }
 
-          @media (min-width: 420px) and (max-width: 575px) {
+          @media (max-width: 575px) {
             grid-template-columns: repeat(2, 1fr);
           }
 
@@ -631,6 +640,16 @@
           }
         }
       }
+    }
+  }
+
+  .slick-arrow {
+    &.slick-prev {
+      left: 0;
+    }
+
+    &.slick-next {
+      right: 0;
     }
   }
 }
