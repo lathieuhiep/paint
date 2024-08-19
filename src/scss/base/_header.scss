@@ -307,7 +307,7 @@
           @include transition();
 
           li {
-            padding: 6px 8px;
+            padding: .6rem 3rem .6rem .8rem;
             display: flex;
 
             a {
@@ -325,6 +325,7 @@
               top: 6px;
               bottom: 6px;
               @include flex-center();
+              transform: translateY(3px);
             }
 
             &:hover {
@@ -707,7 +708,7 @@
     > ul {
       > li {
         padding-left: 1.2rem;
-        padding-right: 3.6rem;
+        padding-right: 1.2rem;
 
         ~ li {
           margin-top: 1rem;
@@ -762,6 +763,12 @@
           li {
             ~ li {
               margin-top: .8rem;
+            }
+
+            a {
+              + .sub-menu-toggle {
+                top: -0.3rem;
+              }
             }
           }
         }
