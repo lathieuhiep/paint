@@ -278,9 +278,13 @@ class Paint_Elementor_Slider extends Widget_Base {
                             $link_key = 'link_' . $index;
                             $this->add_link_attributes( $link_key, $item['list_link'] );
                         ?>
+
+                        <div class="item__container">
                             <a class="link btn-global" <?php $this->print_render_attribute_string( $link_key ); ?>>
                                 <?php echo esc_html( $item['list_title'] ); ?>
                             </a>
+                        </div>
+
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

@@ -36,26 +36,32 @@
 
   &__warp {
     .item {
-      .link {
-        display: inline-block;
-        position: absolute;
-        color: #ffffff;
-        text-align: center;
+      &__container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
 
-        @media (min-width: 768px) {
-          padding: .3rem 2rem;
-          left: 3rem;
-          bottom: 3rem;
-          min-width: 12rem;
-        }
+        .link {
+          display: inline-block;
+          position: absolute;
+          color: #ffffff;
+          text-align: center;
 
-        @media (max-width: 767px) {
-          padding: .2rem 1rem;
-          top: 50%;
-          left: 50%;
-          font-size: 1.2rem;
-          background-color: $color-hover;
-          transform: translate(-50%, -50%);
+          @media (min-width: 768px) {
+            padding: .3rem 2rem;
+            left: 1.2rem;
+            bottom: 3rem;
+            min-width: 12rem;
+          }
+
+          @media (max-width: 767px) {
+            padding: .2rem 1rem;
+            top: 50%;
+            left: 50%;
+            font-size: 1.2rem;
+            background-color: $color-hover;
+            transform: translate(-50%, -50%);
+          }
         }
       }
     }
