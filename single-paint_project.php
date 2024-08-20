@@ -33,6 +33,18 @@ $config_nav_thumbnail = [
     'focusOnSelect' => true,
     'responsive' => [
         [
+            'breakpoint' => 1199,
+            'settings' => [
+                'slidesToShow' => 4,
+            ]
+        ],
+        [
+            'breakpoint' => 991,
+            'settings' => [
+                'slidesToShow' => 3,
+            ]
+        ],
+        [
             'breakpoint' => 767,
             'settings' => [
                 'slidesToShow' => 4,
@@ -42,6 +54,12 @@ $config_nav_thumbnail = [
             'breakpoint' => 575,
             'settings' => [
                 'slidesToShow' => 3,
+            ]
+        ],
+        [
+            'breakpoint' => 479,
+            'settings' => [
+                'slidesToShow' => 2,
             ]
         ],
     ],

@@ -113,9 +113,11 @@ async function buildJsOwlCarouse() {
 async function buildSlickStyle() {
     compilerLibCss('slick-carousel/slick/slick.css', 'libs/slick-carousel')
 }
+exports.buildSlickStyle = buildSlickStyle
 async function buildSlickJs() {
     compilerLibJs('slick-carousel/slick/slick.js', 'libs/slick-carousel')
 }
+exports.buildSlickJs = buildSlickJs
 
 // Task build masonry
 async function buildMasonryJs() {

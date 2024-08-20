@@ -11,14 +11,17 @@
 
       .link-image {
         display: block;
-        height: 52rem;
 
         @media(min-width: 992px) {
           height: 52rem;
         }
 
-        @media (max-width: 991px) {
+        @media (min-width: 420px) and (max-width: 991px) {
           height: 32rem;
+        }
+
+        @media (max-width: 419px) {
+          height: 35rem;
         }
 
         img {
