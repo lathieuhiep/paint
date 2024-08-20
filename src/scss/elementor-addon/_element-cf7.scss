@@ -27,7 +27,7 @@
           font-size: 1.6rem;
         }
 
-        @media (min-width: 575px) {
+        @media (max-width: 575px) {
           font-size: 1.2rem;
         }
       }
