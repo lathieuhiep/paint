@@ -26,77 +26,6 @@ class Paint_Elementor_Product_Grid extends Widget_Base {
 
     protected function register_controls(): void {
 
-        // layout section
-        $this->start_controls_section(
-            'layout_section',
-            [
-                'label' => esc_html__( 'Bố cục', 'paint' ),
-                'tab' => Controls_Manager::TAB_CONTENT,
-            ]
-        );
-
-        $this->add_responsive_control(
-            'column',
-            [
-                'label' => esc_html__( 'Cột', 'paint' ),
-                'type' => Controls_Manager::NUMBER,
-                'min' => 1,
-                'step' => 1,
-                'default' => 4,
-                'selectors' => [
-                    '{{WRAPPER}} .element-product-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'grid-column-gap',
-            [
-                'label' => esc_html__( 'Khoảng cách các cột', 'paint' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'custom' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 24,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .element-product-grid' => 'grid-column-gap: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'grid-row-gap',
-            [
-                'label' => esc_html__( 'Khoảng cách các hàng', 'paint' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'custom' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 24,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .element-product-grid' => 'grid-row-gap: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->end_controls_section();
-
         // content section
         $this->start_controls_section(
             'content_section',
@@ -154,6 +83,259 @@ class Paint_Elementor_Product_Grid extends Widget_Base {
                     'ASC'   =>  esc_html__( 'Tăng dần', 'paint' ),
                     'DESC'  =>  esc_html__( 'Giảm dần', 'paint' ),
                 ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // carousel options
+        $this->start_controls_section(
+            'options_section',
+            [
+                'label' => esc_html__( 'Tùy chọn bổ sung', 'paint' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'loop',
+            [
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label'         =>  esc_html__('Lặp lại vô hạn', 'paint'),
+                'label_off'     =>  esc_html__('Không', 'paint'),
+                'label_on'      =>  esc_html__('Có', 'paint'),
+                'return_value'  =>  'yes',
+                'default'       =>  'yes',
+            ]
+        );
+
+        $this->add_control(
+            'autoplay',
+            [
+                'label'         =>  esc_html__('Tự động chạy', 'paint'),
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label_off'     =>  esc_html__('Không', 'paint'),
+                'label_on'      =>  esc_html__('Có', 'paint'),
+                'return_value'  =>  'yes',
+                'default'       =>  'no',
+            ]
+        );
+
+        $this->add_control(
+            'navigation',
+            [
+                'label' => esc_html__( 'Thanh điều hướng', 'paint' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'arrows',
+                'options' => [
+                    'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'paint' ),
+                    'arrows'  => esc_html__( 'Mũi tên', 'paint' ),
+                    'dots'  => esc_html__( 'Dấu chấm', 'paint' ),
+                    'none' => esc_html__( 'Không', 'paint' ),
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // responsive
+        $this->start_controls_section(
+            'responsive_section',
+            [
+                'label' => esc_html__( 'Responsive', 'paint' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  24,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 1200px
+        $this->add_control(
+            'min_width_1200',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 1200px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  5,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 992px
+        $this->add_control(
+            'min_width_992',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 992px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_992',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  3,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 768px
+        $this->add_control(
+            'min_width_768',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 768px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_768',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  24,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'item_768',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 576px
+        $this->add_control(
+            'width_greater_576',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 576px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_greater_576',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_576',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // greater 480px
+        $this->add_control(
+            'width_greater_480',
+            [
+                'label'     =>  esc_html__( 'Độ rộng lớn hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_greater_480',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  2,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_greater_480',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  12,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        // less 480px
+        $this->add_control(
+            'max_width_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Nhỏ hơn 480px', 'paint' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'item_less_480',
+            [
+                'label'     =>  esc_html__( 'Số lượng hiển thị', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  1,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_less_480',
+            [
+                'label'     =>  esc_html__( 'Khoảng cách', 'paint' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  0,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
@@ -237,12 +419,46 @@ class Paint_Elementor_Product_Grid extends Widget_Base {
 
     protected function render(): void {
         $settings       =   $this->get_settings_for_display();
+
+        // owl options
+        $owl_options = [
+            'loop' => ('yes' === $settings['loop']),
+            'nav' => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
+            'dots' => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
+            'autoplay' => ('yes' === $settings['autoplay']),
+            'margin' => $settings['margin_item'],
+            'responsive' => [
+                '0' => array(
+                    'items' => $settings['item_less_480'],
+                    'margin' => $settings['margin_item_less_480']
+                ),
+                '480' => array(
+                    'items' => $settings['item_greater_480'],
+                    'margin' => $settings['margin_item_greater_480']
+                ),
+                '576' => array(
+                    'items' => $settings['item_greater_576'],
+                    'margin' => $settings['margin_item_greater_576']
+                ),
+                '768' => array(
+                    'items' => $settings['item_768'],
+                    'margin' => $settings['margin_item_greater_768']
+                ),
+                '992' => array(
+                    'items' => $settings['item_992']
+                ),
+                '1200' => array(
+                    'items' => $settings['item']
+                ),
+            ],
+        ];
+
+        // Query
         $cat_post       =   $settings['select_cat'];
         $limit_post     =   $settings['limit'];
         $order_by_post  =   $settings['order_by'];
         $order_post     =   $settings['order'];
 
-        // Query
         $tax_query = [];
 
         if ( $cat_post ) {
@@ -267,36 +483,38 @@ class Paint_Elementor_Product_Grid extends Widget_Base {
         if ( $query->have_posts() ) :
     ?>
         <div class="element-product-grid">
-            <?php
-            while ( $query->have_posts() ):
-                $query->the_post();
+            <div class="element-product-grid__warp custom-owl-carousel owl-carousel owl-theme" data-owl-options='<?php echo wp_json_encode( $owl_options ); ?>'>
+                <?php
+                while ( $query->have_posts() ):
+                    $query->the_post();
 
-                $image_hover = get_post_meta(get_the_ID(), 'paint_cmb_product_image_feature_hover', true);
-            ?>
-            <div class="item">
-                <a class="item__link" href="<?php the_permalink(); ?>"></a>
+                    $image_hover = get_post_meta(get_the_ID(), 'paint_cmb_product_image_feature_hover', true);
+                ?>
+                <div class="item">
+                    <a class="item__link" href="<?php the_permalink(); ?>"></a>
 
-                <div class="item__image">
-                    <?php
-                    $attr = array(
-                        'class' => 'featured-image w-100'
-                    );
+                    <div class="item__image">
+                        <?php
+                        $attr = array(
+                            'class' => 'featured-image w-100'
+                        );
 
-                    the_post_thumbnail('large', $attr);
-                    ?>
+                        the_post_thumbnail('large', $attr);
+                        ?>
 
-                    <?php if ( $image_hover ) : ?>
-                        <div class="secondary-image">
-                            <img src="<?php echo esc_url( $image_hover ); ?>" alt="<?php the_title() ?>" width="768">
-                        </div>
-                    <?php endif; ?>
+                        <?php if ( $image_hover ) : ?>
+                            <div class="secondary-image">
+                                <img src="<?php echo esc_url( $image_hover ); ?>" alt="<?php the_title() ?>" width="768">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <h3 class="item__title">
+                        <?php the_title(); ?>
+                    </h3>
                 </div>
-
-                <h3 class="item__title">
-                    <?php the_title(); ?>
-                </h3>
+                <?php endwhile; wp_reset_postdata(); ?>
             </div>
-            <?php endwhile; wp_reset_postdata(); ?>
         </div>
     <?php
         endif;

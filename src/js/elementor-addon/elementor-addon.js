@@ -230,8 +230,23 @@
         }
     }
 
+    // element image slider
     const elementImageSlider = ($scope, $) => {
         const slider = $scope.find('.element-image-carousel__warp')
+
+        if (slider.length) {
+            slider.each(function () {
+                const thisSlider = $(this)
+                const options = slider.data('owl-options')
+
+                thisSlider.owlCarousel(owlCarouselElementorOptions(options))
+            })
+        }
+    }
+
+    // element product grid
+    const elementProductGrid = ($scope, $) => {
+        const slider = $scope.find('.element-product-grid__warp')
 
         if (slider.length) {
             slider.each(function () {
@@ -271,6 +286,10 @@
         // element code carousel
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-color-code-carousel.default', elementColorCodeSlider);
 
+        // element image slider
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-image-carousel.default', elementImageSlider);
+
+        // element product grid
+        elementorFrontend.hooks.addAction('frontend/element_ready/paint-product-grid.default', elementProductGrid);
     });
 })(jQuery);
