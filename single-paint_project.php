@@ -165,11 +165,16 @@ $config_nav_thumbnail = [
 
                                         <?php
                                         if ( $model ) :
-                                            $post_title = get_the_title( $model );
-                                            $post_link = get_permalink( $model );
+                                            foreach ($model as $item) :
+
+                                            $post_title = get_the_title( $item );
+                                            $post_link = get_permalink( $item );
                                         ?>
                                             <a href="<?php echo esc_url( $post_link ); ?>" class="txt-value"><?php echo esc_html( $post_title ); ?></a>
-                                        <?php endif; ?>
+                                        <?php
+                                            endforeach;
+                                        endif;
+                                        ?>
                                     </li>
 
                                     <li class="mass">

@@ -53,7 +53,7 @@ function paint_cmb_project(): void
     $cmb_normal->add_field(array(
         'name' => esc_html__('Loại sơn'),
         'id' => 'paint_cmb_project_model',
-        'type' => 'select',
+        'type' => 'multicheck_inline',
         'options' => paint_get_post_types('paint_product'),
     ));
 

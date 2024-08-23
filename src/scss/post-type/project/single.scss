@@ -179,6 +179,17 @@
           &.model {
             .txt-value {
               color: $color-secondary;
+
+              ~ .txt-value {
+                &:before {
+                  content: ', ';
+                  color: $color-secondary;
+                }
+              }
+
+              &:hover {
+                color: #000000;
+              }
             }
           }
         }
