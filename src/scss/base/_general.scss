@@ -309,26 +309,44 @@ pre {
   .slick-arrow {
     position: absolute;
     top: 50%;
-    width: 42px;
-    height: 42px;
     z-index: 1;
-    line-height: 42px;
     color: $color-black;
+    line-height: 100%;
     border: 0;
     background-color: $background-hover;
     @include transition();
     @include transform(translateY(-50%));
+    
+    @media (min-width: 576px) {
+      @include square(4rem);
+    }
+
+    @media (max-width: 575px) {
+      @include square(3.5rem);
+    }
 
     &:hover {
       color: $color-white;
     }
 
     &.slick-prev {
-      left: -6rem;
+      @media (min-width: 1200px) {
+        left: -6rem;
+      }
+
+      @media (max-width: 1199px) {
+        left: 0
+      }
     }
 
     &.slick-next {
-      right: -6rem;
+      @media (min-width: 1200px) {
+        right: -6rem;
+      }
+
+      @media (max-width: 1199px) {
+        right: 0
+      }
     }
   }
 }

@@ -42,24 +42,28 @@ $config_nav_thumbnail = [
             'breakpoint' => 991,
             'settings' => [
                 'slidesToShow' => 3,
+                'arrows' => true
             ]
         ],
         [
             'breakpoint' => 767,
             'settings' => [
                 'slidesToShow' => 4,
+                'arrows' => true
             ]
         ],
         [
             'breakpoint' => 575,
             'settings' => [
                 'slidesToShow' => 3,
+                'arrows' => true
             ]
         ],
         [
             'breakpoint' => 479,
             'settings' => [
                 'slidesToShow' => 2,
+                'arrows' => true
             ]
         ],
     ],
