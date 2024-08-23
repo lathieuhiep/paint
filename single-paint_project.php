@@ -162,7 +162,14 @@ $config_nav_thumbnail = [
                                 <ul class="post-content__info">
                                     <li class="model">
                                         <span class="txt-label"><?php esc_html_e('Loại sơn:', 'paint'); ?></span>
-                                        <span class="txt-value"><?php echo esc_html($model); ?></span>
+
+                                        <?php
+                                        if ( $model ) :
+                                            $post_title = get_the_title( $model );
+                                            $post_link = get_permalink( $model );
+                                        ?>
+                                            <a href="<?php echo esc_url( $post_link ); ?>" class="txt-value"><?php echo esc_html( $post_title ); ?></a>
+                                        <?php endif; ?>
                                     </li>
 
                                     <li class="mass">
