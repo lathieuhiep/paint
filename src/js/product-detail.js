@@ -375,6 +375,44 @@
                 ]
             })
         }
+
+        // show / hide chose category
+        $('.btn-dropdown-menu-tabs').on('click', function() {
+            $('#pills-tab').slideToggle()
+        })
+
+        // Lấy vị trí của phần tử tab-content
+        const tabContentOffset = $('.tab-content').offset().top;
+
+        $(window).on('scroll', function() {
+            const scrollPosition = $(window).scrollTop();
+
+
+            if (scrollPosition >= (tabContentOffset + 250)) {
+                $('.btn-tab-canvas').fadeIn();
+            } else {
+                $('.btn-tab-canvas').fadeOut();
+            }
+        });
+
+        $('.btn-canvas-nav-tab').on('click', function() {
+            const targetId = $(this).data('id')
+
+            $('html, body').animate({
+                scrollTop: $('.tabs-warp').offset().top
+            }, 500, function() {
+                const targetTab = $('#' + targetId);
+                targetTab.tab('show');
+
+                // Đóng offcanvas nếu nó đang mở
+                const offcanvasElement = document.getElementById('offcanvasTabs');
+                const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+            })
+        });
     })
 
     // function hover zoom image

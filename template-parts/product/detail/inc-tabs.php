@@ -11,32 +11,39 @@ $code_product = get_post_meta(get_the_ID(), 'paint_cmb_product_code', true);
 <?php endif; ?>
 
 <div class="tabs-warp" data-id="<?php get_the_ID() ?>">
-    <ul class="nav nav-pills justify-content-center gap-3" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active success-loading" id="color-code-tab" data-bs-toggle="pill"
-                    data-bs-target="#color-code"
-                    type="button" role="tab" aria-controls="color-code" aria-selected="true">
-                <?php esc_html_e('Mã màu', 'paint'); ?>
-            </button>
-        </li>
+    <div class="nav-tab-box">
+        <button type="button" class="btn btn-dropdown-menu-tabs d-sm-none">
+            <span><?php esc_html_e('Xem thêm về sản phẩm', 'paint'); ?></span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="gallery-tab" data-bs-toggle="pill" data-bs-target="#gallery" type="button"
-                    role="tab"
-                    aria-controls="gallery" aria-selected="false">
-                <?php esc_html_e('Hình ảnh thực tế', 'paint'); ?>
-            </button>
-        </li>
+        <ul class="nav nav-pills justify-content-center gap-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active success-loading" id="color-code-tab" data-bs-toggle="pill"
+                        data-bs-target="#color-code"
+                        type="button" role="tab" aria-controls="color-code" aria-selected="true">
+                    <?php esc_html_e('Mã màu', 'paint'); ?>
+                </button>
+            </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="product-construction-process-tab" data-bs-toggle="pill"
-                    data-bs-target="#product-construction-process"
-                    type="button"
-                    role="tab" aria-controls="construction-process" aria-selected="false">
-                <?php esc_html_e('Quy trình thi công', 'paint'); ?>
-            </button>
-        </li>
-    </ul>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="gallery-tab" data-bs-toggle="pill" data-bs-target="#gallery" type="button"
+                        role="tab"
+                        aria-controls="gallery" aria-selected="false">
+                    <?php esc_html_e('Hình ảnh thực tế', 'paint'); ?>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="product-construction-process-tab" data-bs-toggle="pill"
+                        data-bs-target="#product-construction-process"
+                        type="button"
+                        role="tab" aria-controls="construction-process" aria-selected="false">
+                    <?php esc_html_e('Quy trình thi công', 'paint'); ?>
+                </button>
+            </li>
+        </ul>
+    </div>
 
     <div class="spinner-warp text-center d-none">
         <div class="spinner-border" role="status">
@@ -64,5 +71,44 @@ $code_product = get_post_meta(get_the_ID(), 'paint_cmb_product_code', true);
         <div class="gallery-tab tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0"></div>
 
         <div class="product-construction-process-tab tab-pane fade" id="product-construction-process" role="tabpanel" aria-labelledby="product-construction-process-tab" tabindex="0"></div>
+    </div>
+</div>
+
+<!-- canvas tabs -->
+<button class="btn btn-primary btn-tab-canvas" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTabs">
+    <i class="fa-solid fa-list-check"></i>
+</button>
+
+<div class="offcanvas offcanvas-end offcanvas-list-tabs" tabindex="-1" id="offcanvasTabs">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            <?php esc_html_e('Xem thêm về sản phẩm', 'paint'); ?>
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="offcanvas-body">
+        <ul class="list-tabs">
+            <li class="item-tab">
+                <button class="btn-canvas-nav-tab" data-id="color-code-tab">
+                    <?php esc_html_e('Mã màu', 'paint'); ?>
+                </button>
+            </li>
+
+            <li class="item-tab">
+                <button class="btn-canvas-nav-tab" data-id="gallery-tab">
+                    <?php esc_html_e('Hình ảnh thực tế', 'paint'); ?>
+                </button>
+            </li>
+
+            <li class="item-tab">
+                <button class="btn-canvas-nav-tab" data-id="product-construction-process-tab">
+                    <?php esc_html_e('Quy trình thi công', 'paint'); ?>
+                </button>
+            </li>
+        </ul>
     </div>
 </div>

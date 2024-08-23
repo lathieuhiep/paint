@@ -137,28 +137,82 @@
   .tabs-warp {
     margin-top: 5rem;
 
-    .nav-pills {
+    .nav-tab-box {
       margin-bottom: 3rem;
-      
-      @media (max-width: 479px) {
-        display: grid;
-        grid-template-columns: 1fr;
+
+      @media (max-width: 575px) {
+        background-color: #F4F4F4;
+        border: .1rem solid rgba(51,51,51,0.95);
+      }
+    }
+
+    .btn-dropdown-menu-tabs {
+      padding: .5rem 1rem;
+      display: grid;
+      width: 100%;
+      text-align: left;
+      color: #ffffff;
+      grid-gap: 1.2rem;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      border-radius: 0;
+      border: 0;
+      background-color: rgba(51,51,51,0.95);
+    }
+
+    .nav-pills {
+      @media (min-width: 576px) {
+        display: flex !important;
+      }
+
+      @media (max-width: 575px) {
+        display: none;
+        border-top: .1rem solid #000000;
+
+        &:has(.nav-link.active) {
+          display: block;
+        }
       }
 
       .nav-item {
-        margin-bottom: .8rem;
-        padding: 0 1.4rem;
+        @media (min-width: 576px) {
+          margin-bottom: .8rem;
+          padding: 0 1.4rem;
+        }
+
+        @media (max-width: 575px) {
+          display: block;
+
+          &:not(:last-child) {
+            .nav-link {
+              border-bottom: .1rem solid rgba(51,51,51,0.95);
+            }
+          }
+        }
       }
 
       .nav-link {
         position: relative;
-        padding: .3rem 3rem;
         font-size: 1.4rem;
-        color: #FDCD26;
         border: .1rem solid currentColor;
         border-radius: 0;
         background-color: transparent;
         @include transition();
+
+        @media (min-width: 576px) {
+          padding: .3rem 3rem;
+          color: #FDCD26;
+        }
+
+        @media (max-width: 575px) {
+          padding: .5rem 1rem;
+          display: block;
+          width: 100%;
+          text-align: left;
+          color: #000000;
+          border: 0;
+
+        }
 
         &::after {
           position: absolute;
@@ -170,6 +224,10 @@
           opacity: 0;
           background-color: #F9C50C;
           @include transition();
+
+          @media (max-width: 575px) {
+            display: none;
+          }
         }
 
         &:hover {
@@ -178,8 +236,15 @@
         }
 
         &.active {
-          border-color: #000000;
-          background-color: #000000;
+          @media (min-width: 576px) {
+            border-color: #000000;
+            background-color: #000000;
+          }
+          
+          @media (max-width: 575px) {
+            color: #ffffff;
+            background-color: rgba(51,51,51,0.95)
+          }
 
           &::after {
             opacity: 1;
@@ -568,6 +633,44 @@
     .construction-process-product {
       max-width: 90rem;
       margin: 0 auto;
+    }
+  }
+
+  .btn-tab-canvas {
+    display: none;
+    padding: .1rem 1rem;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 10;
+    font-size: 2rem;
+    border: 0;
+    background-color: #000000;
+  }
+
+  .offcanvas-list-tabs {
+    .offcanvas-header {
+      border-bottom: .1rem solid #000000;
+
+      .btn-close {
+        padding: 0;
+        font-size: 2rem;
+        border: 0;
+        background: transparent;
+      }
+    }
+
+    .offcanvas-body {
+      .list-tabs {
+        @include reset-list();
+
+        .item-tab {
+          .btn-canvas-nav-tab {
+            border: 0;
+            background-color: transparent;
+          }
+        }
+      }
     }
   }
 }
