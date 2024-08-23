@@ -11,25 +11,33 @@ $cat = !empty($_GET['cat']) ? $_GET['cat'] : '';
 
 <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="form-search-project">
     <div class="control-warp">
-        <div class="group-control group-control-radio">
-            <?php
-            if ($taxonomies) :
-                foreach ($taxonomies as $taxonomy) :
-                    ?>
+        <?php if ($taxonomies) : ?>
+            <div class="group-control group-control-radio">
+                <button type="button" class="btn btn-dropdown-radio-list d-sm-none">
+                    <span><?php esc_html_e('Danh mục sơn', 'paint'); ?></span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div id="groupControlRadio" class="group-control-radio__warp">
+                    <?php foreach ($taxonomies as $taxonomy) : ?>
+
                     <div class="radio-list">
                         <input type="radio" class="btn-check" name="cat"
                                id="<?php echo esc_attr($taxonomy->slug) ?>" autocomplete="off"
                                value="<?php echo esc_attr($taxonomy->slug) ?>" <?php echo esc_attr(!empty($cat) && $cat == $taxonomy->slug ? 'checked' : '') ?>>
                         <label class="btn" for="<?php echo esc_attr($taxonomy->slug) ?>"><?php echo esc_html($taxonomy->name) ?></label>
                     </div>
-                <?php endforeach; ?>
-                <div class="radio-list">
-                    <input type="radio" class="btn-check" name="cat" id="cat-0" autocomplete="off"
-                           value="cat-0" <?php echo esc_attr(!empty($cat) && $cat == 'cat-0' ? 'checked' : '') ?>>
-                    <label class="btn" for="cat-0"><?php esc_html_e('Tất cả', 'paint'); ?></label>
+
+                    <?php endforeach; ?>
+
+                    <div class="radio-list">
+                        <input type="radio" class="btn-check" name="cat" id="cat-0" autocomplete="off"
+                               value="cat-0" <?php echo esc_attr(!empty($cat) && $cat == 'cat-0' ? 'checked' : '') ?>>
+                        <label class="btn" for="cat-0"><?php esc_html_e('Tất cả', 'paint'); ?></label>
+                    </div>
                 </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
 
         <div class="group-control group-search-key">
             <input type="text" id="<?php echo $paint_unique_id; ?>" class="search-field form-control"

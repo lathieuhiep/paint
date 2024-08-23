@@ -3,7 +3,10 @@
 
   .control-warp {
     display: grid;
-    border: .1rem solid #000000;
+
+    @media (min-width: 576px) {
+      border: .1rem solid #000000;
+    }
 
     @media (min-width: 1224px) {
       grid-template-columns: 1fr 37.5rem;
@@ -12,43 +15,72 @@
     @media (min-width: 992px) and (max-width: 1223px) {
       grid-template-columns: 1fr 18rem;
     }
+
+    .btn-dropdown-radio-list {
+      padding: .2rem 1rem;
+      grid-column: 1 / -1;
+      text-align: start;
+      color: #ffffff;
+      border: 0;
+      border-radius: 0;
+      background-color: #000000;
+
+      @media (max-width: 575px) {
+        display: grid;
+        width: 100%;
+        grid-gap: 1.2rem;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
   }
 
   .group-control-radio {
-    display: grid;
-
-    @media (min-width: 576px) {
-      grid-template-columns: repeat(6, auto);
+    @media (max-width: 575px) {
+      border: .1rem solid #000000;
     }
 
-    @media (max-width: 575px) {
-      grid-template-columns: repeat(3, auto);
+    &__warp {
+      @media (min-width: 576px) {
+        display: grid !important;
+        grid-template-columns: repeat(6, auto);
+      }
+
+      @media (max-width: 575px) {
+        display: none;
+      }
     }
 
     .radio-list {
       display: flex;
       align-items: center;
-      justify-content: center;
+
+      @media (min-width: 576px) {
+        justify-content: center;
+      }
+
+      @media (max-width: 575px) {
+        text-align: start;
+      }
 
       ~ .radio-list {
-        border-left: .1rem solid #000000;
-      }
-
-      &:last-child {
-        @media (min-width: 992px) {
-          border-right: .1rem solid #000000;
+        @media (min-width: 576px) {
+          border-left: .1rem solid #000000;
         }
-      }
 
-      &:nth-child(n+4) {
         @media (max-width: 575px) {
           border-top: .1rem solid #000000;
         }
       }
 
-      &:nth-child(3n+4) {
-        @media (max-width: 575px) {
-          border-left: 0;
+      &:last-child {
+        @media (min-width: 992px) {
+          border-right: .1rem solid #000000;
         }
       }
 
@@ -66,13 +98,23 @@
       }
 
       .btn {
-        font-size: 1.4rem
+        font-size: 1.4rem;
+
+        @media (max-width: 575px) {
+          padding: .2rem 1rem;
+          width: 100%;
+          text-align: start;
+        }
       }
     }
   }
 
   .group-search-key {
     position: relative;
+
+    @media (max-width: 575px) {
+      margin-top: 1rem;
+    }
 
     .search-field {
       padding: 0 3.2rem 0 1rem;
@@ -85,7 +127,14 @@
 
       @media (max-width: 991px) {
         height: 3.7rem;
+      }
+
+      @media (min-width: 576px) and (max-width: 991px) {
         border-top: .1rem solid #000000;
+      }
+
+      @media (max-width: 575px) {
+        border: .1rem solid #000000;
       }
     }
 

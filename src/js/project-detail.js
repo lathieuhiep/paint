@@ -1,6 +1,11 @@
 (function ($) {
     "use strict";
 
+    // show / hide chose category
+    $('.btn-dropdown-radio-list').on('click', function() {
+        $('#groupControlRadio').slideToggle()
+    })
+
     const postImageFeature = $('.post-image__feature')
     if ( postImageFeature.length ) {
         postImageFeature.magnificPopup({
