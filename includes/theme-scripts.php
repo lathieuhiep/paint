@@ -208,12 +208,18 @@ function paint_register_front_end(): void
         wp_localize_script('user-save', 'userSaveAjax', array('url' => $paint_admin_url_ajax));
     }
 
+    // template project
+    if ( is_search() && !empty( $_GET['post_type'] ) && $_GET['post_type'] == 'paint_project' ) {
+        wp_enqueue_script('project-search', get_theme_file_uri('/assets/js/project-search.min.js'), array(), '', true);
+    }
+
     if ( is_singular('paint_project') ) {
         wp_enqueue_script('simplebar');
         wp_enqueue_script('owl.carousel.min');
         wp_enqueue_script('magnific-popup', get_theme_file_uri('/assets/libs/magnific-popup/jquery.magnific-popup.min.js'), array('jquery'), '', true);
 
         wp_enqueue_script('project-detail', get_theme_file_uri('/assets/js/project-detail.min.js'), array(), '', true);
+        wp_enqueue_script('project-search', get_theme_file_uri('/assets/js/project-search.min.js'), array(), '', true);
     }
 
     if (is_singular('paint_color_code')) {
