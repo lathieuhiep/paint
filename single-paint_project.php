@@ -9,7 +9,7 @@ $dataUserSave = paint_get_user_saved($user_id, get_the_ID());
 // get metabox
 $banner = get_post_meta(get_the_ID(), 'paint_cmb_project_banner_id', true);
 $gallery = get_post_meta(get_the_ID(), 'paint_cmb_project_gallery', true);
-$model = get_post_meta(get_the_ID(), 'paint_cmb_project_model', true);
+$paint_type = get_post_meta(get_the_ID(), 'paint_cmb_project_paint_type', true);
 $mass = get_post_meta(get_the_ID(), 'paint_cmb_project_mass', true);
 $completion_time = get_post_meta(get_the_ID(), 'paint_cmb_project_completion_time', true);
 $completion_construction = get_post_meta(get_the_ID(), 'paint_cmb_project_construction', true);
@@ -168,8 +168,8 @@ $config_nav_thumbnail = [
                                         <span class="txt-label"><?php esc_html_e('Loại sơn:', 'paint'); ?></span>
 
                                         <?php
-                                        if ( $model ) :
-                                            foreach ($model as $item) :
+                                        if ( $paint_type ) :
+                                            foreach ($paint_type as $item) :
 
                                             $post_title = get_the_title( $item );
                                             $post_link = get_permalink( $item );
