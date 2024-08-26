@@ -6,7 +6,7 @@ if ( empty( $color_code_list ) ) :
     return;
 endif;
 
-foreach ($color_code_list as $key => $color_code_item) :
+foreach ($color_code_list as $color_code_item) :
 ?>
     <div class="item">
         <figure class="item__thumbnail">
