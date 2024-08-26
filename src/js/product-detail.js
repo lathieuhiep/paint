@@ -226,13 +226,6 @@
             const thisItem = $(this)
             const index = thisItem.index()
 
-            // tinh toan vi tri chen
-            const itemWidth = thisItem.outerWidth(true);
-            const containerWidth = thisItem.parent().width()
-            const itemsPerRow = Math.floor(containerWidth / itemWidth)
-            const rowIndex = Math.floor(index / itemsPerRow)
-            const row = thisItem.parent().children().slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow)
-
             // xac dinh gia tri
             const hasClassActive = thisItem.hasClass('active')
             const groupColorGrid = thisItem.closest('.group-color__grid')
@@ -240,6 +233,22 @@
 
             if ( !hasClassActive && !isLoading ) {
                 isLoading = true
+
+                // remove box full color
+                const boxFullColor = groupColorGrid.find('.box-full-color')
+
+                if ( boxFullColor.length ) {
+                    boxFullColor.slideUp(500, function() {
+                        $(this).remove();
+                    })
+                }
+
+                // tinh toan vi tri chen
+                const itemWidth = thisItem.outerWidth(true);
+                const containerWidth = thisItem.parent().width()
+                const itemsPerRow = Math.floor(containerWidth / itemWidth)
+                const rowIndex = Math.floor(index / itemsPerRow)
+                const row = thisItem.parent().children().slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow)
 
                 const spinnerBox = thisItem.find('.spinner-load-color')
                 groupColorGrid.find('.item').removeClass('active')
@@ -260,13 +269,6 @@
                             '</div>')
 
                         spinnerBox.removeClass('d-none')
-                        const boxFullColor = groupColorGrid.find('.box-full-color')
-
-                        if ( boxFullColor.length ) {
-                            boxFullColor.slideUp(500, function() {
-                                $(this).remove();
-                            })
-                        }
                     },
                     success: function (result) {
                         row.last().after(result)
@@ -279,7 +281,7 @@
                         groupColorGrid.find('.box-full-color').slideDown(500, function () {
                             $('html, body').animate({
                                 scrollTop: groupColorGrid.find('.box-full-color').offset().top - $('.site-header').outerHeight() - 50
-                            }, 400);
+                            }, 500);
                         })
 
                         isLoading = false
