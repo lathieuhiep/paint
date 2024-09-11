@@ -160,7 +160,7 @@ $config_nav_thumbnail = [
                                 </div>
 
                                 <h3 class="post-content__heading">
-                                    <?php esc_html_e('Thông tin kỹ thuât', 'paint'); ?>
+                                    <?php esc_html_e('Thông tin kỹ thuật', 'paint'); ?>
                                 </h3>
 
                                 <ul class="post-content__info">
