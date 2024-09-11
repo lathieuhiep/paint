@@ -198,6 +198,9 @@
                                         $(this).addClass('slide-up').css({
                                             'animation-delay': (index * 0.2) + 's',
                                             'opacity': 0
+                                        }).one('animationend', function() {
+                                            $(this).removeClass('slide-up')
+                                            $(this).css('opacity', 1)
                                         });
                                     })
 
@@ -221,73 +224,90 @@
         })
 
         // handle click color product
+        let timeoutId = null
         body.on('click', '.product-color .item', function () {
-            let isLoading = false
-            const thisItem = $(this)
-            const index = thisItem.index()
+            let isLoading = false;
+            const thisItem = $(this);
 
-            // tinh toan vi tri chen
-            const itemWidth = thisItem.outerWidth(true);
-            const containerWidth = thisItem.parent().width()
-            const itemsPerRow = Math.floor(containerWidth / itemWidth)
-            const rowIndex = Math.floor(index / itemsPerRow)
-            const row = thisItem.parent().children().slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow)
+            // Xác định giá trị
+            const hasClassActive = thisItem.hasClass('active');
 
-            // xac dinh gia tri
-            const hasClassActive = thisItem.hasClass('active')
-            const groupColorGrid = thisItem.closest('.group-color__grid')
-            const idColorCode = groupColorGrid.data('color-code-id')
+            if (!hasClassActive && !isLoading) {
+                isLoading = true;
 
-            if ( !hasClassActive && !isLoading ) {
-                isLoading = true
+                // Vô hiệu hóa click trên các item khác
+                $('.product-color .item').addClass('disable-click');
 
-                const spinnerBox = thisItem.find('.spinner-load-color')
-                groupColorGrid.find('.item').removeClass('active')
+                // Tính toán vị trí chèn
+                const items = thisItem.parent().children().not('.box-full-color');
+                const index = items.index(thisItem);
+                const itemWidth = thisItem.outerWidth(true);
+                const containerWidth = thisItem.parent().width();
+                const itemsPerRow = Math.floor(containerWidth / itemWidth);
+                const rowIndex = Math.floor(index / itemsPerRow);
+                const row = items.slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow);
+
+                const groupColorGrid = thisItem.closest('.group-color__grid');
+                const idColorCode = groupColorGrid.data('color-code-id');
+                const boxFullColor = groupColorGrid.find('.box-full-color');
+                const spinnerBox = thisItem.find('.spinner-load-color');
+
+                groupColorGrid.find('.item').removeClass('active');
 
                 $.ajax({
                     url: productDetailAjax.url,
                     type: 'POST',
-                    data: ({
+                    data: {
                         action: 'paint_get_color_code_standard',
                         idColorCode: idColorCode,
                         key: index
-                    }),
+                    },
                     beforeSend: function () {
-                        thisItem.append('<div class="spinner-load-color">\n' +
-                            '<div class="spinner-border text-warning" role="status">\n' +
-                            '<span class="visually-hidden">Loading...</span>\n' +
-                            '</div>\n' +
-                            '</div>')
+                        thisItem.append('<div class="spinner-load-color">' +
+                            '<div class="spinner-border text-warning" role="status">' +
+                            '<span class="visually-hidden">Loading...</span>' +
+                            '</div>' +
+                            '</div>');
 
-                        spinnerBox.removeClass('d-none')
-                        const boxFullColor = groupColorGrid.find('.box-full-color')
+                        spinnerBox.removeClass('d-none');
 
-                        if ( boxFullColor.length ) {
-                            boxFullColor.slideUp(500, function() {
+                        if (boxFullColor.length) {
+                            boxFullColor.slideUp(500, function () {
                                 $(this).remove();
-                            })
+                            });
                         }
                     },
                     success: function (result) {
-                        row.last().after(result)
-                        spinnerBox.addClass('d-none');
+                        row.last().after(result);
                     },
                     complete: function () {
-                        thisItem.addClass('active')
-                        thisItem.find('.spinner-load-color').remove()
+                        // Bỏ lớp disable-click để kích hoạt lại click
+                        $('.product-color .item').removeClass('disable-click');
 
-                        groupColorGrid.find('.box-full-color').slideDown(500, function () {
-                            $('html, body').animate({
-                                scrollTop: groupColorGrid.find('.box-full-color').offset().top - $('.site-header').outerHeight() - 50
-                            }, 500);
-                        })
+                        thisItem.addClass('active');
+                        thisItem.find('.spinner-load-color').remove();
 
-                        isLoading = false
-                        applyZoomEffect()
+                        // Hủy bỏ timeout cũ nếu có
+                        if (timeoutId) {
+                            clearTimeout(timeoutId);
+                        }
+
+                        // Đặt timeout để trì hoãn việc hiển thị box-full-color
+                        timeoutId = setTimeout(function () {
+                            groupColorGrid.find('.box-full-color').slideDown(500, function () {
+                                $('html, body').animate({
+                                    scrollTop: groupColorGrid.find('.box-full-color').offset().top - $('.site-header').outerHeight() - 50
+                                }, 500);
+                            });
+                        }, 500);
+
+                        isLoading = false;
+                        applyZoomEffect();
                     }
-                })
+                });
             }
-        })
+        });
+
 
         body.on('click', '.close-full-color', function () {
             const boxFullColorItem = $(this).closest('.box-full-color')

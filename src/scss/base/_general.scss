@@ -570,3 +570,8 @@ form {
 .font-f-seconder {
   font-family: $font-f-second;
 }
+
+.disable-click {
+  pointer-events: none;
+  opacity: 0.5;
+}
