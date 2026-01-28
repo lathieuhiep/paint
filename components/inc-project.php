@@ -1,54 +1,89 @@
 <?php
-$opt_heading = paint_get_option( 'template_home_opt_project_heading', '' );
-$opt_limit = paint_get_option( 'template_home_opt_project_limit', 10 );
-$opt_order_by = paint_get_option( 'template_home_opt_project_order_by', 'id' );
-$opt_order = paint_get_option( 'template_home_opt_project_order', 'DESC' );
+$opt_desc = paint_get_option('template_home_opt_project_content', '');
+$opt_limit = paint_get_option('template_home_opt_project_limit', 10);
+$opt_order_by = paint_get_option('template_home_opt_project_order_by', 'id');
+$opt_order = paint_get_option('template_home_opt_project_order', 'DESC');
+
+// config slider
+$data_config_slider = [
+  'infinite' => true,
+  'slidesToShow' => 3,
+  'arrows' => true,
+  'autoplay' => false,
+  'dots' => false,
+  'responsive' => [
+    [
+      'breakpoint' => 1023,
+      'settings' => [
+        'slidesToShow' => 3,
+        'slidesToScroll' => 3,
+      ]
+    ],
+    [
+      'breakpoint' => 767,
+      'settings' => [
+        'slidesToShow' => 2,
+        'slidesToScroll' => 2,
+      ]
+    ],
+    [
+      'breakpoint' => 575,
+      'settings' => [
+        'slidesToShow' => 1,
+        'slidesToScroll' => 1,
+      ]
+    ],
+  ],
+];
 
 // Query
 $args = array(
-	'post_type'             =>  'paint_project',
-	'posts_per_page'        =>  $opt_limit,
-	'orderby'               =>  $opt_order_by,
-	'order'                 =>  $opt_order,
-	'ignore_sticky_posts'   =>  1,
+  'post_type' => 'paint_project',
+  'posts_per_page' => $opt_limit,
+  'orderby' => $opt_order_by,
+  'order' => $opt_order,
+  'ignore_sticky_posts' => 1,
 );
 
-$query = new WP_Query( $args );
+$query = new WP_Query($args);
+
+if ($query->have_posts()) :
 ?>
 
 <div class="element-project">
-	<?php if ( ! empty( $opt_heading ) ) : ?>
-        <h2 class="heading mb-5 text-<?php echo esc_attr( $opt_heading['align'] ); ?>">
-			<?php echo esc_html( $opt_heading['title'] ); ?>
-        </h2>
-	<?php
-	endif;
+  <?php if ( $opt_desc ) : ?>
+  <div class="desc">
+    <?php echo wpautop( $opt_desc ); ?>
+  </div>
+  <?php endif; ?>
 
-	if ( $query->have_posts() ) :
-    ?>
+  <div class="project-content custom-slick-carousel" data-config-slick='<?php echo wp_json_encode($data_config_slider); ?>'>
+    <?php while ($query->have_posts()): $query->the_post(); ?>
+      <div class="item">
+        <div class="thumbnail">
+          <a class="link-image" href="<?php the_permalink(); ?>">
+            <?php the_post_thumbnail('medium_large'); ?>
+          </a>
 
-        <div class="project-content project-grid">
-            <div class="row row-cols-2 row-cols-md-3">
-				<?php while ( $query->have_posts() ): $query->the_post(); ?>
-                    <div class="col item">
-                        <div class="thumbnail">
-                            <a class="link-image" href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail('large'); ?>
-                            </a>
-
-                            <h2 class="title">
-                                <a href="<?php the_permalink(); ?>">
-									<?php the_title() ?>
-                                </a>
-                            </h2>
-                        </div>
-                    </div>
-				<?php endwhile; ?>
-            </div>
+          <h2 class="title">
+            <a href="<?php the_permalink(); ?>">
+              <?php the_title() ?>
+            </a>
+          </h2>
         </div>
-
+      </div>
     <?php
-		wp_reset_postdata();
-	endif;
-	?>
+    endwhile;
+    wp_reset_postdata();
+    ?>
+  </div>
+
+  <div class="link-all">
+    <a href="<?php echo esc_url( get_post_type_archive_link( 'paint_project' ) ); ?>">
+      <?php esc_html_e('Xem thêm', 'paint'); ?>
+    </a>
+  </div>
 </div>
+
+<?php
+endif;

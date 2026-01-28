@@ -2,36 +2,45 @@
 $color_code_name = get_post_meta(get_the_ID(), 'paint_cmb_color_code_name', true);
 $color_code_list = get_post_meta(get_the_ID(), 'paint_cmb_color_code_standard', true);
 
-if ( !empty( $color_code_list ) ) :
-	foreach ( $color_code_list as $color_code_item ) :
-?>
-	<div class="item">
-		<figure class="item__thumbnail">
-			<?php echo wp_get_attachment_image($color_code_item['image_id'], 'large'); ?>
-		</figure>
+if (!empty($color_code_list)) :
+    $i = 1;
+    ?>
 
-        <div class="info">
-            <p class="name">
-                <?php echo esc_html( $color_code_name ); ?>
-            </p>
+    <div class="group-color__grid" data-color-code-id="<?php echo esc_attr( get_the_ID() ); ?>">
+        <?php
+        foreach ($color_code_list as $key => $color_code_item) :
+            if ($i == 1 || $i % 3 == 1) :
+        ?>
+            <div class="list-color">
 
-            <p class="paint-number">
-                <?php echo esc_html( $color_code_item['paint_number'] ) ?>
-            </p>
-        </div>
+        <?php endif; ?>
 
-		<?php if ( !empty( $color_code_item['color_mix'] ) ) : ?>
-            <div class="color-mix">
-				<?php foreach ( $color_code_item['color_mix'] as $itemColorMix ) : ?>
-                    <div class="color-mix__item">
-                        <span style="background-color: <?php echo esc_attr( $itemColorMix['color'] ); ?>">
-                            <?php echo esc_html( $itemColorMix['name'] ); ?>
+            <div class="item">
+                <figure class="item__thumbnail" data-key="<?php echo esc_attr($key); ?>">
+                    <?php echo wp_get_attachment_image($color_code_item['image_id'], 'medium_large'); ?>
+                </figure>
+
+                <div class="info text-center">
+                    <?php if (!empty($color_code_name)) : ?>
+                        <span class="name">
+                            <?php echo esc_html($color_code_name); ?>
                         </span>
-                    </div>
-				<?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <span class="paint-number">
+                        <?php echo esc_html($color_code_item['paint_number']) ?>
+                    </span>
+                </div>
             </div>
-		<?php endif; ?>
-	</div>
+
+        <?php if ($i % 3 == 0 || $i == count($color_code_list)) : ?>
+            </div>
+        <?php
+        endif;
+            $i++;
+        endforeach;
+        ?>
+    </div>
+
 <?php
-	endforeach;
 endif;

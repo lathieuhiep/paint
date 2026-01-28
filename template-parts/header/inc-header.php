@@ -1,48 +1,113 @@
 <?php
-$sticky_menu = paint_get_option( 'general_option_menu_sticky', true );
-$logo = paint_get_option( 'general_opt_logo', '' );
+$sticky_menu = paint_get_option('general_option_menu_sticky', true);
+$logo = paint_get_option('general_opt_logo', '');
 ?>
 
-<header class="site-header<?php echo esc_attr( $sticky_menu ? ' active-sticky-nav' : '' ); ?>">
-    <nav class="main-navigation container">
-        <div class="site-navbar">
-            <div class="site-logo d-flex align-items-center">
-                <a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
+<header class="site-header<?php echo esc_attr($sticky_menu ? ' active-sticky-nav' : ''); ?>">
+    <nav class="main-navigation">
+        <div class="container">
+            <div class="site-navbar">
+                <div class="site-logo d-flex align-items-center">
+                    <button class="btn btn-primary btn-close-canvas d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+
+                    <a href="<?php echo esc_url(get_home_url('/')); ?>" title="<?php bloginfo('name'); ?>">
+                        <?php
+                        if (!empty($logo['id'])) :
+                            echo wp_get_attachment_image($logo['id'], 'medium');
+                        else :
+                            ?>
+                            <img class="logo-default"
+                                 src="<?php echo esc_url(get_theme_file_uri('/assets/images/logo.png')) ?>"
+                                 alt="<?php echo esc_attr(get_bloginfo('title')); ?>" />
+
+                        <?php endif; ?>
+                    </a>
+                </div>
+
+                <div id="site-menu" class="site-menu navbar-collapse d-lg-flex">
                     <?php
-                    if ( !empty( $logo['id'] ) ) :
-                        echo wp_get_attachment_image( $logo['id'], 'full' );
-                    else :
-                    ?>
-                        <img class="logo-default" src="<?php echo esc_url( get_theme_file_uri( '/assets/images/logo.png' ) ) ?>" alt="<?php echo esc_attr( get_bloginfo('title') ); ?>" width="auto" height="auto" />
+                    if (has_nav_menu('primary')) :
 
+                        wp_nav_menu(array(
+                            'theme_location' => 'primary',
+                            'menu_class' => 'navbar-nav flex-lg-row',
+                            'container' => false,
+                        ));
+
+                    else:
+                        ?>
+                        <ul class="main-menu">
+                            <li>
+                                <a href="<?php echo get_admin_url() . '/nav-menus.php'; ?>">
+                                    <?php esc_html_e('ADD TO MENU', 'paint'); ?>
+                                </a>
+                            </li>
+                        </ul>
                     <?php endif; ?>
-                </a>
 
-                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
-            </div>
+                    <div class="search-box-warp">
+                        <?php get_template_part('searchform', 'header'); ?>
+                    </div>
+                </div>
 
-            <div id="site-menu" class="site-menu collapse navbar-collapse d-lg-flex justify-content-lg-end">
-                <?php
-                if ( has_nav_menu('primary') ) :
+                <div class="box-action">
+                    <div class="search-header-warp d-flex align-items-center">
+                        <button type="button" id="btn-header-search" class="btn btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
 
-                    wp_nav_menu( array(
-                        'theme_location' => 'primary',
-                        'menu_class'     => 'navbar-nav flex-lg-row',
-                        'container'      => false,
-                    ) ) ;
+                    <div class="dropdown-account-warp position-relative text-center d-flex align-items-center">
+                        <button type="button" id="btn-header-account" class="btn btn-account">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </button>
 
-                else:
-                    ?>
-                    <ul class="main-menu">
-                        <li>
-                            <a href="<?php echo get_admin_url().'/nav-menus.php'; ?>">
-                                <?php esc_html_e( 'ADD TO MENU','paint' ); ?>
-                            </a>
-                        </li>
-                    </ul>
-                <?php endif; ?>
+                        <div id="dropdown-user-manager" class="dropdown-user-manager">
+                            <i class="fa-solid fa-circle-user"></i>
+
+                            <div class="details">
+                                <p class="title"><?php esc_html_e( 'Tài khoản của tôi', 'paint' ); ?></p>
+
+                                <?php
+                                if ( is_user_logged_in() ):
+                                    $current_user = wp_get_current_user();
+                                ?>
+                                    <span class="txt user-name"><?php echo esc_html($current_user->user_nicename); ?></span>
+
+                                    <div class="account-footer d-flex justify-content-between align-items-center">
+                                        <div class="account-footer__item">
+                                            <a class="logout d-flex align-items-center gap-2" href="<?php echo wp_logout_url(home_url()); ?>">
+                                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
+                                                <span><?php esc_html_e('Đăng xuất', 'paint'); ?></span>
+                                            </a>
+                                        </div>
+
+                                        <div class="account-footer__item">
+                                            <a href="<?php echo esc_url(paint_get_tpl_url('templates/personal-info.php')); ?>">
+                                                <i class="fa-solid fa-user-pen"></i>
+                                                <span><?php esc_html_e('Thông tin', 'paint'); ?></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <a id="btn-login-user" class="btn btn-login-user" href="<?php echo esc_url(paint_get_tpl_url('templates/login.php')) ?>">
+                                        <?php esc_html_e( 'Đăng nhập', 'paint' ); ?>
+                                    </a>
+
+                                    <div class="register-warp d-flex align-items-center gap-2">
+                                        <span class="txt"><?php esc_html_e( 'Chưa có tài khoản?', 'paint' ); ?></span>
+
+                                        <a id="btn-register-user" class="btn btn-register-user" href="<?php echo esc_url(paint_get_tpl_url('templates/register.php')); ?>">
+                                            <?php esc_html_e( 'Đăng ký tại đây', 'paint' ); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

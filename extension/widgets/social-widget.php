@@ -1,105 +1,121 @@
 <?php
-/**
- * Widget Name: Social Widget
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+if (!defined('ABSPATH')) {
+  exit;
 }
 
-class paint_social_widget extends WP_Widget {
+class paint_social_widget extends WP_Widget
+{
 
-	/**
-	 * Widget setup.
-	 */
+  /**
+   * Widget setup.
+   */
 
-    public function __construct() {
+  public function __construct()
+  {
 
-        $paint_social_widget_ops = array(
-            'classname'     =>  'paint_social_widget',
-            'description'   =>  'A widget that displays your social icons',
-        );
+    $paint_social_widget_ops = array(
+      'description' => 'A widget that displays your social icons',
+    );
 
-        parent::__construct( 'paint_social_widget', 'Basic Theme: Social Icons', $paint_social_widget_ops );
+    parent::__construct('social_networks', 'My Theme: Social Networks', $paint_social_widget_ops);
 
+  }
+
+  /**
+   * Outputs the content of the widget
+   *
+   * @param array $args
+   * @param array $instance
+   */
+  function widget($args, $instance): void
+  {
+    echo $args['before_widget'];
+
+    if (!empty($instance['title'])) {
+      echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
     }
 
-    /**
-     * Outputs the content of the widget
-     *
-     * @param array $args
-     * @param array $instance
-     */
-	function widget( $args, $instance ) {
+    $opt_social_networks = paint_get_option('paint_opt_social_network', '');
 
-        echo $args['before_widget'];
-
-        if ( ! empty( $instance['title'] ) ) {
-            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
-        }
-
+    if ( empty($opt_social_networks) ) {
+        return;
+    }
     ?>
-		
-        <div class="social-widget social-network-toTopFromBottom">
-            <?php paint_get_social_url(); ?>
+
+    <div class="widget-warp">
+        <div class="social-list">
+            <?php foreach ( $opt_social_networks as $network ) : ?>
+                <div class="item">
+                    <div class="item__thumbnail">
+                        <?php echo wp_get_attachment_image($network['icon']['id'], 'medium'); ?>
+                    </div>
+
+                    <a href="<?php echo esc_url( $network['url'] ) ?>" target="_blank"><?php echo esc_html( $network['title'] ); ?></a>
+                </div>
+            <?php endforeach; ?>
         </div>
+    </div>
+
+    <?php
+    echo $args['after_widget'];
+  }
+
+  /**
+   * Outputs the options form on admin
+   *
+   * @param array $instance The widget options
+   */
+  function form($instance): void
+  {
+
+    $defaults = array(
+      'title' => 'Subscribe & Follow',
+    );
+
+    $instance = wp_parse_args((array)$instance, $defaults); ?>
+
+    <!-- Widget Title: Text Input -->
+    <p>
+      <label for="<?php echo $this->get_field_id('title'); ?>">
+        <?php esc_html_e('Title:', 'paint'); ?>
+      </label>
+
+      <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
+             name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $instance['title']; ?>"
+             style="width:90%;"/>
+    </p>
+
+    <p>
+      <?php esc_html_e('Mạng xã hội được thiết lập ở theme options ở mục "Mạng xã hội"', 'paint'); ?>
+    </p>
 
     <?php
 
-        echo $args['after_widget'];
-	}
+  }
 
-    /**
-     * Outputs the options form on admin
-     *
-     * @param array $instance The widget options
-     */
-	function form( $instance ) {
+  /**
+   * Processing widget options on save
+   *
+   * @param array $new_instance The new options
+   * @param array $old_instance The previous options
+   *
+   * @return array
+   */
+  function update($new_instance, $old_instance): array
+  {
+    $instance = array();
 
-		$defaults = array(
-            'title' => 'Subscribe & Follow',
-        );
+    $instance['title'] = strip_tags($new_instance['title']);
 
-		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
-
-		<!-- Widget Title: Text Input -->
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>">
-                <?php esc_html_e( 'Title:', 'paint' ); ?>
-            </label>
-
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
-		</p>
-		
-		<p>
-            <?php esc_html_e( 'Note: Set your social links in the paint Options', 'paint' ); ?>
-        </p>
-
-	<?php
-
-	}
-
-    /**
-     * Processing widget options on save
-     *
-     * @param array $new_instance The new options
-     * @param array $old_instance The previous options
-     *
-     * @return array
-     */
-    function update( $new_instance, $old_instance ) {
-        $instance = array();
-
-        $instance['title']  =   strip_tags( $new_instance['title'] );
-
-        return $instance;
-    }
+    return $instance;
+  }
 
 }
 
 // Register social widget
-function paint_social_widget_register() {
-    register_widget( 'paint_social_widget' );
+function paint_social_widget_register(): void
+{
+  register_widget('paint_social_widget');
 }
 
-add_action( 'widgets_init', 'paint_social_widget_register' );
+add_action('widgets_init', 'paint_social_widget_register');
