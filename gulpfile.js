@@ -11,7 +11,7 @@ const rename = require("gulp-rename")
 const imagemin = require('gulp-imagemin')
 
 const pathSrc = './src'
-const pathAssets = './assets'
+const pathAssets = './themes/paint/assets'
 const pathAssetsCss = `${pathAssets}/css`
 
 // server
