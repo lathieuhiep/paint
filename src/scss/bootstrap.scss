@@ -12,9 +12,9 @@ $body-color: $color-primary;
 $body-text-align: inherit;
 
 // stylelint-enable value-keyword-case
-$font-family-sans-serif: $font-primary;
-$font-family-monospace: $font-primary;
-$font-family-base: $font-primary;
+$font-family-sans-serif: $font-f-second;
+$font-family-monospace: $font-f-second;
+$font-family-base: $font-f-second;
 $font-size-base: 1.5rem;
 $line-height-base: 2;
 
@@ -58,7 +58,7 @@ $nav-link-font-weight: 40;
 
 // scss-docs-start container-max-widths
 $container-max-widths: (
-        xl: 1224px
+        xl: 1244px
 ) !default;
 
 // Include remainder of required Bootstrap stylesheets

@@ -11,8 +11,11 @@
 }
 
 .site-header {
-  background-color: $color-secondary;
-  @include transition();
+  --header-box-shadow: 0 .4rem 1.2rem 0 rgba(0, 0, 0, 0.15);
+  --header-bk-color: #ffffff;
+
+  box-shadow: var(--header-box-shadow);
+  background-color: var(--header-bk-color);
 
   &.scrolled {
     background-color: #ffffff;
@@ -61,12 +64,8 @@
     grid-column-gap: 2.4rem;
     align-items: center;
 
-    @media (min-width: 1200px) {
-      grid-template-columns: 12.8rem 1fr max-content;
-    }
-
-    @media (min-width: 992px) and (max-width: 1199px) {
-      grid-template-columns: 10rem 1fr max-content;
+    @media (min-width: 992px) {
+      grid-template-columns: 8rem 1fr max-content;
     }
     @media (max-width: 991px) {
       grid-template-columns: 1fr max-content;
@@ -241,6 +240,15 @@
   .navbar-nav {
     @media (max-width: 991px) {
       display: none;
+    }
+  }
+
+  > ul {
+    > li {
+      > a {
+        font-weight: 500;
+        font-size: 1.3rem;
+      }
     }
   }
 

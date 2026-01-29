@@ -260,3 +260,16 @@ function paint_remove_admin_bar(): void
         show_admin_bar(false);
     }
 }
+
+/**
+ * Chuyển đổi thẻ link phông chữ sang chuẩn Preload/Async
+ */
+function paint_partner_async_google_fonts( $tag, $handle, $src ) {
+    // Chỉ áp dụng cho handle 'google-font' đã đăng ký
+    if ( 'google-font' === $handle ) {
+        $tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+        $tag .= '<noscript><link rel="stylesheet" href="' . esc_url( $src ) . '"></noscript>';
+    }
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'paint_partner_async_google_fonts', 10, 3 );

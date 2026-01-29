@@ -5,7 +5,7 @@ function paint_get_version_theme(): string {
 }
 
 add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
-function disable_gutenberg_editor(): false
+function disable_gutenberg_editor(): bool
 {
     return false;
 }
@@ -235,7 +235,7 @@ function paint_check_get_cat($type_taxonomy): array
       )
     );
     
-    if (isset($category) && !empty($category)):
+    if (!empty($category)):
         foreach ($category as $item) {
             $cat_check[$item->term_id] = $item->name . ' (' . $item->count . ')';
         }

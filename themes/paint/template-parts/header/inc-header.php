@@ -1,9 +1,24 @@
 <?php
 $sticky_menu = paint_get_option('general_option_menu_sticky', true);
 $logo = paint_get_option('general_opt_logo', '');
+
+if ( is_page() ) {
+    $page_id = get_queried_object_id();
+    $menu_style = get_post_meta( $page_id, 'paint_cmb_page_menu_style', true );
+}
+
+$class_menu = ['site-header'];
+
+if ( $sticky_menu ) {
+    $class_menu[] = 'active-sticky-nav';
+}
+
+if ( isset( $menu_style ) && $menu_style === 'v-1' ) {
+    $class_menu[] = 'menu-style-v1';
+}
 ?>
 
-<header class="site-header<?php echo esc_attr($sticky_menu ? ' active-sticky-nav' : ''); ?>">
+<header class="<?php echo esc_attr( implode( ' ', $class_menu ) ) ?>">
     <nav class="main-navigation">
         <div class="container">
             <div class="site-navbar">

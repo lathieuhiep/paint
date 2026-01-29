@@ -38,14 +38,16 @@ function paint_register_front_end(): void
     wp_dequeue_style('wc-blocks-style');
     wp_dequeue_style('storefront-gutenberg-blocks');
 
+    // font google
+    $font_url = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap';
+
+    wp_enqueue_style( 'google-font', $font_url, array(), null );
+
     // register simplebar
     wp_register_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
     wp_register_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
 
     /** Load css **/
-
-    // font google
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap', array(), null );
 
     /* Start main Css */
     wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '5.12.1');

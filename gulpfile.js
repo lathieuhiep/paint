@@ -14,11 +14,19 @@ const pathSrc = './src'
 const pathAssets = './themes/paint/assets'
 const pathAssetsCss = `${pathAssets}/css`
 
+require('dotenv').config()
+
+// setting NODE_ENV: development or production
+// NODE_ENV="development" trong file .env để chạy ở chế độ phát triển (có sourcemap)
+const isDev = (process.env.NODE_ENV === 'development');
+
 // server
-const domain = 'localhost/bcolor.vn';
+// tạo file .env với biến PROXY="localhost/bcolor.vn". Có thể thay đổi giá trị này.
+const proxy = process.env.PROXY || 'localhost/bcolor.vn';
+
 function server() {
     browserSync.init({
-        proxy: domain,
+        proxy: proxy,
         open: false,
         cors: true,
         ghostMode: false,
