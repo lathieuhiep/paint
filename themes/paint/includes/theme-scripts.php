@@ -39,7 +39,7 @@ function paint_register_front_end(): void
     wp_dequeue_style('storefront-gutenberg-blocks');
 
     // font google
-    $font_url = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap';
+    $font_url = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap';
 
     wp_enqueue_style( 'google-font', $font_url, array(), null );
 
