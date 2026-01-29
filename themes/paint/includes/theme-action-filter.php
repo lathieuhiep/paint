@@ -273,3 +273,13 @@ function paint_partner_async_google_fonts( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'style_loader_tag', 'paint_partner_async_google_fonts', 10, 3 );
+
+
+// Add description to menu items
+add_filter( 'walker_nav_menu_start_el', 'add_description_to_menu', 10, 4 );
+function add_description_to_menu( $item_output, $item, $depth, $args ) {
+    if ( !empty( $item->description ) ) {
+        $item_output = str_replace( $args->link_after . '</a>', '<span class="menu-item-description">' . $item->description . '</span>' . $args->link_after . '</a>', $item_output );
+    }
+    return $item_output;
+}
