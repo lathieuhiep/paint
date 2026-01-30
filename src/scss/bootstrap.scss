@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @import "variables-site/variables";
 
 // Include functions first (so you can manipulate colors, SVGs, calc, etc)
@@ -60,6 +62,19 @@ $nav-link-font-weight: 40;
 $container-max-widths: (
         xl: 1244px
 ) !default;
+
+//
+$spacing-base: 0.4rem;
+
+$gutters: ();
+@for $i from 0 through 8 {
+  $gutters: map.merge($gutters, (#{$i}: $spacing-base * $i));
+}
+
+$spacers: ();
+@for $i from 0 through 8 {
+  $spacers: map.merge($spacers, (#{$i}: $spacing-base * $i));
+}
 
 // Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";

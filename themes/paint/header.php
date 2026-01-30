@@ -10,29 +10,17 @@
 <body <?php body_class(); ?>>
 
 <!--Include Loading Template-->
-<?php
-get_template_part('template-parts/inc', 'loading');
-if (!is_404()) {
-  get_template_part('template-parts/header/inc', 'header');
-}
-?>
+<?php get_template_part('template-parts/inc', 'loading'); ?>
 <!--End Loading Template-->
 
-<!--Start back to top-->
-<?php
-$show_back_to_top = paint_get_option('general_opt_back_to_top', true);
+<div class="main-warp position-relative d-flex flex-column">
+    <?php
+        if (!is_404()) {
+            get_template_part('template-parts/header/inc', 'header');
+        }
+    ?>
+    <!--Start Sticky Footer-->
+    <div class="sticky-footer">
 
-if ($show_back_to_top) :
-  ?>
-  <div id="back-top">
-    <a href="#">
-      <i class="fa fa-chevron-up"></i>
-    </a>
-  </div>
-<?php endif; ?>
-<!--End back top top-->
-
-<!--Start Sticky Footer-->
-<div class="sticky-footer">
 
 

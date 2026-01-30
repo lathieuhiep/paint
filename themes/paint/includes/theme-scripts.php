@@ -43,19 +43,15 @@ function paint_register_front_end(): void
 
     wp_enqueue_style( 'google-font', $font_url, array(), null );
 
-    // register simplebar
-    wp_register_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
-    wp_register_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
-
-    /** Load css **/
-
-    /* Start main Css */
-    wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '5.12.1');
-    /* End main Css */
+    // fontawesome
+    wp_enqueue_style('fontawesome', get_theme_file_uri('/assets/fonts/fontawesome/css/all.min.css'), array(), '6.7.2');
 
     // get style bootstrap
     wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/libs/bootstrap/bootstrap.min.css'), array(), '5.3.3');
 
+    // register simplebar
+    wp_register_style('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.css'), array(), '');
+    wp_register_script('simplebar', get_theme_file_uri('/assets/libs/simplebar/simplebar.min.js'), array('jquery'), '', true);
 
     // style theme
     wp_enqueue_style( 'paint-style', get_theme_file_uri( '/assets/css/style-theme.min.css' ), array(), paint_get_version_theme() );

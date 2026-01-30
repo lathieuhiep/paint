@@ -24,4 +24,19 @@ function paint_page_metaboxes(): void
         ],
         'default' => '',
     ]);
+
+    $cmb->add_field([
+        'name'    => esc_html__('Vị trí menu', 'paint'),
+        'id'      => 'paint_cmb_page_menu_position',
+        'type'    => 'select',
+        'options' => [
+            ''         => esc_html__('Mặc định', 'paint'),
+            'static'   => esc_html__('Static (mặc định)', 'paint'),
+            'relative' => esc_html__('Relative', 'paint'),
+            'absolute' => esc_html__('Absolute', 'paint'),
+            'fixed'    => esc_html__('Fixed (dính màn hình)', 'paint'),
+            'sticky'   => esc_html__('Sticky (cuộn tới thì dính)', 'paint'),
+        ],
+        'default' => '',
+    ]);
 }

@@ -11,7 +11,8 @@ const rename = require("gulp-rename")
 const imagemin = require('gulp-imagemin')
 
 const pathSrc = './src'
-const pathAssets = './themes/paint/assets'
+const pathTheme = './themes/paint'
+const pathAssets = `${pathTheme}/assets`
 const pathAssetsCss = `${pathAssets}/css`
 
 require('dotenv').config()
@@ -183,7 +184,7 @@ async function buildStylesElementor() {
         }))
         .pipe(rename( {suffix: '.min'} ))
         .pipe(sourcemaps.write())
-        .pipe(dest(`./extension/elementor-addon/css/`))
+        .pipe(dest(`${pathTheme}/extension/elementor-addon/css/`))
         .pipe(browserSync.stream());
 }
 

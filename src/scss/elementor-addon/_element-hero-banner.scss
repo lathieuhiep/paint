@@ -1,0 +1,70 @@
+.element-hero-banner-main {
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__top {
+      flex: 1;
+      flex-direction: column;
+      @extend %flex-justify-center;
+    }
+
+    &__footer {
+      padding-bottom: 5rem;
+
+      .hero-scroll-hint {
+        animation: float-vertical 1.5s ease-in-out infinite;
+      }
+
+      .mouse-icon {
+        position: relative;
+        width: 2.638rem;
+        height: 3.517rem;
+        border: .067rem solid rgba(255, 255, 255, 1);
+        border-radius: 1.265rem;
+        backdrop-filter: blur(4.726942539215088px);
+        overflow: hidden;
+
+        .wheel {
+          position: absolute;
+          width: .329rem;
+          height: .727rem;
+          top: .8rem;
+          left: 50%;
+          border-radius: 0.599rem;
+          background-color: #fff;
+          transform: translateX(-50%);
+          animation: scroll-wheel 1.5s infinite;
+        }
+      }
+
+      .arrow-down {
+        color: #fff;
+        font-size: 2.2rem;
+      }
+    }
+  }
+}
+
+/* Keyframes cho khối nhảy lên xuống */
+@keyframes float-vertical {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Nhảy lên 10px */
+  }
+}
+
+/* Keyframes cho con lăn chuột */
+@keyframes scroll-wheel {
+  0% {
+    opacity: 1;
+    top: .8rem;
+  }
+  100% {
+    opacity: 0;
+    top: 2rem;
+  }
+}

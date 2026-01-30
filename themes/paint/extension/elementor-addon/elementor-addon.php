@@ -21,6 +21,8 @@ function paint_add_elementor_widget_categories( $elements_manager ): void {
 add_action( 'elementor/widgets/register', 'paint_register_widget_elementor_addon' );
 function paint_register_widget_elementor_addon( $widgets_manager ): void {
 	// include add on
+    require get_parent_theme_file_path( '/extension/elementor-addon/widgets/hero-banner.php' );
+
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/about-slider.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/album-gallery.php' );
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/contact-form-7.php' );
@@ -44,6 +46,8 @@ function paint_register_widget_elementor_addon( $widgets_manager ): void {
     require get_parent_theme_file_path( '/extension/elementor-addon/widgets/image-carousel.php' );
 
 	// register add on
+    $widgets_manager->register( new \Paint_Hero_Banner_Widget() );
+
     $widgets_manager->register( new \Paint_Elementor_About_Slider() );
     $widgets_manager->register( new \Paint_Elementor_Album_Gallery() );
     $widgets_manager->register( new \Paint_Elementor_Contact_Form_7() );

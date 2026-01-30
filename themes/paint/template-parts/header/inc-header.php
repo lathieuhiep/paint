@@ -2,19 +2,30 @@
 $sticky_menu = paint_get_option('general_option_menu_sticky', true);
 $logo = paint_get_option('general_opt_logo', '');
 
-if ( is_page() ) {
-    $page_id = get_queried_object_id();
-    $menu_style = get_post_meta( $page_id, 'paint_cmb_page_menu_style', true );
-}
-
 $class_menu = ['site-header'];
 
-if ( $sticky_menu ) {
-    $class_menu[] = 'active-sticky-nav';
+// Page context
+$page_id = get_queried_object_id();
+
+$menu_style    = '';
+$menu_position = '';
+
+// Lấy meta nếu có page ID
+if ($page_id) {
+    $menu_style    = get_post_meta($page_id, 'paint_cmb_page_menu_style', true);
+    $menu_position = get_post_meta($page_id, 'paint_cmb_page_menu_position', true);
 }
 
-if ( isset( $menu_style ) && $menu_style === 'v-1' ) {
+// Menu style (per page)
+if ($menu_style === 'v-1') {
     $class_menu[] = 'menu-style-v1';
+}
+
+// Menu position (ưu tiên page → fallback global)
+if (! empty($menu_position)) {
+    $class_menu[] = 'menu-position-' . sanitize_html_class($menu_position);
+} elseif ($sticky_menu) {
+    $class_menu[] = 'menu-position-sticky';
 }
 ?>
 
@@ -67,16 +78,22 @@ if ( isset( $menu_style ) && $menu_style === 'v-1' ) {
                     </div>
                 </div>
 
-                <div class="box-action">
+                <div class="box-action d-flex align-items-center gap-4">
                     <div class="search-header-warp d-flex align-items-center">
                         <button type="button" id="btn-header-search" class="btn btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
 
+                    <div class="social-header-warp d-flex align-items-center">
+                        <a href="#" target="_blank" class="btn btn-social">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+
                     <div class="dropdown-account-warp position-relative text-center d-flex align-items-center">
                         <button type="button" id="btn-header-account" class="btn btn-account">
-                            <i class="fa-solid fa-circle-user"></i>
+                            <i class="fa-regular fa-user"></i>
                         </button>
 
                         <div id="dropdown-user-manager" class="dropdown-user-manager">

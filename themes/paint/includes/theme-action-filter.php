@@ -276,10 +276,21 @@ add_filter( 'style_loader_tag', 'paint_partner_async_google_fonts', 10, 3 );
 
 
 // Add description to menu items
-add_filter( 'walker_nav_menu_start_el', 'add_description_to_menu', 10, 4 );
-function add_description_to_menu( $item_output, $item, $depth, $args ) {
-    if ( !empty( $item->description ) ) {
-        $item_output = str_replace( $args->link_after . '</a>', '<span class="menu-item-description">' . $item->description . '</span>' . $args->link_after . '</a>', $item_output );
+function my_theme_nav_description( $item_output, $item, $depth, $args ) {
+    // 1. Lấy tiêu đề gốc (bao gồm cả link_before/after nếu có)
+    $title = $args->link_before . $item->title . $args->link_after;
+
+    // 2. Tạo nội dung mới: Bọc tiêu đề vào span
+    $new_content = '<span class="menu-title d-block">' . $title . '</span>';
+
+    // 3. Nếu có mô tả, thêm span mô tả ngay phía sau
+    if ( ! empty( $item->description ) ) {
+        $new_content .= '<span class="menu-desc d-block">' . $item->description . '</span>';
     }
+
+    // 4. Thay thế lại vào output
+    $item_output = str_replace( $title, $new_content, $item_output );
+
     return $item_output;
 }
+add_filter( 'walker_nav_menu_start_el', 'my_theme_nav_description', 10, 4 );
