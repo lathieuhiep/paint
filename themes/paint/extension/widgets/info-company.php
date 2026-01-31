@@ -36,22 +36,10 @@ class paint_info_company_widget extends WP_Widget {
         $email = paint_get_option('opt-info-company-email');
     ?>
         <div class="widget-warp">
-            <?php if ( !empty( $address ) ) : ?>
-                <div class="item">
-                    <div class="item__thumbnail">
-                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-map.png')) ?>" alt="" />
-                    </div>
-
-                    <div class="item__info">
-                        <?php echo esc_html( $address ) ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-
             <?php if ( !empty( $phones ) ) : ?>
                 <div class="item">
                     <div class="item__thumbnail">
-                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-phone.png')) ?>" alt="" />
+                        <i class="fa-solid fa-phone"></i>
                     </div>
 
                     <div class="item__info">
@@ -60,10 +48,10 @@ class paint_info_company_widget extends WP_Widget {
                             if ( !empty( $item ) ) :
                         ?>
                             <?php if ( $index + 1 > 1 ) : ?>
-                                <span class="txt"><?php esc_html_e('hoặc', 'paint'); ?></span>
+                                <span class="txt">|</span>
                             <?php endif; ?>
 
-                            <a href="tel:<?php echo esc_attr( paint_preg_replace_ony_number( $item['phone'] ) ) ?>"><?php echo esc_html( $item['phone'] ); ?></a>
+                            <a class="fw-bold" href="tel:<?php echo esc_attr( paint_preg_replace_ony_number( $item['phone'] ) ) ?>"><?php echo esc_html( $item['phone'] ); ?></a>
                         <?php
                             endif;
                         endforeach;
@@ -72,14 +60,26 @@ class paint_info_company_widget extends WP_Widget {
                 </div>
             <?php endif; ?>
 
-            <?php if ( !empty( $email ) ) : ?>
+            <?php if ( !empty( $address ) ) : ?>
                 <div class="item">
                     <div class="item__thumbnail">
-                        <img class="icon" src="<?php echo esc_url(get_theme_file_uri('/assets/images/contact/icon-mail.png')) ?>" alt="" />
+                        <i class="fa-solid fa-location-dot"></i>
                     </div>
 
                     <div class="item__info">
-                        <?php echo esc_html( $email ) ?>
+                        <?php echo esc_html( $address ) ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ( !empty( $email ) ) : ?>
+                <div class="item">
+                    <div class="item__thumbnail">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div class="item__info">
+                        <a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html( $email ) ?></a>
                     </div>
                 </div>
             <?php endif; ?>

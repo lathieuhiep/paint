@@ -21,7 +21,7 @@ if (is_active_sidebar('paint-sidebar-footer-column-1') || is_active_sidebar('pai
 
                     if (is_active_sidebar('paint-sidebar-footer-column-' . $j)):
                         ?>
-                        <div class="col-12 col-sm-<?php echo esc_attr($sm) ?> col-md-<?php echo esc_attr($md) ?> col-lg-<?php echo esc_attr($lg) ?> col-xl-<?php echo esc_attr($xl); ?>">
+                        <div class="row-gap-5 row-gap-md-14 d-flex flex-column col-12 col-sm-<?php echo esc_attr($sm) ?> col-md-<?php echo esc_attr($md) ?> col-lg-<?php echo esc_attr($lg) ?> col-xl-<?php echo esc_attr($xl); ?>">
                             <?php dynamic_sidebar('paint-sidebar-footer-column-' . $j); ?>
                         </div>
                     <?php

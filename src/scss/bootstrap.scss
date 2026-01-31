@@ -18,7 +18,7 @@ $font-family-sans-serif: $font-f-second;
 $font-family-monospace: $font-f-second;
 $font-family-base: $font-f-second;
 $font-size-base: 1.5rem;
-$line-height-base: 2;
+$line-height-base: 1.6;
 
 // Grid columns
 //
@@ -46,7 +46,7 @@ $h6-font-size: $h6-font-size;
 // headings-variables
 $headings-margin-bottom: 1.2rem;
 $headings-font-weight: 700;
-$headings-line-height: 1.6;
+$headings-line-height: 1.4;
 
 // Paragraphs
 //
@@ -67,12 +67,12 @@ $container-max-widths: (
 $spacing-base: 0.4rem;
 
 $gutters: ();
-@for $i from 0 through 8 {
+@for $i from 0 through 15 {
   $gutters: map.merge($gutters, (#{$i}: $spacing-base * $i));
 }
 
 $spacers: ();
-@for $i from 0 through 8 {
+@for $i from 0 through 15 {
   $spacers: map.merge($spacers, (#{$i}: $spacing-base * $i));
 }
 

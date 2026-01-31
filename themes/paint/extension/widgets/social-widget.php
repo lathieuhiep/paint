@@ -35,7 +35,7 @@ class paint_social_widget extends WP_Widget
       echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
     }
 
-    $opt_social_networks = paint_get_option('paint_opt_social_network', '');
+    $opt_social_networks = paint_get_option('paint_opt_social_network', []);
 
     if ( empty($opt_social_networks) ) {
         return;
@@ -44,14 +44,26 @@ class paint_social_widget extends WP_Widget
 
     <div class="widget-warp">
         <div class="social-list">
-            <?php foreach ( $opt_social_networks as $network ) : ?>
-                <div class="item">
-                    <div class="item__thumbnail">
-                        <?php echo wp_get_attachment_image($network['icon']['id'], 'medium'); ?>
-                    </div>
-
-                    <a href="<?php echo esc_url( $network['url'] ) ?>" target="_blank"><?php echo esc_html( $network['title'] ); ?></a>
-                </div>
+            <?php
+            foreach ( $opt_social_networks as $key => $network ) :
+                if ( $key == 'facebook' ) {
+                    $class_icon = 'fa-facebook';
+                } elseif ( $key == 'youtube' ) {
+                    $class_icon = 'fa-youtube';
+                } elseif ( $key == 'tiktok' ) {
+                    $class_icon = 'fa-tiktok';
+                } elseif ( $key == 'pinterest' ) {
+                    $class_icon = 'fa-pinterest-p';
+                } else {
+                    $class_icon = '';
+                }
+            ?>
+                <a class="item"
+                   href="<?php echo esc_url( $network ); ?>"
+                   target="_blank"
+                >
+                    <i class="fa-brands <?php echo esc_attr( $class_icon ); ?>"></i>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

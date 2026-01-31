@@ -89,24 +89,24 @@ if (class_exists('CSF')) {
         'icon' => 'fas fa-info',
         'fields' => array(
             array(
-                'id'      => 'opt-info-company-address',
-                'type'    => 'text',
-                'title'   => esc_html__('Địa chỉ', 'paint'),
+                'id' => 'opt-info-company-address',
+                'type' => 'text',
+                'title' => esc_html__('Địa chỉ', 'paint'),
                 'default' => esc_html__('Khu Công nghiệp Kiêu Kỵ, Gia Lâm, Hà Nội', 'paint')
             ),
 
             array(
-                'id'        => 'opt-info-company-phone',
-                'type'      => 'repeater',
-                'title'     => esc_html__('Điện thoại', 'paint'),
-                'fields'    => array(
+                'id' => 'opt-info-company-phone',
+                'type' => 'repeater',
+                'title' => esc_html__('Điện thoại', 'paint'),
+                'fields' => array(
                     array(
-                        'id'    => 'phone',
-                        'type'  => 'text',
+                        'id' => 'phone',
+                        'type' => 'text',
                         'title' => esc_html__('Nhập số', 'paint'),
                     ),
                 ),
-                'default'   => array(
+                'default' => array(
                     array(
                         'phone' => '0334.991.555',
                     ),
@@ -117,9 +117,9 @@ if (class_exists('CSF')) {
             ),
 
             array(
-                'id'      => 'opt-info-company-email',
-                'type'    => 'text',
-                'title'   => esc_html__('Email', 'paint'),
+                'id' => 'opt-info-company-email',
+                'type' => 'text',
+                'title' => esc_html__('Email', 'paint'),
                 'default' => 'sonbeecolor@gmail.com'
             ),
         )
@@ -356,12 +356,12 @@ if (class_exists('CSF')) {
 
             // contact
             array(
-                'id'       => 'opt-link-2',
-                'type'     => 'link',
-                'title'    => 'Link',
-                'default'  => array(
-                    'url'    => 'http://codestarframework.com/',
-                    'text'   => 'Codestar Framework',
+                'id' => 'opt-link-2',
+                'type' => 'link',
+                'title' => 'Link',
+                'default' => array(
+                    'url' => 'http://codestarframework.com/',
+                    'text' => 'Codestar Framework',
                     'target' => '_blank'
                 ),
             ),
@@ -376,11 +376,11 @@ if (class_exists('CSF')) {
         'fields' => array(
             // contact
             array(
-                'id'       => 'paint_opt_product_detail_contact',
-                'type'     => 'link',
-                'title'    => esc_html__('Link liên hệ', 'paint'),
-                'default'  => array(
-                    'url'    => '#',
+                'id' => 'paint_opt_product_detail_contact',
+                'type' => 'link',
+                'title' => esc_html__('Link liên hệ', 'paint'),
+                'default' => array(
+                    'url' => '#',
                 ),
             ),
         )
@@ -394,31 +394,41 @@ if (class_exists('CSF')) {
         'fields' => array(
             array(
                 'id' => 'paint_opt_social_network',
-                'type' => 'repeater',
-                'title' => esc_html__('Mạng xã hội', 'paint'),
+                'type' => 'sortable',
+                'title' => 'Sortable',
                 'fields' => array(
                     array(
-                        'id'      => 'title',
-                        'type'    => 'text',
-                        'title'   => esc_html__('Tiêu đề', 'paint'),
-                    ),
-
-
-                    array(
-                        'id'      => 'icon',
-                        'type'    => 'media',
-                        'title'   => esc_html__('Icon', 'paint'),
-                        'library' => 'image',
-                    ),
-
-                    array(
-                        'id' => 'url',
+                        'id' => 'facebook',
                         'type' => 'text',
-                        'title' => esc_html__('Link', 'paint'),
-                        'default' => '#',
+                        'title' => esc_html__('URL Facebook', 'paint'),
+                    ),
+
+                    array(
+                        'id' => 'youtube',
+                        'type' => 'text',
+                        'title' => esc_html__('URL Youtube', 'paint'),
+                    ),
+
+                    array(
+                        'id' => 'tiktok',
+                        'type' => 'text',
+                        'title' => esc_html__('URL Tiktok', 'paint'),
+                    ),
+
+                    array(
+                        'id' => 'pinterest',
+                        'type' => 'text',
+                        'title' => esc_html__('URL Pinterest', 'paint'),
                     ),
                 ),
+                'default' => array(
+                    'facebook' => 'https://www.facebook.com/Bcolor.vn',
+                    'youtube' => 'https://www.youtube.com/@BColorVietNam',
+                    'tiktok' => 'https://www.tiktok.com/@sondabcolor?lang=vi-VN',
+                    'pinterest' => 'https://www.pinterest.com/SonBColor/',
+                ),
             ),
+
         )
     ));
 
@@ -444,17 +454,17 @@ if (class_exists('CSF')) {
     ));
 
     // footer columns
-    CSF::createSection( $paint_prefix, array(
+    CSF::createSection($paint_prefix, array(
         'parent' => 'parent_footer',
-        'title'  => esc_html__( 'Thiết lâp cột', 'paint' ),
+        'title' => esc_html__('Thiết lâp cột', 'paint'),
         'fields' => array(
             // select columns
             array(
-                'id'      => 'paint_opt_footer_columns',
-                'type'    => 'select',
-                'title'   => esc_html__( 'Number of footer columns', 'paint' ),
+                'id' => 'paint_opt_footer_columns',
+                'type' => 'select',
+                'title' => esc_html__('Number of footer columns', 'paint'),
                 'options' => array(
-                    '0' => esc_html__( 'Hide', 'paint' ),
+                    '0' => esc_html__('Hide', 'paint'),
                     '1' => 1,
                     '2' => 2,
                     '3' => 3,
@@ -465,185 +475,185 @@ if (class_exists('CSF')) {
 
             // column width 1
             array(
-                'id'        => 'paint_opt_footer_column_width_1',
-                'type'      => 'fieldset',
-                'title'     => esc_html__( 'Column width 1', 'paint' ),
-                'fields'    => array(
+                'id' => 'paint_opt_footer_column_width_1',
+                'type' => 'fieldset',
+                'title' => esc_html__('Column width 1', 'paint'),
+                'fields' => array(
                     array(
-                        'id'         => 'sm',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
-                        'default'    => 12,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'sm',
+                        'type' => 'slider',
+                        'title' => esc_html__('sm: ≥576px', 'paint'),
+                        'default' => 12,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'md',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
-                        'default'    => 6,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'md',
+                        'type' => 'slider',
+                        'title' => esc_html__('md: ≥768px', 'paint'),
+                        'default' => 6,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'lg',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'lg',
+                        'type' => 'slider',
+                        'title' => esc_html__('lg: ≥992px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'xl',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'xl',
+                        'type' => 'slider',
+                        'title' => esc_html__('xl: ≥1200px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
                 ),
-                'dependency' => array( 'paint_opt_footer_columns', '!=', '0' )
+                'dependency' => array('paint_opt_footer_columns', '!=', '0')
             ),
 
             // column width 2
             array(
-                'id'        => 'paint_opt_footer_column_width_2',
-                'type'      => 'fieldset',
-                'title'     => esc_html__( 'Column width 2', 'paint' ),
-                'fields'    => array(
+                'id' => 'paint_opt_footer_column_width_2',
+                'type' => 'fieldset',
+                'title' => esc_html__('Column width 2', 'paint'),
+                'fields' => array(
                     array(
-                        'id'         => 'sm',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
-                        'default'    => 12,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'sm',
+                        'type' => 'slider',
+                        'title' => esc_html__('sm: ≥576px', 'paint'),
+                        'default' => 12,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'md',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
-                        'default'    => 6,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'md',
+                        'type' => 'slider',
+                        'title' => esc_html__('md: ≥768px', 'paint'),
+                        'default' => 6,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'lg',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'lg',
+                        'type' => 'slider',
+                        'title' => esc_html__('lg: ≥992px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'xl',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'xl',
+                        'type' => 'slider',
+                        'title' => esc_html__('xl: ≥1200px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
                 ),
-                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1' )
+                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1')
             ),
 
             // column width 3
             array(
-                'id'        => 'paint_opt_footer_column_width_3',
-                'type'      => 'fieldset',
-                'title'     => esc_html__( 'Column width 3', 'paint' ),
-                'fields'    => array(
+                'id' => 'paint_opt_footer_column_width_3',
+                'type' => 'fieldset',
+                'title' => esc_html__('Column width 3', 'paint'),
+                'fields' => array(
                     array(
-                        'id'         => 'sm',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
-                        'default'    => 12,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'sm',
+                        'type' => 'slider',
+                        'title' => esc_html__('sm: ≥576px', 'paint'),
+                        'default' => 12,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'md',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
-                        'default'    => 6,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'md',
+                        'type' => 'slider',
+                        'title' => esc_html__('md: ≥768px', 'paint'),
+                        'default' => 6,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'lg',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'lg',
+                        'type' => 'slider',
+                        'title' => esc_html__('lg: ≥992px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'xl',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'xl',
+                        'type' => 'slider',
+                        'title' => esc_html__('xl: ≥1200px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
                 ),
-                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1,2' )
+                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1,2')
             ),
 
             // column width 4
             array(
-                'id'        => 'paint_opt_footer_column_width_4',
-                'type'      => 'fieldset',
-                'title'     => esc_html__( 'Column width 3', 'paint' ),
-                'fields'    => array(
+                'id' => 'paint_opt_footer_column_width_4',
+                'type' => 'fieldset',
+                'title' => esc_html__('Column width 3', 'paint'),
+                'fields' => array(
                     array(
-                        'id'         => 'sm',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'sm: ≥576px', 'paint' ),
-                        'default'    => 12,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'sm',
+                        'type' => 'slider',
+                        'title' => esc_html__('sm: ≥576px', 'paint'),
+                        'default' => 12,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'md',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'md: ≥768px', 'paint' ),
-                        'default'    => 6,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'md',
+                        'type' => 'slider',
+                        'title' => esc_html__('md: ≥768px', 'paint'),
+                        'default' => 6,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'lg',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'lg: ≥992px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'lg',
+                        'type' => 'slider',
+                        'title' => esc_html__('lg: ≥992px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
 
                     array(
-                        'id'         => 'xl',
-                        'type'       => 'slider',
-                        'title'      => esc_html__( 'xl: ≥1200px', 'paint' ),
-                        'default'    => 3,
-                        'min'        => 1,
-                        'max'        => 12,
+                        'id' => 'xl',
+                        'type' => 'slider',
+                        'title' => esc_html__('xl: ≥1200px', 'paint'),
+                        'default' => 3,
+                        'min' => 1,
+                        'max' => 12,
                     ),
                 ),
-                'dependency' => array( 'paint_opt_footer_columns', 'not-any', '0,1,2,3' )
+                'dependency' => array('paint_opt_footer_columns', 'not-any', '0,1,2,3')
             ),
         )
-    ) );
+    ));
 
     // -> End create a section footer
 
