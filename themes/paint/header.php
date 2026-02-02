@@ -13,7 +13,7 @@
 <?php get_template_part('template-parts/inc', 'loading'); ?>
 <!--End Loading Template-->
 
-<div class="main-warp position-relative d-flex flex-column">
+<div class="main-warp position-relative d-flex flex-column h-100">
     <?php
         if (!is_404()) {
             get_template_part('template-parts/header/inc', 'header');

@@ -4,6 +4,44 @@ function paint_get_version_theme(): string {
     return wp_get_theme()->get( 'Version' );
 }
 
+// Empty Option Proxy Class
+if (!class_exists('EmptyOptionProxy')) {
+    class EmptyOptionProxy {
+        public static function __callStatic($name, $args) { return null; }
+    }
+}
+
+/**
+ * Hàm bổ trợ lấy Option Module an toàn
+ * * @template T
+ * @param class-string<T> $class Class name của Option Module (ví dụ: GeneralOptions::class)
+ * @return class-string<T>|class-string<EmptyOptionProxy> Trả về class name của Option Module hoặc EmptyOptionProxy nếu không tồn tại
+ */
+function paint_opt(string $class): string
+{
+    return class_exists($class) ? $class : EmptyOptionProxy::class;
+}
+
+/**
+ * Lấy dữ liệu an toàn từ một Field Tab Class
+ * * @template T
+ * @param class-string<T> $class_name Namespace đầy đủ của class
+ * @param int|null $post_id ID bài viết, mặc định là hiện tại
+ * @return array Mảng dữ liệu hoặc mảng rỗng nếu không tồn tại
+ */
+function paint_get_field_tab_data(string $class_name, int $post_id = null): array
+{
+    $post_id = $post_id ?: get_the_ID();
+
+    // Kiểm tra class tồn tại VÀ có hàm get_data
+    if (class_exists($class_name) && method_exists($class_name, 'get_data')) {
+        return $class_name::get_data($post_id);
+    }
+
+    return [];
+}
+
+// disable gutenberg editor
 add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
 function disable_gutenberg_editor(): bool
 {

@@ -194,7 +194,7 @@ async function buildJSElementor() {
     ], {allowEmpty: true})
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest('./extension/elementor-addon/js/'))
+        .pipe(dest(`${pathTheme}/extension/elementor-addon/js/`))
         .pipe(browserSync.stream());
 }
 

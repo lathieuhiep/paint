@@ -28,6 +28,10 @@ body {
   }
 }
 
+.main-warp {
+  min-height: inherit;
+}
+
 .sticky-footer {
   flex: 1 0 auto;
   overflow-x: hidden;

@@ -85,10 +85,6 @@ function paint_load_script_libs(): void
         // owl carousel
         wp_enqueue_style( 'owl.carousel.min', get_theme_file_uri( '/assets/libs/owl.carousel/owl.carousel.min.css' ), array(), null );
         wp_enqueue_script( 'owl.carousel.min', get_theme_file_uri( '/assets/libs/owl.carousel/owl.carousel.min.js' ), array( 'jquery' ), '2.3.4', true );
-
-        // splide
-        wp_enqueue_style( 'splide.min', get_theme_file_uri( '/assets/libs/splide/splide.min.css' ), array(), null );
-        wp_enqueue_script( 'splide.min', get_theme_file_uri( '/assets/libs/splide/splide.min.js' ), array( 'jquery' ), '4.1.2', true );
     }
 }
 
@@ -101,7 +97,12 @@ function paint_elementor_scripts(): void {
         wp_enqueue_style( 'paint-elementor-style', get_theme_file_uri( '/extension/elementor-addon/css/elementor-addon.min.css' ), array(), paint_get_version_theme() );
 
 		// script
-        wp_enqueue_script( 'paint-elementor-script', get_theme_file_uri( '/extension/elementor-addon/js/elementor-addon.min.js' ), array( 'jquery' ), null, true );
+        wp_enqueue_script( 'paint-elementor-script', get_theme_file_uri(
+            '/extension/elementor-addon/js/elementor-addon.min.js' ),
+            array( 'jquery', 'swiper' ),
+            null,
+            true
+        );
 	}
 }
 

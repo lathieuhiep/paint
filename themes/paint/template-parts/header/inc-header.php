@@ -1,4 +1,7 @@
 <?php
+use ExtendSite\Admin\Fields\Pages\Default\MenuTab;
+
+// Global options
 $sticky_menu = paint_get_option('general_option_menu_sticky', true);
 $logo = paint_get_option('general_opt_logo', '');
 $opt_social_networks = paint_get_option('paint_opt_social_network', []);
@@ -8,14 +11,11 @@ $class_menu = ['site-header'];
 // Page context
 $page_id = get_queried_object_id();
 
-$menu_style    = '';
-$menu_position = '';
+// Lấy menu data từ Page (Carbon Fields qua Tab)
+$menu_data = $page_id ? paint_get_field_tab_data(MenuTab::class, $page_id) : [];
 
-// Lấy meta nếu có page ID
-if ($page_id) {
-    $menu_style    = get_post_meta($page_id, 'paint_cmb_page_menu_style', true);
-    $menu_position = get_post_meta($page_id, 'paint_cmb_page_menu_position', true);
-}
+$menu_style    = $menu_data['style'] ?? '';
+$menu_position = $menu_data['position'] ?? '';
 
 // Menu style (per page)
 if ($menu_style === 'v-1') {

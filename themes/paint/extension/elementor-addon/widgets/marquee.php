@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 class Paint_Elementor_Marquee extends Widget_Base {
 
     public function get_name(): string {
-        return 'es-marquee';
+        return 'paint-marquee';
     }
 
     public function get_title(): string {
@@ -22,11 +22,20 @@ class Paint_Elementor_Marquee extends Widget_Base {
     }
 
     public function get_categories(): array {
-        return ['es-addons'];
+        return ['my-theme'];
     }
 
     public function get_keywords(): array {
         return ['marquee', 'logo', 'gallery', 'splide'];
+    }
+
+    public function get_style_depends(): array {
+        return [ 'swiper' ];
+    }
+
+    // widget scripts dependencies
+    public function get_script_depends(): array {
+        return [ 'swiper', 'paint-elementor-script' ];
     }
 
     /* =======================
@@ -56,6 +65,15 @@ class Paint_Elementor_Marquee extends Widget_Base {
         );
 
         $this->add_control(
+            'gallery',
+            [
+                'label' => esc_html__( 'Chọn ảnh', 'text-domain' ),
+                'type' => Controls_Manager::GALLERY,
+                'default' => [],
+            ]
+        );
+
+        $this->add_control(
             'direction',
             [
                 'label' => esc_html__('Scroll Direction', 'extend-site'),
@@ -71,11 +89,13 @@ class Paint_Elementor_Marquee extends Widget_Base {
         $this->add_control(
             'speed',
             [
-                'label' => esc_html__('Scroll Speed', 'extend-site'),
+                'label' => esc_html__( 'Tốc độ chạy (ms)', 'text-domain' ),
                 'type' => Controls_Manager::NUMBER,
-                'default' => 1,
-                'min' => 0.1,
-                'step' => 0.1,
+                'min' => 1000,
+                'max' => 20000,
+                'step' => 500,
+                'default' => 5000,
+                'frontend_available' => true, // Cho phép JS truy cập nếu cần
             ]
         );
 
@@ -100,7 +120,7 @@ class Paint_Elementor_Marquee extends Widget_Base {
                     'px' => ['min' => 40, 'max' => 400],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .es-marquee .splide__slide' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .element-marquee .splide__slide' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -115,7 +135,7 @@ class Paint_Elementor_Marquee extends Widget_Base {
                     'px' => ['min' => 20, 'max' => 300],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .es-marquee img' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .element-marquee img' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -127,7 +147,7 @@ class Paint_Elementor_Marquee extends Widget_Base {
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} .es-marquee' => '--es-marquee-gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .element-marquee' => '--element-marquee-gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -136,7 +156,7 @@ class Paint_Elementor_Marquee extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'item_border',
-                'selector' => '{{WRAPPER}} .es-marquee img',
+                'selector' => '{{WRAPPER}} .element-marquee img',
             ]
         );
 
@@ -144,7 +164,7 @@ class Paint_Elementor_Marquee extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'item_shadow',
-                'selector' => '{{WRAPPER}} .es-marquee img',
+                'selector' => '{{WRAPPER}} .element-marquee img',
             ]
         );
 
@@ -156,22 +176,27 @@ class Paint_Elementor_Marquee extends Widget_Base {
      * ======================= */
     protected function render(): void {
         $settings = $this->get_settings_for_display();
-        ?>
-        <div class="es-marquee splide es-marquee--<?php echo esc_attr($settings['mode']); ?>"
-             data-direction="<?php echo esc_attr($settings['direction']); ?>"
-             data-speed="<?php echo esc_attr($settings['speed']); ?>">
+        $gallery = $settings['gallery'];
 
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <?php
-                    // Demo item – bước sau thay bằng repeater / query
-                    for ($i = 1; $i <= 6; $i++) :
-                        ?>
-                        <li class="splide__slide es-marquee__item">
-                            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ) ?>" alt="">
-                        </li>
-                    <?php endfor; ?>
-                </ul>
+        if ( empty( $gallery ) ) return;
+
+        $speed = !empty($settings['speed']) ? $settings['speed'] : 5000;
+        $direction = !empty($settings['direction']) ? $settings['direction'] : 'ltr';
+
+        ?>
+        <div class="element-marquee swiper"
+             data-speed="<?php echo esc_attr($speed); ?>"
+             data-direction="<?php echo esc_attr($direction); ?>">
+            <div class="swiper-wrapper">
+                <?php
+                // Lặp lại mảng ảnh để đảm bảo loop mượt mà
+                $slides = array_merge($gallery, $gallery);
+                foreach ( $slides as $image ) :
+                    ?>
+                    <div class="swiper-slide">
+                        <img src="<?php echo esc_url( $image['url'] ); ?>" alt="Partner Logo">
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <?php

@@ -8,6 +8,21 @@
         return rect.top >= 0 && rect.bottom <= windowHeight;
     }
 
+    // get scope element
+    const getScopeElement = (scope) => {
+        if (!scope) return document;
+
+        if (window.jQuery && scope instanceof jQuery) {
+            return scope[0];
+        }
+
+        if (scope.nodeType === 1) {
+            return scope;
+        }
+
+        return document;
+    };
+
     // setting owlCarousel
     const owlCarouselElementorOptions = (options) => {
         let defaults = {
@@ -230,6 +245,7 @@
         }
     }
 
+    // element image carousel
     const elementImageSlider = ($scope, $) => {
         const slider = $scope.find('.element-image-carousel__warp')
 
@@ -243,6 +259,43 @@
         }
     }
 
+    // marquee splide init
+    const initSwiperMarquee = ($scope) => {
+        const $container = $scope.find('.element-marquee.swiper');
+        if (!$container.length) return;
+
+        // Đọc thông số từ HTML
+        const customSpeed = parseInt($container.data('speed')) || 5000;
+        const direction = $container.data('direction'); // 'ltr' hoặc 'rtl'
+
+        if ($container.data('my_swiper')) {
+            $container.data('my_swiper').destroy(true, true);
+        }
+
+        const swiper = new Swiper($container.get(0), {
+            loop: true,
+            slidesPerView: 6,
+            spaceBetween: 24,
+            speed: 6000,
+            allowTouchMove: false,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                reverseDirection: (direction === 'ltr'),
+            },
+            freeMode: {
+                enabled: true,
+                sticky: false,
+                momentum: false,
+            },
+            resistance: false,
+            touchMoveStopPropagation: true,
+        });
+
+        $container.data('my_swiper', swiper);
+    };
+
+// Đăng ký với Elementor
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-slider.default', elementSlider);
@@ -271,6 +324,13 @@
         // element code carousel
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-color-code-carousel.default', elementColorCodeSlider);
 
+        // element image carousel
         elementorFrontend.hooks.addAction('frontend/element_ready/paint-image-carousel.default', elementImageSlider);
+
+        // element marquee splide init
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/paint-marquee.default',
+            initSwiperMarquee
+        );
     });
 })(jQuery);
