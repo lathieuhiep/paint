@@ -1,8 +1,11 @@
     </div><!--End Sticky Footer-->
 
     <?php if (!is_404()) : ?>
-      <footer class="site-footer">
-        <?php get_template_part('template-parts/footer/inc', 'multi-column'); ?>
+      <footer class="site-footer d-flex flex-column gap-11">
+        <?php
+        get_template_part('template-parts/footer/inc', 'multi-column');
+        get_template_part('template-parts/footer/inc', 'copyright');
+        ?>
       </footer>
     <?php endif; ?>
 </div><!--End main-warp-->

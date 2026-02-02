@@ -5,9 +5,53 @@
     justify-content: space-between;
 
     &__top {
+      padding-top: 10rem;
       flex: 1;
       flex-direction: column;
       @extend %flex-justify-center;
+
+      .hero-caption {
+        line-height: 1;
+        font-family: $font-primary;
+        color: #fff;
+        font-size: 6.2rem;
+
+        + .hero-headline {
+          margin-top: 1.6rem;
+        }
+      }
+
+      .hero-headline {
+        margin: 0;
+        line-height: 1;
+        font-family: $font-primary;
+        color: $color-secondary;
+        font-size: 6.9rem;
+      }
+
+      .hero-action {
+        margin-top: 5rem;
+      }
+
+      .hero-btn {
+        padding: 1.8rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1;
+        border: 1px solid #fff;
+        border-radius: .6rem;
+        background: rgba(255,255,255,0.24);
+        @include transition();
+
+        &:hover {
+            background: rgba(255,255,255,0.4);
+        }
+      }
     }
 
     &__footer {

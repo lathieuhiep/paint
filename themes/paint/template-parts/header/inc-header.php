@@ -1,6 +1,7 @@
 <?php
 $sticky_menu = paint_get_option('general_option_menu_sticky', true);
 $logo = paint_get_option('general_opt_logo', '');
+$opt_social_networks = paint_get_option('paint_opt_social_network', []);
 
 $class_menu = ['site-header'];
 
@@ -85,11 +86,13 @@ if (! empty($menu_position)) {
                         </button>
                     </div>
 
-                    <div class="social-header-warp d-flex align-items-center">
-                        <a href="#" target="_blank" class="btn btn-social">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                    </div>
+                    <?php if ( !empty( $opt_social_networks ) && !empty( $opt_social_networks['facebook'] ) ) : ?>
+                        <div class="social-header-warp d-flex align-items-center">
+                            <a href="<?php echo esc_url( $opt_social_networks['facebook'] ); ?>" target="_blank" class="btn btn-social">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="dropdown-account-warp position-relative text-center d-flex align-items-center">
                         <button type="button" id="btn-header-account" class="btn btn-account">
