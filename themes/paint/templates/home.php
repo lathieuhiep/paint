@@ -4,9 +4,7 @@
  */
 
 get_header();
-?>
 
+get_template_part('templates/parts/home-page/inc', 'hero');
 
-
-<?php
 get_footer();

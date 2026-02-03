@@ -140,6 +140,10 @@ function paint_register_front_end(): void
         wp_enqueue_style('template_acc_info', get_theme_file_uri('/assets/css/templates/template-acc-info.min.css'), array(), '');
     }
 
+    if (is_page_template('templates/home.php')) {
+        wp_enqueue_style('tpl-home', get_theme_file_uri('/assets/css/templates/tpl-home.min.css'), array(), '');
+    }
+
     /*
     * End Get Css Front End
     * */
