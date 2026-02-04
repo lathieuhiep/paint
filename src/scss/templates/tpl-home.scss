@@ -1,6 +1,15 @@
 @import "../variables-site/variables";
 
+// element hero banner
 .element-hero-banner-main {
+  --fs-caption: 6.2rem;
+  --fs-headline: 6.9rem;
+
+  --footer-pdb: 5rem;
+
+  --btn-size: 2rem;
+  --btn-pd: 1.8rem;
+
   position: relative;
   height: 100vh;
 
@@ -17,7 +26,7 @@
     left: 0;
 
     &__top {
-      padding-top: 10rem;
+      padding-top: 9.8rem;
       flex: 1;
       flex-direction: column;
       @extend %flex-justify-center;
@@ -26,7 +35,7 @@
         line-height: 1;
         font-family: $font-primary;
         color: #fff;
-        font-size: 6.2rem;
+        font-size: var(--fs-caption);
 
         + .hero-headline {
           margin-top: 1.6rem;
@@ -38,7 +47,7 @@
         line-height: 1;
         font-family: $font-primary;
         color: $color-secondary;
-        font-size: 6.9rem;
+        font-size: var(--fs-headline);
       }
 
       .hero-action {
@@ -46,13 +55,13 @@
       }
 
       .hero-btn {
-        padding: 1.8rem;
+        padding: var(--btn-pd);
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 1.2rem;
         color: #fff;
-        font-size: 2rem;
+        font-size: var(--btn-size);
         font-weight: 500;
         line-height: 1;
         border: 1px solid #fff;
@@ -67,7 +76,7 @@
     }
 
     &__footer {
-      padding-bottom: 5rem;
+      padding-bottom: var(--footer-pdb);
 
       .hero-scroll-hint {
         animation: float-vertical 1.5s ease-in-out infinite;
@@ -101,6 +110,21 @@
       }
     }
   }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    --fs-caption: 5rem;
+    --fs-headline: 5.9rem;
+  }
+
+  @media (max-width: 991px) {
+    --fs-caption: 3rem;
+    --fs-headline: 3.9rem;
+
+    --footer-pdb: 2rem;
+
+    --btn-size: 1.6rem;
+    --btn-pd: 1.2rem;
+  }
 }
 
 /* Keyframes cho khối nhảy lên xuống */
@@ -122,5 +146,30 @@
   100% {
     opacity: 0;
     top: 2rem;
+  }
+}
+
+// element partner
+.element-partner {
+  &__warp {
+    margin: 0 auto;
+
+    @media (min-width: 1200px) {
+      max-width: 90%;
+    }
+
+    @media (max-width: 1199px) {
+      padding: 0 1.2rem;
+    }
+
+    img {
+      @media (min-width: 992px) {
+        max-width: 16.5rem;
+      }
+
+      @media (max-width: 991px) {
+        max-width: 12rem;
+      }
+    }
   }
 }

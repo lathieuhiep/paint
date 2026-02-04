@@ -1,10 +1,11 @@
 <?php
 namespace ExtendSite\Admin\Fields\Pages\Home;
 
-
 use Carbon_Fields\Field;
 use ExtendSite\Admin\Fields\FieldTabIF;
 use ExtendSite\Constants\ControlOptions;
+
+defined('ABSPATH') || exit;
 
 class HeroTab implements FieldTabIF
 {

@@ -2,7 +2,9 @@
 namespace ExtendSite\Admin\Fields\Pages;
 
 use Carbon_Fields\Container;
+use ExtendSite\Admin\Fields\Pages\Home\GalleryTab;
 use ExtendSite\Admin\Fields\Pages\Home\HeroTab;
+use ExtendSite\Admin\Fields\Pages\Home\PartnerTab;
 
 defined('ABSPATH') || exit;
 
@@ -16,6 +18,12 @@ class HomeFields {
             ->add_tab(
                 esc_html__('Hero', 'extend-site'),
                 HeroTab::fields()
+            )->add_tab(
+                esc_html__('Đối tác', 'extend-site'),
+                PartnerTab::fields()
+            )->add_tab(
+                esc_html__('Galleries', 'extend-site'),
+                GalleryTab::fields()
             );
     }
 }

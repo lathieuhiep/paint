@@ -39,6 +39,10 @@
         }
       }
     }
+
+    .btn-close-canvas {
+      color: $color-white;
+    }
   }
 
   &.scrolled {
@@ -267,7 +271,7 @@
   @include flex(0 0 auto);
 
   @media (max-width: 991px) {
-    gap: 1.6rem;
+    gap: 2.4rem;
   }
 
   a {
