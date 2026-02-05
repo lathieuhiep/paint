@@ -89,4 +89,36 @@ class ESHelpers
             'screen_reader_text' => '&nbsp;',
         ));
     }
+
+    /**
+     * Lấy danh sách toàn bộ trang
+     * @return array
+     */
+    public static function get_all_page(): array
+    {
+        static $pages = null;
+
+        if ($pages !== null) {
+            return $pages;
+        }
+
+        $pages = [
+            '' => esc_html__('— Chọn trang —', 'extend-site'),
+        ];
+
+        $query = get_posts([
+            'post_type'      => 'page',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+            'fields'         => 'ids',
+        ]);
+
+        foreach ($query as $page_id) {
+            $pages[$page_id] = get_the_title($page_id);
+        }
+
+        return $pages;
+    }
 }

@@ -66,6 +66,9 @@
                 splideGroupGallery.each(function () {
                     // Lấy element DOM thuần từ đối tượng jQuery
                     const el = this;
+                    const direction = $(this).data('direction');
+
+                    console.log(direction);
 
                     const splide = new Splide(el, {
                         type: 'loop',
@@ -76,6 +79,7 @@
                         gap: '12px',
                         arrows: false,
                         pagination: false,
+                        direction: direction,
                         autoScroll: {
                             speed: 1,
                             pauseOnHover: false,

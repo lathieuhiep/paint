@@ -2,6 +2,7 @@
 namespace ExtendSite\Admin\Fields\Pages;
 
 use Carbon_Fields\Container;
+use ExtendSite\Admin\Fields\Pages\Home\AboutTab;
 use ExtendSite\Admin\Fields\Pages\Home\GalleryTab;
 use ExtendSite\Admin\Fields\Pages\Home\HeroTab;
 use ExtendSite\Admin\Fields\Pages\Home\PartnerTab;
@@ -24,6 +25,9 @@ class HomeFields {
             )->add_tab(
                 esc_html__('Galleries', 'extend-site'),
                 GalleryTab::fields()
+            )->add_tab(
+                esc_html__('Về chúng tôi', 'extend-site'),
+                AboutTab::fields()
             );
     }
 }

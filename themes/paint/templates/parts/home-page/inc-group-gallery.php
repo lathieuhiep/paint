@@ -11,7 +11,7 @@ if (empty($data['group_gallery'])) {
 <div class="element-group-gallery">
     <div class="element-group-gallery__warp">
         <?php foreach ( $data['group_gallery'] as $group ) : ?>
-            <div class="element-group-gallery__splide splide">
+            <div class="element-group-gallery__splide splide" data-direction="<?php echo esc_attr( $group['direction'] ); ?>">
                 <div class="splide__track">
                     <ul class="splide__list">
                         <?php foreach ($group['gallery'] as $image_id) : ?>
