@@ -6,6 +6,8 @@ use ExtendSite\Admin\Fields\Pages\Home\AboutTab;
 use ExtendSite\Admin\Fields\Pages\Home\GalleryTab;
 use ExtendSite\Admin\Fields\Pages\Home\HeroTab;
 use ExtendSite\Admin\Fields\Pages\Home\PartnerTab;
+use ExtendSite\Admin\Fields\Pages\Home\ProductTab;
+use ExtendSite\Admin\Fields\Pages\Home\ServicesTab;
 
 defined('ABSPATH') || exit;
 
@@ -28,6 +30,12 @@ class HomeFields {
             )->add_tab(
                 esc_html__('Về chúng tôi', 'extend-site'),
                 AboutTab::fields()
+            )->add_tab(
+                esc_html__('Dịch vụ', 'extend-site'),
+                ServicesTab::fields()
+            )->add_tab(
+                esc_html__('Sản phẩm', 'extend-site'),
+                ProductTab::fields()
             );
     }
 }

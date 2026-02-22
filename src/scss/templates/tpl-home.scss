@@ -1,5 +1,36 @@
 @import "../variables-site/variables";
 
+.element-page-heading {
+  font-weight: 900;
+  line-height: 1.2;
+
+  @media (min-width: 1200px) {
+    font-size: 10rem;
+    margin-bottom: 7.6rem;
+  }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    font-size: 7.2rem;
+    margin-bottom: 6rem;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 4.8rem;
+    margin-bottom: 4rem;
+  }
+}
+
+.mw-1214 {
+  @media (min-width: 1200px) {
+    max-width: 121.4rem;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1199px) {
+    max-width: 100%;
+  }
+}
+
 // element hero banner
 .element-hero-banner-main {
   --fs-caption: 6.2rem;
@@ -200,17 +231,10 @@
 .element-about {
   padding-top: 8rem;
 
-  &__heading {
-    margin-bottom: 7.6rem;
-    font-size: 10rem;
-    font-weight: 900;
-    line-height: 1.2;
-  }
-
   &__body {
     position: relative;
     min-height: 94.6rem;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     overflow: hidden;
 
     > div {
@@ -234,7 +258,7 @@
   }
 
   &__content {
-    padding: 10.8rem 6rem;
+
     position: relative;
     z-index: 2;
     max-width: 68rem;
@@ -246,12 +270,32 @@
     backdrop-filter: blur(10.6px);
     -webkit-backdrop-filter: blur(10.6px);
 
+    @media (min-width: 1200px) {
+      padding: 10.8rem 6rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+      padding: 6rem;
+    }
+
+    @media (max-width: 991px) {
+      padding: 4rem 2.4rem;
+    }
+
     .sub-heading {
-      margin-bottom: 4.4rem;
-      font-size: 4rem;
       color: #fff;
       font-weight: 900;
       line-height: 1.2;
+
+      @media (min-width: 992px) {
+        margin-bottom: 4.4rem;
+        font-size: 4rem;
+      }
+
+      @media (max-width: 991px) {
+        margin-bottom: 2.4rem;
+        font-size: 3rem;
+      }
     }
 
     .description {
@@ -272,6 +316,116 @@
     .hero-btn {
       --btn-pd: 1.2rem 2.4rem;
       --btn-fs: 3rem;
+    }
+  }
+}
+
+// element services
+.element-services {
+  padding: 9rem 0;
+
+  @media (max-width: 991px) {
+    padding: 6rem 0;
+  }
+
+  &__list {
+    .item {
+      --icon-box-size: 12.5rem;
+
+      border-radius: 2.4rem;
+      backdrop-filter: blur(1.2rem);
+      box-shadow: 0 0 1.6rem 0 rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      display: grid;
+      grid-template-columns: var(--icon-box-size) 1fr;
+
+      @media (min-width: 576px) {
+        padding: 5.2rem;
+        gap: 3.4rem;
+      }
+
+      @media (max-width: 575px) {
+        --icon-box-size: 10rem;
+        padding: 3.2rem;
+        gap: 2.4rem;
+      }
+
+      .icon-box {
+        width: var(--icon-box-size);
+        height: var(--icon-box-size);
+        border-radius: 50%;
+        border: .4rem solid #23282B;
+
+        img {
+          @media (min-width: 576px) {
+            max-width: 7rem;
+          }
+
+          @media (max-width: 575px) {
+            max-width: 5rem;
+          }
+        }
+      }
+
+      &__title {
+        font-weight: 800;
+        line-height: 1.2;
+
+        @media (min-width: 576px) {
+          font-size: 4rem;
+        }
+
+        @media (max-width: 575px) {
+          font-size: 3rem;
+        }
+      }
+
+      &__desc {
+        line-height: 1.25;
+        color: #23282B;
+
+        @media (min-width: 576px) {
+          font-size: 2.4rem;
+        }
+
+        @media (max-width: 575px) {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
+
+// element product
+.element-product {
+  &__decor {
+    position: relative;
+
+    .bg-box {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: $color-tertiary;
+    }
+  }
+
+  .card-box {
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+
+      .title-wrap {
+        flex: 1;
+        max-width: 100%;
+      }
+    }
+
+    &__media {
+      display: flex;
+      gap: 2rem;
     }
   }
 }

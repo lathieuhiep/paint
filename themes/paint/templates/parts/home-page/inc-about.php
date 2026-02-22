@@ -11,7 +11,7 @@ if ( empty( $data ) ) {
 
 <div class="element-about">
     <div class="container">
-        <h2 class="element-about__heading text-center">
+        <h2 class="element-about__heading element-page-heading text-center">
             <?= esc_html($data['heading']); ?>
         </h2>
     </div>
@@ -26,21 +26,23 @@ if ( empty( $data ) ) {
         </div>
 
         <div class="container">
-            <div class="element-about__content">
-                <h3 class="sub-heading"><?= esc_html($data['sub_heading']); ?></h3>
+            <div class="mw-1214">
+                <div class="element-about__content">
+                    <h3 class="sub-heading"><?= esc_html($data['sub_heading']); ?></h3>
 
-                <div class="description">
-                    <?= wpautop(wp_kses_post( $data['description']) ); ?>
+                    <div class="description">
+                        <?= wpautop(wp_kses_post( $data['description']) ); ?>
+                    </div>
+
+                    <?php if (!empty($data['button']['url']) && !empty($data['button']['text'])) : ?>
+                        <a href="<?= esc_url($data['button']['url']); ?>"
+                           class="hero-btn"
+                        >
+                            <span><?= esc_html($data['button']['text']); ?></span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
-
-                <?php if (!empty($data['button']['url']) && !empty($data['button']['text'])) : ?>
-                    <a href="<?= esc_url($data['button']['url']); ?>"
-                       class="hero-btn"
-                    >
-                        <span><?= esc_html($data['button']['text']); ?></span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                <?php endif; ?>
             </div>
         </div>
     </div>
