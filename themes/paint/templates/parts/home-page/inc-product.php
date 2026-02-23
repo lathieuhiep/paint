@@ -29,7 +29,7 @@ if (!empty($data['items'])) :
 
             <div class="container position-relative">
                 <div class="element-product__stack">
-                    <?php foreach ($data['items'] as $index => $item) :
+                    <?php var_dump(STR_PAD_LEFT); foreach ($data['items'] as $index => $item) :
                         $number = str_pad((string)($index + 1), 2, '0', STR_PAD_LEFT);
                         ?>
                         <article class="card-box" data-index="<?php echo esc_attr($index); ?>">
@@ -40,7 +40,7 @@ if (!empty($data['items'])) :
 
                                 <div class="title-wrap">
                                     <?php if (!empty($item['title'])) : ?>
-                                        <h3 class="title">
+                                        <h3 class="title mb-3">
                                             <span><?php echo esc_html($item['title']); ?></span>
 
                                             <?php if (!empty($item['icon'])) : ?>
@@ -50,7 +50,7 @@ if (!empty($data['items'])) :
                                     <?php endif; ?>
 
                                     <?php if (!empty($item['sub_title'])) : ?>
-                                        <p class="card__subtitle">
+                                        <p class="subtitle">
                                             <?php echo esc_html($item['sub_title']); ?>
                                         </p>
                                     <?php endif; ?>
@@ -58,7 +58,7 @@ if (!empty($data['items'])) :
 
                                 <?php if ( !empty( $item['color_code'][0] && !empty( $item['color_code'][0]['id'] ) ) ) : ?>
                                     <a href="<?php echo esc_url(get_permalink( $item['color_code'][0]['id'] )); ?>"
-                                       class="card__btn">
+                                       class="btn-view-color">
                                         <?php esc_html_e('Xem bảng màu', 'extend-site'); ?>
                                     </a>
                                 <?php endif; ?>
