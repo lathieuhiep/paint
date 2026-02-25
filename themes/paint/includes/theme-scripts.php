@@ -255,9 +255,27 @@ function paint_register_front_end(): void
             array('splide'), '0.5.3', true
         );
 
+        // GSAP core
+        wp_enqueue_script(
+            'gsap',
+            'https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js',
+            array('jquery'),
+            '3.14.1',
+            true
+        );
+
+        // ScrollTrigger plugin
+        wp_enqueue_script(
+            'ScrollTrigger',
+            'https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js',
+            array('jquery', 'gsap'),
+            '3.14.1',
+            true
+        );
+
         wp_enqueue_script('tpl-home',
             get_theme_file_uri('/assets/js/tpl-home.min.js'),
-            array('jquery', 'splide', 'splide-extension-auto-scroll'),
+            array('jquery', 'splide', 'splide-extension-auto-scroll', 'gsap', 'ScrollTrigger'),
             '1.0.0', true
         );
     }

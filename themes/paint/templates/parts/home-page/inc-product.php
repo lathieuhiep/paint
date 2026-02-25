@@ -27,9 +27,9 @@ if (!empty($data['items'])) :
                 </div>
             <?php endif; ?>
 
-            <div class="container position-relative">
-                <div class="element-product__stack">
-                    <?php var_dump(STR_PAD_LEFT); foreach ($data['items'] as $index => $item) :
+            <div class="container">
+                <div class="element-product__stack position-relative">
+                    <?php foreach ($data['items'] as $index => $item) :
                         $number = str_pad((string)($index + 1), 2, '0', STR_PAD_LEFT);
                         ?>
                         <article class="card-box" data-index="<?php echo esc_attr($index); ?>">
