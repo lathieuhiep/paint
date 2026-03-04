@@ -6,7 +6,6 @@
 
   @media (min-width: 1200px) {
     font-size: 10rem;
-    margin-bottom: 7.6rem;
   }
 
   @media (min-width: 992px) and (max-width: 1199px) {
@@ -40,6 +39,7 @@
 
   position: relative;
   height: 100vh;
+  background-color: #222222;
 
   .hero-image {
     height: inherit;
@@ -258,7 +258,6 @@
   }
 
   &__content {
-
     position: relative;
     z-index: 2;
     max-width: 68rem;
@@ -367,6 +366,13 @@
         }
       }
 
+      &__icon,
+      &__title {
+        clip-path: inset(100% 0 0 0);
+        opacity: 0;
+        overflow: hidden;
+      }
+
       &__title {
         font-weight: 800;
         line-height: 1.2;
@@ -397,11 +403,22 @@
 }
 
 // element product
+.stack-space {
+  position: relative;
+  width: 100%;
+}
+
+.stack-wrapper {
+  position: relative;
+  width: 100%;
+  will-change: transform;
+  overflow: hidden;
+}
+
 .element-product {
   position: relative;
 
   &__decor {
-    padding: 9rem 0;
     position: relative;
 
     .bg-box {
@@ -425,15 +442,17 @@
     padding: 4.5rem;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 12px;
+    right: 12px;
     color: $color-white;
     background: #1C1B1C;
     border: .2rem solid #FFE9A7;
     border-radius: 4rem;
+    box-sizing: border-box;
+    will-change: transform, opacity;
 
     &:not(:first-child) {
-      transform: translateY(100vh);
+      opacity: 0;
     }
 
     .number {
@@ -491,6 +510,15 @@
         border-radius: 2.6rem;
         border: .1rem solid $color-white;
         @extend %flex-align-center;
+        height: 31.2rem;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
       }
 
       .card__color {

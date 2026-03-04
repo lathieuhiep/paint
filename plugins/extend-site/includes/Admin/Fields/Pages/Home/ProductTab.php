@@ -89,6 +89,7 @@ class ProductTab implements FieldTabIF
         return [
             'heading' => trim((string) carbon_get_post_meta($post_id, self::HEADING)),
             'bg_image' => (int) carbon_get_post_meta($post_id, self::BG_IMAGE),
+            'order' => $order,
             'items' => array_values($items),
         ];
     }
