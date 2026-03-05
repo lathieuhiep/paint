@@ -17,7 +17,7 @@ if (!empty($data['items'])) :
             </div>
         <?php endif; ?>
 
-        <div class="element-product__decor">
+        <div class="element-product__decor position-relative">
             <?php if (!empty($data['bg_image'])) : ?>
                 <div class="bg-box">
                     <?php echo wp_get_attachment_image(
@@ -29,10 +29,9 @@ if (!empty($data['items'])) :
                 </div>
             <?php endif; ?>
 
-
-            <div class="element-product__stack stack-space">
-                <div class="stack-wrapper">
-                    <div class="container h-inherit position-relative">
+            <div class="element-product__stack position-relative">
+                <div class="container">
+                    <div class="card-warp">
                         <?php
                         $total = count( $data['items']) ;
 
@@ -42,12 +41,11 @@ if (!empty($data['items'])) :
                                 : $index + 1;
 
                             $number = str_pad((string)$num, 2, '0', STR_PAD_LEFT);
-                            ?>
-                            <article class="card-box panel-item" data-index="<?php echo esc_attr($index); ?>">
+                        ?>
+
+                            <article class="card-box" data-index="<?php echo esc_attr($index); ?>">
                                 <div class="card-box__content">
-                                <span class="number">
-                                    <?php echo esc_html($number); ?>
-                                </span>
+                                    <span class="number"><?php echo esc_html($number); ?></span>
 
                                     <div class="title-wrap">
                                         <?php if (!empty($item['title'])) : ?>
@@ -106,6 +104,7 @@ if (!empty($data['items'])) :
                                     <?php endif; ?>
                                 </div>
                             </article>
+
                         <?php endforeach; ?>
                     </div>
                 </div>

@@ -403,23 +403,11 @@
 }
 
 // element product
-.stack-space {
-  position: relative;
-  width: 100%;
-}
-
-.stack-wrapper {
-  position: relative;
-  width: 100%;
-  will-change: transform;
-  overflow: hidden;
-}
-
 .element-product {
   position: relative;
 
   &__decor {
-    position: relative;
+    padding: 10rem 0;
 
     .bg-box {
       position: absolute;
@@ -440,7 +428,6 @@
 
   .card-box {
     padding: 4.5rem;
-    position: absolute;
     top: 0;
     left: 12px;
     right: 12px;
@@ -448,11 +435,12 @@
     background: #1C1B1C;
     border: .2rem solid #FFE9A7;
     border-radius: 4rem;
-    box-sizing: border-box;
-    will-change: transform, opacity;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(4rem);
 
-    &:not(:first-child) {
-      opacity: 0;
+    ~ .card-box {
+      margin-top: 2.4rem;
     }
 
     .number {
