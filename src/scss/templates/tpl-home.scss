@@ -537,3 +537,195 @@
     }
   }
 }
+
+// element project
+.element-project {
+  padding: 80px 0;
+
+  .element-page-heading {
+    margin-bottom: 16px;
+  }
+
+  &__desc {
+    max-width: 640px;
+    margin: 0 auto 48px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  // Wrap overflow hidden để cắt 2 bên
+  &__slider-wrap {
+    position: relative;
+    overflow: hidden;
+    padding: 24px 0 36px;
+    max-width: 157.4rem;
+    margin: 0 auto;
+  }
+
+  &__swiper {
+    // Cho phép slide tràn ra ngoài wrapper → đè lên 2 bên
+    overflow: visible !important;
+
+    .swiper-wrapper {
+      align-items: center;
+    }
+
+    .swiper-slide {
+      // Swiper coverflow tự xử lý transform 3D
+      // Chỉ cần bo góc + transition mượt
+      border-radius: 20px;
+      overflow: hidden;
+      transition: box-shadow 0.4s ease;
+
+      &.swiper-slide-active {
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  &__footer {
+    margin-top: 40px;
+  }
+}
+
+// ─── Card ────────────────────────────────────────────────────────────────────
+.project-card {
+  position: relative;
+  aspect-ratio: 16 / 10;
+
+  // ── Ảnh
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // ── Gradient overlay
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            to bottom,
+            transparent 40%,
+            rgba(0, 0, 0, 0.75) 100%
+    );
+    pointer-events: none;
+  }
+
+  // ── Info bar: tên trái, quy mô phải (đúng như ảnh mẫu)
+  &__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 2;
+  }
+
+  &__info-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  &__info-right {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  &__scale-label {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  &__scale-value {
+    display: block;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+  }
+}
+
+// ─── Button ──────────────────────────────────────────────────────────────────
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 32px;
+  border: 1.5px solid currentColor;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  &__arrow {
+    transition: transform 0.3s;
+  }
+
+  &:hover &__arrow {
+    transform: translateX(4px);
+  }
+}
+
+// ─── Responsive ──────────────────────────────────────────────────────────────
+@media (max-width: 767px) {
+  .element-project {
+    padding: 48px 0;
+
+    &__desc {
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+  }
+
+  .project-card {
+    &__info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    &__info-right {
+      text-align: left;
+    }
+  }
+}

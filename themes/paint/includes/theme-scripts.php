@@ -143,6 +143,15 @@ function paint_register_front_end(): void
 
     if (is_page_template('templates/home.php')) {
         wp_enqueue_style('splide', get_theme_file_uri('/assets/libs/splide/splide.min.css'), array(), '4.1.2');
+
+        // Swiper CSS
+        wp_enqueue_style(
+            'swiper',
+            'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+            array(),
+            '11'
+        );
+
         wp_enqueue_style('tpl-home', get_theme_file_uri('/assets/css/templates/tpl-home.min.css'), array(), '');
     }
 
@@ -255,6 +264,15 @@ function paint_register_front_end(): void
             array('splide'), '0.5.3', true
         );
 
+        // Swiper JS
+        wp_enqueue_script(
+            'swiper',
+            'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+            array(),
+            '11',
+            true
+        );
+
         // GSAP core
         wp_enqueue_script(
             'gsap',
@@ -275,7 +293,7 @@ function paint_register_front_end(): void
 
         wp_enqueue_script('tpl-home',
             get_theme_file_uri('/assets/js/tpl-home.min.js'),
-            array('jquery', 'splide', 'splide-extension-auto-scroll', 'gsap', 'ScrollTrigger'),
+            array('jquery', 'splide', 'splide-extension-auto-scroll', 'swiper', 'gsap', 'ScrollTrigger'),
             '1.0.0', true
         );
     }

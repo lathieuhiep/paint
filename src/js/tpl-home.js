@@ -103,6 +103,28 @@
         });
     };
 
+    // Khởi tạo Swiper Project với hiệu ứng Coverflow
+    const elementProject = () => {
+        const el = document.querySelector('.element-project__swiper');
+        if (!el) return;
+
+        new Swiper(el, {
+            effect: "coverflow",
+            loop: true,
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 1.2,
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 100,
+                depth: 100,
+                modifier: 2,
+                slideShadows: true,
+                scale: 0.95,
+            },
+        });
+    };
+
     // Quản lý luồng thực thi khi trang load
     $(window).on('load', function () {
         // Chạy Splide trước
@@ -112,6 +134,9 @@
         // Chạy GSAP sau cùng
         initStack();
         initServicesReveal();
+
+        //
+        elementProject();
 
         // Đồng bộ hóa lại toàn bộ tọa độ sau khi các Slider đã ổn định
         setTimeout(() => {
