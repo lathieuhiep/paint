@@ -3,12 +3,14 @@ namespace ExtendSite\Admin\Fields\Pages;
 
 use Carbon_Fields\Container;
 use ExtendSite\Admin\Fields\Pages\Home\AboutTab;
+use ExtendSite\Admin\Fields\Pages\Home\ContactTab;
 use ExtendSite\Admin\Fields\Pages\Home\GalleryTab;
 use ExtendSite\Admin\Fields\Pages\Home\HeroTab;
 use ExtendSite\Admin\Fields\Pages\Home\PartnerTab;
 use ExtendSite\Admin\Fields\Pages\Home\ProductTab;
 use ExtendSite\Admin\Fields\Pages\Home\ProjectTab;
 use ExtendSite\Admin\Fields\Pages\Home\ServicesTab;
+use ExtendSite\Admin\Fields\Pages\Home\VolunteerTab;
 
 defined('ABSPATH') || exit;
 
@@ -40,6 +42,12 @@ class HomeFields {
             )->add_tab(
                 esc_html__('Dự án', 'extend-site'),
                 ProjectTab::fields()
+            )->add_tab(
+                esc_html__('Thiện nguyện', 'extend-site'),
+                VolunteerTab::fields()
+            )->add_tab(
+                esc_html__('Liên hệ', 'extend-site'),
+                ContactTab::fields()
             );
     }
 }

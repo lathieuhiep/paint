@@ -7,20 +7,20 @@ $data = paint_get_field_tab_data(ProjectTab::class);
 if (!empty($data['items'])) :
     ?>
     <section class="element-project">
-        <div class="container">
+        <div class="element-project__top">
+            <div class="container">
+                <?php if (!empty($data['title'])) : ?>
+                    <h2 class="element-page-heading element-page-heading mb-lg-18 text-center">
+                        <?php echo esc_html($data['title']); ?>
+                    </h2>
+                <?php endif; ?>
 
-            <?php if (!empty($data['title'])) : ?>
-                <h2 class="element-page-heading text-center">
-                    <?php echo esc_html($data['title']); ?>
-                </h2>
-            <?php endif; ?>
-
-            <?php if (!empty($data['description'])) : ?>
-                <p class="element-project__desc text-center">
-                    <?php echo esc_html($data['description']); ?>
-                </p>
-            <?php endif; ?>
-
+                <?php if (!empty($data['description'])) : ?>
+                    <div class="element-project__desc text-center">
+                        <?php echo wpautop($data['description']); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
 
         <div class="element-project__slider-wrap">
@@ -29,7 +29,6 @@ if (!empty($data['items'])) :
                     <?php foreach ($data['items'] as $index => $item) : ?>
                         <div class="swiper-slide">
                             <div class="project-card">
-
                                 <?php if (!empty($item['image'])) : ?>
                                     <div class="project-card__media">
                                         <img
@@ -37,7 +36,6 @@ if (!empty($data['items'])) :
                                             alt="<?php echo esc_attr($item['name']); ?>"
                                             loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>"
                                         >
-                                        <div class="project-card__overlay"></div>
                                     </div>
                                 <?php endif; ?>
 
@@ -57,7 +55,7 @@ if (!empty($data['items'])) :
                                     </div>
 
                                     <?php if (!empty($item['scale'])) : ?>
-                                        <div class="project-card__info-right">
+                                        <div class="project-card__info-right d-flex flex-column gap-1 align-items-xs-end">
                                             <span class="project-card__scale-label">
                                                 <?php esc_html_e('Quy mô dự án', 'extend-site'); ?>
                                             </span>
@@ -68,6 +66,7 @@ if (!empty($data['items'])) :
                                     <?php endif; ?>
                                 </div>
 
+                                <div class="project-card__overlay"></div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -76,10 +75,10 @@ if (!empty($data['items'])) :
         </div>
 
         <?php if (!empty($data['button']['link'])) : ?>
-            <div class="element-project__footer text-center">
+            <div class="element-project__footer text-center ps-3 pe-3">
                 <a href="<?php echo esc_url($data['button']['link']); ?>" class="btn-outline">
                     <?php echo esc_html($data['button']['text'] ?? __('Xem thêm công trình', 'extend-site')); ?>
-                    <span class="btn-outline__arrow">→</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         <?php endif; ?>
