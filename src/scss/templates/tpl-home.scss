@@ -877,13 +877,6 @@
         object-fit: cover;
         object-position: center;
       }
-
-      &.swiper-slide-active {
-        img {
-          //width: 100%;
-          //height: auto;
-        }
-      }
     }
   }
 }
@@ -898,12 +891,23 @@
   }
 
   &__form {
-    padding: 5.5rem 8.4rem;
-    max-width: 104rem;
     width: 100%;
     margin: 0 auto;
     border: 1px solid #E9ECEE;
     border-radius: 2.4rem;
+
+    @media (min-width: 1200px) {
+      padding: 5.5rem 8.4rem;
+      max-width: 104rem;
+    }
+
+    @media (max-width: 1199px) {
+      padding: 2.4rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+      max-width: 95%;
+    }
 
     .wpcf7-form {
       .title-label {
@@ -914,16 +918,71 @@
         color: #2C2C2C;
       }
 
+      .required {
+        color: $color-required;
+      }
+
+      .label {
+        margin-bottom: 1.2rem;
+        font-size: 1.7rem;
+        line-height: 1.25;
+        color: #23282B;
+      }
+
+      input:not(.wpcf7-submit), textarea {
+        &.wpcf7-form-control {
+          padding: 1.2rem;
+          min-height: 5.5rem;
+          border-radius: 1rem;
+          border: 1px solid #E9ECEE;
+          background: #F5F6F8;
+        }
+      }
+
+      textarea {
+        &.wpcf7-textarea {
+          height: 9rem;
+        }
+      }
+
+      .wpcf7-form-control-wrap {
+        margin: 0;
+
+        .wpcf7-not-valid-tip {
+          margin-top: 1.2rem;
+        }
+      }
+
       .group-box {
         ~ .group-box {
           margin-top: 3.7rem;
+        }
+
+        .grid-field__item {
+          + .grid-field__item {
+            margin-top: 2.4rem;
+          }
         }
       }
 
       .grid-warp {
         display: grid;
-        gap: 2.4rem 8.8rem;
-        grid-template-columns: 43.4rem 1fr;
+
+        @media (min-width: 1200px) {
+          gap: 2.4rem 8.8rem;
+        }
+
+        @media (max-width: 1199px) {
+          gap: 2.4rem 4rem;
+        }
+
+        @media (min-width: 992px) {
+          grid-template-columns: 43.4rem 1fr;
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       .wpcf7-checkbox {
@@ -993,7 +1052,7 @@
           display: flex;
           gap: 2.4rem 5.4rem;
 
-          @media (max-width: 575px) {
+          @media (max-width: 991px) {
             flex-direction: column;
           }
         }
@@ -1004,6 +1063,68 @@
           display: flex;
           flex-direction: column;
           gap: 2.4rem;
+        }
+      }
+
+      .action-box {
+        position: relative;
+        margin-top: 2.4rem;
+        max-width: 43.4rem;
+        width: 100%;
+        display: flex;
+        gap: 1.2rem;
+
+        &__btn {
+          flex: 1 0 auto;
+          max-width: 100%;
+        }
+
+        p {
+          cursor: pointer;
+          padding: 1rem;
+          display: flex;
+          gap: 1.2rem;
+          align-items: center;
+          justify-content: center;
+          min-height: 5rem;
+          width: 100%;
+          font-size: 1.7rem;
+          font-weight: 500;
+          line-height: 1.1;
+          color: #fff;
+          border-radius: 1rem;
+          background-color: #23282B;
+          @include transition();
+
+          &:hover {
+            color: $color-black;
+            background-color: #faca26;
+          }
+        }
+
+        .wpcf7-submit {
+          padding: 0;
+          background: transparent;
+          color: currentColor;
+          font-weight: inherit;
+        }
+
+        .chat-link {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1.2rem;
+          color:currentColor;
+          @include transition(none);
+        }
+
+        .wpcf7-spinner {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
       }
     }

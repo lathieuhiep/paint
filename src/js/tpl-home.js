@@ -196,6 +196,18 @@
         });
     }
 
+    // Xử lý sự kiện click cho nút submit cf7
+    $('.element-contact__form .wpcf7-form .action-box__btn p').on('click', function (e) {
+        if ($(e.target).is('.wpcf7-submit')) return;
+
+        const btn = $(this).find('.wpcf7-submit');
+
+        if (btn.length) {
+            btn[0].click(); // dùng native click
+        }
+
+    });
+
     // Quản lý luồng thực thi khi trang load
     $(window).on('load', function () {
         elementPartner();
