@@ -291,9 +291,17 @@ function paint_register_front_end(): void
             true
         );
 
+        wp_enqueue_script(
+            'SplitText',
+            'https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js',
+            array('jquery', 'gsap'),
+            '3.14.1',
+            true
+        );
+
         wp_enqueue_script('tpl-home',
             get_theme_file_uri('/assets/js/tpl-home.min.js'),
-            array('jquery', 'splide', 'splide-extension-auto-scroll', 'swiper', 'gsap', 'ScrollTrigger'),
+            array('jquery', 'splide', 'splide-extension-auto-scroll', 'swiper', 'gsap', 'ScrollTrigger', 'SplitText'),
             '1.0.0', true
         );
     }

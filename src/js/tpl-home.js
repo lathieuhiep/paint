@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(SplitText, ScrollTrigger);
 
     // Khởi tạo Splide Partners
     const elementPartner = () => {
@@ -196,6 +196,32 @@
         });
     }
 
+    //
+    const initTyping = () => {
+        const el = document.querySelector('.typing');
+        if (!el) return;
+
+        const split = SplitText.create(el, {
+            type: 'chars',
+            charsClass: 'char',
+            tag: 'span'
+        });
+
+        gsap.set(split.chars, { opacity: 0 });
+
+        gsap.to(split.chars, {
+            opacity: 1,
+            duration: 0.01,
+            stagger: 0.06,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+                trigger: el,       // khi el vào viewport
+                start: 'top 80%',  // bắt đầu khi top của el đạt 80% chiều cao màn hình
+                once: true,        // chỉ chạy 1 lần
+            }
+        });
+    }
+
     // Xử lý sự kiện click cho nút submit cf7
     $('.element-contact__form .wpcf7-form .action-box__btn p').on('click', function (e) {
         if ($(e.target).is('.wpcf7-submit')) return;
@@ -215,6 +241,7 @@
         initServicesReveal();
         elementProject();
         elementVolunteer();
+        initTyping();
 
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {

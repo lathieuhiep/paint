@@ -16,7 +16,7 @@ if (!empty($data['items'])) :
                 <?php endif; ?>
 
                 <?php if (!empty($data['description'])) : ?>
-                    <div class="element-project__desc text-center">
+                    <div class="element-project__desc text-center typing">
                         <?php echo wpautop($data['description']); ?>
                     </div>
                 <?php endif; ?>
