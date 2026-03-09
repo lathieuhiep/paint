@@ -55,71 +55,92 @@
 
     // Stacked Cards — pin section + các card trượt từ dưới lên đè nhau
     const initStack = () => {
-
         if (!window.matchMedia("(min-width:1200px)").matches) return;
 
         const stack = document.getElementById('productStack');
         const warp  = document.getElementById('cardWarp');
-
         if (!stack || !warp) return;
 
         const cards = gsap.utils.toArray('#cardWarp .card-box');
         const total = cards.length;
+        if (total < 2) return;
 
-        if (!total) return;
+        const REVEAL = 24; // px mỗi card lộ ra khi bị đè
 
-        let cardH;
+        const getCardH = () => cards[0].offsetHeight;
 
-        const updateLayout = () => {
-            cardH = cards[0].offsetHeight;
+        // Set z-index một lần
+        cards.forEach((card, i) => {
+            gsap.set(card, { zIndex: i + 1 });
+        });
+
+        let ctx = null;
+
+        const build = () => {
+            // Kill context cũ
+            if (ctx) ctx.revert();
+
+            const cardH = getCardH();
             warp.style.height = cardH + 'px';
+
+            ctx = gsap.context(() => {
+                // Reset tất cả cards về vị trí ban đầu
+                cards.forEach((card, i) => {
+                    gsap.set(card, {
+                        y: i === 0 ? 0 : cardH + i * REVEAL,
+                        scale: 1,
+                        opacity: 1
+                    });
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: stack,
+                        start: "top top",
+                        end: () => `+=${(total - 1) * window.innerHeight}`,
+                        pin: true,
+                        scrub: 2,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        refreshPriority: 1,
+                    }
+                });
+
+                cards.forEach((card, i) => {
+                    if (i === 0) return;
+
+                    const targetY = i * REVEAL;
+
+                    tl.to(card,
+                        {
+                            y: targetY,
+                            ease: "none",
+                            duration: 1
+                        },
+                        i - 1  // mỗi card chiếm 1 unit trong timeline
+                    );
+                });
+            });
         };
 
-        updateLayout();
+        build();
 
-        ScrollTrigger.getAll().forEach(st => {
-            if (st.trigger === stack) st.kill();
-        });
+        // Rebuild khi resize (debounce)
+        let resizeTimer;
+        const onResize = () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (!window.matchMedia("(min-width:1200px)").matches) {
+                    if (ctx) ctx.revert();
+                    warp.style.height = '';
+                    return;
+                }
+                build();
+                ScrollTrigger.refresh();
+            }, 200);
+        };
 
-        cards.forEach((card, i) => {
-            card.style.zIndex = i + 1;
-        });
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: stack,
-                start: "top top",
-                end: () => "+=" + (total - 1) * window.innerHeight,
-                pin: true,
-                scrub: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-                refreshPriority: 1,
-                onRefreshInit: updateLayout
-            }
-        });
-
-        const reveal = 20;
-
-        cards.forEach((card, i) => {
-
-            if (i === 0) return;
-
-            const prev = cards[i - 1];
-
-            tl.fromTo(card,
-                { y: () => cardH + (i * 32) },
-                { y: i * reveal, ease: "none" }
-            )
-
-                .to(prev, {
-                    scale: 1,
-                    opacity: 1,
-                    ease: "none"
-                }, "<");
-
-        });
-
+        window.addEventListener('resize', onResize);
     };
 
     // Khởi tạo GSAP Services Reveal
