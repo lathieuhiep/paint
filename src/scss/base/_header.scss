@@ -8,6 +8,16 @@
   .active-sticky-nav {
     top: 32px;
   }
+
+  .site-header {
+    &.menu-position {
+
+      &-fixed,
+      &-sticky {
+        top: 32px;
+      }
+    }
+  }
 }
 
 .site-header {
@@ -19,29 +29,31 @@
   z-index: 10;
 
   &.menu-style-v1 {
-    --header-bk-color: rgba(0, 0, 0, 0.43);
-    backdrop-filter: blur(6.6rem);
+    &:not(.scrolled) {
+      --header-bk-color: rgba(0, 0, 0, 0.43);
+      backdrop-filter: blur(6.6rem);
 
-    .site-menu {
-      > ul {
-        > li {
-          > a {
-            color: #ffffff;
+      .site-menu {
+        > ul {
+          > li {
+            > a {
+              color: #ffffff;
 
-            &:hover {
-              color: $color-secondary;
+              &:hover {
+                color: $color-secondary;
+              }
             }
-          }
 
-           > .sub-menu-toggle {
-            color: #ffffff;
+            > .sub-menu-toggle {
+              color: #ffffff;
+            }
           }
         }
       }
-    }
 
-    .btn-close-canvas {
-      color: $color-white;
+      .btn-close-canvas {
+        color: $color-white;
+      }
     }
   }
 

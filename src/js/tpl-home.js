@@ -156,7 +156,7 @@
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 40%",
+                        start: "top 80%",
                         end: "bottom 100px",
                         toggleActions: "play none none reverse",
                         invalidateOnRefresh: true,
@@ -166,9 +166,9 @@
                 tl.to([icon, title], {
                     clipPath: "inset(0% 0 0 0)",
                     opacity: 1,
-                    duration: 1,
-                    ease: "power2.out",
-                    stagger: 0.1
+                    duration: 0.8,
+                    ease: "expo.out",
+                    stagger: 0.15
                 });
             }
         });
