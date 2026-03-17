@@ -99,7 +99,7 @@
                         start: "top top",
                         end: () => `+=${(total - 1) * window.innerHeight}`,
                         pin: true,
-                        scrub: 2,
+                        scrub: true ,
                         anticipatePin: 1,
                         invalidateOnRefresh: true,
                         refreshPriority: 1,
